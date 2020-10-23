@@ -1,0 +1,82 @@
+---
+title: "ball()"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+library(knitr)
+```
+
+### Description
+Finds the atoms within a sphere with the indicated center and radius
+
+### Usage
+ball(pdb, res, chain, r, backbone = FALSE)
+
+### Arguments
+_pdb_	is either a PDB id, or the path to a pdb file.
+
+_chain_	a character indicating the chain to which the residue belongs
+
+_res_	position in the primary structure of the residue of interest, which will be use as center of the sphere.
+
+_r_	radious in ångströms of the sphere.
+
+_backbone_	logical, when TRUE it means that we include those atoms belonging to the main chain (CA, N, O and C) beside all the side chain atoms.
+
+### Value
+A dataframe with the atoms identification and their distances to the central atom.
+
+### See Also
+_pairwise.dist()_, _res.dist()_, _dist2closest()_
+
+### Details
+
+The continuous formation and rupture of non-covalent bonds (intra- and intermolecular), gives rise to dynamic molecular interactions, which are cosubstantial to life. These non-covalent interactions can adopt many forms, but all of them are fundamentally electrostatic in nature, and strongly influenced by distances.
+
+| Type of interaction   | Energy dependence on the distance |
+|-----------------------|-----------------------------------|
+| Ion-ion               | $1/r$                             |
+| Ion-dipole            | $1/r^2$                           |
+| Dipole-dipole         | $1/r^3$                           |
+| Ion-induced dipole    | $1/r^4$                           |
+| Dipole-indiced dipole | $1/r^5$                           |
+| Dispersion            | $1/r^6$                           |
+
+
+Therefore, computing spatial distances (in ångströms, Å), either between atoms or residues, is a useful task in many different contexts. A number of function from the package _ptm_ will help us in these tasks:
+
+* [res.dist](./res.dist)
+* [dist2closest](./dist2closest)
+* ball (the current document)
+* [pairwise.dist](./pairwise.dist)
+
+
+There is a set of atoms of the protein molecule of particular interst because of they  intramolecular interactions with other atoms that may be close enough. The types of relevant atoms that can be study with the function **ball()_ are:
+
+* Sulfur delta (SD) from Met residues.
+* Sulfur gamma (SG) from Cys residues.
+* Oxigen gamma (OG) from Ser residues.
+* Oxigen gamma-1 (OG1) from Thr residues.
+* Carboxylate atoms (OE1 and OE2) from Glu residues.
+* Carboxylate atoms (OD1 and OD2 ) from Asp residues.
+* Nitrogen atoms (ND1 and NE2) of the imidazol from His residues.
+* Nitrogen atoms (NE, NH1 and NH2) of the guanidinum from Arg residues.
+* Nitrogen zeta (NZ) from Lys residues.
+* Benzene ring atoms (CG, CD1, CD2, CE1, CE2 and CZ) from Phe residues.
+* Benzene ring atoms (CG, CD1, CD2, CE1, CE2 and CZ) from Tyr residues.
+* Indol ring atoms (ring-1: CG, CD1, CD2, NE1 CE2; ring-2: CD2, CE3, CZ2, CH2, CZ3, CE2) from Trp residues.
+
+The function **ball()** takes the _(x, y, z)_ coordinates of the chosen atom (or centroid of the functional group) as the center of a sphere (ball) of radious $r$, and finds all the atoms from the protein that are within this sphere. For instance, if we are interested in the interactions of the SD from Met181 of the protein human inositol polyphosphate multikinase (PDB ID: 6R7F), then we may procedure: 
+
+```{r}
+kable(ball(pdb = '6e7f', chain = 'A', res = 181, r = 4.5)) 
+```
+
+It should be noted that all atoms belonging to the central residue, in this case Met181, are excluded in the returned dataframe. Also, keep in mind that if we select a central residue that doesn't belong to the set {Met, Cys, Ser, Thr, Glu, Asp, His, Arg, Lys, Phe, Tyr, Trp}, the function will return an error message.
+
+

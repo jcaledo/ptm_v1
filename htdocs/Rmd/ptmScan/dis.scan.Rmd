@@ -1,0 +1,63 @@
+---
+title: "Scan a Protein in Search of Disease-Related PTM Sites"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+```
+
+### Description
+Scans the indicated protein in search of disease-related PTM sites
+
+### Usage
+dis.scan(up_id)
+
+### Arguments
+_up_id_	a character string corresponding to the UniProt ID.
+
+### Value
+Returns a dataframe where each row corresponds to a residue, and the colums inform about the disease-related modifications.
+
+### References
+Hornbeck et al. [Nucleic Acids Res. 2019 47:D433-D441](https://www.ncbi.nlm.nih.gov/pubmed/30445427).
+
+### See Also
+_ac.scan()_, _meto.scan()_, _p.scan()_, _me.scan()_, _ub.scan()_, _su.scan()_, _gl.scan()_, _sni.scan()_, _ni.scan()_, _ptm.scan()_, _reg.scan()_
+
+### Details
+
+The different posttranslational modifications participate in nearly all aspects of biological processes by regulating protein functions, and aberrant states of PTMs are frequently implicated in [human diseases](https://www.sciencedirect.com/science/article/pii/S1672022918303188).
+
+The package _ptm_ has a function, **dis.scan()**, which allows to scan a protein, let's say Catenin beta-1 (P35222), for known PTM sites related with diseases. The straightforward use would be:
+
+```{r}
+library(knitr)
+catenin <- dis.scan('P35222')
+kable(catenin)
+```
+
+This function can also be used in more elaborated ways. Suppose, for whatever reasons, we are interested in knowing those sites related to diseases found in proteins contained in the database MetOSite. To achieve this goal, we start making a list with UniProt ID for all the proteins from MetOSite:
+
+```{r}
+meto <- unique(meto.search()$prot_id)
+```
+
+Now, we can procedure to a recursive scan for all the MetOSite's proteins:
+
+```{r}
+meto_disease <- catenin[0,] # To inherit the headers of the 'catenin' dataframe
+for (i in 1:length(meto)){
+  t <- dis.scan(meto[i])
+  if (nrow(t) != 0){
+    meto_disease <- rbind(meto_disease, t)
+  }
+}
+kable(head(meto_disease))
+```
+
+The object meto_disease is a dataframe containing hundreds of entries (rows), although only the first ones have been shown herein.

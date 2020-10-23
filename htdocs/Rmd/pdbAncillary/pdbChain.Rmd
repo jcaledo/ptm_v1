@@ -1,0 +1,53 @@
+---
+title: "pdb.chain()"
+# author: "Juan Carlos Aledo"
+# date: "1/25/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+```
+
+### Description
+Determines the subunit composition of a given protein
+
+### Usage
+pdb.quaternary(pdb, keepfiles = FALSE)
+
+### Arguments
+_pdb_ the path to the PDB of interest or a 4-letter identifier.
+
+_keepfiles_ logical, if TRUE the function makes a 'temp' directory and save in it a pdb file for each chain present in the given structure.
+
+### Value
+The function returns a chr vector where each coordinate is a chain from the structure.
+
+### Details
+
+The _ptm_ package contains a number of ancillary functions that deal with [Protein Data Bank](https://www.rcsb.org/) (PDB) files. These functions may be useful when structural 3D data need to be analyzed. The mentioned functions are:
+
+* [uniprot2pdb](./uniprot2pdb)
+* [pdb2uniprot](./pdb2uniprot)
+* pdb.chain (the current document)
+* [pdb.quaternary](./pdb.quaternary)
+* [pdb.res](./pdb.res)
+* [pdb.pep](./pdb.pep)
+* [pdb.select](./pdb.select)
+* [download.dssp](./download.dssp)
+* [compute.dssp](./compute.dssp)
+* [parse.dssp](./parse.dssp)
+* [mkdssp](./mkdssp)
+
+Quaternary structure exists in proteins consisting of two or more identical or different polypeptide chains (subunits). These proteins are called oligomers because they have two or more subunits. The quaternary structure describes the manner in which subunits are arranged in the native protein. When dealing with a PDB file of a protein possessing quaternary structure, the function **pdb.chain()**, which returns an array with the chain identifiers, can be useful. For instance, we can explore, as an example, the human placental glyceraldehyde-3-phosphate dehydrogenase (1U8F):
+
+```{r}
+pdb.chain('1u8f')
+```
+We can check that this structure is a tetramer and the chain IDs are O, P, Q and R. Furthermore, we have the option to keep a pdb file for each single monomer, which sometimes can be very helpful for further analyses. Thus, if we are interested in keeping this single monomer pdb files, just change the argument _keepfiles_ to TRUE:
+
+```{r}
+pdb.chain('1u8f', keepfiles = TRUE)
+```
+In addition to returns the chain IDs, the function makes a temporal directory (within the current one) containing the desired files.

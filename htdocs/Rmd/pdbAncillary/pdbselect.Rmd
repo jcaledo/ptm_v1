@@ -1,0 +1,65 @@
+---
+title: "pdb.select()"
+# author: "Juan Carlos Aledo"
+# date: "1/25/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+```
+
+### Description
+Select the PDB and chain with the higher coverage to a given UniProt sequence
+
+### Usage
+pdb.select(up_id)
+
+### Arguments
+_up_id_	the UniProt ID.
+
+### Value
+A list of two elements: (i) the PDB ID and (ii) the chain. The coverage with the UniProt sequence is given as an attribute.
+
+### Details
+
+The _ptm_ package contains a number of ancillary functions that deal with [Protein Data Bank](https://www.rcsb.org/) (PDB) files. These functions may be useful when structural 3D data need to be analyzed. The mentioned functions are:
+
+* [uniprot2pdb](./uniprot2pdb)
+* [pdb2uniprot](./pdb2uniprot)
+* [pdb.chain](./pdb.chain)
+* [pdb.quaternary](./pdb.quaternary)
+* [pdb.res](./pdb.res)
+* [pdb.pep](./pdb.pep)
+* pdb.select (the current document)
+* [download.dssp](./download.dssp)
+* [compute.dssp](./compute.dssp)
+* [parse.dssp](./parse.dssp)
+* [mkdssp](./mkdssp)
+
+Often I have find myself in the situation of having an UniProt ID, and wanting to know the best PDB ID associated to this UniProt sequence. What should we understand for "the best"?
+As you may know, dealing with PDB files can be challenging. For example, many structures (particular those determined by crystallography) only include information about part of the functional biological assembly. Also, many PDB entries are missing portions of the molecule that were not observed in the experiment. Therefore, in our case, "the best"  means the PDB structure containing the largest extension of the UniProt sequence. The function that fulfils this work is **pdb.select()**.
+
+For instance, if we ask for a PDB of the human enzyme glyceraldehyde-3-phosphate dehydrogenase (P04406), all we need to type is:
+
+```{r}
+pdb.select('P04406')
+```
+
+As we can  observe, the chain 'O' of the PDB '1U8F' contain nearly 100 % of the amino acids corresponding to the sequence that we may recover from UniProt.
+
+Sometimes we are not so lucky! and the coverage is well bellow that figure. That is the case with the splicing factor, proline- and glutamine-rich (P23246):
+
+```{r}
+pdb.select('P23246')
+```
+
+We got a PDB and a chain, but only 31.7 % of the amino acids in the UniProt sequence are present in this chain.
+
+Even worse, many proteins present in the UniProt database are not represented the the PDB database. In these cases, we'll get, I'm afraid,  a negative response:
+
+```{r}
+pdb.select('G3SB67')
+```
+

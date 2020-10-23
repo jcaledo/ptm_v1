@@ -1,0 +1,67 @@
+---
+title: "Scan a Protein in Search of PTM Sites"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+```
+
+### Description
+Scans the indicated protein in search of PTM sites
+
+### Usage
+ptm.scan(up_id, renumerate = TRUE)
+
+### Arguments
+_up_id_ a character string corresponding to the UniProt ID.
+
+_renumerate_	logical, when TRUE the sequence numeration of MetO sites is that given by Uniprot, which may not coincide with that from MetOSite. The numerations of the sequences given by UniProt and MetOSite may or may not match, because sometimes one of the sequences corresponds to the precursor protein and the other to the procesed mature protein.
+
+### Value
+The numerations of the sequences given by UniProt and MetOSite may or may not match. Sometimes one of the sequences corresponds to the precursor protein and the other to the procesed mature protein.
+
+### References
+Hornbeck et al. [Nucleic Acids Res. 2019 47:D433-D441](https://www.ncbi.nlm.nih.gov/pubmed/30445427).
+Huang et al. [Nucleic Acids Res. 2019 47:D298-D308](https://www.ncbi.nlm.nih.gov/pubmed/30418626).
+Ullah et al. [Sci. Rep. 2016 6:23534](https://www.ncbi.nlm.nih.gov/pubmed/27010073).
+Durek et al. [Nucleic Acids Res.2010 38:D828-D834](https://www.ncbi.nlm.nih.gov/pubmed/19880383).
+Dinkel et al. [Nucleic Acids Res. 2011 39:D261-D567](https://www.ncbi.nlm.nih.gov/pubmed/21062810).
+
+### See Also
+_ac.scan()_, _meto.scan()_, _ni.scan()_, _gl.scan()_, _ub.scan()_, _su.scan()_, _dis.scan()_, _sni.scan()_, _me.scan()_, _p.scan()_, _reg.scan()_
+
+### Details
+
+While the regulatory importance of protein phosphorylation has long been known, the coexistence of different PTMs on the same protein has only recently gained attention. Thus, multiple PTMs within a protein can co-ordinately determine a functional outcome, thereby providing an expanded variety of mechanisms to integrate external and internal cues. 
+
+In this sense, we have reported that [methionine residues around phosphorylation sites](https://www.nature.com/articles/srep40403) are preferentially oxidized in vivo under stress conditions. This cross-talk between phosphorylation and sulfoxidation was further supported by [phylogenetic analyses](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5530960/). 
+
+The package _ptm_ provides a function, **ptm.scan()**, that scans a given protein in search of the different PTMs that have been described for that protein. The UniProt ID of the protein of interest must be passed as argument. For instance, using the Histone H3.1t protein (Q16695) as model
+
+```{r}
+library(knitr)
+h3 <- ptm.scan('Q16695')
+kable(head(h3))
+```
+
+We obtain a dataframe where each row corresponds to a residue of the protein that is liable to be modified post-translationally. Each colum informs about the specific PTM:
+
+* Position of the residue in the primary structure (n)
+* Methionine sulfoxidation (meto)
+* Phosphorylation (p)
+* Acetylation (ac)
+* Methylation (me)
+* Ubiquitination (b)
+* Sumoylation (su)
+* S-nitrosylation (Sni)
+* Nitration (ni)
+* Regulatory PTM (reg)
+* PTM related to disease (dis)
+* Number of different PTMs targeting that amino acid (multi)
+
+

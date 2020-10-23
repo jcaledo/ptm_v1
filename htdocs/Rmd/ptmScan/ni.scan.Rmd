@@ -1,0 +1,41 @@
+---
+title: "Scan a Protein in Search of S-Nitrosylation Sites"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+```
+
+### Description
+Scans the indicated protein in search of nitration sites
+
+### Usage
+ni.scan(up_id)
+
+### Arguments
+_up_id_	a character string corresponding to the UniProt ID.
+
+### Value
+Returns a dataframe where each row corresponds to a modified residue.
+
+### References
+Huang et al. [Nucleic Acids Res. 2019 47:D298-D308](https://www.ncbi.nlm.nih.gov/pubmed/30418626).
+
+### See Also
+_ac.scan()_, _meto.scan()_, _p.scan()_, _gl.scan()_, _ub.scan()_, _su.scan()_, _dis.scan()_, _sni.scan()_, _me.scan()_, _ptm.scan()_, _reg.scan()_
+
+### Details
+
+[Protein nitration](https://www.ncbi.nlm.nih.gov/pubmed/23157446) represents a post-translational modification that occurs primarily on tyrosine residues. This modification disrupts nitric oxide signaling and skews metabolism towards pro-oxidant processes.
+
+The package _ptm_ provides a function, **ni.scan()**, that assists in the identification of nitration sites in a given protein. The UniProt ID of the protein of interest must be passed as argument. For instance, to scan the mouse mitochondrial aspartate aminotransferase (P05202):
+
+```{r}
+ni.scan("P05202")
+```
+

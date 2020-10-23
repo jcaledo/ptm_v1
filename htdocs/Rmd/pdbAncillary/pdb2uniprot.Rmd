@@ -1,0 +1,63 @@
+---
+title: "pdb2uniprot()"
+# author: "Juan Carlos Aledo"
+# date: "1/25/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+```
+
+### Description
+Returns the uniprot id of a given chain within a PDB structure
+
+### Usage
+pdb2uniprot(pdb, chain)
+
+### Arguments
+_pdb_ the 4-letter PDB identifier.
+
+_chain_	letter identifying the chain.
+
+### Value
+The function returns the UniProt ID for the chain of interest.
+
+### See Also
+_uniprot2pdb()_, _id.mapping()_
+
+### Details
+
+The _ptm_ package contains a number of ancillary functions that deal with [Protein Data Bank](https://www.rcsb.org/) (PDB) files. These functions may be useful when structural 3D data need to be analyzed. The mentioned functions are:
+
+* [uniprot2pdb](./uniprot2pdb)
+* pdb2uniprot (the current document)
+* [pdb.chain](./pdb.chain)
+* [pdb.quaternary](./pdb.quaternary)
+* [pdb.res](./pdb.res)
+* [pdb.pep](./pdb.pep)
+* [pdb.select](./pdb.select)
+* [download.dssp](./download.dssp)
+* [compute.dssp](./compute.dssp)
+* [parse.dssp](./parse.dssp)
+* [mkdssp](./mkdssp)
+
+One of the most basic operations consists of interconversion between identifiers. For instance, suppose we have a PDB file containing information about the structure of the human deoxyhaemoglobin (2HHB) and we want to know the UniProt IDs of their constitutive polypeptide chains.
+
+
+```{r}
+for (chain in pdb.chain('2hhb')){
+  cat(pdb2uniprot('2hhb', chain), '\n')
+}
+```
+
+We observe that this protein es a heterotetramer formed by two types of polypeptide whose UniProt IDs are given above.
+
+If we don't care about the chains, and all we want is the UniProt IDs for all the polypeptides present in the PDB file, we can use:
+
+```{r}
+id.mapping('2hhb', from = 'pdb', to = 'uniprot')
+```
+
+

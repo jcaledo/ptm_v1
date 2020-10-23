@@ -1,0 +1,155 @@
+---
+title: "prot2codon()"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+```
+
+### Description
+Finds the codons corresponding to a given protein
+
+### Usage
+prot2codon(prot, chain = "", laxity = TRUE)
+
+### Arguments
+_prot_	is either a UniProt or PDB id, or the path to a pdb file.
+
+_chain_	when prot corresponds to a pdb, the chain of interest must be provided.
+
+_laxity_	logical, if FALSE the program stop when a mismatch between the protein and the gene sequences is detected. Otherwise The program finishes running and at the end points out the mismatches.
+
+### Value 
+Returns a dataframe with as many rows as residues has the protein.
+
+### Details
+
+The _ptm_ package offers a set of functions aimed to assist us to download and handle sequences from different databases: 
+
+* [get.seq](./get.seq)
+* prot2codon (the current document)
+* [id.mapping](./id.mapping)
+* [id.features](./id.features)
+* [species.mapping](./species.mapping)
+
+At the heart of this set of functions is **get.seq()**, which imports a biological sequence (either as a string or an array) from the selected database. 
+
+This function can take three arguments: 
+
+* id: the identifier of the molecule in the desired database. 
+* db: the database of interest, which must be one of 'uniprot', 'metosite', 'pdb', 'kegg-aa' or 'kegg-nt'. By default, db = 'uniprot'.
+* as.string: logical, if TRUE the imported sequence will be returned as a character string, otherwise the sequence is returned as an array. By default, as.string = TRUE.
+
+Regarding the identifiers, it should be noted that [MetOSite](https://metosite.uma.es/dashboard) uses the same type of protein ID than [UniProt](https://www.uniprot.org/). However, if the chosen database is [PDB](https://www.rcsb.org/), the identifier should be the 4-character unique identifier characteristic of PDB, followed by a dot and the chain of interest (for proteins with quaternary structure). For instance, '2OCC.B' means we are interested in the sequence of chain B from the structure 2OCC. Please, note that while the function is case-insensitive regarding the PDB ID, that is not the case for the letter that identify the chain, which must be a capital letter. 
+
+```{r}
+# Two valid queries:
+chainB <- get.seq('2occ.B', db = 'pdb')
+CHAINB <- get.seq('2OCC.B', db = 'pdb')
+chainB == CHAINB
+```
+
+If we request the PDB sequence of an oligomeric protein, but we don't provide the chain identifier, then the function will return the concatenated sequences of all the chains
+
+```{r}
+all_chains <- get.seq('2occ', db = 'pdb')
+nchar(all_chains)
+```
+
+We can check that chain B is indeed found within this super-sequence:
+
+```{r}
+gregexpr(chainB, all_chains)
+```
+
+We have been using the chain B from the structure 2OCC as an example to show the usage of **get.seq()**, but you may be wondering what protein it is. If that is the case, you may find useful the function **id.features()**, which returns diverse features related to the protein being query. However, this function require the UniProt ID as argument, and all we have so far is the PDB ID. Fortunately, that won't be a problem because **id.mapping()** allows the ID interconversion we need. 
+
+```{r}
+up_id <- id.mapping('2occ', from = 'pdb', to = 'uniprot')
+up_id
+```
+
+We can verify that the structure 2OCC consist of 13 different polypeptide chains. Now, we are in condition to find out more about 2OCC. For this purpose, we are going to build, with the help of **id.features()**, a dataframe with some features for each polypeptide (Please, type <**?id.features** in the RStudio console to get further details).
+
+```{r}
+features_2occ <- data.frame(Entry = rep(NA, length(up_id)),
+                            Status = rep(NA, length(up_id)),
+                            Entry_name = rep(NA, length(up_id)),
+                            Organism = rep(NA, length(up_id)))
+                            
+
+for (i in 1:length(up_id)){ 
+  chain <- id.features(up_id[i], features = 'ec')
+  features_2occ$Entry[i] <- chain$Entry
+  features_2occ$Status[i] <- chain$Status
+  features_2occ$Entry_name[i] <- chain$Entry_name
+  features_2occ$Organism[i] <- chain$Organism
+}
+library(knitr)
+kable(features_2occ)
+```
+
+Now, that we know that the 2OCC structure correspond to the cytochrome c oxidase (COX), 
+let's suppose that we are interested in obtaining the DNA sequence that codes for the COX2 chain. We know the UniProt ID for this chain, but we need to know the ID of that sequence in the suitable database: [KEGG](https://www.genome.jp/kegg/). Actually, an important part of handling sequences from different databases involves  the conversion of identifiers among different databases, but we already know how to do it with **id.mapping()**
+
+```{r}
+kegg_id <- id.mapping(id = 'P68530', from = 'uniprot', to = 'kegg', 'Bos taurus')
+kegg_id
+```
+
+Thus, we can proceed to download the nucleotide sequence from KEGG:
+
+```{r}
+cox2_dna <- get.seq(kegg_id, db = 'kegg-nt')
+cox2_dna
+```
+
+Next, we are going to check that this DNA sequence encodes indeed for the polypeptide sequence contained in the object _chainB_ that we got above. To carry out this task we are going to make use of the packages _seqinr_ and _bio3d_. So, if you’ve not done so already, install them  with the command:
+
+```
+install.packages("pkg_name")
+````
+
+
+```{r}
+library(seqinr)
+translated <- seqinr::translate(seqinr::s2c(cox2_dna), numcode = 2)
+translated <- paste(translated, collapse = "")
+```
+
+Observe that, since COX2 is a mtDNA encoded protein, we have passed the argument _numcode = 2_ to indicate that the vertebrate mitochondrial [genetic code](https://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi) should be used. 
+
+```{r}
+library(bio3d)
+translated <- as.character(translated)
+sequences <- seqbind(chainB, translated, blank = '-') 
+myaln <- seqaln(sequences, id = c("chainB", "translated"))
+myaln
+```
+
+Indeed, both protein sequences are identical!
+
+A straightforward alternative approach to get the DNA coding sequence, implies using the function **prot2codon()**. This function accepts as argument either the UniProt ID or the PDB ID. In the last case, we have to provide the chain ID.
+
+```{r}
+prot_dna <- prot2codon(prot = '2occ', chain = 'B')
+paste(prot_dna$codon, collapse = "")
+```
+
+When using **prot2codon()**, a caveat to keep in mind is that the translation is carry out using the standard genetic code. For that reason, those methionine encoded by ATA are marked as _check = FALSE_, because the script expected isoleucine instead of methionine. 
+
+```{r}
+library(knitr)
+kable(head(prot_dna))
+```
+
+Finally, we present the function **species.mapping()**, which maps a protein ID (either from UniProt or PDB) to its corresponding organism. We have seen above, that this functionality can be obtanined using the more general purpose function **id.features()**, but when all we wish is to assign a species to a given protein, the easier and faster option is:
+
+```{r}
+species.mapping('2occ', db = 'pdb')
+```
+

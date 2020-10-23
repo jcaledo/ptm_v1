@@ -1,0 +1,64 @@
+---
+title: "aa.comp()"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+library(knitr)
+```
+
+### Description
+Returns a table with the amino acid composition of the target protein
+
+### Usage
+aa.comp(target, uniprot = TRUE)
+
+### Arguments
+
+_target_	a character string specifying the UniProt ID of the protein of interest or, alternatively, the sequence of that protein.
+
+_uniprot_	
+logical, if TRUE the argument 'target' shoud be an ID.
+
+### Value
+Returns a dataframe with the absolute frequency of each type of residue found in the target peptide.
+
+### See Also
+_aa.at()_, _is.at()_, _renum.pdb()_, _renum.meto()_, _renum()_
+
+### Details
+
+The _ptm_ package offers a set of ancillary functions aimed to carry out rutinary work, which may be needed when more elaborated analysis are required. Among these ancillary function are:
+
+* [aa.at](./aa.at)
+* [is.at](./is.at)
+* aa.comp (the current document)
+* [renum.pdb](./renum.pdb)
+* [renum.meto](./renum.meto)
+* [renum](./renum)
+
+
+The function **aa.comp()** provides us the amino acid composition of a given sequence.
+
+```{r}
+library(knitr)
+mytable <- aa.comp('P01009')
+mytable$percent <- round(100 * mytable$frequency/sum(mytable$frequency), 1)                
+kable(mytable)
+```
+
+Above we have passed the UniProt ID of the protein of interest, but we can also provide any customized sequence:
+
+```{r}
+library(knitr)
+mytable <- aa.comp('MAARESAPFDR', uniprot = FALSE)
+mytable$percent <- round(100 * mytable$frequency/sum(mytable$frequency), 1)                
+kable(mytable)
+```
+
+
+

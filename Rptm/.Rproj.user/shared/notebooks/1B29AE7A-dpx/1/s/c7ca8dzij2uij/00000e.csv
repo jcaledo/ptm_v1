@@ -1,0 +1,1 @@
+"0","plot(1:335, GAPDH$min_dpx_complex[1:335], ty = 'b')"

@@ -1,0 +1,91 @@
+---
+title: "pdb.res()"
+# author: "Juan Carlos Aledo"
+# date: "1/25/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+```
+
+### Description
+Checks whether or not a given residue is resolved in the PDB structure
+
+### Usage
+pdb.res(at, up, pdb, chain)
+
+### Arguments
+_at_	the position in the primary structure of the residue (according to the UniProt sequence).
+
+_up_	the UniProt ID.
+
+_pdb_	the 4-letter PDB identifier.
+
+_chain_	letter identifying the chain.
+
+### Value
+This function checks if a given residue in the Uniprot sequence is found in the PDB, and returns TRUE if the residue is found in the PDB sequence (and gives the position in the PDB sequence, that may or may not match that of the Uniprot). If the residue of interest is not found in the PDB the function returns FALSE.
+
+### Details
+
+The _ptm_ package contains a number of ancillary functions that deal with [Protein Data Bank](https://www.rcsb.org/) (PDB) files. These functions may be useful when structural 3D data need to be analyzed. The mentioned functions are:
+
+* [uniprot2pdb](./uniprot2pdb)
+* [pdb2uniprot](./pdb2uniprot)
+* [pdb.chain](./pdb.chain)
+* [pdb.quaternary](./pdb.quaternary)
+* pdb.res (the current document)
+* [pdb.pep](./pdb.pep)
+* [pdb.select](./pdb.select)
+* [download.dssp](./download.dssp)
+* [compute.dssp](./compute.dssp)
+* [parse.dssp](./parse.dssp)
+* [mkdssp](./mkdssp)
+
+When dealing with PDB files, you may run into several challenges. For example, many structures (particular those determined by crystallography) only include information about part of the functional biological assembly. Also, many PDB entries are missing portions of the molecule that were not observed in the experiment. These include structures that include only alpha carbon positions, structures with missing loops, structures of individual domains, or subunits from a larger molecule. For this reazon the function **pdb.res()** may be useful if we want to check whether a given residues appears resolved in the structure of interest. 
+
+For instance, we know that the subunit 9 of the transcription initiation factor TFIID is sulfoxidiezed at Met180:
+
+```{r}
+meto.scan('Q16594')$Metosites
+```
+
+We now search for PDB files containing the structure of this transcription factor:
+
+```{r}
+uniprot2pdb('Q16594') 
+```
+
+It can be observed that the chain F of the structure 6F3T correspond to the subunite 9. Now we can check wheter the Met180 is resolved in this structure:
+
+```{r}
+pdb.res(at = 180, up = 'Q16594', pdb = '6f3t', chain = 'F')
+```
+
+And the answer is negative. Unfortunately, if we examine all the other PDB files, we will check that this methionine residue is not resolved.
+
+Finnally, to end with a better taste, let's consider another example: the NADP-dependent malic enzyme (P48163)
+
+```{r}
+meto.scan('P48163')$Metosites
+```
+
+There are two methionine residues that are sulfoxidized. Next we will search for a PDB structure where these methionines appear resolved. 
+
+```{r}
+uniprot2pdb('P48163') 
+```
+
+We try with the PDB 3WJA:
+
+```{r}
+pdb.res(at = 229, up = 'P48163', pdb = '3wja', chain = 'A')
+```
+
+We observe that Met229 is resolved, but the position of this residue in the PDB sequence is 222 (the first seven N-terminal residues of the polypeptide are not resolved). Similarly:
+
+```{r}
+pdb.res(at = 361, up = 'P48163', pdb = '3wja', chain = 'A')
+```

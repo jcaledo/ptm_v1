@@ -1,0 +1,143 @@
+---
+title: "Documentation"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+The _ptm_ package, writen to assist the study of protein post-translational modifications, consists of sets of functions that can be grouped, according to their functionality, into the following categories:
+
+* Functions exploring data from [MetOSite](https://metosite.uma.es) (a methionine sulfoxidation database).
+* Functions integrating data from other main PTM databases.
+* Functions to study S-aromatic motifs.
+* Functions to analyse sequence environment.
+* Functions to handle sequences from different databases.
+* Evolutionary analysis tools.
+* Ancillary tools dealing with PDB files.
+* Functions to explore protein surfaces.
+* Functions to explore thermodynamic stability.
+* Tools for sequence re-numbering.
+* Functions related to inter-atomic and inter-residue distances
+* Funtions related to data visualization.
+
+Major functions are listed below with links to further documentation that includes example code and results.
+
+Note that you can also get help on any particular function by using the command **?function**  or **help(function)** (e.g. help(meto.search)).
+
+We also distribute a number of extended _ptm_ vignettes that provide worked examples of using _ptm_ to perform a particular type of analysis. Currently available vignettes include:
+
+* [S-Aromatic Motifs and Calmodulin](./S-Aromatic-Motifs-and-Calmodulin)
+* [Exploring MetO Sequence Environments](./Exploring-MetO-Sequence-Environments)
+* [Building Up a Dataset for the Study of Phosphoserines](./Building-Up-a-Dataset-for-the-Study-of-Phosphoserines)
+* [Building Up a Dataset for 3D Analyses of MetO Sites](./Building-Up-a-Dataset-for-3D-Analyses-of-MetO Sites)
+
+## Help topics
+
+### Exploring data from MetOSite
+
+* [meto.search](./meto.search): Searchs for Specific MetO Sites.
+* [meto.scan](./meto.scan): Scans a Protein in Search of MetO Sites.
+* [meto.list](./meto.list): Lists Proteins Found in MetOSite Matching a Keyword.
+
+### Integrating data from other main PTM databases
+
+* [p.scan](./p.scan): Scans a Protein in Search of Phosphosites.
+* [ac.scan](./ac.scan): Scans a Protein in Search of Acetylation Sites.
+* [me.scan](./me.scan): Scans a Protein in Search of Methylation Sites.
+* [ub.scan](./ub.scan): Scans a Protein in Search of Ubiquitination Sites.
+* [su.scan](./su.scan): Scans a Protein in Search of Sumoylation Sites.
+* [gl.scan](./gl.scan): Scans a Protein in Search of OGlcNAc Sites.
+* [sni.scan](./sni.scan): Scans a Protein in Search of S-nitrosylation Sites.
+* [ni.scan](./ni.scan): Scans a Protein in Search of Nitration Sites.
+* [ptm.scan](./ptm.scan): Scans a Protein in Search of PTM Sites.
+* [reg.scan](./reg.scan): Scans a Protein in Search of Regulatory PTM Sites.
+* [dis.scan](./dis.scan): Scans a Protein in Search of Disease-Related PTM Sites.
+
+### Functions to study S-aromatic motifs
+
+* [saro.motif](./saro.motif): Searchs for S-Aromatic Motifs in Proteins.
+* [saro.gemometry](./saro.geometry): Computes Distances and Angles of S-Aromatic Motifs.
+* [saro.dist](./saro.dist): Computes Distances to the Closest Aromatic Residues and the Number of S-Aromatic Motifs.
+
+### Functions to analyse sequence environments
+
+* [env.extract](./env.extract): Extracts the Sequence Environment Around a Given Position
+* [env.matrices](./env.matrices): Provides the Frequencies of Each Amino Acid Within the Environment.
+* [env.Ztest](./env.Ztest): Searchs for Amino Acids Either Overrepresented or Avoided at Given Positions Within a Sequence Environment.
+* [env.plot](./env.plot): Plots the Z Statistics at Each Position Within the Environment for the Requested Amino Acid.
+
+### Handling sequences from different databases
+
+* [get.seq](./get.seq): Imports a Protein Sequence from a Database.
+* [prot2codon](./prot2codon): Finds the Coding Triplets for a Given Protein.
+* [id.mapping](./id.mapping): Identifier Mapping.
+* [id.features](./id.features): Features Related to the Protein Entry.
+* [species.mapping](./species.mapping): Maps Protein ID to Species.
+
+
+### Evolutionary analysis tools
+
+* [msa](/msa): Multiple Sequence Alignment.
+* [custom.aln](/custom.aln): Downloads and Aligns Orthologous Sequences.
+* [list.hom](/list.hom): Searchs Homologous Entries.
+* [parse.hssp](/parse.hssp): Parses a HSSP File to Return Dataframes.
+* [get.hssp](/get.hssp): Gets a HSSP File.
+* [shannon](/shannon): Computes Shannon Entropy for Amino Acid and Codon Sites.
+* [site.type](/site.type): Computes Shannon Entropy and Sort out the Sites.
+
+### Ancillary tools dealing with PDB files
+
+* [pdb.quaternary](./pdb.quaternary): Determines the Subunit Composition of a Given Protein.
+* [pdb.chain](./pdb.chain): Downloads a PDB File and Splits it to Provide a File by Chain.
+* [uniprot2pdb](./uniprot2pdb): Returns the PDB and Chain IDs of the Provided Protein.
+* [pdb2uniprot](./pdb2uniprot): Return the UniProt ID of a Given Chain Within a PDB Structure.
+* [pdb.res](./pdb.res): Checks Whether or Not a Given Residue is Resolved in the PDB Structure.
+* [pdb.pep](./pdb.pep): Checks Whether a Given Oligopeptide is Resolved in the PDB.
+* [download.dssp](./download.dssp): Downloads a Precoumputed DSSP File.
+* [compute.dssp](./compute.dssp): Computes and Returns a DSSP File.
+* [parse.dssp](./parse.dssp): Parses a DSSP File to Return a Dataframe.
+* [mkdssp](./mkdssp): Computes DSSP Files Using an In-House Version of the DSSP Software.
+
+### Functions to explore protein surfaces.
+
+* [acc.dssp](./accdssp): Computes Residue Accessibility and SASA.
+* [get.area](./getarea): Atomic Solvation Energies.
+* [atom.dpx](./atomdpx): Atom Depth Analysis.
+* [res.dpx](./resdpx): Residue Depth Analysis.
+* [stru.part](/strupart): Partition of Structural Regions.
+
+### Functions to explore thermodynamic stability.
+
+* [imutant](/imutant): Computes Changes in Stability Using a Machine-Learning Approach.
+* [foldx](/foldx): Computes Changes in Stability Using a Force-Field Approach.
+* [ddG.profile](/ddGprofile): Represents the Sensitivity of a Given Position to Changes in Stability.
+* [ddG.ptm](/ddGptm): Computes Changes in Stability After PTM.
+
+### Tools for sequence re-numbering 
+
+* [aa.at](./aa.at): Returns the Residue Found at the Requested Position.
+* [is.at](./is.at): Checks if a Given Amino Acid is at a Given Position.
+* [renum.pdb](./renum.pdb): Renumerates Residue Position of a PDB Sequence to Match the Corresponding UniProt Sequence.
+* [renum.meto](./renum.meto): Renumerates Residue Position of a MetOSite Sequence to Match the Corresponding UniProt Sequence.
+* [renum](./renum): Renumerates Residue Position.
+* [aa.comp](./aa.comp): Returns a Table with the Amino Acid Composition of the Target Protein.
+
+### Functions related to inter-atomic and inter-residue distances
+
+* [res.dist](./res.dist): Computes the Euclidean Distance Between Two Given Residues.
+* [dist2closest](./dist2closest): Computes the Distance to the Closest Amino Acid of the Indicated Type.
+* [ball](./ball): Finds the Atoms Within a Sphere with the Indicated Center and Radius.
+* [pairwise.dist](./pairwise.dist): Computes the Pairwise Distance Matrix Between Two Sets of Points.
+
+### Data visualization
+
+* [env.plot](./env.plot): Plots the Z Statistics at Each Position Within the Environment for the Requested Amino Acid.
+* [ptm.plot](./plotptm): Plots Values of Property and PTM Sites Along the Protein Sequence.
+* [ddG.profile](/ddGprofile): Represents the Sensitivity of a Given Position to Changes in Stability.
+* [site.type](/site.type): Computes Shannon Entropy and Sort out the Sites.
+

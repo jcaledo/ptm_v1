@@ -1,0 +1,105 @@
+---
+title: "atom.dpx()"
+# author: "Juan Carlos Aledo"
+# date: "1/25/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+library(knitr)
+```
+
+### Description
+Computes the Depth from the Surface for Each Protein's Atom.
+
+### Usage
+atom.dpx(pdb)
+
+### Arguments
+_pdb_	is either a PDB id, or the path to a pdb file.
+
+
+### Value
+A dataframe with the computed depths. The depth is defined as the distance in angstroms between the target atom and the closest atom on the protein surface. When the protein is composed of several subunits, the calculations are made for both, the atom being part of the complex, and the atom being only part of the polypeptide chain to which it belongs.
+
+### References
+
+* Pintar et al. 2003. [Bioinformatics 19:313-314](https://www.ncbi.nlm.nih.gov/pubmed/12538266)
+
+### Details
+
+Analysis of protein commonly requires the partition of their structure into regions such as the surface, interior, or interface. Whenever you are interested into analysing such a partition in a particular protein, the following function of the _ptm_ package may be of help:
+
+* [acc.dssp](/acc.dssp)
+* [get.area](/get.area)
+* atom.dpx (the current document)
+* [res.dpx](/res.dpx)
+* [stru.part](/stru.part)
+
+In order to obtain an accurate description of the protein interior, the function **atom. dpx()** provides meaures of the depth of each atom in the target protein, defined as its distance in Å from the closest solvent accessible atom. For instance, for calmodulin (CaM) a small monomeric protein:
+
+```{r}
+aCaM <- atom.dpx('1cll') 
+kable(head(aCaM))
+```
+
+while **res.dpx()** does the same but at the level of residues:
+
+```{r}
+CaM <- res.dpx('1cll')
+kable(head(CaM))
+```
+
+Note that for each residue, the function returns three dpx measurement: the one for the atom with the minimum distance, the one for the atom with the maximum dpx, and the average dpx for all the atom from that residue. You can also note that because CaM is a monomeric protein, there is not point in comparing the dpx values compute for the monomer and the complex (both are the same).
+
+Now lets represent the dpx value along the primary sequence of a monomer of glyceraldehyde-3-phosphate dehydrogenase, a tetrameric protein. 
+
+```{r}
+GAPDH <- res.dpx('1u8f')
+```
+
+First using the minimum distance:
+
+```{r}
+par(mfrow = c(2,1))
+par(mar = c(2,4.1,1,2.1))
+
+plot(1:335, GAPDH$min_dpx_complex[1:335], ty = 'b', ylab = 'Distance to surface')
+
+Ddpx <- GAPDH$min_dpx_complex - GAPDH$min_dpx_chain # dpx_complex - dpx_monomer
+
+plot(1:335, Ddpx[1:335], ty = 'b',
+    xlab = 'Residue number', ylab = 'Complex - Monomer')
+
+```
+
+
+Then the averaged distance:
+
+```{r}
+par(mfrow = c(2,1))
+par(mar = c(2,4.1,1,2.1))
+plot(1:335, GAPDH$avg_dpx_complex[1:335], ty = 'b', 
+     xlab = 'Residue number', ylab = 'Distance to surface')
+
+Ddpx <- GAPDH$avg_dpx_complex - GAPDH$avg_dpx_chain # dpx_complex - dpx_monomer
+
+plot(1:335, Ddpx[1:335], ty = 'b', 
+     xlab = 'Residue number', ylab = 'Complex - Monomer')
+```
+
+and finally, the maximum distance:
+
+```{r}
+par(mfrow = c(2,1))
+par(mar = c(2,4.1,1,2.1))
+plot(1:335, GAPDH$max_dpx_complex[1:335], ty = 'b',
+     xlab = 'Residue number', ylab = 'Distance to surface')
+
+Ddpx <- GAPDH$max_dpx_complex - GAPDH$max_dpx_chain
+
+plot(1:335, Ddpx[1:335], ty = 'b',
+       xlab = 'Residue number', ylab = 'Complex - Monomer')
+```

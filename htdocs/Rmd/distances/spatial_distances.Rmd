@@ -1,0 +1,86 @@
+---
+title: "Spatial Distances"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+```
+
+The continuous formation and rupture of non-covalent bonds (intra- and intermolecular), gives rise to dynamic molecular interactions, which are cosubstantial to life. These non-covalent interactions can adopt many forms, but all of them are fundamentally electrostatic in nature, and strongly influenced by distances.
+
+| Type of interaction   | Energy dependence on the distance |
+|-----------------------|-----------------------------------|
+| Ion-ion               | $1/r$                             |
+| Ion-dipole            | $1/r^2$                           |
+| Dipole-dipole         | $1/r^3$                           |
+| Ion-induced dipole    | $1/r^4$                           |
+| Dipole-indiced dipole | $1/r^5$                           |
+| Dispersion            | $1/r^6$                           |
+
+
+Therefore, computing spatial distances (in ångströms, Å), either between atoms or residues, is a useful task in many different contexts. A number of function from the package _ptm_ will help us in these tasks:
+
+* res.dist()
+* dist2closest()
+* ball()
+* pairwise.dist()
+
+
+The function <font size="1">**res.dist()**</font> computes the minimal, the maximun and the average distances bewteen two given residues. Let's take as model the alpha subunit of the human eIF2 ([PDB ID 1Q8K](https://www.rcsb.org/structure/1Q8K)). S218 and M222 
+have been proposed to be [functionally related](https://www.ncbi.nlm.nih.gov/pubmed/28750604). So, we'll focus on this pair of residues. 
+
+Note that when computing the distances, we can exclude the backbone and hydrogen atoms by setting their parameter to FALSE.
+
+```{r}
+res.dist(pdb = '1q8k',
+         rA = 218, chainA = 'A',
+         rB = 222, chainB = 'A',
+         backbone = FALSE, hatoms = FALSE)
+```
+We can see that 5.04 Å is the minimal distance between these two residues. Furthermore, we see that this minimal distance is between the beta carbon from S218 and the beta carbon from M222.
+
+Similarly, we can check that the maximum distance is 8.37 Å, and corresponds to the distance between the gamma oxygen of S218 and the epsilon carbon of M222.
+
+
+What if we want to know the distance in ångströms between M222 and the closest vecinal methionine? Then, we can use the function <font size="1">**dist2closest()**</font> as follows:
+
+```{r}
+dist2closest(pdb = '1q8k', chain = 'A', res = 222, aa = 'M')
+dist2closest(pdb = '1q8k', chain = 'A', res = 222, aa = 'M', backbone = TRUE)
+```
+
+There is a set of atoms of the protein molecule whose intramolecular interactions we might want to know. The function <font size="1">**ball()**</font> will help us in such a mission. The types of relevant atoms that can be study with this function are:
+
+* Sulfur delta (SD) from Met residues.
+* Sulfur gamma (SG) from Cys residues.
+* Oxigen gamma (OG) from Ser residues.
+* Oxigen gamma-1 (OG1) from Thr residues.
+* Carboxylate atoms (OE1 and OE2) from Glu residues.
+* Carboxylate atoms (OD1 and OD2 ) from Asp residues.
+* Nitrogen atoms (ND1 and NE2) of the imidazol from His residues.
+* Nitrogen atoms (NE, NH1 and NH2) of the guanidinum from Arg residues.
+* Nitrogen zeta (NZ) from Lys residues.
+* Benzene ring atoms (CG, CD1, CD2, CE1, CE2 and CZ) from Phe residues.
+* Benzene ring atoms (CG, CD1, CD2, CE1, CE2 and CZ) from Tyr residues.
+* Indol ring atoms (ring-1: CG, CD1, CD2, NE1 CE2; ring-2: CD2, CE3, CZ2, CH2, CZ3, CE2) from Trp residues.
+
+The function <font size="1">**ball()**</font> takes the _(x, y, z)_ coordinates of the chosen atom (or  centroid of the functional group) as the center of a sphere (ball) of radious $r$, and finds all the atoms from the protein that are within this sphere. For instance, if we are interested in the interactions of the SD from Met181 of the protein human inositol polyphosphate multikinase (PDB ID: 6R7F), 
+
+```{r}
+ball(pdb = '6e7f', chain = 'A', res = 181, r = 4.5)
+```
+
+Finally, the function <font size="1">**pairwise.dist()**</font> takes two sets of points (in the form of matrices) tailored by the user, and returns a distance matrix  
+
+```{r}
+a <- matrix(c(1,1,1,1,0,0,1,0,1), ncol = 3, byrow = TRUE)
+rownames(a) <- c('point-1', 'point-2', 'point-3')
+b <- matrix(c(0,0,0,1,1,1), ncol = 3, byrow = TRUE)
+rownames(b) <- c('point-4', 'point-5')
+
+pairwise.dist(a, b, square = FALSE)
+```

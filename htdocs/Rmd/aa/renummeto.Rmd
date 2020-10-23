@@ -1,0 +1,60 @@
+---
+title: "renum.meto()"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+library(knitr)
+```
+
+### Description
+Renumerates residue position of a MetOSite sequence to match the corresponding UniProt sequence
+
+### Usage
+renum.meto(uniprot)
+
+### Arguments
+
+_uniprot_	the UniProt ID.
+
+### Value
+Returns a dataframe containing the re-numerated sequence.
+
+### See Also
+_aa.at()_, _is.at()_, _aa.comp()_, _renum.pdb()_, _renum()_
+
+### Dependencies
+To use this function you will need [_MUSCLE_](https://www.drive5.com/muscle/) installed in your computer.
+
+### Details
+
+The _ptm_ package offers a set of ancillary functions aimed to carry out rutinary work, which may be needed when more elaborated analysis are required. Among these ancillary function are:
+
+* [aa.at](./aa.at)
+* [is.at](./is.at)
+* [aa.comp](./aa.comp)
+* [renum.pdb](./renum.pdb)
+* renum.meto (the current document)
+* [renum](./renum)
+
+
+In a few ocasions the numeration of the sequences coming from UniProt and MetOSite don't fully match. For instance, the sequence given in MetOSite may be the one corresponding to the mature form of the protein (because the numeration use in the literature is that for the mature form) and the sequence found in UniProt may be that of the precursor protein. When this happens it is useful to have a tool such as **renum.meto()** that will re-numerate the residues for us.
+
+Let's see an example using the protein alpha-1-antitrypsin as model. The mature form of the protein (sequence given by MetOSite) is formed by proteolytic cleavage of a precursor (sequence given by UniProt). Thus, the processed protein starts at the position 25 from the precursor.
+
+
+```{r}
+up_meto <- renum.meto('P01009')
+kable(up_meto[1:35, ])
+```
+
+We can see that the function **renum.meto()** has renumerated all the residues from the MetOSite sequence to force them matching the UniProt numeration.
+
+
+
+
+

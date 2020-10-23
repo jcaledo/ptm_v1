@@ -1,0 +1,49 @@
+---
+title: "Getting started with ptm"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Overview
+
+_ptm_ is an R package containing utilities for the analysis of post-translational modifications (PTMs) in proteins, with particular emphasis on the [sulfoxidation of methionine ](https://metosite.uma.es/blog/methionine-proteins) residues. 
+
+It is currently distributed as platform independent source code under the [GPL version 2 license](http://www.gnu.org/copyleft/gpl.html). Please, see the [Installing ](./installing) _ptm_ page for installation instructions. 
+
+## Features
+  
+* Straigthforward way to download, filter and analyze data from the sulfoxidation database [_MetOSite_](https://metosite.uma.es).
+* Integration of major protein PTM and sequence databases and associated search tools.
+* Data visualization: by using visual elements like charts, graphs, and maps, data visualization tools provide an accessible way to see and understand trends, outliers, and patterns in data related to PTM. 
+* In addition, various utility functions are provided to enable the statistical and graphical power of the R environment to work with biological sequence and structural data.
+
+## Development
+
+For information on current and future development of _ptm_, see the ptm project on [BitBucket](https://bitbucket.org/jcaledo/ptm/src/master/). 
+
+## Citing ptm
+
+* MetOSite: an integrated resource for the study of methionine residues sulfoxidation, <span style="color:magenta">_Bioinformatics_</span>, 2019, 35:4849–4850.  
+([Abstract](https://doi.org/10.1093/bioinformatics/btz462) | [PubMed](https://www.ncbi.nlm.nih.gov/pubmed/31197322))
+
+* Methionine in proteins: The Cinderella of the proteinogenic amino acids, <span style="color:magenta">_Protein Sci._</span>, 2019, 28:1785-1796. 
+([Abstract](https://doi.org/10.1002/pro.3698) | [PubMed](https://www.ncbi.nlm.nih.gov/pubmed/31359525)) 
+
+## What's next
+
+Depending on your degree of familiarity with R, you can choose between:
+
+
+* Brief [user guide](./aboutR) for newbies in R
+* [Installing](./installing) _ptm_
+* _ptm_ [Documentation](./documentation)
+* _ptm_ [Vignettes](./vignettes)
+
+
+Last modification: 6/Nov/2019
+

@@ -1,0 +1,80 @@
+---
+title: "foldx.assembly()"
+# author: "Juan Carlos Aledo"
+# date: "1/25/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+library(knitr)
+```
+
+### Description
+Computes changes in the Gibbs free energy of the assembly process of a protein.
+
+### Usage
+foldx.assembly(pdb, mol1, mol2, pH = 7, I = 0.05)
+
+### Arguments
+_pdb_	the 4-letter identifier of a PDB structure or the path to a PDB file.
+
+_mol1_ molecule or group of molecules interacting with mol2 (see details)
+
+_mol2_ molecule or group of molecules interacting with mol1 (see details)
+
+_pH_ a numeric value between 0 and 14.
+
+_I_ a value indicating the molar ionic strength.
+
+### Value
+
+The function returns a dataframe with the residues that make up the interface between mol1 and mol2, as well as the change in Gibbs free energy, ΔG, of the assembly process for the requested subunits.
+
+### References
+Schymkowitz et al (2005) [Nucl. Ac. Res. 33:W382-W388](https://www.ncbi.nlm.nih.gov/pubmed/15980494).
+
+### Details
+
+This function implements the FoldX's command ['AnalyseComplex'](http://foldxsuite.crg.eu/command/AnalyseComplex), which allows to determine the interaction energy between two molecues or two groups of molecules.
+
+The interaction between two molecules is driven by the free energy of binding. For instance, let's suppose we have a dimeric protein formed by two polypeptide: chain A and chain B. Then the binding reaction to be considere would be:
+
+
+![](./mdh_binding.png)
+
+
+$ΔG_{bind}$ is directly related to the thermodynamic dissociation constant (Kd) by the following equation: $ΔG_{bind} = RT ln(Kd)$, where R is the gas constant ($1.9859 cal mol^{−1} K^{−1}$) and T is the temperature in kelvin. Please, note that the equilibrium constant of the binding reaction represented above is 1/Kd. 
+
+In order to calculate the free energy of binding of a complex AB, FoldX computes the Gibbs energies of the complex folding ($ΔG_{AB}$) and of the folding of the two molecules A and B alone ($ΔG_A and ΔG_B$, respectively). Then, taking advantage of the fact that ΔG is a state function (its value does not depend on the path followed to reach final state), we can obtain the interaction energy as $ΔG_{bind} = ΔG_{AB} - ΔG_A - ΔG_B$.
+
+
+![](./DGbind.png)
+
+
+The function **foldx.assembly()** in addition to return the requested ΔG (kcal/mol), returns a dataframe with the residues from mol1 and mol2 involved in the intermolecular interaction. To illustrate the use of **foldx.assembly()** we are going to analyze an homodimeric protein as the human mitochondrial malate dehydrogenase (2dfd).  
+
+```{r}
+mdh <- foldx.assembly(pdb = '2dfd', mol1 = 'A', mol = 'B')
+attributes(mdh)$Gibbs 
+attributes(mdh)$units
+```
+
+Now, we can examine some of the 90 residues that configure the interface between the two monomers:
+
+```{r}
+head(mdh)
+```
+
+
+```{r}
+tail(mdh)
+```
+
+Among the amino acids making up the binding interface, you may find symbols that may not be as familiar as those for the 20 proteinogenic amino acids. For instance, in the interface of malate dehydrogenase we got 3 residues 'e' (charged NE2 histidine) and 1 residue 'o' (charged ND1 histidine). The full list of recognized residues can be found [here](http://foldxsuite.crg.eu/allowed-residues)
+
+Note: more elaborate vignette involving the use of **foldx.assembly()** can be reached [here](/GAPDH).
+
+Warning: the function **foldx.assembly()** makes an extensive use of commands invoking the OS, reason why it may not work properly on Windows. 
+

@@ -1,0 +1,96 @@
+---
+title: "env.extract()"
+# author: "Juan Carlos Aledo"
+# date: "`r Sys.Date()`"
+# output: rmarkdown::html_vignette
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+library(knitr)
+```
+
+### Description
+Extracts the sequence environment around a given position
+
+### Usage
+env.extract(prot, db = 'none', c, r, ctr = 'none', exclude = c())
+
+### Arguments
+_prot_	either a uniprot id or a string sequence.
+
+_db_	a character string specifying the desired database; it must be one of 'uniprot', 'metosite', 'none'.
+
+_c_	center of the environment.
+
+_r_	radius of the environment.
+
+_ctr_	the type of control environment; it must be one of 'random', 'closest', or 'none'.
+
+_exclude_	a vector containing the positions to be excluded as control.
+
+### Value
+Returns a list of two strings (environments).
+
+### Reference
+Aledo et al. [Sci Rep. 2015; 5: 16955](https://www.ncbi.nlm.nih.gov/pubmed/26597773)
+
+### Details
+
+Amino acids in the vicinity of a PTM site are critical in promoting or hindering the incoming substituent on specific amino acid. Thus, knowledge about amino acids surronding modified sites and the correlation between them is very valuable. 
+
+The package _ptm_ offers four functions that will assist you in the process of gaining such a knowledge:
+
+* env.extract (the current document)
+* [env.matrices](./envmatrices)
+* [env.Ztest](./envZtest)
+* [env.plot](./envplot)
+
+A more elaborated vignette showing how these four functions can be coordinately used to gain knowledge can be found [here](./enviroments)
+
+For the sake of concretion, let's suppose we are interested in investigating whether the environment of serines that are susceptible to being phosphorylated (phosphosites) can be statistically discriminated against those other enviroments belonging to serines that are not phosphorylatable. To address this issue, we need to build up a set of data on which to carry out the analyses. This is where  **env.extract()** comes into play. Although we will illustrate the use of this function using a single protein (Neuroendocrine protein 7B2, P05408), the process described below should be repeated for the whole phosphoproteome, in order to gain enough statistical power to reach any conclusion regarding the null hypothesis: the environment of phosphorylatable and non-phosphorylatable serine residues are not different. 
+
+Let's start finding the positions at which this protein presents p-serines:
+
+```{r}
+psites <- p.scan('P05408', db = 'PSP')
+psites
+```
+
+After noting that two serine residues are phosphorylated at positions 11 and 205, we next extract their sequence environments. In this ocasion we will choose to use as control the non-phosphorilatable serine closest to the target p-Ser:
+
+```{r}
+pSer <- c(11, 205)
+env.extract(prot = 'P05408', 
+            db = 'uniprot',
+            c = 11, 
+            r = 5, 
+            ctr = 'closest', 
+            exclude = pSer)
+```
+
+
+Now, the process is repeated for the sencond p-Ser:
+
+```{r}
+pSer <- c(11, 205)
+env.extract(prot = 'P05408', 
+            db = 'uniprot',
+            c = 11, 
+            r = 5, 
+            ctr = 'closest', 
+            exclude = pSer)
+```
+
+Eventually, we will get four serine environments: two for the positive sample (phosphorylatable) and two for the control sample (non-phosphorylatable).
+
+If instead of a UniProt ID you have a protein sequence, we can also use **env.extract()** to operate. For instance: 
+```{r}
+myseq <- "MPSSVSWGILLLAGLCCLVPVSLAEDPQGDAAQKTDTSHHDQDHPTFNKITPNLAEFAFSLYRQLAHQSNSTNIFFSPVSIATAFAMLSLGTKADTHDEILEGLNFNLTEIPEAQIHEGFQELLRTLNQPDSQLQLTTGNGLFLSEGLKLVDKFLEDVKKLYHSEAFTVNFGDTEEAKKQINDYVEKGTQGKIVDLVKELDRDTVFALVNYIFFKGKWERPFEVKDTEEEDFHVDQVTTVKVPMMKRLGMFNIQHCKKLSSWVLLMKYLGNATAIFFLPDEGKLQHLENELTHDIITKFLENEDRRSASLHLPKLSITGTYDLKSVLGQLGITKVFSNGADLSGVTEEAPLKLSKAVHKAVLTIDEKGTEAAGAMFLEAIPMSIPPEVKFNKPFVFLMIEQNTKSPLFMGKVVNPTQK"
+
+env.extract(prot = myseq, c = 261, r = 5, ctr = 'random')
+            
+```
+

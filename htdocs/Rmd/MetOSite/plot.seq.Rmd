@@ -1,0 +1,13 @@
+---
+title: "Plot Values of a Property Along the Protein Sequence"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+```
+
+The _ptm_ function <font size="1">**plot.seq()**</font> allows the representation of a chonsen property along the proten sequence. 

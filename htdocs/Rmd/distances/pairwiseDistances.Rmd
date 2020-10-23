@@ -1,0 +1,67 @@
+---
+title: "pairwise.dist()"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+```
+
+### Description
+Computes the pairwise distance matrix between two sets of points
+
+### Usage
+pairwise.dist(a, b, squared = TRUE, ...)
+
+### Arguments
+_a, b_	matrices (NxD) and (MxD), respectively, where each row represents a D-dimensional point.
+
+_squared_	return containing squared Euclidean distance.
+
+### Value
+Euclidean distance matrix (NxM). An attribute "squared" set to the value of param squared is provided.
+
+### See Also
+_res.dist()_, _dist2closest()_, _ball()_
+
+### Details
+
+The continuous formation and rupture of non-covalent bonds (intra- and intermolecular), gives rise to dynamic molecular interactions, which are cosubstantial to life. These non-covalent interactions can adopt many forms, but all of them are fundamentally electrostatic in nature, and strongly influenced by distances.
+
+| Type of interaction   | Energy dependence on the distance |
+|-----------------------|-----------------------------------|
+| Ion-ion               | $1/r$                             |
+| Ion-dipole            | $1/r^2$                           |
+| Dipole-dipole         | $1/r^3$                           |
+| Ion-induced dipole    | $1/r^4$                           |
+| Dipole-indiced dipole | $1/r^5$                           |
+| Dispersion            | $1/r^6$                           |
+
+
+Therefore, computing spatial distances (in ångströms, Å), either between atoms or residues, is a useful task in many different contexts. A number of function from the package _ptm_ will help us in these tasks:
+
+* [res.dist](./res.dist)
+* [dist2closest](./dist2closest)
+* [ball](./ball)
+* pairwise.dist (the current document)
+
+
+The most elementary of all these functions is, **pairwise.dist()**, which takes two sets of points (in the form of matrices) tailored by the user, and returns a distance matrix. Let's just   
+
+```{r}
+a <- matrix(c(1,1,1,1,0,0,1,0,1), ncol = 3, byrow = TRUE)
+rownames(a) <- c('point-1', 'point-2', 'point-3')
+b <- matrix(c(0,0,0,1,1,1), ncol = 3, byrow = TRUE)
+rownames(b) <- c('point-4', 'point-5')
+a
+b
+```
+
+and now let's compute the distances between the two sets of points:
+
+```{r}
+pairwise.dist(a, b, square = FALSE)
+```

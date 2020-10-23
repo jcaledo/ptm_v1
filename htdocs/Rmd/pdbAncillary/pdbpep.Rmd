@@ -1,0 +1,56 @@
+---
+title: "pdb.pep()"
+# author: "Juan Carlos Aledo"
+# date: "1/25/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+```
+
+### Description
+Checks whether a given oligopeptide is resolved in the PDB
+
+### Usage
+pdb.pep(pep, pdb)
+
+### Arguments
+
+_pep_	character string corresponding to the sequence of the oligopeptide.
+
+_pdb_	the 4-letter PDB identifier.
+
+### Value
+The functions returns TRUE if peptide is found in the PDB sequence (and gives the starting position and the chain as attributes), and FALSE otherwise.
+
+### Details
+
+The _ptm_ package contains a number of ancillary functions that deal with [Protein Data Bank](https://www.rcsb.org/) (PDB) files. These functions may be useful when structural 3D data need to be analyzed. The mentioned functions are:
+
+* [uniprot2pdb](./uniprot2pdb)
+* [pdb2uniprot](./pdb2uniprot)
+* [pdb.chain](./pdb.chain)
+* [pdb.quaternary](./pdb.quaternary)
+* [pdb.res](./pdb.res)
+* pdb.pep (the current document)
+* [pdb.select](./pdb.select)
+* [download.dssp](./download.dssp)
+* [compute.dssp](./compute.dssp)
+* [parse.dssp](./parse.dssp)
+* [mkdssp](./mkdssp)
+
+When dealing with PDB files, you may run into several challenges. For example, many structures (particular those determined by crystallography) only include information about part of the functional biological assembly. Also, many PDB entries are missing portions of the molecule that were not observed in the experiment. These include structures that include only alpha carbon positions, structures with missing loops, structures of individual domains, or subunits from a larger molecule. For this reazon the function **pdb.pep()** may be useful if we want to check whether a given segment of the sequence (oligopeptide) is resolved in the structure of interest. 
+
+For instance, the in the 3D structure of NADP-dependent malic enzyme (PDB: 3WJA) the first seven N-terminal residues (MEPEAPR) are lacking. This fact can be checked as follows:
+
+```{r}
+pdb.pep(pep = 'MEPEAPR', pdb = '3wja')[[1]]
+```
+
+However, the peptide NSQEIQVLRVVK is found in the resolved structure:
+
+```{r}
+pdb.pep(pep = 'NSQEIQVLRVVK', pdb = '3wja')
+```

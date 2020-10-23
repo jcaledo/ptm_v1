@@ -1,0 +1,61 @@
+---
+title: "Scan a Protein in Search of Ubiquitination Sites"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+```
+
+### Description
+Scans the indicated protein in search of ubiquitination sites
+
+### Usage
+ub.scan(up_id, db = 'all')
+
+### Arguments
+_up_id_	a character string corresponding to the UniProt ID.
+
+_db_	the database where to search. It should be one among 'PSP', 'dbPTM', 'all'.
+
+### Value
+Returns a dataframe where each row corresponds to a modifiable residue.
+
+### References
+Hornbeck et al. [Nucleic Acids Res. 2019 47:D433-D441](https://www.ncbi.nlm.nih.gov/pubmed/30445427).
+Huang et al. [Nucleic Acids Res. 2019 47:D298-D308](https://www.ncbi.nlm.nih.gov/pubmed/30418626).
+
+### See Also
+_ac.scan()_, _meto.scan()_, _ni.scan()_, _gl.scan()_, _su.scan()_, _sni.scan()_, _dis.scan()_, _ptm.scan()_, _me.scan()_, _p.scan()_, _reg.scan()_
+
+### Details
+
+[Protein ubiquitination](https://www.nature.com/articles/cr201639) is a dynamic multifaceted post-translational modification involved in nearly all aspects of eukaryotic biology. Ubiquitination can affect proteins in many ways: it can mark them for degradation via the proteasome, alter their cellular location, affect their activity, and promote or prevent protein interactions.
+
+The package _ptm_ provides a function, **ub.scan()**, that aims to integrate information from different PTM databases, and assist to identify ubiquitination sites in a given protein. The UniProt ID of the protein of interest must be passed as argument. A second argument for this function is _db_, used to indicate the database to be searched. The databases accessible for this purpose are:
+
+* [PSP](https://www.phosphosite.org): PhosphoSitePlus.
+* [dbPTM](http://dbptm.mbc.nctu.edu.tw): database of Post-Translational Modifications.
+
+
+By default, **ub.scan()** use all above databases to search for methylation sites. In this case, it should be noted that the same ubiquitination site can appear twice if it is present in both databases. If we wish to get a list of unique ubiquitination sites found, for instance,  in the protein Histone H3.1t, we can proceed as follows:
+
+First, you need to search for the UniProt ID. If the protein in question is found into MetOSite, you can search the ID:
+
+```{r}
+id <- meto.list('Histone H3.1t')$prot_id
+id
+```
+
+Otherwise, go to the [UniProt](https://www.uniprot.org) page to search for the ID.
+
+Then,
+
+```{r}
+unique(ub.scan(id)$modification)
+```
+

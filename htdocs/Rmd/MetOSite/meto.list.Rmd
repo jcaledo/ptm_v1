@@ -1,0 +1,64 @@
+---
+title: "List Proteins Found in MetOSite Matching a Keyword"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+```
+
+
+### Description
+Lists proteins found in MetOSite with names matching the keyword.
+
+### Usage
+meto.list(keyword)
+
+### Arguments
+_keyword_ a character string corresponding to the keyword.
+
+### Value
+This function returns a dataframe with the UniProt id, the protein name and the species, for those proteins present into MetOSite whose name contains the keyword.
+
+### References
+Valverde et al. 2019. MetOSite: an integrated resource for the study of methionine residues sulfoxidation, [Bioinformatics 35:4849-4850](https://doi.org/10.1093/bioinformatics/btz462).
+
+### See Also
+_meto.search()_, _meto.scan()_
+
+### Details
+
+We have search the literature to find those protein-bound methionine residues that have been detected, either _in vitro_ or _in vivo_, as MetO. All this information has been collected and published in the form of a database: [MetOSite](https://metosite.uma.es).
+
+Thus, MetOSite is a database that provides mannually curated data related to experimentally confirmed sulfoxidation sites and [the effect of such PTM on the protein properties](https://www.ncbi.nlm.nih.gov/pubmed/31359525). Currently, it contains over 7300 sites found in more than 3500 different proteins from over 20 species. 
+
+The _ptm_ packages offers three functions that help to explore and download data from MetOSite. 
+
+* meto.list (the current tutorial)
+* [meto.scan](./meto.scan)
+* [meto.search](./meto.search)
+
+
+Thus, if you wish to know whether your protein of interest has been described to contain MetO sites, the function **meto.scan()** will help you.
+
+If, on the contrary, you're interested on sets of proteins or MetO sites, grouped according to criteria such as functional effect, species or oxidants, then the place to go is **meto.search()**
+
+Finally, the function **meto.list()** provides a list with the proteins found in MetOSite whose names contain the keyword provided as argument to the function. 
+
+For instance, using the word _calcium_ as keyword:
+
+```{r}
+ca <- meto.list('calcium')
+head(ca)
+```
+
+In this way, the object we have named *ca* is a dataframe that contains tens of proteins (one per row) whose names include the word *calcium*. Now, if you wish, we can further explore any of them using **meto.scan()**. For instance, let's say we are interested in the protein "Calcium/calmodulin-dependent protein kinase type II subunit delta", which is found in the row 11 from the dataframe *ca* :
+
+```{r}
+meto.scan(ca$prot_id[11])$Note
+```
+Note that we have only requested the 'Note' field. For a more detailed report, please check the documentation of the function **meto.scan()**.
+

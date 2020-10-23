@@ -1,0 +1,131 @@
+---
+title: "Search for Specific MetO Sites"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+```
+
+### Description
+Searchs for specific MetO sites filtering MetOSite according to the selected criteria.
+
+### Usage
+meto.search(...)
+
+### Arguments
+_highthroughput.group_ logical, when FALSE the sites described in a high-throughput study (unknown effect) are filtered out.
+
+_bodyguard.group_	logical, when FALSE the sites postulated to function as ROS sink (because when oxidized no apparent effect can be detected) are filtered out.
+
+_regulatory.group_ logical, when FALSE the sites whose oxidation affect the properties of the protein (and therefore may be involved in regulation) are filtered out.
+
+_gain.activity_ introduce 1 or 0 to indicate wether the oxidation of the selected sites implies a gain of activity or not, respectively. If we do not wish to use this property to filter, introduce 2.
+
+_loss.activity_	introduce 1 or 0 to indicate wether or not the oxidation of the selected sites implies a loss of activity or not, respectively. If we do not wish to use this property to filter, introduce 2.
+
+_gain.ppi_ introduce 1 or 0 to indicate wether the oxidation of the selected sites implies a gain of protein-protein interaction or not, respectively. If we do not wish to use this property to filter, introduce 2.
+
+_loss.ppi_ introduce 1 or 0 to indicate wether or not the oxidation of the selected sites implies a loss of protein-protein interaction or not, respectively. If we do not wish to use this property to filter, introduce 2.
+
+_change.stability_ introduce 1 or 0 to indicate wether the oxidation of the selected sites leads to a change in the protein stability or not, respectively. If we do not wish to use this property to filter, introduce 2.
+
+_change.location_	introduce 1 or 0 to indicate wether or not the oxidation of the selected sites implies a change of localization or not, respectively. If we do not wish to use this property to filter, introduce 2.
+
+_organism_	a character string indicating the scientific name of the species of interest, or -1 if we do not wish to filter by species.
+
+_oxidant_ a character string indicating the oxidant, or -1 if we do not wish to filter by oxidants.
+
+### Value
+This function returns a dataframe with a line per MetO site.
+
+### References
+Valverde et al. 2019. MetOSite: an integrated resource for the study of methionine residues sulfoxidation, [Bioinformatics 35:4849-4850](https://doi.org/10.1093/bioinformatics/btz462).
+
+### See Also
+_meto.scan()_, _meto.list()_
+
+### Details
+
+We have search the literature to find those protein-bound methionine residues that have been detected, either _in vitro_ or _in vivo_, as MetO. All this information has been collected and published in the form of a database: [MetOSite](https://metosite.uma.es).
+
+Thus, MetOSite is a database that provides mannually curated data related to experimentally confirmed sulfoxidation sites and [the effect of such PTM on the protein properties](https://www.ncbi.nlm.nih.gov/pubmed/31359525). Currently, it contains over 7300 sites found in more than 3500 different proteins from over 20 species. 
+
+The _ptm_ packages offers three functions that help to explore and download data from MetOSite. 
+
+* meto.search (the current tutorial)
+* [meto.scan](./meto.scan)
+* [meto.list](./meto.list)
+
+
+Thus, if you wish to know whether your protein of interest has been described to contain MetO sites, the function **meto.scan()** will help you.
+
+If, on the contrary, you're interested on sets of proteins or MetO sites, grouped according to criteria such as functional effect, species or oxidants, then you are in the right place and  **meto.search()** is your function.
+
+The function **meto.list()** provides a list with the proteins found in MetOSite whose names contain the keyword provided as argument to the function. 
+
+Each MetO site can be assigned to one of three possible groups, depending on the answer to the following question:
+
+Does the oxidation of this methionine has an effect on any biological property of the protein?
+
+* Group 1: The answer is "We do not know because it has not been addressed". This group is composed mainly for those MetO sites coming from high-througput studies and nothing is known about the effect of their sulfoxidation just because it has not been addressed (hightroughput.group).
+
+* Group 2: The answer is "No, we could not find any effect even though we searched for it". This group is formed for those methionines that are postulated to function as ROS sink (bodyguard.group).
+
+* Group 3: The answer is "Yes, a change in some property has been described". This group is populated for those methionines that may fulfil a role in cellular signaling by affecting at least one of the following biological properties (regulatory.group):
+
+  + Gain of Activity
+  + Loss of Activity
+  + Gain of Protein-Protein Interaction
+  + Loss of Protein-Protein Interaction
+  + Effect on Protein Stability
+  + Effect on Subcellular Location 
+
+The function **meto.search()** helps to download those MetO sites belonging to one or various of the above described groups. For those sites belonging to the "regulatory.group" we can select for those sites affecting one or various of the 6 properties listed above. In addition, data can also be filterd attending to the oxidant and/or the species of interest.
+
+
+For instance, let's say we are interested in all the methionine sites known to be oxidized by hypochlorous acid (HClO), regardless of the species and the effect on the protein properties. Then, we have to run:
+
+```{r}
+hclo <- meto.search(oxidant = 'HClO')
+```
+
+The function returns a dataframe with a line per MetO site found. This dataframe provides information regarding the UniProt ID of the protein (prot_id), the protein's name (prot_name), the position of the MetO site (met_pos), whether the oxidation has been observed _in vivo_ or _in vitro_ (met_vivo_vitro), the [functional category](https://metosite.uma.es/blog/functional-categories) of the site (reg_id), the species (org_sp) and the oxidant (org_oxidant). 
+
+```{r}
+unique(hclo$prot_name)
+```
+
+Now, let's move the focus of interest. We are going to recover all those methionine sites that when oxidized lead to the activation of the protein, regardless of the species and the oxidant. To this end, we'll filter out those sites belonging to the group 1 (_highthroughput_) and group 2 (_bodyguard_) and select _gain.activity_ = 1. 
+
+```{r}
+activ <- meto.search(highthroughput.group = FALSE,
+                    bodyguard.group = FALSE,
+                    gain.activity = 1)
+print(head(activ[,1:3]))
+```
+
+Note that all the arugments that can be passed to this function are optional. We only pass an argument to the function when we want to use that parameter to filter. Thus, **meto.search()** will return all the MetO sites found in the database MetOSite:
+
+```{r}
+all <- meto.search()
+```
+
+Then, we can build, for example, a dataframe indicating the number of sites and proteins found for each species
+
+```{r}
+species <- unique(all$org_sp)
+mytable <- data.frame(species = species, sites = NA, proteins = NA)
+counter <- 0
+for (sp in species){
+  counter <- counter + 1
+  mytable$sites[counter] <- length(all$met_pos[which(all$org_sp == sp)])
+  mytable$proteins[counter] <- length(unique(all$prot_id[which(all$org_sp == sp)]))
+}
+mytable
+```
+
+

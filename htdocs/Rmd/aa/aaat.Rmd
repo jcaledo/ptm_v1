@@ -1,0 +1,70 @@
+---
+title: "aa.at()"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+```
+
+### Description
+Returns the residue found at the requested position
+
+### Usage
+aa.at(at, target, uniprot = TRUE)
+
+### Arguments
+
+_at_	the position in the primary structure of the protein.
+
+_target_	a character string specifying the UniProt ID of the protein of interest or, alternatively, the sequence of that protein.
+
+_uniprot_	logical, if TRUE the argument 'target' shoud be an ID.
+
+### Value
+Returns a single character representing the residue found at the indicated position in the indicated protein.
+
+### See Also
+_is.at()_, _renum.pdb_, _renum.meto()_, _renum()_
+
+### Details
+
+The _ptm_ package offers a set of ancillary functions aimed to carry out rutinary work, which may be needed when more elaborated analysis are required. Among these ancillary function are:
+
+* aa.at (the current document)
+* [is.at](./is.at)
+* [aa.comp](./aa.comp)
+* [renum.pdb](./renum.pdb)
+* [renum.meto](./renum.meto)
+* [renum](./renum)
+
+The function **aa.at()** returns the amino acid found at the requested position of the target sequence. For instance, if we want to know what amino acid is found at the position 100 of the horse cytochrome c (P00004):
+ 
+```{r}
+aa.at(100, 'P00004')
+```
+We can afirm that the amino acid found is a lysine (K).
+
+The _target_ sequence doen't need to be a UniProt sequence, it can be any string of amino acid, in that case we should pass the argument _uniprot = FALSE_:
+
+```{r}
+aa.at(at = 10, target = "GDVEKGKKIFVQKCAQCHTVEKGGK", uniprot = FALSE)
+```
+In this case, at the position 10 of the string that we have passed as argument, we find a phenylalanine (F).
+
+We have found this function to be useful to carry out data quality controls. For instance, if we carry out a query in [MetOSite](https://metosite.uma.es) (a database for sulfoxidation sites), asking for the protein alpha1-antitrypsin (P01009), we obtain:
+
+```{r}
+meto.scan('P01009')$Metosites[[1]]
+```
+
+To verify that there was no error with the annotations, we checked that indeed methionine residues are found at this positions:
+
+```{r}
+lapply(as.numeric(meto.scan('P01009')$Metosites[[1]]), 
+       function (x) aa.at(x, get.seq('P01009', db = 'metosite'), uniprot = FALSE))
+```
+

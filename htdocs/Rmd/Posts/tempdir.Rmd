@@ -1,0 +1,72 @@
+---
+title: "When do you need temporary directory and files in R and how to use them"
+# author: "Juan Carlos Aledo"
+# date: "1/21/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### When temporary files in R become handy
+
+Every time you need to download a file from anywhere, to extract data from it and then to throw it away you have to decide where to save this file. There could be many options, for example, to save in working directory or in home directory. It looks simple but you have to check whether a file with similar name already exists. Then you need to hold list of all temporary files to remove them later.
+
+### How to use tempdir() and tempfile()
+R provides you with special infrastructure for temp files. When you start a new R session a temporary directory is created. Location of the directory depends on your system and configuration. Function tempdir() returns path to the current temporary directory.
+
+On OS X system its output could look like this:
+```{r}
+tempdir()
+```
+On normal exit R cleans up this directory, so don’t put there nonreproducible data.
+
+Now you know the place where to hold temporary stuff.
+
+Next question is how to name temporary files. You can hardcode names in your script. For instance:
+
+```{r}
+url <- "http://uniprot.org/uniprot/P01009.fasta"
+download.file(url, destfile = paste(tempdir(), '/P01009.fas', sep = ""), quiet = TRUE)
+```
+
+But again, sometimes it is more convenient to use specialized R tool for it.
+
+The function **tempfile()** generates file names what are very likely to be unique among calls to ‘tempfile’ in an R session. The function takes three arguments: the file name, the directory name and the file extension. 
+
+```{r}
+url <- "http://uniprot.org/uniprot/P01009.fasta"
+destfile <- tempfile(pattern = 'P00109',
+                     tmpdir = tempdir(),
+                     fileext = '.fas')
+download.file(url, destfile, quiet = TRUE)
+```
+
+The path to the save fasta file is, in my case:
+
+```{r}
+destfile
+```
+
+By default, when using **tempfile()** you get a filename with pattern file without extension located in per-session temporary directory.
+
+```{r}
+download.file(url, destfile = tempfile(), quiet = TRUE)
+tempfile()
+```
+
+In this way we can use file names from tempfile() to save our temporary files. When we don’t need them any more, they can deletee  with unlink() R function.
+
+```{r}
+unlink(paste(tempdir(), "/*.fas", sep = ""))
+```
+
+
+### Disclose 
+
+Everything is in the web! and that is good, but it is also part of the problem: sometimes to find a gold nugget you have to put tons of scum aside. I don't have the philosopher's stone, rather I am a miner who after much searching wants to share with you what, after much searching, has shone like gold to me. In other words, herein I echo what other have written and I've found it interesting. Therefore, I don't claim any authorship, and reference to the source is provided [here](http://rstat.consulting/blog/temporary-dir-and-files-in-r/).
+
+
+
+

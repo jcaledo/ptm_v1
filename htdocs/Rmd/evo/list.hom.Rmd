@@ -1,0 +1,74 @@
+---
+title: "list.hom()"
+# author: "Juan Carlos Aledo"
+# date: "5/5/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+library(knitr)
+```
+
+### Description
+Searchs for homologous entries.
+
+### Usage
+list.hom(target, homology = 'o')
+
+### Arguments
+_target_	the KEGG identifier of the protein of interest.
+
+_homology_  one leter indicating the type of homology. It should be either 'o' (orthologs) or 'p' (paralogs).
+
+
+### Value
+
+Returns a dataframe with the requested entries.
+
+### References
+Kanehisa et al (2017) [Nucl. Ac. Res. 33:D353-D361](https://www.ncbi.nlm.nih.gov/pubmed/27899662).
+Pearson WR (1023) [Curr. Protoc Bioinformatics 42:3.1.1.3.1.8](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3820096/)
+### See Also
+msa(), custom.aln(), parse.hssp(), get.hssp(), shannon()
+
+### Details
+
+The concept of sequence [homology](https://en.wikipedia.org/wiki/Sequence_homology) (common evolutionary ancestry) is central to computational analyses of protein and DNA sequences. We infer homology when two sequences or structures share more similarity than would be expected by chance. When excess similarity is observed, the simplest explanation for that excess is that the two sequences did not arise independently, they arose from a common ancestor. Thus, linked to the concept of homology is the process of multiple sequence alignment (MSA), which consists in the alignment of three or more biological sequences. From the output, homology can be inferred and the evolutionary relationships between the sequences studied. Thus, alignment is the most important stage in most evolutionary analyses. In addition, MSA is also an essential tool for protein structure and function prediction. The package _ptm_ offers several functions that will assist you in the process of sequence analysis:
+
+[msa](/msa)
+[custom.aln](/custom.aln)
+list.hom (current doc)
+[parse.hssp](/parse.hssp)
+[get.hssp](/get.hssp)
+[shannon](/shannon)
+[site.type](/site.type)
+
+The function **list.hom()** search for either orthologs or paralogs sequences to a given sequence of interest. The function rests on the KEGG Sequence Similarity Database, which contains the information about amino acid sequence similarities among all protein-coding genes in the complete genomes, as well as the addendum and virus categories, of the GENES database. Thefore, we have to provide the KEGG ID of the target protein. For instance, suppose we want to get the orthologous sequences of human glyceraldehyde-3-phosphate dehydrogenase, for which we know the UniProt ID: P04406. In this case, we can use another _ptm_ function: **id.mapping()**, in the following way:
+
+
+```{r}
+orthologous <- list.hom(target = id.mapping('P04406', from = 'uniprot', to = 'kegg'), hom = 'o')
+orthologous
+```
+
+As you can check we recover a few thousand of orthologous sequences, although we only show herein a few of them. In contrast, if we ask for paralogus sequences found in human, the number of recovered entries is only 2 (including the target one):
+
+```{r}
+paralogous <- list.hom(target = id.mapping('P04406', from = 'uniprot', to = 'kegg'), hom = 'p')
+paralogous
+```
+
+
+
+
+
+
+
+
+
+
+
+
+

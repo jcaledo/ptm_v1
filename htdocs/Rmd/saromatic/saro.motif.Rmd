@@ -1,0 +1,79 @@
+---
+title: "saro.motif()"
+author: "Juan Carlos Aledo"
+date: "21/1/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+library(knitr)
+```
+
+### Description
+Searchs for S-aromatic motifs in proteins.
+
+### Usage
+saro.motif(pdb, threshold = 7, onlySaro = TRUE)
+
+### Arguments
+_pdb_	either the path to the PDB file of interest or the 4-letters identifier.
+
+_threshold_	distance in ångströms, between the S atom and the aromatic ring centroid, used as threshold.
+
+_onlySaro_	logical, if FALSE the output includes information about Met residues that are not involved in S-aromatic motifs.
+
+## Value
+For each methionyl residue taking place in a S-aromatic motif, this function cumputes the aromatic residues involved, the distance between the delta sulfur and the aromatic ring's centroid, as well as the angle between the sulfur-aromatic vector and the normal vector of the plane containing the aromatic ring. The function returns a dataframe reporting the S-aromatic motifs found for the protein of interest.
+
+### References
+Reid, Lindley & Thornton, [FEBS Lett. 1985, 190:209-213](https://doi.org/10.1016/0014-5793(85)81285-0).
+
+### See Also
+_saro.dist()_, _saro.geometry()_
+
+### Details
+
+In the large inventory of the benefits provided by the presence of a sulfur atom in the side chain of methionine, we can find those effects derived from the so-called **S-aromatic motifs**. Indeed, an interaction of methionine and nearby aromatic residues (Phe, Tyr and Trp) was described as early as in the mid-eighties. Even earlier, a frequency of sulfur and aromatic ring in close proximity within proteins higher than expected had been noticed. Despite the potential importance of these findings, they went largely overlooked, perhaps because the physicochemical nature of this bond is only poorly understood. 
+
+Although the strength of these interactions may depend on the conditions of its environment, it is accepted that the S-aromatic interaction occurs at a greater distance (5-7 Å) than a salt bridge (< 4 Å), while the energies associated with either interaction are comparable. More recently, extensive surveys of the Protein Data Bank have revealed the importance of the methionine-aromatic motif for stabilizing protein structures and for protein-protein interactions (see the review [*Methionine in proteins: The Cinderella of the proteinogenic amino acids*](https://onlinelibrary.wiley.com/doi/abs/10.1002/pro.3698) for further details).
+
+When searching for S-aromatic motifs in proteins, two relevant variables are the distance between the delta sulfur atom (SD) and the centroid of the aromatic ring, which can be computed as the euclidean norm of the vector $V_S$ shown in the figure below
+
+\[
+d = \lVert \mathbf{V_S} \rVert 
+\] 
+
+The other relevant variable is the angle theta. This angle is defined as that between the sulfur-aromatic vector ($V_S$) and the normal vector of the aromatic ring ($n$). This angle is complementary to the angle of elevation of the sulfur above the plane of the ring. In the figure, CG, SD and CE stand for carbon gamma, sulfur delta and carbon epsilon of the methionine residue. 
+
+<style>
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+<img src="metosite.png" alt="S-aromatic" style="width:50%;">
+
+Note that two extreme cases are possible: a face-on interaction (angles around 0º) and an edge-on interaction (involving angles around 90º).
+
+Currently, the *ptm* package offers three functions that may be useful for the study of these S-aromatic motifs:
+
+* [saro.dist](./saro.dist)                                  
+* [saro.geometry](./saro.geometry)                         
+* saro.motif (the current tutorial) 
+
+To illustrate the use of these functions we are going to use calmodulin (CaM) as a model protein. Calmodulin is a multifunctional calcium-binding protein expressed in all eukaryotic cells. The binding of the secondary messenger Ca2+ to CaM changes the CaM conformation and its affinity for its various targets. Methionine residues of CaM play an essential role in the sequence-independent specific binding to its many protein targets. In a Ca2+ free medium, CaM exhibits a spatial conformation corresponding to the so-called apoCaM (PDB ID: 1CFD). On the other hand, when CaM binds two Ca2+ ions, the protein adopt a different spatial conformation correspoonding to the holoCaM (PDB ID: 1CLL).
+
+
+
+```{r, include = FALSE}
+cam <- saro.motif('1cll', threshold = 6)
+kable(cam)
+```
+
+It can be observed that with this astringent threshold (default is 7), only three methionine residues are close enough to be considered as part of S-aromatic motifs.
+
+

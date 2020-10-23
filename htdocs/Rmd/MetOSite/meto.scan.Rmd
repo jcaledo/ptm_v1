@@ -1,0 +1,114 @@
+---
+title: "Scan for MetO Sites"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+```
+
+### Description
+Scans a given protein in search of MetO sites.
+
+### Usage
+meto.scan(up_id, report = 1)
+
+### Arguments
+_up_id_	a character string corresponding to the UniProt ID.
+_report_	it should be a natural number between 1 and 3.
+
+### Value
+This function returns a report regarding the MetO sites found, if any, in the protein of interest.
+
+### References
+Valverde et al. 2019. MetOSite: an integrated resource for the study of methionine residues sulfoxidation, [Bioinformatics 35:4849-4850](https://doi.org/10.1093/bioinformatics/btz462).
+
+### See Also
+_meto.list()_, _meto.search()_
+
+### Details
+
+We have search the literature to find those protein-bound methionine residues that have been detected, either in vitro or in vivo, as MetO. All this information has been collected and published in the form of a database: [MetOSite](https://metosite.uma.es).
+
+Thus, MetOSite is a database that provides mannually curated data related to experimentally confirmed sulfoxidation sites and [the effect of such PTM on the protein properties](https://www.ncbi.nlm.nih.gov/pubmed/31359525). Currently, it contains over 7300 sites found in more than 3500 different proteins from over 20 species. 
+
+The _ptm_ packages offers three functions that help to explore and download data from MetOSite. 
+
+* meto.scan (the current tutorial)
+* [meto.search](./meto.search)
+* [meto.list](./meto.list)
+
+
+Thus, if you wish to know whether your protein of interest has been described to contain MetO sites, you are in the right place and **meto.scan()** is your function.
+
+If, on the contrary, you're interested on sets of proteins or MetO sites, grouped according to criteria such as functional effect, species or oxidants, then you should visit the documentation for **meto.search()**.
+
+The function **meto.list()** provides a list with the proteins found in MetOSite whose names contain the keyword provided as argument to the function.
+
+As mentioned above, **meto.scan()** is indicated when you want to know if your protein of interest is known to be sulfoxidized, and in that case all the relevant information regarding such modification. To illustrate the function, let's say we are interested in the alpha-1-antitrypsin. Then, we need the Uniprot ID for that protein, because that will be the argument to pass to the function. If you know this ID, then all you have to do is: 
+
+```{r}
+myresult <- meto.scan('P01009')
+```
+
+Note that we have placed the output in an object name _myresult_. By default, this object is a list of 2 elements:
+
+```{r}
+str(myresult)
+```
+
+The first one is a dataframe containing information about the MetO sites, if any, found in your protein. If wished, you can extract it from the list and rename it:
+
+```{r}
+mysites <- myresult$Metosites
+```
+
+If you explore the data structure of this dataframe:
+
+```{r}
+str(mysites)
+```
+
+you will check that it has six variables:
+
+* met_pos: position in the primary structure for the MetO site.
+* reg_id: effect on the protein properties of the sulfoxidation of that site (this information is numerically encoded). Please, note that reg_id and FC ([Functional Category](https://metosite.uma.es/blog/functional-categories)) are equivalent.
+* org_oxidant: the oxidant used to sulfoxidate that site.
+* met_vivo_vitro: whether the oxidation was carried out _in vivo_ or _in vitro_.
+* org_tissue: when applicable, the tissue of origin of the oxidized protein.
+* References: links to the publication describing the oxidation.
+
+The second element of the list provides a brief summary regarding the MetO sites found in your protein:
+
+```{r}
+myresult$Note
+```
+
+An optional argument that can be passed to the function **meto.scan()** is _report_, which cant take the values 1 (by default), 2 or 3. 
+
+I you opt for a more detailed report that the one returned by default, then 
+
+```{r}
+myresult2 <- meto.scan('P01009', report = 2)
+str(myresult2)
+```
+
+When the option report = 3 is chosen, a printable txt document will be save in the current directory with the name _report\_scan\_P01009.txt_
+
+What happens if you don't know the UniProt ID assigned to your protein? Well, of course you can go to the [UniProt](https://www.uniprot.org) page to check it, or, alternatively, you can use the _ptm_ function **meto.list()** to find it. For example:
+
+
+```{r}
+meto.list("antitrypsin")$prot_id
+```
+
+
+
+
+
+
+
+

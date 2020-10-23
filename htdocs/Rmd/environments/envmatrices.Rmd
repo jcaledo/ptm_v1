@@ -1,0 +1,95 @@
+---
+title: "env.matrices()"
+# author: "Juan Carlos Aledo"
+# date: "`r Sys.Date()`"
+# output: rmarkdown::html_vignette
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+library(knitr)
+```
+
+### Description
+Provides the frequencies of each amino acid within the environment
+
+### Usage
+env.matrices(env)
+
+### Arguments
+_env_	a character string vector containing the environments.
+
+### Value
+Returns a list of two dataframes. The first, shown the environment in matricial form. The second provides the frequencies of each amino acid within the environments.
+
+### Reference
+Aledo et al. [Sci Rep. 2015; 5: 16955](https://www.ncbi.nlm.nih.gov/pubmed/26597773)
+
+### Details
+
+Amino acids in the vicinity of a PTM site are critical in promoting or hindering the incoming substituent on specific amino acid. Thus, knowledge about amino acids surronding modified sites and the correlation between them is very valuable. 
+
+The package _ptm_ offers four functions that will assist you in the process of gaining such a knowledge:
+
+* [env.extract](./envextract)
+* env.matrices (the current document)
+* [env.Ztest](./envZtest)
+* [env.plot](./envplot)
+
+A more elaborated vignette showing how these four functions can be coordinately used to gain knowledge can be found [here](./enviroments)
+
+For the sake of concretion, let's suppose we are interested in investigating whether the environment of serines that are susceptible to being phosphorylated (phosphosites) can be statistically discriminated against those other enviroments belonging to serines that are not phosphorylatable. To address this issue, we need a collection of positive environments (sequence of amino acids arround a phosphorylatable serine) and its control counterpart (sequence of amino acids arround a non phosphorylatable serine). These sets can be obtained with the help of [**env.extract()**](./envextract). Suppose we have already extracted the sequence environments of 40 phosphoserines, as well as, the same number of environments corresponding to non-phosphorylatable serines (to be used as control). This small number of environments is, of course, extremely small to reach any meaningful conclusion, but enough to illustrate the use of **env.matrices()**
+
+
+```{r}
+positive <- c("ERNLLsVAYKN", "SWRIIsSIEQK", "LNEPLsNEDRN", "LTLWTsDQQDD", "WRVLSsIEQKS",
+              "ESELRsICTTV", "ASQAEsKVFYL", "RKILLsEWKSQ", "GGSSCsQTPSR", "QVLLEsGEKST",
+              "ARAVYsDADIF", "NRQLPsDGKKM", "SPGYRsVRERT", "KDRTTsEAQTE", "KTEAEsYEGLL",
+              "CGRTGsGKSSL", "HVPAPsPQGPG", "IQESEsHSKNG", "LHGKKsGKPPL", "SISAPsSDKPL",
+              "NTVANsPQTLL", "PYAHLsKKEKK", "GKQQVsPIRNL", "VCEKQtITKWP", "ASQAGsRKESR",
+              "FIRGVsGGERK", "LTPGGsMGLQV", "PCPRYsNPADF", "GITGSsQDTYV", "KLKGKsPGIIF",
+              "GQQLAsMLRWT", "YKVLSsLGYHV", "FISGLsDQLIP", "LFRSRsLREFE", "PGIDLsQVYEL",
+              "SPRTLsPTPSA", "IRRSSsDFFYS", "PASSTsGSPSR", "TPTSRsPQHYS", "MKARSsSYADP")
+
+control <- c("PEKACsLAKTA", "AYKAAsDIAMT", "LALNFsVFYYE", "ATVVEsSEKAY", "TLSEDsYKDST",
+             "AWRVIsSIEQK", "PEKACsLAKTA", "VKKENsVETQA", "MSGGSsCSQTP", "SGHQPsQSRAI",
+             "FALVLsALILA", "RTFSEsSVWSQ", "CGSVGsGKTSL", "EDPQQsNPCPE", "STLEYsNERLK",
+             "GTMDPsQVPEH", "PIVTPsGEVVV", "AVIQEsESHSK", "LYSNLsKPFLD", "TSTRGsVQMLT",
+             "FDEPSsYLDVK", "PTQKFsGGWRM", "HIINLsLTFHG", "SRLESsGKNKS", "EKEILsNINGI",
+             "TMIFSsVCYWT", "LVKTLsRLAKG", "QAAQHsPYVAL", "YSGVGsSDGNS", "VPVAPsSSSGG",
+             "SSSSGsAAAAL", "SEGEAsEEGLY", "PADQFsDGREP", "GPAEEsRVRRH", "CSSEKsKVTSS",
+             "SYGDVsGGVRD", "GIRCDsCEKYI", "SVPASsTSGSP", "RSGPEsGRSSP", "TTAGNsSQVSD")
+```
+
+Now, for each of these sets (positive and control), we create two matrices. One, shows the environments being analyzed in matricial form: 
+
+```{r}
+# Positive amino acid matrix
+p1 <- env.matrices(positive)[[1]]
+kable(p1)
+```
+
+```{r}
+# Control amino acid matrix
+c1 <- env.matrices(control)[[1]]
+kable(c1)
+```
+
+And the other matrix provides the frequencies of each amino acid within the environments:
+
+```{r}
+# Positive frequency matrix
+p2 <- env.matrices(positive)[[2]]
+kable(p2)
+```
+
+```{r}
+# Control frequency matrix
+c2 <- env.matrices(control)[[2]]
+kable(c2)
+```
+
+At this point we have two frequency matrices for positive and control environments (_p2_ and _c2_) and we are ready to contrast the null hypothesis: the environment of phosphorylatable and non-phosphorylatable serine residues are not different. That can be done with [**env.Ztest()**](./envZtest).
+

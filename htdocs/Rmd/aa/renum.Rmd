@@ -1,0 +1,102 @@
+---
+title: "renum()"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+library(knitr)
+```
+
+### Description
+Renumerates residue position
+
+### Usage
+renum(up_id, pos, from, to, ...)
+
+### Arguments
+
+_up_id_	the UniProt ID.
+
+_pos_	position in the initial sequence.
+
+_from_	origen of the initial sequence, it should be one among 'uniprot', 'metosite' and 'pdb'.
+
+_to_	target sequence, it should be one among 'uniprot', 'metosite' and 'pdb'.
+
+...  additional arguments (PDB ID and chain) when 'pdb' is either origin or destination.
+
+### Value
+Returns the renumerated position requested.
+
+### See Also
+_aa.at()_, _is.at()_, _aa.comp()_, _renum.pdb()_, _renum.meto()_
+
+### Dependencies
+To use this function you will need [_MUSCLE_](https://www.drive5.com/muscle/) installed in your computer.
+
+### Details
+
+The _ptm_ package offers a set of ancillary functions aimed to carry out rutinary work, which may be needed when more elaborated analysis are required. Among these ancillary function are:
+
+* [aa.at](./aa.at)
+* [is.at](./is.at)
+* [aa.comp](./aa.comp)
+* [renum.pdb](./renum.pdb)
+* [renum.meto](./renum.meto)
+* renum (the current document)
+
+
+In some ocasions the numeration of the sequences coming from UniProt, PDB and MetOSite don't fully match for a variety of reasons. For instance, the sequence given in one database may correspond to the mature form of the protein while the sequence provided by other database  may be that of the precursor protein. When this happens and we want to know the correspondence of a specific residue in the sequences obtained from two databases, **renum()** will do the job.
+
+For instance, [according to the literature](https://www.ncbi.nlm.nih.gov/pubmed/10867014), oxidation of either M351 or  M358 in alpha-1-antitrypsin causes loss of anti-neutrophil elastase activity. If we check what residues are found at these positions in the alpha-1-antitrypsin sequence downloaded from MetOSite, we'll find, as expected, that they are two methionine residues 
+
+```{r}
+is.at(351, ptm::get.seq('P01009', db = 'metosite'), aa = 'M', uniprot = FALSE)
+is.at(358, ptm::get.seq('P01009', db = 'metosite'), aa = 'M', uniprot = FALSE)
+```
+
+However, if we check for the amino acids found at these positions in the sequence downloaded from UniProt,
+
+```{r}
+aa.at(351, 'P01009', uniprot = TRUE)
+aa.at(358, 'P01009', uniprot = TRUE)
+```
+
+We find leucine and histidine, respectively! That is because the numeration use in the literature, as well as in MetOSite, is that for the mature form, while the UniProt sequence corresponds to the precursor protein. 
+
+In this case, we can use the function **renum()** to renumerate one specific residue:
+
+```{r}
+renum('P01009', pos = 351, from = 'metosite', to = 'uniprot')
+```
+
+Let's check that at position 375 in the UniProt sequence we find indeed a methionine:
+
+```{r}
+is.at(375, 'P01009', aa = 'M', uniprot = TRUE)
+```
+
+It should be noted that either the origin sequence or the target sequence should be uniprot. Nevertheless, the conversion pdb -> metosite, for instance, can be achieved through the path: pdb -> uniprot -> metosite. If 'pdb' is selected, then the PDB ID and the involved chain must be provided, in that order. Let's see an example:
+
+We know that Met351 of alpha-1-antitrypsin is sulfoxidized. What would be the numeration of this methionine residue in their PDB 1ATU?  
+
+First, we carry out the conversion metosite -> uniprot:
+
+```{r}
+renum(up_id = 'P01009', pos = 351,
+      from = 'metosite', to = 'uniprot')
+```
+And then, the uniprot -> pdb:
+
+```{r}
+renum(up_id = 'P01009', pos = 375,
+      from = 'uniprot', to = 'pdb',
+      pdb = '1ATU', chain = 'A')
+```
+
+So, eventually we'll conclude that Met351 (MetOSite sequence) corresponds to Met331 in the PDB file.
+

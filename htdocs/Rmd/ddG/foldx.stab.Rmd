@@ -1,0 +1,163 @@
+---
+title: "foldx.stab()"
+# author: "Juan Carlos Aledo"
+# date: "1/25/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+library(knitr)
+```
+
+### Description
+Computes Folding Free Energy ($latex ΔG_{fold}$).
+
+### Usage
+ffoldx.stab(pdb, pH = 7, I = 0.05)
+
+### Arguments
+_pdb_	the 4-letter identifier of a PDB structure or the path to a PDB file.
+
+_pH_ a numeric value between 0 and 14.
+
+_I_ a value indicating the molar ionic strength.
+
+### Value
+
+The function computes and returns the ΔG (kcal/mol) of the folding process of the requested protein.
+
+### References
+Schymkowitz et al (2005) [Nucl. Ac. Res. 33:W382-W388](https://www.ncbi.nlm.nih.gov/pubmed/15980494).
+
+### Details
+
+Thermodynamic stability is a fundamental property of proteins that influences protein structure, function, expression, and solubility. Not surprinsinly,  prediction of the effect of point mutations on protein stability is a topic of great interest in many areas of biological research, including the field of protein post-translational [modifications](https://academic.oup.com/bioinformatics/article/28/22/2905/240075). Consequentely, a wide range of strategies for estimating protein energetics has been developed. In the package _ptm_ we have implemented several commands of the FoldX. One of these FoldX's commands is _Stability_ that is implemented in the function *foldx.stab()*. This function computes the ΔG, in kcal/mol, of the folding process. 
+
+![](./Gfold.png)
+
+Therefore, the more negative this values is, the more stable the protein is. Nevertheless, we must be cautions when using *foldx.stab()* because $latex ΔG_{fold}$ is calculated as the difference in Gibbs free energy between the detailed 3D structure (provided by the argument _pdb_) and a hypothetical unfolded reference state of which no structural detail is available. Thus, the algorithm is based on the assumption that in the denatured state there is absence of persistent structure, which in a range of proteins proteins has been experimentally shown to be only partly correct. Therefore, the values provided by *foldx.stab()* should not be considered as absolute since they could have large error. That is not the case when we use other FoldX base functions such as *foldx.mutant()* or *foldx.assembly()*, where the change in free energy is calculated between two well-defined structures.
+
+Since the functions based on FoldX commands show the highest accuracy when the energy difference can be calculated, *foldx.stab()* may be useful to compare the thermodynamic stability of two conformations of the same protein. For instance, Calmodulin (CaM) is a multifunctional calcium-binding protein expressed in all eukaryotic cells. The binding of the secondary messenger Ca2+ to CaM changes the CaM conformation and its affinity for its various targets. In a Ca2+ free medium, CaM exhibits a spatial conformation corresponding to the so-called apoCaM (PDB ID: 1CFD). On the other hand, when CaM binds two Ca2+ ions, the protein adopts a different spatial conformation corresponding to the holoCaM (PDB ID: 1CLL). We can compute the change in Gibbs free energy for the conformational change from apoCaM to holoCaM using *foldx.stab()* as indicated in the next figure.
+
+![](./CaMconfor.png)
+
+To perform this calculations we can run the following chunk:
+
+```{r}
+# apo <- foldx.stab('1cfd')
+# holo <- foldx.stab('1cll')
+G_conf <- holo - apo
+G_conf
+```
+
+The function *foldx.stab()* allows us to illustrate the effect of the ionic strength on the stability of proteins. To this end we will use bacteriophage T4 lysozyme  (7LZM). Electrostatic interactions, also known as salt bridges or ionic interactions, are formed between groups found in basic (Arg, Lys and His) and acidic (Glu, Asp) residues of proteins at neutral pH. In the figure below the basic (blue) and acidic (red) amino acids find in lysozyme are show as a mesh. 
+
+![](./lysozyme.png)
+The strength of these interactions is given by the Coulomb's law:
+
+$latex F = \frac{1}{D} \frac{q_1 q_2}{r^1}$
+
+where $latex q_1$ and $latex q_2$ are the charges of the ionized groups, $latex r$ is the distance between them and $latex D$ is the dielectric constant (the higher the ionic strength the greater the dielectric constant). Thus, we can are entitled to conclude that at high ionic strength the strength of the salt bridges will be low, and vice versa. 
+
+Next we compute and plot the thermodynamic stability of lysozyme at high, medium and low inonic strength:
+
+```{r}
+
+# high <- foldx.stab("7lzm", I = 1)
+# medium <- foldx.stab("7lzm", I = 0.05) 
+# low <- foldx.stab("7lzm", I = 0.0001)
+
+I <- c(1, 0.05, 0.0001)
+DG <- c(high, medium, low)
+plot(-log(I),DG, ty = "b", ylab = expression(paste(Delta, 'G ', "(kcal/mol)")))
+```
+
+
+At low inonic strength the stability is higher (ΔG = -18 kcal/mol) than at high ionic strength (ΔG = -13.8 kcal/mol), which may be in line with stronger salt bridges, although this sort of simple interpretations are a risk business when dealing with protein stability!  
+ 
+
+
+
+
+Although using very different strategies, both functions assess 
+the thermodynamic stability effect of substituting a single amino acid residue in the protein of interest. To do that, both function peform an estimation of the change in Gibbs free energy, $\Delta\Delta G$ (kcal/mol), for the folding process. That is,
+
+$\Delta\Delta G = \Delta G_{mut} - \Delta G_{wt}$
+
+Where $\Delta G$ is the change in free energy corresponding to the folding of the protein from its unfolded state, either in the wild type (wt) or mutated (mut) version of the protein. Thus, a $\Delta\Delta G > 0$ implyes a decrease in stability (destabilizing mutation) while a $\Delta\Delta G < 0$ is interpreted as an increase in stability (stabilizing mutation).
+
+
+
+
+To illustrate the use of the functions imutant() and foldx(), we will use as a model the β1 domain of streptococcal protein G (Gβ1), which has been extensively [characterized experimentally](https://www.pnas.org/content/116/33/16367) in terms of thermodynamic stability. 
+
+So, let's start using imutant() to compute the mutational sensitivity, $\Delta\Delta G$, of this domain when we target the lysine found at position 31:
+
+
+```{r}
+# GB1_a <- imutant(protein = '1pga', ch = 'A', pos = 31)
+load("./GB1_a.Rda")
+kable(GB1_a)
+```
+
+In addition, imutant() allows us to compute the change in stability even if we don't have 3D structural data, that is, when there is no PDB file for the protein of interest. In this case, we'll have to pass the primary sequence of the protein as an argument instead of the PDB ID. In the example that concerns us, we must bear in mind that the β1 domain of streptococcal protein G starts at the position 227 of the whole protein sequence:
+
+```{r}
+# GB1_b <- imutant(protein = get.seq(pdb2uniprot('1pga', 'A')), pos = 31 + 226)
+load("./GB1_b.Rda")
+kable(GB1_b)
+```
+
+We can now compare the results obtained using both approaches: tertiary structure data _versus_ primary structure data:
+
+```{r}
+# model <- lm(GB1_b$DDG ~ GB1_a$DDG)
+# plot(GB1_a$DDG, GB1_b$DDG, 
+#      xlab = expression(paste(Delta, Delta,"G from tertiary structure data", sep = "")),
+#      ylab = expression(paste(Delta, Delta,"G from primary structure data", sep = "")))
+# abline(model)
+```
+
+As we can observe, there is a reasonably good correlation between both results (R-squared = 0.7).
+
+Nevertheless, if the computing time is not a concern for you, then you may wish to use foldx() instead of imutant(). The function foldx() will repair your structure before carrying out the computation. To do that, FoldX identify those residues which have bad torsion angles, or VanderWaals' clashes, or total energy, and repairs them. The function foldx() will take care of this repair process, so you only have to indicate which of the two alternative methods that foldx() offers you whant to use to assess the requested change in stability: ['buildmodel'](http://foldxsuite.crg.eu/command/BuildModel) 
+
+
+```{r}
+# GB1_c <- foldx(pdb = '1pga', ch = 'A', pos = 31, method = 'buildmodel')
+# load("./GB1_c.Rda")
+# kable(GB1_c)
+```
+
+or ['positionscan'](http://foldxsuite.crg.eu/command/PositionScan). 
+
+
+```{r}
+# GB1_d <- foldx(pdb = '1pga', ch = 'A', pos = 31, method = 'positionscan')
+# load("./GB1_d.Rda")
+# kable(GB1_d)
+```
+
+For the details regarding the differences between both methods you would like to consult [FoldX's manual](http://foldxsuite.crg.eu/documentation#manual). Nevertheless, at this point you may have already noted that the 'buildmodel' method returns a dataframe with 19 raws (one per proteinogenic amino acid alternative to the wild type), while the 'positionscan' method returns a dataframe with 24 raws. That is because in addition to the 19 alternative proteinogenic amino acids, this method assess the effect of changing the wild type residue to phosphotyrosine (y), phosphothreonine (p), phosphoserine (s) and hydroxiproline (h). 
+
+Now, we can compare the results returned for these two FoldX's methods:
+
+```{r}
+# aa <- ptm:::aai$aa # 20 proteinogenic amino acids
+# GB1_c <- GB1_c [order(GB1_c $NEW), ]
+# GB1_d  <- GB1_d[order(GB1_d$NEW), ]
+# GB1_d <- GB1_d[which(GB1_d$NEW %in% aa), ] # removes PTM residues
+# GB1_d <- GB1_d[which(GB1_d$NEW != 'K'), ] # This method includes K -> K, DDG = 0
+# 
+# model <- lm(GB1_d$DDG ~ GB1_c$DDG)
+# plot(GB1_c$DDG, GB1_d$DDG, 
+#      xlab = expression(paste(Delta, Delta,"G (buildmodel)", sep = "")),
+#      ylab = expression(paste(Delta, Delta,"G (positionscan)", sep = "")))
+# abline(model)
+```
+
+As it can be observed, there is an excellent correlation!
+
+Warning: the function foldx() makes an extensive use of commands invoking the OS, reason why it may not work properly on Windows. If that is your case, you always can use imutant().

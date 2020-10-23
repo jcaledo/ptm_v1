@@ -1,0 +1,74 @@
+---
+title: "ddG.profile()"
+# author: "Juan Carlos Aledo"
+# date: "1/25/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+library(knitr)
+```
+
+### Description
+Represents the sensitivity of a given position to changes in stability of a protein (DDG).
+
+### Usage
+ddG.profile(prot, ch, pos, pH = 7, Te = 25)
+
+
+### Arguments
+_prot_	eihter the 4-letter identifier of a PDB structure, or the amino acid sequence (one letter amino acid code) of a protein.
+
+_ch_ a letter identifying the chain of interest.
+
+_pos_ the position, in the primary structure, of the residue to be mutated.
+
+_pH_ a numeric value between 0 and 14.
+
+_Te_ a numeric value indicating the temperature in degrees Celsius.
+
+### Value
+
+The function returns a dataframe with the DDG values (kcal/mol) for each alternative amino acid, and a barplot grouping the amino acids according to their physicochemical nature.
+
+
+### Details
+
+Thermodynamic stability is a fundamental property of proteins that influences protein structure, function, expression, and solubility. Not surprinsinly,  prediction of the effect of point mutations on protein stability is a topic of great interest in many areas of biological research, including the field of protein post-translational [modifications](https://academic.oup.com/bioinformatics/article/28/22/2905/240075). Consequentely, a wide range of strategies for estimating protein energetics has been developed. In the package _ptm_ we have implemented two popular computational approaches for prediction of the effect of amino acid changes on protein stability. 
+
+On the one hand, foldx() implements [FoldX](https://www.ncbi.nlm.nih.gov/pubmed/15980494) (buildmodel and positionscan methods), a computational approach that uses a force field method and athough it has been proved to be satisfactorily accurate, it is also a time-consuming method. On the other hand, [I-Mutant](https://www.ncbi.nlm.nih.gov/pubmed/15980478) is a method based on machine-learning and it represents an alternative much faster to FoldX. The _ptm_ function that implements this last approach is imutant().
+
+
+Although using very different strategies, both functions assess 
+the thermodynamic stability effect of substituting a single amino acid residue in the protein of interest. To do that, both function peform an estimation of the change in Gibbs free energy, $\Delta\Delta G$ (kcal/mol), for the folding process. That is,
+
+$\Delta\Delta G = \Delta G_{mut} - \Delta G_{wt}$
+
+Where $\Delta G$ is the corresponding to the folding of the protein from its unfolded state, either in the wild type (wt) or mutated (mut) version of the protein. Thus, a $\Delta\Delta G > 0$ implies a decrease in stability (destabilizing mutation) while a $\Delta\Delta G < 0$ is interpreted as an increase in stability (stabilizing mutation).
+
+
+
+
+To illustrate the use of *ddG.profile()*, a function that offers the possibility to plot the stability profile at a given position within the primary structure of a protein of interest, we will use as a model the β1 domain of streptococcal protein G (Gβ1), which has been extensively [characterized experimentally](https://www.pnas.org/content/116/33/16367) in terms of thermodynamic stability. More concretely, we are going to address the effect of changing residues at the positions 26 and 27 of the β1 domain of streptococcal protein G, where we find alanine (A) and glutamate (E), respectively in the wild type form of the  Gβ1 protein.
+
+
+```{r}
+E27 <- ddG.profile('1pga', 'A', pos = 27)
+```
+
+Each amino acid has been colored according to its physicochemical nature. Acidic (E, D) in red, basic (H, R, K) in blue, hydrophobic (L, I, M, F, W, Y, A) in orange, polar (S, T, C, Q, N) in green and special (G, P) in purple.
+
+It can be seen at a glance, that hydrophobic amino acids, with the excepticon of alanine (A), tend to increase the protein stability when replacing to glutamate (E) at position 27. This results might seem surprising, but it is in perfect agreement with the experimental observations ([Nisthal et al. 2019](https://www.pnas.org/content/116/33/16367)). Less surprising and equally in line with the experimental evidence, is that proline (P) is the worst (most destabilizing) amino acid for incorporation at position 27.
+
+When we address the stability profile for position 26, the result is quite different:
+
+```{r}
+A26 <- ddG.profile('1pga', 'A', pos = 26)
+```
+
+We conclude that any substitution at this position is destabilizing, regardless the nature of the amino acid being introduced. This conclusion is again in excelent agreement with the experimental results ([Nisthal et al. 2019](https://www.pnas.org/content/116/33/16367)).
+
+
+

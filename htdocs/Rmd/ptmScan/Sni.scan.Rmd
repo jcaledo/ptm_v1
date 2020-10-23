@@ -1,0 +1,52 @@
+---
+title: "Scan a Protein in Search of S-Nitrosylation Sites"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+```
+
+### Description
+Scans the indicated protein in search of S-nitrosylation sites
+
+### Usage
+sni.scan(up_id)
+
+### Arguments
+_up_id_	a character string corresponding to the UniProt ID.
+
+### Value
+Returns a dataframe where each row corresponds to a modifiable residue.
+
+### References
+Huang et al. [Nucleic Acids Res. 2019 47:D298-D308](https://www.ncbi.nlm.nih.gov/pubmed/30418626).
+
+### See Also
+_ac.scan()_, _meto.scan()_, _ni.scan()_, _gl.scan()_, _ub.scan()_, _su.scan()_, _dis.scan()_, _ptm.scan()_, _me.scan()_, _p.scan()_, _reg.scan()_
+
+### Details
+
+[S-Nitrosylation](https://www.ncbi.nlm.nih.gov/pubmed/15688001) is the covalent attachment of a nitric oxide group (-NO) to cysteine thiol within a protein to form an S-nitrosothiol (SNO). S-nitrosylation has diverse regulatory roles in bacteria, yeast and plants and in all mammalian cells.
+
+The package _ptm_ provides a function, **Sni.scan()**, that assist in the identification of S-nitrosylation sites in a given protein. The UniProt ID of the protein of interest must be passed as argument. For instance, to scan the protein vimentin, we can proceed as follows:
+
+First, you need to search for the UniProt ID. If the protein in question is found into MetOSite, you can search the ID:
+
+```{r}
+id <- meto.list('Vimentin')$prot_id
+id
+```
+
+Otherwise, go to the [UniProt](https://www.uniprot.org) page to search for the ID.
+
+Then,
+
+```{r}
+sni.scan(id)
+```
+

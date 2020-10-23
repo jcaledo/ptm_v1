@@ -1,0 +1,101 @@
+---
+title: "Installing"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Before you attempt to install _ptm_ you should have a relatively recent version of R installed and working on your system. Detailed instructions for obtaining and installing R on various platforms can be found on the [R home page](http://www.r-project.org/). We also encourage you to install [_RStudio_](https://rstudio.com/), a useful integrated development environment for R.
+
+## Obtaining _ptm_
+
+You can get _ptm_ from its bitbucket repository using the R function **install_bitbucket()** from the [**devtools**](https://www.r-project.org/nosvn/pandoc/devtools.html) package. 
+
+```{r}
+# install.packages("devtools")
+# library(devtools)
+# install_bitbucket("jcaledo/ptm", subdir = "Rptm") 
+```
+
+After installing _ptm_ from Bitbucket you may wish to restart R before using it.
+
+
+## Dependences
+
+Some functions from _ptm_ require computations that are carry out by external programs such as _MUSCLE_ and _DSSP_. Whenever possible, we have implemented code to carry out these computations online, behind the scene. In this way, you have to worry about nothing. Although handy, somethimes this strategy may come at the price of a less efficient computation (longer times to accomplish the requested task) depending on how busy are the servers, and in any event it requires you to be connected to internet. To avoid these drawbacks, these _ptm_ functions offer you the possibility to carry out all the computation in-house, if you have previously installed the external programs on your system and have them in the search path for executables. 
+
+Let's illustrate this point with a concrete example. Suppose we are interested in assessing the [accessibility](https://en.wikipedia.org/wiki/Relative_accessible_surface_area) of the methionine residues of the alpha-1-antitrypsin inhibitor (UniProt ID: P01009). That's a work for _acc.dssp()_:
+
+If we have not installed DSSP, we will have to carry out the computations online (this is the default option): 
+
+```{r}
+library(ptm)
+t0 <- Sys.time()
+online <- suppressWarnings(
+            acc.dssp(pdb = uniprot2pdb('P01009')[[1]][1], 
+                     aa = "M")
+          )
+t1 <- Sys.time()
+print(t1-t0)
+```
+Now, we repete the same computations, but this time using an in-house version of DSSP. Thus, we have to indicate we want this option by passing the argument dssp = 'mkdssp':
+
+```{r}
+t0 <- Sys.time()
+offline <- suppressWarnings(
+            acc.dssp(pdb = uniprot2pdb('P01009')[[1]][1], 
+                     dssp = 'mkdssp',
+                     aa = "M")
+            )
+t1 <- Sys.time()
+print(t1-t0)
+```
+
+  
+Thus, for full and optimal functionality you may wish to have _MUSCLE_, _DSSP_ and _FoldX_ installed on your system and in the search path for executables. Background details and install instructions for each of these packages on different operating systems is provided further below. Nevertheless, remember that most of the functionality of _ptm_ will still be operative even if you don't install them.
+
+### MUSCLE
+
+Muscle is a fast multiple sequence alignment program available from the [muscle home page](http://www.drive5.com/muscle).
+
+For quick install on MacOS we recommend using [homebrew](https://brew.sh/index.html).
+
+In a MacOS terminal prompt, paste:
+
+```
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+Then, type:
+
+```
+brew install brewsci/science/muscle
+```
+
+On a Linux/UNIX system you should use your appropiate package manager (e.g. apt-get for Debian/Ubuntu and nf for Red Hat/Fedora systems). If you experience problems with any of these steps, please read on for alternative installation methods.
+
+### DSSP
+
+[DSSP](http://swift.cmbi.ru.nl/gv/dssp/) is a popular secondary structure analysis program which should be installed on your system as an executable called “dssp” or "mkdssp" and be in the search path for executables. The latter version is available on [GitHub](https://github.com/cmbi/dssp) and it is also distributed by [CCP4](http://www.ccp4.ac.uk/) (Collaborative Computational Project No. 4) and [Anaconda](https://www.anaconda.com/distribution/), a popular Python/R data science plataform. Using this last plataform:
+
+```
+conda install -c salilab dssp
+```
+
+### FoldX
+
+FoldX is a protein design algorithm that uses an empirical force field. It can determine the energetic effect of point mutations as well as the interaction energy of protein complexes. You can easily download the software (which requires free registration) [here](http://foldxsuite.crg.eu/). After you have installed FoldX and added the binary location to PATH environment variable, you're done! Nevertheless, if you are interested in the FoldX suite, you may wish to consult its [manual](http://foldxsuite.crg.eu/documentation).
+
+
+## Where next
+
+* [A brief user guide for newbies in R](./aboutR) may be your next stop if you have no previous experience with R. 
+* [Documentation](./documentation), where a number of worked examples are available. 
+* [Vignettes](/vignettes/dummy.html) is the place to go for more elaborated tutorials.
+
+

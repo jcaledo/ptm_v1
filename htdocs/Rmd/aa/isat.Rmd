@@ -1,0 +1,69 @@
+---
+title: "is.at()"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+```
+
+### Description
+Checks if a given amino acid is at a given position
+
+### Usage
+is.at(at, target, aa = 'M', uniprot = TRUE)
+
+### Arguments
+
+_at_	the position in the primary structure of the protein.
+
+_target_	a character string specifying the UniProt ID of the protein of interest or, alternatively, the sequence of that protein.
+
+_aa_	the amino acid of interst.
+
+_uniprot_	logical, if TRUE the argument 'target' shoud be an ID.
+
+### Value
+Returns a boolean. Either the residue is present at that position or not.
+
+### See Also
+_aa.at()_, _renum.pdb_, _renum.meto()_, _renum()_
+
+### Details
+
+The _ptm_ package offers a set of ancillary functions aimed to carry out rutinary work, which may be needed when more elaborated analysis are required. Among these ancillary function are:
+
+* [aa.at](./aa.at)
+* is.at (the current document)
+* [aa.comp](./aa.comp)
+* [renum.pdb](./renum.pdb)
+* [renum.meto](./renum.meto)
+* [renum](./renum)
+
+
+Sometimes it may be convinient to check if the reside found at a given position is the one we expect, then we resort to the function **is.at()**. 
+
+For instance when checking for data quality control in [MetOSite](https://metosite.uma.es/) (a database for methionine oxidation), we want to make sure that the annotation of the MetO site (at which position we find a sulfoxidized methionine) corresponds to a methionine residue in the original protein sequence. For example, if we query MetOSite for cytochrome c (P00004), we will find that Met80 is oxidized:
+
+```{r}
+meto.scan('P00004')$Metosites[[1]]
+```
+
+Now, let's chekc that certainly we find methionine at position 80 in the protein sequence:
+
+```{r}
+is.at(at = 80, target = get.seq('P00004', db = 'metosite'), uniprot = FALSE)
+```
+ 
+Note, that we have passed a string (the sequence of the mature cytochrome c) to the argument _target_:
+
+```{r}
+ get.seq('P00004', db = 'metosite')
+```
+
+Also, you may have noted that we didn't pass any value to the argument _aa_, that is because its value by default is 'M'.
+
+

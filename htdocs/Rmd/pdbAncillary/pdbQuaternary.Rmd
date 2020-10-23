@@ -1,0 +1,75 @@
+---
+title: "pdb.quaternary()"
+# author: "Juan Carlos Aledo"
+# date: "1/25/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+```
+
+### Description
+Determines the subunit composition of a given protein
+
+### Usage
+pdb.quaternary(pdb, fas = FALSE)
+
+### Arguments
+_pdb_ The path to the PDB of interest or a 4-letter identifier.
+
+_fas_	logical, if TRUE the fasta file containing the alignment of the subunits is saved in the current directory.
+
+### Value
+This function returns a list with four elements: (i) a distances matrix, (ii) the sequences, (iii) chains id, (iv) the PDB ID used.
+
+### Details
+
+The _ptm_ package contains a number of ancillary functions that deal with [Protein Data Bank](https://www.rcsb.org/) (PDB) files. These functions may be useful when structural 3D data need to be analyzed. The mentioned functions are:
+
+* [uniprot2pdb](./uniprot2pdb)
+* [pdb2uniprot](./pdb2uniprot)
+* [pdb.chain](./pdb.chain)
+* pdb.quaternary (the current document)
+* [pdb.res](./pdb.res)
+* [pdb.pep](./pdb.pep)
+* [pdb.select](./pdb.select)
+* [download.dssp](./download.dssp)
+* [compute.dssp](./compute.dssp)
+* [parse.dssp](./parse.dssp)
+* [mkdssp](./mkdssp)
+
+Quaternary structure exists in proteins consisting of two or more identical or different polypeptide chains (subunits). These proteins are called oligomers because they have two or more subunits. The quaternary structure describes the manner in which subunits are arranged in the native protein. When dealing with a PDB file of a protein possessing quaternary structure, the function **pdb.quaternary()** can provide us some interesting information. For instance, let's work with the human deoxyhaemoglobin (2HHB) as an example:
+
+```{r}
+Hb <- pdb.quaternary('2hhb', fas = TRUE)
+```
+
+First, we can check that this protein has four subunits (polypeptide chains) that are identified in the PDB files as:
+
+```{r}
+Hb[[3]]
+```
+
+Second, we can ask whether these subunits are or are not identical to each other:
+
+```{r}
+Hb[[1]]
+```
+
+This distance matrix tell us that subunits A and C, on one hand, and subunits B and D, on the other hand, are identical are identical to each other. Furthermore, the sequence distance between A and B (or C and D) is quantified (0.7346).
+
+We also can ask for these sequences:
+
+```{r}
+Hb[[2]]
+```
+
+In addition, if we have passed the argument _fas = TRUE_ to the fucntion **pdb.quaternary()**, then we can read a fasta file with the alignment between these sequences:
+
+```{r}
+read.fasta(paste("./", Hb[[4]], ".fa", sep = ""))
+```
+
+

@@ -1,0 +1,16 @@
+image: python:latest
+
+pipelines:
+  branches:
+    hector-ftp:
+      - step:
+          script:
+            - apt-get update
+            - apt-get -qq install git-ftp
+            - git ftp push --syncroot htdocs/html --user $PTM_FTP_USER --passwd $PTM_FTP_PASS ftp://$PTM_FTP_HOST/$PTM_FTP_PATH
+    master:
+      - step:
+          script:
+            - apt-get update
+            - apt-get -qq install git-ftp
+            - git ftp push --syncroot htdocs/html --user $PTM_FTP_USER --passwd $PTM_FTP_PASS ftp://$PTM_FTP_HOST/$PTM_FTP_PATH

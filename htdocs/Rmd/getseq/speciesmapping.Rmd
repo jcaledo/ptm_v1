@@ -1,0 +1,51 @@
+---
+title: "species.mapping()"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+```
+
+### Description
+Maps a protein ID to its corresponding organism
+
+### Usage
+species.mapping(id, db = 'uniprot')
+
+### Arguments
+_id_	the identifier of the protein of interest.
+
+_db_	a character string specifying the corresponding database. Currently, only 'uniprot' or 'pdb' are valid options.
+
+### Value 
+Returns a character string identifying the organism to which the given protein belong.
+
+### See Also 
+_id.features()_
+
+### Details
+
+The _ptm_ package offers a set of functions aimed to assist us to download and handle sequences from different databases. The functions that we will document herein are:
+
+* [get.seq](./get.seq)
+* [prot2codon](./prot2codon)
+* [id.mapping](./id.mapping)
+* [id.features](./id.features)
+* species.mapping (the current document)
+
+Sometimes we have a UniProt or PDB ID for a given protein, and we want to know to which species it belongs. For instance, let's say we want to know the source of the structure 2OCC corresponding to the complex IV (cytochrome c oxidase). Although such a task can be addressed combining the use of **id.mapping()** and **id.features()**, for instance:
+
+```{r}
+up <- id.mapping('2occ', from = 'pdb', to = 'uniprot')
+id.features(up[1])$Organism
+```
+
+a more convenient a straightforward way to reach that goal, would be:
+
+```{r}
+species.mapping('2occ', db = 'pdb')
+```

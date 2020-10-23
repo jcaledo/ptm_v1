@@ -1,0 +1,65 @@
+---
+title: "GO_vivo_vitro"
+author: "Juan Carlos Aledo"
+date: "5/18/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+rm(list = ls())
+```
+
+
+```{r}
+path <- "/Users/juancarlosaledo/Dropbox/Investigacion/Unpublished/MetO_Environments/Rdata/"
+file <- "environment_human_hydrogen_peroxide.Rda"
+load(paste(path, file, sep = ""))
+```
+
+```{r}
+vivo <- data[which(data$prot_vivo_vitro == 'only_vivo'), ]
+vivo <- unique(vivo[, c(1,2,5,9:14)])
+```
+
+## GO terms linked to the 'vivo' set
+
+```{r}
+# vivo$GO <- NA
+# for (i in 1:nrow(vivo)){
+#   print(i)
+#   vivo$GO[i] <- get.go(vivo$prot_id[i], filter = FALSE, format = 'string')
+# }
+# save(vivo, file = paste(path, "vivoGO.Rda", sep = ""))
+load(paste(path, "vivoGO.Rda", sep = ""))
+
+t <- paste(vivo$GO, collapse = ',')
+tt <- gsub(",", " ", t)
+vivo_ <- strsplit(tt, split = '\\s+')[[1]]
+rm(t,tt)
+```
+
+## GO terms associated to apoptosis
+
+```{r}
+apoptosis <- search.go("apoptosis")
+apoptosis_ <- unlist(apoptosis$GO_id)
+
+counter <- 0
+for (i in 1:nrow(vivo)){
+  print(i)
+  t <- trimws(strsplit(vivo$GO[i], split = ",")[[1]])
+  inter <- intersect(t, apoptosis_)
+  if (length(inter > 0)){
+    counter <- counter + 1
+  }
+}
+```
+
+
+```{r}
+s <- c(13,13, 13.5)
+c <- rep(14,14, 14.53)
+t.test(s,c)
+```

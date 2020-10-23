@@ -1,0 +1,39 @@
+"0","GAPDH <- res.dpx('1u8f')"
+"2","probando la URL 'https://files.rcsb.org/download/1u8f.pdb'
+"
+"2","downloaded 948 KB
+
+"
+"1","  Note: Accessing on-line PDB file
+"
+"2","/var/folders/2h/92ky134s63b1th57p4gc66vw0000gn/T//Rtmp1o3UQg/1u8f.pdb  exists. Skipping download"
+"1","   PDB has ALT records, taking A only, rm.alt=TRUE
+"
+"1","  Note: Accessing on-line PDB file
+"
+"2","/var/folders/2h/92ky134s63b1th57p4gc66vw0000gn/T//Rtmp1o3UQg/1u8f.pdb  exists. Skipping download"
+"1","   PDB has ALT records, taking A only, rm.alt=TRUE
+"
+"2","probando la URL 'https://files.rcsb.org/download/1u8f.pdb'
+"
+"2","downloaded 948 KB
+
+"
+"1","  |                                                                                "
+"1","  |                                                                          |   0%"
+"1","  |                                                                                "
+"1","  |==================                                                        |  25%"
+"1","  |                                                                                "
+"1","  |=====================================                                     |  50%"
+"1","  |                                                                                "
+"1","  |========================================================                  |  75%"
+"1","  |                                                                                "
+"1","  |==========================================================================| 100%"
+"1","
+"
+"1","   PDB has ALT records, taking A only, rm.alt=TRUE
+"
+"1","   PDB has ALT records, taking A only, rm.alt=TRUE
+"
+"1","   PDB has ALT records, taking A only, rm.alt=TRUE
+"

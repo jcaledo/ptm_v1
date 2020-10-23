@@ -1,0 +1,77 @@
+---
+title: "dist2closest()"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+```
+
+### Description
+Computes the distance to the closest amino acid of the indicated type
+
+### Usage
+dist2closest(pdb, res, aa, backbone = FALSE)
+
+### Arguments
+_pdb_	is either a PDB id, or the path to a pdb file.
+
+_chain_ one letter identifier of the polypeptide chain.
+
+_res_	position of the residue of interest.
+
+_aa_	amino acid of interest.
+
+_backbone_	logical, when TRUE it means that we include those atoms belonging to the main chain (CA, N, O and C) beside all the side chain atoms.
+
+### Value
+Numerical value indicating the distance in ångströms (Å).
+
+### See Also
+_pairwise.dist()_, _res.dist()_, _ball()_
+
+### Details
+
+The continuous formation and rupture of non-covalent bonds (intra- and intermolecular), gives rise to dynamic molecular interactions, which are cosubstantial to life. These non-covalent interactions can adopt many forms, but all of them are fundamentally electrostatic in nature, and strongly influenced by distances.
+
+| Type of interaction   | Energy dependence on the distance |
+|-----------------------|-----------------------------------|
+| Ion-ion               | $1/r$                             |
+| Ion-dipole            | $1/r^2$                           |
+| Dipole-dipole         | $1/r^3$                           |
+| Ion-induced dipole    | $1/r^4$                           |
+| Dipole-indiced dipole | $1/r^5$                           |
+| Dispersion            | $1/r^6$                           |
+
+
+Therefore, computing spatial distances (in ångströms, Å), either between atoms or residues, is a useful task in many different contexts. A number of function from the package _ptm_ will help us in these tasks:
+
+* [res.dist](./res.dist)
+* dist2closest (the current document)
+* [ball](./ball)
+* [pairwise.dist](./pairwise.dist)
+
+Let's take as model the alpha subunit of the human eIF2 ([PDB ID 1Q8K](https://www.rcsb.org/structure/1Q8K)). Ser218 and Met222 
+have been proposed to be [functionally related](https://www.ncbi.nlm.nih.gov/pubmed/28750604). So, we'll focus on this pair of residues. 
+
+What if we want to know the distance in ångströms between M222 and the closest vecinal serine?, is Ser218 the closest one? To address this issues, we shall use **dist2closest()** as follows:
+
+```{r}
+dist2closest(pdb = '1q8k', chain = 'A', res = 222, aa = 'S')
+```
+
+Note that the identities of the closest atoms are given as an attribute. Also, remember that the backbone atoms can be included in the analysis is wished:
+
+```{r}
+dist2closest(pdb = '1q8k', chain = 'A', res = 222, aa = 'S', backbone = TRUE)
+```
+
+Just out of curiosity, what would be the closest methionine to Met222?
+
+```{r}
+dist2closest(pdb = '1q8k', chain = 'A', res = 222, aa = 'M', backbone = TRUE)
+```
+

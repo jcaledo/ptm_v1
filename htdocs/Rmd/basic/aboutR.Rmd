@@ -1,0 +1,30 @@
+---
+title: "Brief user guide for newbies in R"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This page presents a brief introduction to R for those who never have used R before. It is intended to guide the first steps for getting off to a quick start. 
+
+## Why R?
+
+R is a free and powerful software environment for statistical computing and graphics. It compiles and runs on a wide variety of UNIX platforms, Windows and MacOS. While there are many other common applications that will allow you to manipulate lists of numbers (e.g., spreadsheet programs, matlab, etc), R has an attrative advantage: R has a wide and very active community that supports it. 
+
+If you still doubt about the benefits of R, I recommend reading [why I should use R](http://thegrantlab.org/bio3d/79-static-content/85-why-use-r) written by Barry Grant. If, on the contrary, you are excited about the idea of starting to use R, then go to the oficial  [R home page](http://www.r-project.org) and follow the instructions to download and install R into your system. We also encourage you to install [_RStudio_](https://rstudio.com/), a useful integrated development environment for R.  
+
+## Do I need to know R to use _ptm_?
+
+To get the most out of _ptm_ you should be somewhat familiar with basic R usage, but, of course, you don't need to master it. If you have never used R before, there are numerous on-line resources that can help you get started using R. For instance, you may visit [DataCamp](https://www.datacamp.com) (requires free registration). Also, you may want to have a look at the [official R manual](http://cran.r-project.org/doc/manuals/R-intro.pdf). I also find interesting the online version of the book [Advanced R](https://adv-r.hadley.nz/).
+
+
+## What's next
+
+* [Installing](./installing) _ptm_
+* _ptm_ [Documentation](./documentation.)
+* _ptm_ [Vignettes](./vignettes)
+

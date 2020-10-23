@@ -1,0 +1,49 @@
+---
+title: "get.area()"
+# author: "Juan Carlos Aledo"
+# date: "1/25/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+library(knitr)
+```
+
+### Description
+Computes Online Surface Energies Using the Getarea Server.
+
+### Usage
+get.area(pdb, keepfiles = FALSE)
+
+### Arguments
+_pdb_	is either a PDB id, or the path to a pdb file.
+
+_keepfiles_	logical, if TRUE the dataframe will be saved in the working directory and we will keep the getarea txt file.
+
+### Value
+This function returns a dataframe containing the requested information.
+
+### References
+
+* Fraczkiewicz, R. and Braun, W. (1998) [J. Comp. Chem., 19, 319-333](https://doi.org/10.1002/(SICI)1096-987X(199802)19:3<319::AID-JCC6>3.0.CO;2-W).
+
+### Details
+
+Analysis of protein commonly requires the partition of their structure into regions such as the surface, interior, or interface. Whenever you are interested into analysing such a partition in a particular protein, the following function of the _ptm_ package may be of help:
+
+* [acc.dssp](/acc.dssp)
+* get.area (the current document)
+* [atom.dpx](/atom.dpx)
+* [res.dpx](/res.dpx)
+* [stru.part](/stru.part)
+
+The function **get.area()** returns the surface energies computed as described by  Fraczkiewicz & Braun. Further details can be obtained [here.](http://curie.utmb.edu/area_man.html) 
+
+Using as example the human hexokinase 1, which is a monomeric protein, the output of the current function would look something like this:
+
+```{r}
+hHK1 <- get.area(pdb = '1cza')
+kable(head(hHK1))
+```

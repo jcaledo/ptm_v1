@@ -1,0 +1,92 @@
+---
+title: "Scan a Protein in Search of Regulatory PTM Sites"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+```
+
+### Description
+Scans the indicated protein in search of regulatory PTM sites
+
+### Usage
+reg.scan(up_id)
+
+### Arguments
+_up_id_	a character string corresponding to the UniProt ID.
+
+### Value
+Returns a dataframe where each row corresponds to a residue, and the colums inform about the regulatory modifications.
+
+### References
+Hornbeck et al. [Nucleic Acids Res. 2019 47:D433-D441](https://www.ncbi.nlm.nih.gov/pubmed/30445427).
+
+### See Also
+_ac.scan()_, _meto.scan()_, _ni.scan()_, _gl.scan()_, _ub.scan()_, _su.scan()_, _dis.scan()_, _sni.scan()_, _me.scan()_, _p.scan()_, _ptm.scan()_
+
+### Details
+
+Mass spectrometric methods are revealing a very large number of sites of PTM in proteins. However, do each of these PTM sites have a role in the functioning of a cellular process? We do not know the answer to this question because the functional effects of the vast majority of these modifications have not yet been investigated. However, there are reasons for believing that some portion of these reported PTMs might have [little or no functional importance](https://www.ncbi.nlm.nih.gov/pubmed/18603430). 
+
+Therefore, if you want to use an astringent criterion, I'd recoment to use the _ptm_ function **reg.scan()**, which scans only for experimentally documented regulatory PTM sites. Thus, using this function with our model protein P01009, it turns out than only one, among the fifteen sites previously reported, is known to be functionally relevant.
+
+To illustrate this point, we are going to scan two model proteins.
+
+## Alfa-1-antitrypsin (P01009)
+
+First let's find all the PTM sites described for this protein. To this end we use  **ptm.scan()**:
+
+```{r}
+a1at <- ptm.scan('P01009')
+```
+
+We can observe that there are:
+
+```{r}
+nrow(a1at)
+```
+residues that are post-translationally modified. However this number is reduced to:
+
+```{r}
+sum(a1at$reg, na.rm = TRUE)
+```
+when only those sites known to be functionally relevant are considered.
+
+We can get further details regarding these sites using the function **reg.scan()**:
+
+```{r}
+library(knitr)
+kable(reg.scan('P01009'))
+```
+
+## Histone H3.1t (Q16695)
+
+First let's find all the PTM sites described for this protein. To this end we use  **ptm.scan()**:
+
+```{r}
+h3 <- ptm.scan('Q16695')
+```
+
+We can observe that there are:
+
+```{r}
+nrow(h3)
+```
+residues that are post-translationally modified. However this number is reduced to:
+
+```{r}
+sum(h3$reg, na.rm = TRUE)
+```
+when only those sites known to be functionally relevant are considered.
+
+We can get further details regarding these sites using the function **reg.scan()**:
+
+```{r}
+library(knitr)
+kable(reg.scan('Q16695'))
+```

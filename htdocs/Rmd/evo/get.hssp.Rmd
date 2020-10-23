@@ -1,0 +1,191 @@
+---
+title: "get.hssp()"
+# author: "Juan Carlos Aledo"
+# date: "5/5/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+library(knitr)
+```
+
+### Description
+Gets a HSSP file of the requested structure.
+
+### Usage
+get.hssp(file, keepfiles = TRUE)
+
+### Arguments
+_pdb_	the 4-letter identifier of the PDB file.
+
+_path_  character string providing the path to the in-house HSSP database.
+
+_keepfiles_  logical, if TRUE the dataframes will be saved in the working directory and we will keep the hssp file.
+
+### Value
+
+Returns 4 dataframes containing the information found in hssp files, as describe below.
+
+### References
+Touw et al (2015) [Nucl. Ac. Res. 43:D364-368](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4383885/).
+Lange et al (2020) [Protein Sci. 29:330-344](https://www.ncbi.nlm.nih.gov/pubmed/31724231).
+
+### See Also
+msa(), custom.aln(), list.hom(), parse.hssp(), shannon()
+
+### Details
+
+Multiple sequence alignment (MSA), which consists in the alignment of three or more biological sequences. From the output, homology can be inferred and the evolutionary relationships between the sequences studied. Thus, alignment is the most important stage in most evolutionary analyses. In addition, MSA is also an essential tool for protein structure and function prediction. The package _ptm_ offers several functions that will assist you in the process of sequence analysis:
+
+[msa](/msa)
+[custom.aln](/custom.aln)
+[list.hom](/list.hom)
+[parse.hssp](/parse.hssp)
+get.hssp (current doc)
+[shannon](/shannon)
+[site.type](/site.type)
+
+The function **get.hssp()** will obtain and parse the requested HSSP file. [HSSP](https://swift.cmbi.umcn.nl/gv/hssp/) stands for Homology-derived Secondary Structure of Proteins. These  files contain information related to MSAs of UniProtKB against PDB. When the argument 'keepfiles' is set to TRUE, the **get.hssp()** function will build and save (in the working directory) the following 4 dataframes:
+
+* id_seq_list.Rda: This block of information holds the metadata per sequence, and some alignment statistic. For a detailed description of the information that can be find in this block, check here[https://swift.cmbi.umcn.nl/gv/hssp].
+
+* id_aln.Rda: This dataframe contains the alignment itself (each sequence is a column). Additional information such as secondary structure, SASA (solvent accessible surface area), etc is also found in this block.
+
+* id_profile.Rda: This dataframe holds per amino acid type its percentage in the list of residues observed at the indicated position. In addition, this dataframe also informs about the entropy at each position, as well as the number of sequences spanning this position (NOOC).
+
+* id_insertions.Rda: A dataframe with information regarding those sequences that contain inserctions. Click [here](https://swift.cmbi.umcn.nl/gv/hssp) for further details.   
+
+In order to use this function, you need to obtain a local copy of the HSSB database. This is a process that can take a few minutes, but it only have to be done once. To do that, you can follow the indication given [here](https://swift.cmbi.umcn.nl/gv/hssp/).  I have created my copy of HSSB in a folder whose absolute path is '/Users/juancarlosaledo/ptm_outdropbox/local_HSSP/', so to obtain the hssp information related to the PDB structure 1U8F, all I have to type in R is:
+
+```{r}
+profile <- get.hssp(pdb = '1u8f', 
+                     path = "/Users/juancarlosaledo/ptm_outdropbox/local_HSSP/", 
+                     keepfiles = TRUE)
+```
+
+The object 'profile' is a dataframe with as many rows as residues has the protein. For each position, the following variables (columns) are shown:
+
+  * SeqNo: Sequence residue number.
+  * PDBNo: PDB residue number.
+  * V: Percentage at which the amino acid valine (Val) is found at that position.
+  * L: Percentage at which the amino acid leucine (Leu) is found at that position.
+  * I: Percentage at which the amino acid Isoleucine (Ile) is found at that position.
+  * M: Percentage at which the amino acid methionine (Met) is found at that position.
+  * F: Percentage at which the amino acid phenylalanine (Phe) is found at that position.
+  * W: Percentage at which the amino acid tryptopha (Trp) is found at that position.
+  * Y: Percentage at which the amino acid tyrosine (Tyr) is found at that position.
+  * A: Percentage at which the amino acid alanine (Ala) is found at that position.
+  * G: Percentage at which the amino acid glycine (Gly) is found at that position.
+  * P: Percentage at which the amino acid proline (Pro) is found at that position.
+  * S: Percentage at which the amino acid serine (Ser) is found at that position.
+  * T: Percentage at which the amino acid threonine (Thr) is found at that position.
+  * C: Percentage at which the amino acid cysteine (Cys) is found at that position.
+  * Q: Percentage at which the amino acid glutamine (Gln) is found at that position.
+  * N: Percentage at which the amino acid asparragine (Asn) is found at that position.
+  * H: Percentage at which the amino acid histidine (His) is found at that position.
+  * R: Percentage at which the amino acid arginine (Arg) is found at that position.
+  * K: Percentage at which the amino acid lysine (Lys) is found at that position.
+  * E: Percentage at which the amino acid glutamate (Glu) is found at that position.
+  * D: Percentage at which the amino acid aspartate (Asp) is found at that position.
+  * NOCC: Number of aligned sequences spanning this position (including the test sequence).
+  * NDEL: Number of sequences with a deletion in the test protein at this position.
+  * NINS: Number of sequences with an insertion in the test protein at this position.
+  * ENTROPY: Entropy measure of sequence variaparbility at this position.
+  * RELENT: Relative entropy, i.e.  entropy normalized to the range 0-100.
+  * WEIGHT: Conservation weight.
+  
+
+We can have a visual impression of which are the most variable and the most conserved positions by plotting the relative entropy as a function of the position:
+
+```{r}
+plot(profile$SeqNo, profile$RELENT, ty = 'h', xlab = 'Position', ylab = 'Relative Entropy')
+```
+In this way, the most variable position is:
+
+```{r}
+maxS_at <- which(profile$ENTROPY ==  max(profile$ENTROPY))
+x <- as.data.frame(t(profile[maxS_at, 3:22]))
+x$col <- c(rep("orange", 8), rep("purple", 2), rep("green", 5), rep("blue", 3), rep("red",2))
+names(x) <- c('frequency', 'col')
+
+barplot(height = x$frequency,
+        names = rownames(x),
+        col = x$col,
+        main = paste("Position:", profile$PDBNo[maxS_at]))
+```
+
+Here, we have colored the amino acids according to their physicochemical nature. Acidic (E, D) in red, basic (H, R, K) in blue, hydrophobic (L, I, M, F, W, Y, A) in orange, polar (S, T, C, Q, N) in green and special (G, P) in purple. We observe that, except Trp (W) and Cys (C), any amino acid can be found at this position. 
+
+In contrast, the most conserved position is:
+
+```{r}
+minS_at <- which(profile$ENTROPY ==  min(profile$ENTROPY))
+x <- as.data.frame(t(profile[minS_at, 3:22]))
+x$col <- c(rep("orange", 8), rep("purple", 2), rep("green", 5), rep("blue", 3), rep("red",2))
+names(x) <- c('frequency', 'col')
+
+barplot(height = x$frequency,
+        names = rownames(x),
+        col = x$col,
+        main = paste("Position:", profile$PDBNo[minS_at]))
+```
+where valine is the only amino acid present!
+
+
+In addition to this dataframe we have colled 'profile', we can access, if we wish, the alignment itself:
+
+```{r}
+load("./1u8f_aln.Rda")
+dim(aln)
+```
+
+This dataframe, that we have placed in an object colled 'aln', has 333 raws (one per residue) and 528 columns. The first eight colums are:
+
+ * SeqNo: Sequence residue number.
+ * PDBNo: PDB residue number.
+ * Chain: Chain identifier.
+ * AA: Amino Acid at that position in the reference sequence.
+ * SS: Element of secondary structure.
+ * ACC: Solven accessible area.
+ * NOCC: Number of aligned sequences spanning this position (including the reference sequence).
+ * VAR: Sequence variability on a scale of 0-100 as derived from the number of sequences aligned.
+
+The ninth column (named in this example 'P04406') gives the reference sequence, while the remaining colums provide the sequence of the protein included in the alignment. These columns are named with the UniProt ID of the corresponding protein.
+
+Information regarding the metadata per sequence, and some alignment statistic, can be found in a third dataframe:
+
+```{r}
+load("./1u8f_seq_list.Rda")
+head(seq_list)
+```
+
+The number of rows, in our example, is 520 (one per sequence included in the alignment). The variables (columns) holded in this dataframe are:
+
+ * NR: Sequence number.
+ * ID: EMBL/SWISSPROT identifier of the aligned (homologous) protein.
+ * IDE: Percentage of residue identity of the alignment.
+ * WSIM: Weighted similarity of the alignment.
+ * IFIR: First residue of the alignment in the test sequence.
+ * ILAS: Last residue of the alignment in the test sequence.
+ * JFIR: First residue of the alignment in the alignend protein.
+ * JLAS: Last residue of the alignment in the alignend protein.
+ * LALI: Length of the alignment excluding insertions and deletions.
+ * NGAP: Number of insertions and deletions in the alignment.
+ * LGAP: Total length of all insertions and deletions.
+ * LSEQ2: Length of the entire sequence of the aligned protein.
+ * ACCNUM: SwissProt accession number.
+ * PROTEIN: One-line description of aligned protein.
+
+Finally, a fourth dataframe, named 'insertions' can be assessed
+
+```{r}
+load("./1u8f_insertions.Rda")
+inser
+```
+Further details regarding the information provided by this dataframe can be obtained [here](See https://swift.cmbi.umcn.nl/gv/hssp).
+
+Please, mind that if the argument 'keepfiles' is set to FALSE, only the dataframe 'profile' will be returned, and the hssp file will be delated from you machine. 
+
+

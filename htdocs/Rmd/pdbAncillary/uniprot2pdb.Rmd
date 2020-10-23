@@ -1,0 +1,62 @@
+---
+title: "uniprot2pdb()"
+# author: "Juan Carlos Aledo"
+# date: "1/25/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+library(knitr)
+```
+
+### Description
+Returns the PDB and chain IDs of the provided protein
+
+### Usage
+uniprot2pdb(up_id)
+
+### Arguments
+_up_id_ the UniProt ID.
+
+### Value
+The function returns a dataframe with info about the PDB related to the protein of interest.
+
+### See Also
+_pdb2uniprot()_, _id.mapping()_
+
+### Details
+
+The _ptm_ package contains a number of ancillary functions that deal with [Protein Data Bank](https://www.rcsb.org/) (PDB) files. These functions may be useful when structural 3D data need to be analyzed. The mentioned functions are:
+
+* uniprot2pdb (the current document)
+* [pdb2uniprot](./pdb2uniprot)
+* [pdb.chain](./pdb.chain)
+* [pdb.quaternary](./pdb.quaternary)
+* [pdb.res](./pdb.res)
+* [pdb.pep](./pdb.pep)
+* [pdb.select](./pdb.select)
+* [download.dssp](./download.dssp)
+* [compute.dssp](./compute.dssp)
+* [parse.dssp](./parse.dssp)
+* [mkdssp](./mkdssp)
+
+One of the most basic operations consists of interconversion between identifiers. For instance, suppose we have a the human hemoglobin subunit alpha (P69905), and we want to explore the PDB files where this subunit appears:
+
+```{r}
+pdbs <- uniprot2pdb('P69905')
+```
+
+The dataframe we have called _pdbs_ contains 534 observations, but let's take a look at some of them.
+
+```{r}
+kable(head(pdbs))
+```
+
+If we don't care about the chains, and all we want is the PDB IDs where this protein appers, we can proceed as follows:
+
+```{r}
+id.mapping('P69905', from = 'uniprot', to = 'pdb')
+```
+

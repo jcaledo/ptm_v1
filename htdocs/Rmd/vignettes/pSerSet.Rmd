@@ -1,0 +1,61 @@
+---
+title: "Building Up a Dataset for the Study of Phosphoserines"
+# author: "Juan Carlos Aledo"
+# date: "`r Sys.Date()`"
+# output: rmarkdown::html_vignette
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+library(knitr)
+```
+
+Whenever you embark yourself on a computational project, you should not forget the maxim that affirms "junk in means junk out". So, the very first step must be to build a clean and solid dataset. To this respect, _ptm_ can be your friend!
+
+For the sake of concretion, let's suppose we are interested in investigating whether the environment of serines that are susceptible to being phosphorylated (phosphosites) can be statistically discriminated against those other enviroments belonging to serines that are not phosphorilatable. To address this research, the raw dataset we need may consist in a dataframe with two columns: one for the UniProt ID of the phosphoprotein, and another containing an array with the position where pSer can be found within each phosphoprotein. 
+
+First, we are going to obtain an array with the IDs for all the human (let's focus just on human proteins) that are found in the [PhosphoSitePlus](https://www.phosphosite.org) database:
+
+```{r}
+# Get all the phosphosites:
+url <- "https://github.com/jcaledo/ptm_db/raw/master/p_db.Rda"
+destfile <- tempfile(pattern = 'all',
+                     tmpdir = tempdir(),
+                     fileext = '.Rda')
+download.file(url, destfile, quiet = TRUE)
+load(destfile)
+```
+
+These lines of code will load an object (dataframe) called `p_db` in the global environment of R. This dataframe contains data regarding phosphosites found in different databases and for different species. So, we need to filter out non-human phosphoproteins, as well as those human sites corresponding to tyrosine or threonine.
+
+```{r}
+hpSer <- p_db[which(p_db$organism == 'Homo sapiens' &
+                      p_db$database == 'PSP' &
+                      grepl('S', p_db$modification)), c(1,3) ]
+```
+
+Then, we're going to build a dataframe (df) where each row contain the pSer sites of a unique human protein:
+
+```{r}
+id <- unique(hpSer$up_id)
+df <- data.frame(id = id, pos = rep(NA, length(id)))
+
+sites <- function(x){
+  t <- hpSer$modification[which(hpSer$up_id == x)]
+  output <- lapply(t,  function(y) stringr::str_extract_all(y,"([0-9]+)", simplify = TRUE))
+  return(as.numeric(unlist(output)))
+}
+
+df$pos <- lapply(id, sites)
+```
+
+Let's see a few of them:
+
+```{r}
+kable(head(df))
+```
+
+Now that we have the dataset, we are ready to study the differential sequence environment of these phosphoserine sites. To get an idea of how we can proceed further, read the vignette [Exploring MetO Sequence Environments](/exploring-meto-sequence-environments).
+

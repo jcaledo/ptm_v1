@@ -1,0 +1,115 @@
+---
+title: "mkdssp()"
+# author: "Juan Carlos Aledo"
+# date: "1/25/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+library(knitr)
+```
+
+### Description
+Computes the DSSP file using an in-house version of the DSSP software
+
+### Usage
+mkdssp(pdb, method = 'ptm', exefile)
+
+### Arguments
+_pdb_ is either a 4-character identifier of the PDB structure, or the path to a pdb file.
+
+_method_ a character string specifying the desired method to get the dssp dataframe; it should be one of 'ptm' or 'bio3d'.
+
+_exefile_ file path to the DSSP executable on your system (i.e. how is DSSP invoked).
+
+### Value
+Returns either a dataframe containing the information extracted from the dssp file (method ptm), or a list with that information (method bio3d).
+
+### Referebces
+* Touw et al. (2015) [Nucl. Ac. Res. 43(Database issue): D364-D368](https://www.ncbi.nlm.nih.gov/pubmed/25352545).
+* Kabsch & Sander (1983) [Biopolimers 22:2577-2637](https://www.ncbi.nlm.nih.gov/pubmed/6667333).
+
+### See Also
+_compute.dssp()_, _download.dssp()_, _mkdssp()_ and _acc.dssp()_
+
+### Details
+
+The _ptm_ package contains a number of ancillary functions that deal with [Protein Data Bank](https://www.rcsb.org/) (PDB) files. These functions may be useful when structural 3D data need to be analyzed. The mentioned functions are:
+
+* [uniprot2pdb](./uniprot2pdb)
+* [pdb2uniprot](./pdb2uniprot)
+* [pdb.chain](./pdb.chain)
+* [pdb.quaternary](./pdb.quaternary)
+* [pdb.res](./pdb.res)
+* [pdb.pep](./pdb.pep)
+* [pdb.select](./pdb.select)
+* [download.dssp](./download.dssp)
+* [compute.dssp](./compute.dssp)
+* [parse.dssp](./parse.dssp)
+* mkdssp (the current document)
+
+The [DSSP](https://en.wikipedia.org/wiki/DSSP_(hydrogen_bond_estimation_algorithm)) (_Define Secondary Structure of Proteins_) algorithm allows to assign secondary structure to the amino acids of a protein using the atomic coordinates of the protein (a PDB file). 
+
+DSSP, based on the identification of intra-backbone [hydrogen bonds](https://en.wikipedia.org/wiki/Hydrogen_bond) of the protein can identify eight types of [secondary structure](https://en.wikipedia.org/wiki/Protein_secondary_structure) that can be grouped in three main categories:
+
+* Helices
+G = 3-turn helix [$\sf{3_{10}}$ helix](https://en.wikipedia.org/wiki/310_helix). Min length 3 residues.
+H = 4-turn helix [α helix](https://en.wikipedia.org/wiki/Alpha_helix). Minimum length 4 residues.
+I = 5-turn helix [π helix](https://en.wikipedia.org/wiki/Pi_helix). Minimum length 5 residues.
+
+* Strands
+E = extended strand in parallel and/or anti-parallel β-sheet conformation. Min length 2 residues.
+B = residue in isolated β-bridge (single pair β-sheet hydrogen bond formation)
+
+* Loops
+T = hydrogen bonded turn (3, 4 or 5 turn)
+S = bend (the only non-hydrogen-bond based assignment).
+C = coil (residues which are not in any of the above conformations).
+
+
+Given a PDB file (or its 4 letter ID) there are three different ways to get the corresponding dssp file. The one used by the function **download.dssp()** consist in downloading a pre-computed file making use of the REST API provided by the [Centre for Molecular and Biomolecular Informatics](https://www.linkedin.com/company/centre-for-molecular-and-biomolecular-informatics/about/).
+
+The database selected by default is 'pdb_redo', which corresponds to fully optimised structure models. If the choosen pdb structure has not a precomputed file, the function will resort to the database 'PDB' (see [_Facilities that make the PDB data collection more powerful_](https://www.ncbi.nlm.nih.gov/pubmed/31724231) for a recent review). 
+
+For instance, let's obtain the dssp file for the Dynein light chain 2.
+
+```{r}
+download.dssp(id = '2xqq')
+```
+
+Once the file has been downloaded we can parse it using the function **parse.dssp()**, which return a dataframe
+
+```{r}
+Dynein <- parse.dssp('./2xqq.dssp')
+kable(head(Dynein))
+```
+By default, the parsed dssp file is delated once it has been used. If you want to keep it and save the obtained dataframe, then you should pass an additional argument: _keepfiles_ = TRUE.
+
+To download these precomputed DSSP files we use the command 'rsync'. If your OS experiences problems dealing with that command, you may consider the alternative of using the function **compute.dssp()**. In addition, the latter, also acepts a PDB file that you may have generated and therefore is not present in the PDB database (in this case you must pass the path to browse until the file as an argument). In any case, the function send the file to the [XSSP](https://www3.cmbi.umcn.nl/xssp/) server which will carry out the computation and returns a dssp file.
+
+```{r}
+compute.dssp(pdb = '2xqq')
+```
+We can now parse the obtained dssp file:
+
+```{r}
+Dynein <- parse.dssp('./2xqq.dssp')
+kable(head(Dynein))
+```
+
+A drawback of this function is that it depends on the XSSP server and in ocasions it can take a long time to process the request. Thus, a third alternative option to convert a PDB file into a DSSP file is to carry out the computation on your in-house computer, using the function **mkdssp()**. To do that, previously you will have had to install the _mkdssp_ program as an executable. Some help can be foun [here](./installing).
+
+```{r}
+Dynein <- mkdssp(pdb = '2xqq',
+                 method = 'ptm',
+                 exefile = '/anaconda3/bin')
+kable(tail(Dynein))
+```
+
+### A warning words
+
+PDB entries are notirously hard to parse. It is no unusual that the entry contains UNK residues, Cα-only residues, or residues with otherwise missin atoms, just to mention a few issues. For that reason we provide different alternative approaches to compute the desired dssp file, in the hope that they complement each other and together allow obtaining the desired calculations for a large majority of PDB files.
+
+

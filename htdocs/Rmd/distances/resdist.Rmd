@@ -1,0 +1,77 @@
+---
+title: "res.dist()"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+```
+
+### Description
+Computes the euclidean distance between two given residues
+
+### Usage
+res.dist(file,  rA, chainA, rB, chainB, backbone = F, hatoms = F)
+
+### Arguments
+_pdb_	is either a PDB id, or the path to a pdb file.
+
+_rA_	an integer indicating the position of the first residue.
+
+_chainA_	a character indicating the chain to which belong the first residue.
+
+_rB_	an integer indicating the position of the second residue.
+
+_chainB_	a character indicating the chain to which belong the second residue.
+
+_backbone_	logical, when TRUE it means that we include those atoms belonging to the main chain (CA, N, O and C) beside all the side chain atoms.
+
+_hatoms_	logical, if TRUE we include all the hydrogen atoms in the computation as long as the PDB provides their coordinates.
+
+### Value
+This function returns a list of three elements, where each of these elements is, in turn, a list of three elements providing information regarding minimal, maximal and averaged distances.
+
+### See Also
+_pairwise.dist()_, _dist2closest()_, _ball()_
+
+### Details
+
+The continuous formation and rupture of non-covalent bonds (intra- and intermolecular), gives rise to dynamic molecular interactions, which are cosubstantial to life. These non-covalent interactions can adopt many forms, but all of them are fundamentally electrostatic in nature, and strongly influenced by distances.
+
+| Type of interaction   | Energy dependence on the distance |
+|-----------------------|-----------------------------------|
+| Ion-ion               | $1/r$                             |
+| Ion-dipole            | $1/r^2$                           |
+| Dipole-dipole         | $1/r^3$                           |
+| Ion-induced dipole    | $1/r^4$                           |
+| Dipole-indiced dipole | $1/r^5$                           |
+| Dispersion            | $1/r^6$                           |
+
+
+Therefore, computing spatial distances (in ångströms, Å), either between atoms or residues, is a useful task in many different contexts. A number of function from the package _ptm_ will help us in these tasks:
+
+* [res.dist] (the current document)
+* [dist2closest](./dist2closest)
+* [ball](./ball)
+* [pairwise.dist](./pairwise.dist)
+
+The function **res.dist()** computes the minimal, the maximun and the average distances bewteen two given residues. Let's take as model the alpha subunit of the human eIF2 ([PDB ID 1Q8K](https://www.rcsb.org/structure/1Q8K)). Ser218 and Met222 
+have been proposed to be [functionally related](https://www.ncbi.nlm.nih.gov/pubmed/28750604). So, we'll focus on this pair of residues. 
+
+Note that when computing the distances, we can exclude the backbone and hydrogen atoms by setting their respective parameter to FALSE.
+
+```{r}
+res.dist(pdb = '1q8k',
+         rA = 218, chainA = 'A',
+         rB = 222, chainB = 'A',
+         backbone = FALSE, hatoms = FALSE)
+```
+
+We can see that 5.04 Å is the minimal distance between these two residues. Furthermore, we see that this minimal distance is between the beta carbon from Ser218 and the beta carbon from Met222.
+
+Similarly, we can check that the maximum distance is 8.37 Å, and corresponds to the distance between the gamma oxygen of Ser218 and the epsilon carbon of Met222.
+
+

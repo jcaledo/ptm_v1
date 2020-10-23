@@ -1,0 +1,120 @@
+---
+title: "env.Ztest()"
+# author: "Juan Carlos Aledo"
+# date: "`r Sys.Date()`"
+# output: rmarkdown::html_vignette
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+library(knitr)
+```
+
+### Description
+Searchs for amino acids either overrepresented or avoided at given positions within a sequence environment.
+
+### Usage
+env.Ztest(pos, ctr, alpha = 0.05)
+
+### Arguments
+_pos_	a 21 x m matrix containing the absolute frequencies of 21 amino acids at the m positions, in the positive environments.
+
+_ctr_	a 21 x m matrix containing the absolute frequencies of 21 amino acids at the m positions, in the control environments.
+
+_alpha_	significance level.
+
+### Value
+Returns a list with three elements: (1) a matrix with the values of the Z statistical. (2) A dataframe with information regarding amino acid overrepresented in the positive environments, and (3) a dataframe similar to the previous one, but for amino acids avoided from the positive environments. Please, note that in addition to the 20 proteinogenetic amino acid we are using the symbol X when the target (central) residue is closer to the N-terminal or C-terminal of the protein than the radious used.
+
+### Reference
+Aledo et al. [Sci Rep. 2015; 5: 16955](https://www.ncbi.nlm.nih.gov/pubmed/26597773)
+
+### Details
+
+Amino acids in the vicinity of a PTM site are critical in promoting or hindering the incoming substituent on specific amino acid. Thus, knowledge about amino acids surronding modified sites and the correlation between them is very valuable. 
+
+The package _ptm_ offers four functions that will assist you in the process of gaining such a knowledge:
+
+* [env.extract](./envextract)
+* [env.matrices](./envmatrices)
+* env.Ztest (the current document)
+* [env.plot](./envplot)
+
+A more elaborated vignette showing how these four functions can be coordinately used to gain knowledge can be found [here](./enviroments)
+
+For the sake of concretion, let's suppose we are interested in investigating whether the environment of serines that are susceptible to being phosphorylated (phosphosites) can be statistically discriminated against those other enviroments belonging to serines that are not phosphorylatable. To address this issue, we need a collection of positive environments (sequence of amino acids arround a phosphorylatable serine) and its control counterpart (sequence of amino acids arround a non phosphorylatable serine). These sets can be obtained with the help of [**env.extract()**](./envextract). Suppose we have already extracted the sequence environments of 40 phosphoserines, as well as, the same number of environments corresponding to non-phosphorylatable serines (to be used as control).
+
+```{r}
+positive <- c("ERNLLsVAYKN", "SWRIIsSIEQK", "LNEPLsNEDRN", "LTLWTsDQQDD", "WRVLSsIEQKS",
+              "ESELRsICTTV", "ASQAEsKVFYL", "RKILLsEWKSQ", "GGSSCsQTPSR", "QVLLEsGEKST",
+              "ARAVYsDADIF", "NRQLPsDGKKM", "SPGYRsVRERT", "KDRTTsEAQTE", "KTEAEsYEGLL",
+              "CGRTGsGKSSL", "HVPAPsPQGPG", "IQESEsHSKNG", "LHGKKsGKPPL", "SISAPsSDKPL",
+              "NTVANsPQTLL", "PYAHLsKKEKK", "GKQQVsPIRNL", "VCEKQtITKWP", "ASQAGsRKESR",
+              "FIRGVsGGERK", "LTPGGsMGLQV", "PCPRYsNPADF", "GITGSsQDTYV", "KLKGKsPGIIF",
+              "GQQLAsMLRWT", "YKVLSsLGYHV", "FISGLsDQLIP", "LFRSRsLREFE", "PGIDLsQVYEL",
+              "SPRTLsPTPSA", "IRRSSsDFFYS", "PASSTsGSPSR", "TPTSRsPQHYS", "MKARSsSYADP")
+
+control <- c("PEKACsLAKTA", "AYKAAsDIAMT", "LALNFsVFYYE", "ATVVEsSEKAY", "TLSEDsYKDST",
+             "AWRVIsSIEQK", "PEKACsLAKTA", "VKKENsVETQA", "MSGGSsCSQTP", "SGHQPsQSRAI",
+             "FALVLsALILA", "RTFSEsSVWSQ", "CGSVGsGKTSL", "EDPQQsNPCPE", "STLEYsNERLK",
+             "GTMDPsQVPEH", "PIVTPsGEVVV", "AVIQEsESHSK", "LYSNLsKPFLD", "TSTRGsVQMLT",
+             "FDEPSsYLDVK", "PTQKFsGGWRM", "HIINLsLTFHG", "SRLESsGKNKS", "EKEILsNINGI",
+             "TMIFSsVCYWT", "LVKTLsRLAKG", "QAAQHsPYVAL", "YSGVGsSDGNS", "VPVAPsSSSGG",
+             "SSSSGsAAAAL", "SEGEAsEEGLY", "PADQFsDGREP", "GPAEEsRVRRH", "CSSEKsKVTSS",
+             "SYGDVsGGVRD", "GIRCDsCEKYI", "SVPASsTSGSP", "RSGPEsGRSSP", "TTAGNsSQVSD")
+```
+
+After that, using [**env.matrices()**](./envmatrices) we can compute two matrices: one containing the frequencies of each amino acid at the corresponding position within the sequence environment around the positive targen (p-Ser), and its counterpart matrix for the control (environment around non-phosphorilatable serine). 
+
+```{r}
+pos <- env.matrices(positive)[[2]]
+ctr <- env.matrices(control)[[2]]
+```
+
+Once we have these two matrices, it's time to use **env.Ztest()** to test the null hypothesis: the environment of phosphorylatable and non-phosphorylatable serine residues are not different. 
+
+```{r}
+results <- env.Ztest(pos, ctr, alpha = 0.05)
+```
+
+This object we have called 'results' is a list of three elements. The first one is a matrix showing the $Z_{ij}$ statistical for each amino acid ($i$) at each position ($j$) within the sequence environment.  This matrix, accounting for the standardized difference in frequencies, is computed according to equation:
+
+$Z_{ij} = \frac{f^{pos}_{ij}- f^{ctr}_{ij}}{\sqrt{ \frac{f^{pos}_{ij}(1 - f^{pos}_{ij}) +  f^{ctr}_{ij}(1 - f^{ctr}_{ij})}{n} }}$
+
+where $f_{ij}$ is the computed relative frequency for amino acid $i$ at position $j$, and $n$ is is the total number of environmental sequences analyzed.
+
+```{r}
+kable(round(results[[1]], 1))
+```
+
+A standard score, $Z_{ij}$, that is much greater than zero or much less than zero indicates that amino acid $i$ is overrepresented or underrepresented at position $j$, respectively, in an environment of the positive sequences with respect to an environment of the control ones. To this respect, the second element of the list 'results' is a dataframe with information regarding those amino acids overrepresented in the positive environments (Z values much higher than 0):
+
+```{r}
+kable(results[[2]])
+```
+
+The third element of the list is also a dataframe, but in this case with information regarding amino acid underrepresented in the positive environments (Z values much lower thant 0):
+
+```{r}
+kable(results[[3]])
+```
+
+Finally, the function **env.Zplot()** allows us to visualize the results of these analyses graphycally. For that we choose the amino acid we want to focus on. In this way, we can visualize that at the position -2 (towards the N-terminal) glutamate es significantly avoided from the environment of p-Ser:
+
+```{r}
+env.plot(Z = results[[1]], 
+         aa = 'E', 
+         pValue = 0.05, 
+         title = "Glutamete around p-Ser")
+```
+
+while leucine is clearly enriched at that position:
+
+```{r}
+env.plot(Z = results[[1]], 
+         aa = 'L', 
+         pValue = 0.05, 
+         title = "Leucine around p-Ser")
+```
