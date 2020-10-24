@@ -13,4 +13,4 @@ Your are welcome to:
 
 * Submit suggestions and bug-reports at: https://bitbucket.org/jcaledo/ptm/issues
 * Send a pull request on: https://bitbucket.org/jcaledo/ptm/pull-request
-* Send us an email to: metosite@uma.es
+* Send us an email to: caledo@uma.es
