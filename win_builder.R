@@ -11,3 +11,10 @@ devtools::check_win_release(pkg = ".",
                           email = NULL,
                           quiet = FALSE)
 
+devtools::run_examples(pkg = ".",
+                       start = NULL,
+                       run_dontrun = FALSE,
+                       run_donttest = FALSE,
+                       document = TRUE)
+
+

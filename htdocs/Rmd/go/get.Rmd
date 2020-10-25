@@ -1,0 +1,58 @@
+---
+title: "get"
+author: "Juan Carlos Aledo"
+date: "10/25/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Let's focus on the function **get.go()**. This function, returns a dataframe (by default) with the GO terms associated to the protein of interest. For instance, if we pass the argument 'P01009' (human Alpha-1-antitrypsin protein):
+
+```{r, echo = TRUE, include = FALSE}
+a1a <- get.go('P01009')
+```
+
+We obtain the GO terms linked to this protein:
+
+```{r}
+a1a$GO_id
+```
+
+In addition to the GO IDs, for each term we can read the term name:
+
+```{r}
+a1a$term_name
+```
+
+A longer text with definition of each term:
+
+```{r}
+a1a$definition_text[1:3]
+```
+
+The aspect of each term:
+
+```{r}
+a1a$aspect
+```
+
+and whether or not the term is obsolete:
+
+```{r}
+a1a$obsolete
+```
+
+This list of GO annotations corresponds with the annotations displayed in the Function and Subcellular location sections of UniProtKB entries. This list is a filtered one, as some well-characterized proteins can have many GO annotations. Therefore annotated terms are displayed in the UniProtKB entry based on their granularity and evidence code quality (with manual annotations preferred over automatic predictions). Annotations that have been made to isoform identifiers, or use any of the GO annotation qualifiers (NOT, contributes_to, colocalizes_with) are also removed. In addition, some parts of a GO annotation are not included in the UniProtKB entry: for example, an annotation's 'with/from' field contents is not displayed; this field supplies additional supporting evidence for an annotation. If the user wish a complete list of GO annotations, he/she should set the argument filter to FALSE:
+
+```{r}
+a1a_full <- get.go('P01009', filter = FALSE)
+```
+
+No we have a longer list of GO terms, as provided by [QuickGO](https://www.ebi.ac.uk/QuickGO/annotations). 
+
+```{r}
+a1a_full$GO_id
+```

@@ -10,9 +10,12 @@ test_that("search.go() works properly", {
   skip_on_travis()
 
   a <- search.go(query = 'oxidative stress')
-  b <- search.go(query = 'apoptosis')
+  b <- search.go(query = 'methionine')
 
-
+  expect_is(a, 'data.frame')
+  expect_gte(nrow(a), 300)
+  expect_equal(ncol(a), 5)
+  expect_true('GO:0070994' %in% a$GO_id)
 })
 
 ## ---------------------------------------------- ##

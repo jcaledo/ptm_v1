@@ -18,6 +18,7 @@ The _ptm_ package, writen to assist the study of protein post-translational modi
 * Functions to analyse sequence environment.
 * Functions to handle sequences from different databases.
 * Evolutionary analysis tools.
+* GO network analysis.
 * Ancillary tools dealing with PDB files.
 * Functions to explore protein surfaces.
 * Functions to explore thermodynamic stability.
@@ -89,6 +90,13 @@ We also distribute a number of extended _ptm_ vignettes that provide worked exam
 * [get.hssp](/get.hssp): Gets a HSSP File.
 * [shannon](/shannon): Computes Shannon Entropy for Amino Acid and Codon Sites.
 * [site.type](/site.type): Computes Shannon Entropy and Sort out the Sites.
+
+### GO network and enrichment analyses
+
+* [search.go](/search-go): Searchs a Simple User Query.
+* [term.go](/search-go): Gets core information about the GO term of interest.
+* [get.go](/get-go): Gets the gene ontology annotations for a given protein.
+* [go.enrich](/go-enrich): Carries out GO term enrichment tests
 
 ### Ancillary tools dealing with PDB files
 

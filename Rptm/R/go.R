@@ -16,10 +16,10 @@
 #' @description Searchs a simple user query.
 #' @usage search.go(query)
 #' @param query character string defining the query.
-#' @details that....
-#' @return Returns a ......
+#' @return Returns a dataframe containing the GO IDs found associated to the query, as well as other information related to these terms.
 #' @author Juan Carlos Aledo
 #' @seealso term.go(), get.go(), go.enrich(), gorilla(), net.go()
+#' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 #' @examples search.go('oxidative stress')
 #' @importFrom httr GET
 #' @importFrom httr accept
@@ -57,6 +57,7 @@ search.go <- function(query){
 #' @return Returns a dataframe containing core information such as term name and definition, reference, aspect, and whether or not the term is obsolete.
 #' @author Juan Carlos Aledo
 #' @seealso search.go(), get.go(), go.enrich(), gorilla(), net.go()
+#' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 #' @examples term.go('GO:0034599')
 #' @importFrom httr GET
 #' @importFrom httr accept
@@ -116,6 +117,7 @@ term.go <- function(go, children = FALSE){
 #' @return Returns a dataframe (by deafult) with GO IDs linked to the protein of interest, as well as additional information related to these GO ids. A string with the GO ids can be obtained as output if indicated by means of the argument 'format'.
 #' @author Juan Carlos Aledo
 #' @seealso search.go, term.go(), go.enrich(), gorilla(), net.go()
+#' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 #' @examples get.go('P01009')
 #' @importFrom httr GET
 #' @importFrom httr accept
@@ -221,7 +223,7 @@ get.go <- function(id, filter = TRUE, format = 'dataframe', silent = FALSE){
 #' @details It is essential that the items in the 'sample' vector correspond to items within the background.
 #' @return Returns the results of the enrichement test as a dataframe.
 #' @author Juan Carlos Aledo
-#' @references
+#' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 #' @seealso search.go(), term.go(), get.go(), gorilla(), net.go()
 #' @examples \dontrun{go.enrich("../bench/sample.txt", "../bench/background.txt", 'CC', n = 10)}
 #' @importFrom topGO readMappings
@@ -282,6 +284,7 @@ go.enrich <- function(s_file, bg_file, aspect = 'BP', n = 20){
 #' @return a list containing (i) the dataframe corresponding to the computed Jaccard matrix and (ii) the adjacency matrix.
 #' @author Juan Carlos Aledo
 #' @seealso search.go(), term.go(), get.go(), go.enrich(), gorilla(), net.go()
+#' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 #' @examples \dontrun{net.go(path2data = "./GOvivo.txt")}
 #' @importFrom igraph graph_from_adjacency_matrix
 #' @importFrom igraph get.edgelist

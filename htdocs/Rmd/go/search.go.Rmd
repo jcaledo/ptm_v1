@@ -1,7 +1,7 @@
 ---
-title: "get.go()"
+title: "search.go()"
 author: "Juan Carlos Aledo"
-date: "15/5/2020"
+date: "24/10/2020"
 output: html_document
 ---
 
@@ -13,38 +13,31 @@ library(knitr)
 ```
 
 ### Description
-Gets the gene ontology annotations for a given protein.
+Searchs a simple user query.
 
 ### Usage
-get.go(id, filter = TRUE, format = 'dataframe', silent = FALSE)
+search.go(query)
 
 ### Arguments
-_id_	the UniProt identifier of the protein of interest.
-
-_filter_  logical, if TRUE a reduced number of terms, selected on the basis of astringent criteria (see details), is returned.
-
-_format_ string indicating the output's format. It should be either 'dataframe' or 'string'
-
-_silent_ logical, if FALSE print details of the reading process.
+_query_	character string defining the query.
 
 ### Value
 
-Returns a dataframe (by deafult) with GO IDs linked to the protein of interest, as well as additional information related to these GO ids. A string with the GO ids can be obtained as output if indicated by means of the argument 'format'.
+Returns a dataframe containing the GO IDs found associated to the query, as well as additional information related to these terms.
 
 ### References
 Rhee, Wood, Dolinkski & Draghici, [Nature Reviews Genetics 2008, 9:509–515](https://pubmed.ncbi.nlm.nih.gov/18475267/).
 
 ### See Also
-search.go(), term.go(), go.enrich(), gorilla() 
+term.go(), get.go(), go.enrich(), gorilla() 
 
 ### Details
 
-The [Gene Ontolory project](http://geneontology.org/) (GO) provides a controlled vocabulary to describe gene and gene product attributes. Thus, a 
-GO annotation is a statement describing some biological aspect. GO annotations are created by associating a gene or gene product with a GO term. Together, these statements comprise a “snapshot” of current biological knowledge. Hence, GO annotations capture statements about three disjoint categories: cellular component, molecular function and biological process. In this way, GO terms, using a controlled and hierarchical vocabulary, help to describe how a gene functions at the molecular level, where in the cell it functions, and what biological processes it helps to carry out.
+The [Gene Ontolory project](http://geneontology.org/) (GO) provides a controlled vocabulary to describe gene and gene product attributes. Thus, a GO annotation is a statement describing some biological aspect. GO annotations are created by associating a gene or gene product with a GO term. Together, these statements comprise a “snapshot” of current biological knowledge. Hence, GO annotations capture statements about three disjoint categories: cellular component, molecular function and biological process. In this way, GO terms, using a controlled and hierarchical vocabulary, help to describe how a gene functions at the molecular level, where in the cell it functions, and what biological processes it helps to carry out.
 
 The use of this vocabulary (GO annotations) has diverse applications, perhaps the most popular of them is the functional profiling. The goal of functional profiling is to determine which processes might be different in particular sets of genes (or gene products). That is, GO annotations are used to determine which biological processes, functions, and/or locations are significantly over- or under-represented in a given group of genes (or gene products). This approach is also known as GO term enrichment analysis.
 
-Whenever we have a set of genes that are differentially expressed between different conditions (for example, cancerous versus healthy), we can apply GO enrichment analyses. For the sake of concretion let's build some toy data that may be useful to illustrate the theory behind the GO term enrichement analysis. So, suppose we have analysed the expression of 20 genes (N = 20) in cancerous and healthy cells. Let's continue imagining: among these 20 genes, 5 of them are differentially expressed between the two conditions. This set of differentially expressed genes constitutes our target set (T), the remaining 15 genes belong to the complementary set ($latex T^c$). Please, note that the union of these two sets gives the background set ($latex B = T \cup T^c$).
+Whenever we have a set of genes that are differentially expressed between different conditions (for example, cancerous versus healthy), we can apply GO enrichment analyses. For the sake of concretion let's build some toy data that may be useful to illustrate the theory behind the GO term enrichment analysis. So, suppose we have analysed the expression of 20 genes (N = 20) in cancerous and healthy cells. Let's continue imagining: among these 20 genes, 5 of them are differentially expressed between the two conditions. This set of differentially expressed genes constitutes our target set (T), the remaining 15 genes belong to the complementary set ($latex T^c$). Please, note that the union of these two sets gives the background set.
 
 At this point, we must be aware that two types of questions can be addressed when performing functional profiling: 
 
@@ -59,7 +52,7 @@ Thus, we start computing how many of the 20 genes forming the background set (B)
 ![](./HG.png)
 
 
-We can observe that the proportion of genes related to apoptosis within the target set is (3/5 = 0.6) much higher than that in the background set (5/20 = 0.25), but ..., what can we conclude? The main problem here is that any enrichment value can occur just by chance. That is, we need an appropriate statistical model. Thus, we define our random variable X as the number of genes in the target set that are related to apoptosis. Now, as a first approach, we can assume that X follows a binomial distribution with parameters p = 7/20 (probability of randomly pick an apoptotic gene from the background set) and n = 5 (cardinal of the target set). That is, $latex X \sim Bin(p = 0.35, n = 5)$. Thefore, the probability of getting just by random three apoptotic genes in the targe set would be:  $latex P[X = 3] = \binom{5}{3} 0.35^3 0.65^2 = 0.181$. If we want to estimate the p-value, using the binomial model, we have to estimate the following probability:  
+We can observe that the proportion of genes related to apoptosis within the target set is (3/5 = 0.6) much higher than that in the background set (5/20 = 0.25), but ..., what can we conclude? The main problem here is that any enrichment value can occur just by chance. That is, we need an appropriate statistical model. Thus, we define our random variable X as the number of genes in the target set that are related to apoptosis. Now, as a first approach, we can assume that X follows a binomial distribution with parameters p = 7/20 (probability of randomly pick an apoptotic gene from the background set) and n = 5 (cardinal of the target set). That is, $latex X \sim Bin(p = 0.35, n = 5)$. Therefore, the probability of getting just by random three apoptotic genes in the target set would be:  $latex P[X = 3] = \binom{5}{3} 0.35^3 0.65^2 = 0.181$. If we want to estimate the p-value, using the binomial model, we have to estimate the following probability:  
 
 ```{r}
 1- pbinom(2, size = 5, p = 0.35)
@@ -73,13 +66,13 @@ A valid critic to the model we have chosen (the binomial one) is that the binomi
 dhyper(3, 7, 13, 5)
 ```
 
-Again, to compute the p-value we have to resort to the cumulative distribution function instead to the probability density function. That is, $P[X \geq 3] = \sum_{i=3}^5 \frac{\binom{7}{i} \binom{13}{5-i}}{\binom{20}{5}}$
+Again, to compute the p-value we have to resort to the cumulative distribution function instead to the probability mass function. That is, $P[X \geq 3] = \sum_{i=3}^5 \frac{\binom{7}{i} \binom{13}{5-i}}{\binom{20}{5}}$
 
 ```{r}
 1- phyper(2, 7, 13, 5)
 ```
 
-In general, if we have summarized the results in a contingency table as the one shown in the figure above, the question we want to answer is: knowing that we have $a + b$ genes related to the process (function or component) of interest in the background set, which is formed by $N$ genes, and assuming the null hypothesis (any observed enrichment is due to chance), what is the probability that the these genes of interest would be so unevenly (or even more) distributed as in our observation? In other words, what is the probability of observing data as extreme or more extreme than our observation? To answer this question we use, as we have already noted, the hypergeometric distribution, although in this context we may refer to the statistic model as the Fisher's exact test. In any case, the reasoning is as follows: In a population of $N$ genes, we have $a + b$ belonging to the process of interest. Now, if we randomly draw (that the null hypothesis) $a + c$ genes from the background set, what is the probability that $a$ of them would belong to the process of interest? 
+In general, if we have summarized the results in a contingency table as the one shown in the figure above, the question we want to answer is: knowing that we have $a + b$ genes related to the process (function or component) of interest in the background set, which is formed by $N$ genes, and assuming the null hypothesis (any observed enrichment is due to chance), what is the probability that the these genes of interest would be so unevenly (or even more) distributed as in our observation? In other words, what is the probability of observing data as extreme or more extreme than our observation? To answer this question we use, as we have already noted, the hypergeometric distribution, although in this context we may refer to the statistic model as the Fisher's exact test. In any case, the reasoning is as follows: In a population of $N$ genes, we have $a + b$ belonging to the process of interest. Now, if we randomly draw (that is the null hypothesis) $a + c$ genes from the background set, what is the probability that $a$ of them would belong to the process of interest? 
 
 $P[X = a] = \frac{\binom{a+b}{a} \binom{c+d}{c}}{\binom{N}{a+c}} = \frac{(a + b)! (c + d)! (a + c)! (b + d)!}{a! b! c! d! N!}$
 
@@ -102,7 +95,7 @@ Hitherto, we have addressed the so-called hypothesis-driven approach. Now, we wi
 dhyper(5, 7, 13, 5)
 ```
 
-this probability is as low as 0.001. However, if we compute the probability of the 5 genes belonging to the same category, we find that this probability has been multiplied by the number of tests we have to performed (as many as color are being tested). 
+this probability is as low as 0.001. However, if we compute the probability of the 5 genes belonging to the same category, we find that this probability has been multiplied by the number of tests we have to performed (as many as colors are being tested). 
 
 ![](./Bonferroni.png)
 
@@ -134,62 +127,22 @@ Q-values can be compute from p-values using the **qvalue()** function from the q
 
 After this rather long introduction to GO term enrichment analysis,  let's point out that the package _ptm_ offers several functions that will assist you in the process of GO analysis:
 
-[search.go](/search.go)
+search.go(current doc)
 [term.go](/term.go)
-get.go (current doc)
+[get.go](/get.go)
 [go.enrich](/go.enrich)
 [gorilla](/gorilla)
 
 
-Let's focus on the function **get.go()**. This function, returns a dataframe (by default) with the GO terms associated to the protein of interest. For instance, if we pass the argument 'P01009' (human Alpha-1-antitrypsin protein):
+Let's focus on the function **search.go()**. This function, returns a dataframe  with the GO terms associated to the query of interest. For instance, if we pass the argument 'oxidative stress':
 
 ```{r, echo = TRUE, include = FALSE}
-a1a <- get.go('P01009')
+o <- search.go('oxidative stress')
 ```
 
-We obtain the GO terms linked to this protein:
+We obtain the GO terms linked to this query. For instance, the first ten rows in our example would look like:
 
 ```{r}
-a1a$GO_id
+kable(o[1:10, c(1,3,5)])
 ```
-
-In addition to the GO IDs, for each term we can read the term name:
-
-```{r}
-a1a$term_name
-```
-
-A longer text with definition of each term:
-
-```{r}
-a1a$definition_text[1:3]
-```
-
-The aspect of each term:
-
-```{r}
-a1a$aspect
-```
-
-and whether or not the term is obsolete:
-
-```{r}
-a1a$obsolete
-```
-
-This list of GO annotations corresponds with the annotations displayed in the Function and Subcellular location sections of UniProtKB entries. This list is a filtered one, as some well-characterized proteins can have many GO annotations. Therefore annotated terms are displayed in the UniProtKB entry based on their granularity and evidence code quality (with manual annotations preferred over automatic predictions). Annotations that have been made to isoform identifiers, or use any of the GO annotation qualifiers (NOT, contributes_to, colocalizes_with) are also removed. In addition, some parts of a GO annotation are not included in the UniProtKB entry: for example, an annotation's 'with/from' field contents is not displayed; this field supplies additional supporting evidence for an annotation. If the user wish a complete list of GO annotations, he/she should set the argument filter to FALSE:
-
-```{r}
-a1a_full <- get.go('P01009', filter = FALSE)
-```
-
-No we have a longer list of GO terms, as provided by [QuickGO](https://www.ebi.ac.uk/QuickGO/annotations). 
-
-```{r}
-a1a_full$GO_id
-```
-
-In addition to a longer GO terms list, the date, the [evidence code](http://wiki.geneontology.org/index.php/Guide_to_GO_Evidence_Codes) and reference, among other data, are provided.
-
-
 
