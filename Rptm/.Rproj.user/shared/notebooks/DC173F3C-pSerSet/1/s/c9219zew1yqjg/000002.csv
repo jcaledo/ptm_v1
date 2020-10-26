@@ -1,7 +1,0 @@
-"0","# Get all the phosphosites:"
-"0","url <- ""https://github.com/jcaledo/ptm_db/raw/master/p_db.Rda"""
-"0","destfile <- tempfile(pattern = 'all',"
-"0","                     tmpdir = tempdir(),"
-"0","                     fileext = '.Rda')"
-"0","download.file(url, destfile, quiet = TRUE)"
-"0","load(destfile)"

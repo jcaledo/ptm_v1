@@ -1,7 +1,0 @@
-"0","vivo_Z <- env.Ztest(vivo_positive, vivo_control, alpha = 0.0001)"
-"0","vitro_Z <- env.Ztest(vitro_positive, vitro_control, alpha = 0.0001)"
-"0","vivo_vitro_Z <- env.Ztest(vivo_positive, vitro_positive, alpha = 0.0001)"
-"0",""
-"0","# Cleaning up:"
-"0","rm(vivo_pos, vivo_ctr, vitro_pos, vitro_ctr)  "
-"0","rm(vivo_positive, vivo_control, vitro_positive, vitro_control)"

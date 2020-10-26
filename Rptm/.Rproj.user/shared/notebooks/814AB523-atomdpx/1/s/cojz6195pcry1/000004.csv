@@ -1,5 +1,0 @@
-"0",""
-"0","Ddpx <- GAPDH$max_dpx_complex - GAPDH$max_dpx_chain"
-"0",""
-"0","plot(1:335, Ddpx[1:335], ty = 'b',"
-"0","       xlab = 'Residue number', ylab = 'Complex - Monomer')"

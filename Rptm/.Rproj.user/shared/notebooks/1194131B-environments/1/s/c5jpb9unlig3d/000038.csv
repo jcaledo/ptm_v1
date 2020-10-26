@@ -1,5 +1,0 @@
-"0","pdf(""apolar.pdf"", width = 6, height = 10.5)"
-"0",""
-"0","par(mfrow=c(4,2))"
-"0","    "
-"0","env.plot(Z_vivo, aa = 'A', pValue = 0.01)"

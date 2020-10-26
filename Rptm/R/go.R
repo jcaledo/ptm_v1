@@ -188,9 +188,17 @@ get.go <- function(id, filter = TRUE, format = 'dataframe', silent = FALSE){
         resp <- .get.url(call)
         cont <- httr::content(resp, 'text')
         cont <- jsonlite::fromJSON(cont, flatten = TRUE)$results
-        output$obsolete[i] <- cont$isObsolete
-        output$definition_text[i] <- cont$definition.text
-        output$aspect[i] <- cont$aspect
+
+        if ("isObsolete" %in% names(cont)){
+          output$obsolete[i] <- cont$isObsolete
+        }
+        if ("definition.text" %in% names(cont)){
+          output$definition_text[i] <- cont$definition.text
+        }
+        if ("aspect" %in% names(cont)){
+          output$aspect[i] <- cont$aspect
+        }
+
       }
     }
     return(output)
@@ -202,7 +210,10 @@ get.go <- function(id, filter = TRUE, format = 'dataframe', silent = FALSE){
   } else {
     output <- complet.list(id)
   }
+  ## ---- Removing spurius rows if necessary
+  output <- output[which(substr(output$GO_id, 1, 2) == "GO"), ]
 
+  ## ---- Formating output
   if (format == 'string'){
       output <- paste(output$GO_id, collapse = ", ")
   }
@@ -217,8 +228,8 @@ get.go <- function(id, filter = TRUE, format = 'dataframe', silent = FALSE){
 #' GO Terms Enrichment Tests
 #' @description Carry out GO term enrichment tests
 #' @usage go.enrich(s_file, bg_file, aspect = 'BP', n = 20)
-#' @param s_file path to the file containing the list of identifiers for the sample of interest.
-#' @param bg_file  path to the file containing the list of IDs acting as background.
+#' @param target either a vector containing the UniProt IDs of the set of interest, or the path to the txt file containing the list of identifiers for the sample of interest.
+#' @param background  either a vector containing the UniProt IDs of the background set or the path to the txt file containing the list of IDs acting as background.
 #' @param aspect  character string indicating the aspect or sub-ontology. It must be one of 'BP' (Biological Process), 'MF' (Molecular Function) or 'CC' (Cellular Component). acting as background.
 #' @details It is essential that the items in the 'sample' vector correspond to items within the background.
 #' @return Returns the results of the enrichement test as a dataframe.
@@ -231,18 +242,56 @@ get.go <- function(id, filter = TRUE, format = 'dataframe', silent = FALSE){
 #' @importFrom topGO GenTable
 #' @export
 
-go.enrich <- function(s_file, bg_file, aspect = 'BP', n = 20){
+go.enrich <- function(target, background, aspect = 'BP', n = 20){
 
   ## ----- The sample to be analyzed
-  sample <- read.csv(s_file, header = FALSE)
-  sample <- sample$V1 # as factor values array
+  if (is.character(target) & length(target) == 1){ # input as path to the txt
+    if (gregexpr('txt', target)[[1]] != -1){
+      sample <- read.csv(target, header = FALSE)
+      sample <- trimws(as.character(sample$V1))
+    } else {
+      stop("A proper path to a txt file should be provided for the target set")
+    }
+  } else if (is.character(target) & length(target) > 1){ # input as vector
+    sample <- trimws(as.character(target))
+  } else if (is.data.frame(target) & nrow(target) > 1){ # input as dataframe
+    sample <- trimws(as.character(target))
+  } else {
+    stop("A proper target set must be provided")
+  }
+
+  ## ----- The background set
+  if (is.character(background) & length(background) == 1){ # input as path to the txt
+    if (gregexpr('txt', background)[[1]] != -1){
+      bg <- read.csv(background, header = FALSE)
+      bg <- trimws(as.character(bg$V1))
+    } else {
+      stop("A proper path to a txt file should be provided for the background set")
+    }
+  } else if (is.character(background) & length(background) > 1){ # input as vector
+    bg <- as.character(background)
+  } else if (is.data.frame(background) & nrow(background) > 1){ # input as dataframe
+    bg <- trimws(as.character(background))
+  } else {
+    stop("A proper background set must be provided")
+  }
+
+  ## ----- Check that the target is included into the background set
+  sample_bg <- intersect(sample, bg)
+  if (length(sample) != sum(sample_bg == sample)){
+    stop("Please, make sure that all the target proteins are contained in the background set")
+  }
+
+
+
 
   ## ----- Geting GO ids for the backgraound set
   bg <- read.csv(bg_file, header = FALSE)
   names(bg) <- 'up_id'
   bg$GO_id <- NA
   for (i in 1:nrow(bg)){
-    bg$GO_id[i] <- get.go(bg$up_id[i], format = 'string')
+    print(i)
+    bg$GO_id[i] <- get.go(trimws(bg$up_id[i]), format = 'string')
   }
   bg_proteins <- bg$up_id
   write.table(bg, file = "file_temp.map", quote = FALSE,

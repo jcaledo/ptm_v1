@@ -1,28 +1,0 @@
-"0","aCaM <- atom.dpx('1cll') "
-"2","probando la URL 'https://files.rcsb.org/download/1cll.pdb'
-"
-"2","downloaded 143 KB
-
-"
-"2","./1cll.pdb  exists. Skipping download"
-"1","  Note: Accessing on-line PDB file
-"
-"2","/var/folders/2h/92ky134s63b1th57p4gc66vw0000gn/T//RtmpBt8fle/1cll.pdb  exists. Skipping download"
-"1","   PDB has ALT records, taking A only, rm.alt=TRUE
-"
-"2","probando la URL 'https://files.rcsb.org/download/1cll.pdb'
-"
-"2","downloaded 143 KB
-
-"
-"1","  |                                                                         "
-"1","  |                                                                   |   0%"
-"1","  |                                                                         "
-"1","  |===================================================================| 100%"
-"1","
-"
-"1","   PDB has ALT records, taking A only, rm.alt=TRUE
-"
-"1","   PDB has ALT records, taking A only, rm.alt=TRUE
-"
-"0","kable(head(aCaM))"

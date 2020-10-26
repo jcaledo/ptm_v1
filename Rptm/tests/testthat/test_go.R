@@ -56,6 +56,7 @@ test_that("get.go() works properly", {
   b <- get.go(id = 'P01009', filter = FALSE)
   c <- get.go(id = 'P04406', format = 'string')
   d <- get.go(id = 'P04406', filter = FALSE, format = 'string')
+  e <- get.go(id = 'P00367') # requires removing spurius rows
 
   expect_is(a, 'data.frame')
   expect_gte(nrow(a), 25)
@@ -69,6 +70,10 @@ test_that("get.go() works properly", {
   expect_gte(nchar(c), 460)
   expect_is('d', "character")
   expect_gte(nchar(d), 1100)
+
+  expect_is(e, 'data.frame')
+  expect_gte(nrow(a), 15)
+  expect_equal(ncol(a), 5)
 })
 
 ## ---------------------------------------------- ##
