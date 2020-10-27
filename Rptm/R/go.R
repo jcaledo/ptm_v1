@@ -173,10 +173,14 @@ get.go <- function(id, filter = TRUE, format = 'dataframe', silent = FALSE){
 
     output <- as.data.frame(matrix(rep(NA,length(d)*2), ncol = 2))
     names(output) <- c('term_name', 'GO_id')
+
     for (i in 1:length(d)){
       output$term_name[i] <- trimws( strsplit(d[i], split = '\\[')[[1]][1] )
       output$GO_id[i] <- gsub('\\]', '', strsplit(d[i], split = '\\[')[[1]][2])
     }
+    ## ---- Removing spurious rows if necessary
+    output <- output[which(substr(output$GO_id, 1, 2) == "GO"), ]
+
     if (sum(is.na(output$GO_id)) == nrow(output)){
       return(paste("Sorry, no GO terms found for the ", id, " entry", sep = ""))
     } else {
@@ -198,7 +202,6 @@ get.go <- function(id, filter = TRUE, format = 'dataframe', silent = FALSE){
         if ("aspect" %in% names(cont)){
           output$aspect[i] <- cont$aspect
         }
-
       }
     }
     return(output)
@@ -210,12 +213,9 @@ get.go <- function(id, filter = TRUE, format = 'dataframe', silent = FALSE){
   } else {
     output <- complet.list(id)
   }
-  ## ---- Removing spurius rows if necessary
-  output <- output[which(substr(output$GO_id, 1, 2) == "GO"), ]
 
-  ## ---- Formating output
-  if (format == 'string'){
-      output <- paste(output$GO_id, collapse = ", ")
+  if (format == 'string' & !is.atomic(output)){
+    output <- paste(output$GO_id, collapse = ", ")
   }
 
   return(output)
@@ -282,15 +282,10 @@ go.enrich <- function(target, background, aspect = 'BP', n = 20){
     stop("Please, make sure that all the target proteins are contained in the background set")
   }
 
+  ## ----- Getting GO ids for the backgraund set
+  bg <- data.frame(up_id = bg, GO_id = rep(NA, length(bg)))
 
-
-
-  ## ----- Geting GO ids for the backgraound set
-  bg <- read.csv(bg_file, header = FALSE)
-  names(bg) <- 'up_id'
-  bg$GO_id <- NA
   for (i in 1:nrow(bg)){
-    print(i)
     bg$GO_id[i] <- get.go(trimws(bg$up_id[i]), format = 'string')
   }
   bg_proteins <- bg$up_id
