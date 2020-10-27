@@ -3,6 +3,7 @@
 #     search.go                           #
 #     term.go                             #
 #     get.go                              #
+#     background.go                       #
 #     go.enrich                           #
 #     gorilla                             #
 #     net.go                              #
@@ -18,7 +19,7 @@
 #' @param query character string defining the query.
 #' @return Returns a dataframe containing the GO IDs found associated to the query, as well as other information related to these terms.
 #' @author Juan Carlos Aledo
-#' @seealso term.go(), get.go(), go.enrich(), gorilla(), net.go()
+#' @seealso term.go(), get.go(), background.go(), go.enrich(), gorilla(), net.go()
 #' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 #' @examples search.go('oxidative stress')
 #' @importFrom httr GET
@@ -39,8 +40,13 @@ search.go <- function(query){
   r <- httr::GET(requestURL, httr::accept("application/json"))
   httr::stop_for_status(r)
   json <- jsonlite::toJSON(httr::content(r))
-  output <- as.data.frame(jsonlite::fromJSON(json))[, 2:6]
-  names(output) <- c("GO_id", "obsolete", "term_name", "definition_text", "aspect")
+  myjson <- jsonlite::fromJSON(json)
+  if (myjson$numberOfHits == 0){
+    output <- "Sorry, no hits were found for the current query"
+  } else {
+    output <- as.data.frame(jsonlite::fromJSON(json))[, 2:6]
+    names(output) <- c("GO_id", "obsolete", "term_name", "definition_text", "aspect")
+  }
 
   attr(output, "query") <- query
   return(output)
@@ -56,7 +62,7 @@ search.go <- function(query){
 #' @details When the argument children is set to TRUE, the output of this function is a list with two element: the first one is a dataframe with the core information, and the second one is a dataframe containing the children terms.
 #' @return Returns a dataframe containing core information such as term name and definition, reference, aspect, and whether or not the term is obsolete.
 #' @author Juan Carlos Aledo
-#' @seealso search.go(), get.go(), go.enrich(), gorilla(), net.go()
+#' @seealso search.go(), get.go(), background.go(), go.enrich(), gorilla(), net.go()
 #' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 #' @examples term.go('GO:0034599')
 #' @importFrom httr GET
@@ -116,7 +122,7 @@ term.go <- function(go, children = FALSE){
 #' @details Since some well-characterized proteins can have many GO annotations, it may be convenient to filter the shown GO terms. When filter is set to TRUE, the annotated terms displayed are those provided by the corresponding UniProtKB entry, which are selected based on their granularity and evidence code quality (with manual annotations preferred over automatic predictions). Annotations that have been made to isoform identifiers, or use any of the GO annotation qualifiers (NOT, contributes_to, colocalizes_with) are also removed.
 #' @return Returns a dataframe (by deafult) with GO IDs linked to the protein of interest, as well as additional information related to these GO ids. A string with the GO ids can be obtained as output if indicated by means of the argument 'format'.
 #' @author Juan Carlos Aledo
-#' @seealso search.go, term.go(), go.enrich(), gorilla(), net.go()
+#' @seealso search.go, term.go(), background.go(), go.enrich(), gorilla(), net.go()
 #' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 #' @examples get.go('P01009')
 #' @importFrom httr GET
@@ -221,30 +227,66 @@ get.go <- function(id, filter = TRUE, format = 'dataframe', silent = FALSE){
   return(output)
 }
 
-
 ## ---------------------------------------------------------------- ##
-#   go.enrich <- function(s_file, bg_file, aspect = 'BP', n = 20)    #
+#             background.go <- function(ids)                         #
 ## ---------------------------------------------------------------- ##
-#' GO Terms Enrichment Tests
-#' @description Carry out GO term enrichment tests
-#' @usage go.enrich(s_file, bg_file, aspect = 'BP', n = 20)
-#' @param target either a vector containing the UniProt IDs of the set of interest, or the path to the txt file containing the list of identifiers for the sample of interest.
-#' @param background  either a vector containing the UniProt IDs of the background set or the path to the txt file containing the list of IDs acting as background.
-#' @param aspect  character string indicating the aspect or sub-ontology. It must be one of 'BP' (Biological Process), 'MF' (Molecular Function) or 'CC' (Cellular Component). acting as background.
-#' @details It is essential that the items in the 'sample' vector correspond to items within the background.
-#' @return Returns the results of the enrichement test as a dataframe.
+#' Search GO Terms for Background Set
+#' @description Searchs the GO terms of the protein contained in a given set.
+#' @usage background.go(ids)
+#' @param ids either a vector containing the UniProt IDs of the background set or the path to the txt file containing the list of IDs acting as background.
+#' @return Returns a dataframe with two columns (Uniprot ID, GO terms) and as many rows as different proteins there are in the input set.
 #' @author Juan Carlos Aledo
 #' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
-#' @seealso search.go(), term.go(), get.go(), gorilla(), net.go()
-#' @examples \dontrun{go.enrich("../bench/sample.txt", "../bench/background.txt", 'CC', n = 10)}
-#' @importFrom topGO readMappings
-#' @importFrom topGO runTest
-#' @importFrom topGO GenTable
+#' @seealso search.go(), term.go(), get.go(), go.enrich(), gorilla(), net.go()
+#' @examples background.go(c('P01009', 'P01374', 'Q86UP4'))
 #' @export
 
-go.enrich <- function(target, background, aspect = 'BP', n = 20){
+background.go <- function(ids){
+  ## ----- The background set
+  if (is.character(ids) & length(ids) == 1){ # input as path to the txt
+    if (gregexpr('txt', ids)[[1]] != -1){
+      bg <- read.csv(ids, header = FALSE)
+      bg <- trimws(as.character(bg$V1))
+    } else {
+      stop("A proper path to a txt file should be provided for the background set")
+    }
+  } else if (is.character(ids) & length(ids) > 1){ # input as vector
+    bg <- as.character(ids)
+  } else if (is.data.frame(ids) & nrow(ids) > 1){ # input as dataframe
+    bg <- trimws(as.character(ids))
+  } else {
+    stop("A proper background set must be provided")
+  }
 
-  ## ----- The sample to be analyzed
+  ## ----- Getting GO ids for the backgraund set
+  bg <- data.frame(up_id = bg, GO_id = rep(NA, length(bg)))
+
+  for (i in 1:nrow(bg)){
+    bg$GO_id[i] <- get.go(trimws(bg$up_id[i]), format = 'string')
+  }
+  output(bg)
+}
+
+
+## ---------------------------------------------------------------- ##
+#        hdfisher.go <- function(target, background, query)          #
+## ---------------------------------------------------------------- ##
+#' Hypothesis-driven Fisher Test
+#' @description Carries out an enrichment Fisher's test using a hypothesis driven approach.
+#' @usage hdfisher.go(target, background, query)
+#' @param target either a vector containing the UniProt IDs of the target set or the path to the txt file containing the list of IDs.
+#' @param background  a dataframe with two columns (Uniprot ID and GO terms) and as many rows as different proteins there are in the background set.
+#' @param query character string defining the query.
+#' @param analysis a character string indicating whether the desired analysis is the enrichment ('enrichment') or depletion ('depletion').
+#' @return Returns...
+#' @author Juan Carlos Aledo
+#' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
+#' @seealso search.go(), term.go(), get.go(), background.go(), go.enrich(), gorilla(), net.go()
+#' @examples
+#' @export
+
+hdfisher.go <- function(target, background, query, analysis = 'enrichment'){
+  ## ----- The target sample to be analyzed
   if (is.character(target) & length(target) == 1){ # input as path to the txt
     if (gregexpr('txt', target)[[1]] != -1){
       sample <- read.csv(target, header = FALSE)
@@ -260,18 +302,122 @@ go.enrich <- function(target, background, aspect = 'BP', n = 20){
     stop("A proper target set must be provided")
   }
 
-  ## ----- The background set
-  if (is.character(background) & length(background) == 1){ # input as path to the txt
-    if (gregexpr('txt', background)[[1]] != -1){
-      bg <- read.csv(background, header = FALSE)
-      bg <- trimws(as.character(bg$V1))
-    } else {
-      stop("A proper path to a txt file should be provided for the background set")
+  ## ----- Check the input background set
+  if (is.data.frame(background) & ncol(background) == 2){
+    bg <- trimws(as.character(background[,1]))
+  } else {
+    stop("A proper background set must be provided")
+  }
+
+  ## ----- Check that the target is included into the background set
+  sample_bg <- intersect(sample, bg)
+  if (length(sample) != sum(sample_bg == sample)){
+    stop("Please, make sure that all the target proteins are contained in the background set")
+  }
+  target_c <- setdiff(bg, sample) # target complement
+
+  rquery <- search.go(query)
+  if (!is.data.frame(rquery)){
+    output <- "Sorry, no hits were found for the current query"
+    return(output)
+  } else {
+    rquery <- unlist(rquery$GO_id)
+
+    # -- Contingency Table
+
+    df_target <- background[which(background$up_id %in% sample), ]
+    df_target_c <- background[which(background$up_id %in% target_c), ]
+    df_target$query <- df_target_c$query <- NA
+
+    for (i in 1:nrow(df_target)){
+      t <- strsplit(df_target$GO_id[i], split = ',')[[1]]
+      t <- trimws(t)
+      if (length(intersect(t, rquery)) > 0){
+        df_target$query[i] <- TRUE
+      } else {
+        df_target$query[i] <- FALSE
+      }
     }
-  } else if (is.character(background) & length(background) > 1){ # input as vector
-    bg <- as.character(background)
-  } else if (is.data.frame(background) & nrow(background) > 1){ # input as dataframe
-    bg <- trimws(as.character(background))
+    # a: number of proteins from the target set with terms present into the query
+    a <- sum(df_target$query)
+    # c: number of protein from the target set which terms are absent from the query
+    c <- nrow(df_target) - a
+
+
+    for (i in 1:nrow(df_target_c)){
+      t <- strsplit(df_target_c$GO_id[i], split = ',')[[1]]
+      t <- trimws(t)
+      if (length(intersect(t, rquery)) > 0){
+        df_target_c$query[i] <- TRUE
+      } else {
+        df_target_c$query[i] <- FALSE
+      }
+    }
+    # b: number of proteins from the target complement set with terms present into the query
+    b <- sum(df_target_c$query)
+    # d: number of protein from the target complement set which terms are absent from the query
+    d <- nrow(df_target_c) - b
+
+    # -- Fisher's test
+    if (analysis == 'enrichment'){
+      alternative <- 'greater'
+    } else if (analysis == 'depletion'){
+      alternative <- 'less'
+    } else {
+      stop("a suitable analysis, either 'enrichment' or 'deplation' must be indicated")
+    }
+    ct <- matrix(c(a,b,c,d), nrow = 2, byrow = TRUE)
+    ft <- fisher.test(ct, alternative = alternative)
+    output <- list(ct, ft$p.value, ft$conf.int)
+  }
+  attr(output, 'query') <- query
+  attr(output, 'analysis') <- analysis
+  return(output)
+}
+
+## ---------------------------------------------------------------- ##
+#  go.enrich <- function(target, background, aspect = 'BP', n = 20)  #
+## ---------------------------------------------------------------- ##
+#' GO Terms Enrichment Tests
+#' @description Carry out GO term enrichment tests
+#' @usage go.enrich(target, background, aspect = 'BP', n = 20)
+#' @param target either a vector containing the UniProt IDs of the set of interest, or the path to the txt file containing the list of identifiers for the sample of interest.
+#' @param background  a dataframe with two columns (Uniprot ID and GO terms) and as many rows as different proteins there are in the background set.
+#' @param aspect  character string indicating the aspect or sub-ontology. It must be one of 'BP' (Biological Process), 'MF' (Molecular Function) or 'CC' (Cellular Component). acting as background.
+#' @param n maximum number of enriched GO terms reported.
+#' @details It is essential that the items in the 'sample' vector correspond to items within the background.
+#' @return Returns the results of the enrichement test as a dataframe.
+#' @author Juan Carlos Aledo
+#' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
+#' @seealso search.go(), term.go(), background.go(), get.go(), gorilla(), net.go()
+#' @examples \dontrun{go.enrich("../bench/sample.txt", "../bench/background.txt", 'CC', n = 10)}
+#' @importFrom topGO readMappings
+#' @importFrom topGO runTest
+#' @importFrom topGO GenTable
+#' @importFrom topGO annFUN
+#' @export
+
+go.enrich <- function(target, background, aspect = 'BP', n = 20){
+
+  ## ----- The target sample to be analyzed
+  if (is.character(target) & length(target) == 1){ # input as path to the txt
+    if (gregexpr('txt', target)[[1]] != -1){
+      sample <- read.csv(target, header = FALSE)
+      sample <- trimws(as.character(sample$V1))
+    } else {
+      stop("A proper path to a txt file should be provided for the target set")
+    }
+  } else if (is.character(target) & length(target) > 1){ # input as vector
+    sample <- trimws(as.character(target))
+  } else if (is.data.frame(target) & nrow(target) > 1){ # input as dataframe
+    sample <- trimws(as.character(target))
+  } else {
+    stop("A proper target set must be provided")
+  }
+
+  ## ----- Check the input background set
+  if (is.data.frame(background) & ncol(background) == 2){
+    bg <- trimws(as.character(background[,1]))
   } else {
     stop("A proper background set must be provided")
   }
@@ -283,11 +429,8 @@ go.enrich <- function(target, background, aspect = 'BP', n = 20){
   }
 
   ## ----- Getting GO ids for the backgraund set
-  bg <- data.frame(up_id = bg, GO_id = rep(NA, length(bg)))
+  bg <- data.frame(up_id = bg, GO_id = background[,2])
 
-  for (i in 1:nrow(bg)){
-    bg$GO_id[i] <- get.go(trimws(bg$up_id[i]), format = 'string')
-  }
   bg_proteins <- bg$up_id
   write.table(bg, file = "file_temp.map", quote = FALSE,
               sep = "\t", row.names = FALSE, col.names = FALSE)
@@ -327,7 +470,7 @@ go.enrich <- function(target, background, aspect = 'BP', n = 20){
 #' @details Finds the adjacency matrix for the relation among proteins from a given set based on their GO terms. The input data can be either a txt file containing UniProt IDs for the set protein of interest (one ID per line) or, alternatively, a Rda file containing a Jaccard matrix previously computed.
 #' @return a list containing (i) the dataframe corresponding to the computed Jaccard matrix and (ii) the adjacency matrix.
 #' @author Juan Carlos Aledo
-#' @seealso search.go(), term.go(), get.go(), go.enrich(), gorilla(), net.go()
+#' @seealso search.go(), term.go(), get.go(), background.go(), go.enrich(), gorilla()
 #' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 #' @examples \dontrun{net.go(path2data = "./GOvivo.txt")}
 #' @importFrom igraph graph_from_adjacency_matrix

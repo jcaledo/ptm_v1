@@ -120,16 +120,12 @@ all <- meto.search(organism = 'Homo sapiens',
                    oxidant = 'hydrogen peroxide')
 vivo <- unique(all$prot_id[which(all$met_vivo_vitro == 'vivo')])
 bg <- unique(all$prot_id)
+```
 
-filevivo <- tempfile(pattern = 'vivo', fileext = '.txt')
-for (i in 1:length(vivo)){
-  cat(vivo[i], "\n", file = filevivo, append = TRUE)
-}
 
-filebg <- tempfile(pattern = 'bg', fileext = '.txt')
-for (i in 1:length(bg)){
-  cat(bg[i], "\n", file = filebg, append = TRUE)
-}
+```{r}
+os <- search.go('oxidative stress')
+os <- os$GO_id
 ```
 
 ```{r}
