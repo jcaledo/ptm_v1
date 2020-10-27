@@ -285,8 +285,7 @@ go.enrich <- function(target, background, aspect = 'BP', n = 20){
   ## ----- Getting GO ids for the backgraund set
   bg <- data.frame(up_id = bg, GO_id = rep(NA, length(bg)))
 
-  for (i in 669:nrow(bg)){
-    print(i)
+  for (i in 1:nrow(bg)){
     bg$GO_id[i] <- get.go(trimws(bg$up_id[i]), format = 'string')
   }
   bg_proteins <- bg$up_id
