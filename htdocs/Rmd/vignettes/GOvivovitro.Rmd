@@ -118,7 +118,7 @@ The hypothesis we are going to test is that in human cells, the proteins being o
 ```{r}
 all <- meto.search(organism = 'Homo sapiens',
                    oxidant = 'hydrogen peroxide')
-vivo <- unique(all$prot_id[which(all$met_vivo_vitro == 'vivo')])
+target <- unique(all$prot_id[which(all$met_vivo_vitro == 'vivo')])
 bg <- unique(all$prot_id)
 ```
 
