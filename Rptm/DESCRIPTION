@@ -22,7 +22,6 @@ Imports:
   RCurl,
   seqinr,
   stats,
-  topGO,
   utils,
   xml2,
   XML

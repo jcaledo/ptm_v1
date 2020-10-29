@@ -21,8 +21,11 @@ When the argument children is set to TRUE, the output of this function is a list
 \examples{
 term.go('GO:0034599')
 }
+\references{
+Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
+}
 \seealso{
-search.go(), get.go(), go.enrich(), gorilla(), net.go()
+search.go(), get.go(), background.go(), go.enrich(), gorilla(), net.go()
 }
 \author{
 Juan Carlos Aledo

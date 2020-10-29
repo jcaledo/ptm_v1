@@ -7,26 +7,29 @@
 net.go(path2data, threshold = 0.2, silent = FALSE)
 }
 \arguments{
+\item{data}{either a vector containing the UniProt IDs (vertices) or the path to the txt or rda file containing them.}
+
 \item{threshold}{threshold value of the Jaccard index above which, two proteins are considered to be linked.}
 
 \item{silent}{logical, if FALSE print details of the running process.}
-
-\item{path2data}{path to the dataset file.}
 }
 \value{
-a list containing (i) the dataframe corresponding to the computed Jaccard matrix and (ii) the adjacency matrix.
+Returns a list containing (i) the dataframe corresponding to the computed Jaccard matrix, (ii) the adjacency matrix, (iii) a vector containing the vertices, and (iv) a matrix describing the edges of the network.
 }
 \description{
 Explores the relationship among proteins from a given set.
 }
 \details{
-Finds the adjacency matrix for the relation among proteins from a given set based on their GO terms. The input data can be either a txt file containing UniProt IDs for the set protein of interest (one ID per line) or, alternatively, a Rda file containing a Jaccard matrix previously computed.
+This function first searchs the GO for each vertex and then computes the Jarcard index for each protein pair based on their GO terms. Afterwards, an adjacency matrix is computed, where two proteins are linked if their Jarcard index is greater than the selected threshold.
 }
 \examples{
 \dontrun{net.go(path2data = "./GOvivo.txt")}
 }
+\references{
+Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
+}
 \seealso{
-search.go(), term.go(), get.go(), go.enrich(), gorilla(), net.go()
+search.go(), term.go(), get.go(), background.go(), gorilla()
 }
 \author{
 Juan Carlos Aledo

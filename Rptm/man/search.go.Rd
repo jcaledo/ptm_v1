@@ -10,19 +10,19 @@ search.go(query)
 \item{query}{character string defining the query.}
 }
 \value{
-Returns a ......
+Returns a dataframe containing the GO IDs found associated to the query, as well as other information related to these terms.
 }
 \description{
 Searchs a simple user query.
 }
-\details{
-that....
-}
 \examples{
 search.go('oxidative stress')
 }
+\references{
+Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
+}
 \seealso{
-term.go(), get.go(), go.enrich(), gorilla(), net.go()
+term.go(), get.go(), background.go(), go.enrich(), gorilla(), net.go()
 }
 \author{
 Juan Carlos Aledo

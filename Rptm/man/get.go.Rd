@@ -27,8 +27,11 @@ Since some well-characterized proteins can have many GO annotations, it may be c
 \examples{
 get.go('P01009')
 }
+\references{
+Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
+}
 \seealso{
-search.go, term.go(), go.enrich(), gorilla(), net.go()
+search.go, term.go(), background.go(), go.enrich(), gorilla(), net.go()
 }
 \author{
 Juan Carlos Aledo

@@ -78,8 +78,49 @@ test_that("get.go() works properly", {
 
   expect_is(f, 'character')
   expect_true(f == "Sorry, no GO terms found for the Q14687 entry")
+})
+
+## ---------------------------------------------- ##
+#           Testing background.go                  #
+## ---------------------------------------------- ##
+test_that("background.go() works properly", {
+
+  skip_on_cran()
+  skip_on_travis()
+
+  a <- background.go(ids = "./go/id_set.txt")
+  b <-  background.go(ids = c("Q13015", "Q14667", "P08575", "Q5JSZ5", "P13196"))
+
+  expect_is(a, 'data.frame')
+  expect_equal(nrow(a), 5)
+  expect_equal(ncol(a), 2)
+
+  expect_is(a, 'data.frame')
+  expect_equal(nrow(a), 5)
+  expect_equal(ncol(a), 2)
+
+  expect_equal(a, b)
 
 })
+
+## ---------------------------------------------- ##
+#           Testing  hdfisher.go                  #
+## ---------------------------------------------- ##
+test_that(" hdfisher.go() works properly", {
+
+  skip_on_cran()
+  skip_on_travis()
+
+  a <- hdfisher.go(target = c('Q14667', 'Q5JSZ5'),
+                   background = background.go(c("Q13015", "Q14667", "P08575", "Q5JSZ5", "P13196")),
+                   query = 'extracellular')
+
+  expect_is(a, 'list')
+  expect_is(a[[1]], 'matrix')
+  expect_is(a[[2]], 'numeric')
+  expect_true(attributes(a)$query == 'extracellular')
+})
+
 
 ## ---------------------------------------------- ##
 #              Testing gorilla                     #
@@ -136,26 +177,35 @@ test_that("net.go() works properly", {
 
   expect_is(a, 'list')
   expect_is(a[[1]], 'matrix')
-  expect_equal(dim(a[[1]]), c(100,100))
+  expect_equal(dim(a[[1]]), c(6,6))
   expect_true(!isSymmetric(a[[1]]))
   expect_is(a[[2]], 'matrix')
-  expect_equal(dim(a[[2]]), c(100,100))
+  expect_equal(dim(a[[2]]), c(6,6))
   expect_true(isSymmetric(a[[2]]))
-  expect_is(a[[3]], 'data.frame')
-  expect_equal(nrow(a[[3]]), 100)
+  expect_is(a[[3]], 'character')
+  expect_equal(length(a[[3]]), 6)
   expect_is(a[[4]], 'matrix')
   expect_equal(ncol(a[[4]]), 2)
 
   expect_is(b, 'list')
   expect_is(b[[1]], 'matrix')
-  expect_equal(dim(b[[1]]), c(150,150))
+  expect_equal(dim(b[[1]]), c(6,6))
   expect_true(!isSymmetric(b[[1]]))
   expect_is(b[[2]], 'matrix')
-  expect_equal(dim(b[[2]]), c(150,150))
+  expect_equal(dim(b[[2]]), c(6,6))
   expect_true(isSymmetric(b[[2]]))
-  expect_is(b[[3]], 'data.frame')
-  expect_equal(nrow(b[[3]]), 150)
+  expect_is(b[[3]], 'character')
+  expect_equal(length(b[[3]]), 6)
   expect_is(b[[4]], 'matrix')
   expect_equal(ncol(b[[4]]), 2)
 })
 
+## ---------------------------------------------- ##
+#              Testing net.go                      #
+## ---------------------------------------------- ##
+test_that("net.go() works properly", {
+
+  skip_on_cran()
+  skip_on_travis()
+
+})

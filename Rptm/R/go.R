@@ -4,7 +4,7 @@
 #     term.go                             #
 #     get.go                              #
 #     background.go                       #
-#     go.enrich                           #
+#     hdfisher.go                         #
 #     gorilla                             #
 #     net.go                              #
 #                                         #
@@ -264,7 +264,7 @@ background.go <- function(ids){
   for (i in 1:nrow(bg)){
     bg$GO_id[i] <- get.go(trimws(bg$up_id[i]), format = 'string')
   }
-  output(bg)
+  return(bg)
 }
 
 
@@ -282,7 +282,7 @@ background.go <- function(ids){
 #' @author Juan Carlos Aledo
 #' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 #' @seealso search.go(), term.go(), get.go(), background.go(), go.enrich(), gorilla(), net.go()
-#' @examples
+#' @examples hdfisher.go(c('Q14667', 'Q5JSZ5'), background.go(c("Q13015", "Q14667", "P08575", "Q5JSZ5", "P13196")), 'extracellular')
 #' @export
 
 hdfisher.go <- function(target, background, query, analysis = 'enrichment'){
@@ -367,110 +367,32 @@ hdfisher.go <- function(target, background, query, analysis = 'enrichment'){
       stop("a suitable analysis, either 'enrichment' or 'deplation' must be indicated")
     }
     ct <- matrix(c(a,b,c,d), nrow = 2, byrow = TRUE)
+    colnames(ct) <- c('target', 'target-complement')
+    rownames(ct) <- c('query', 'non-query')
+
     ft <- fisher.test(ct, alternative = alternative)
-    output <- list(ct, ft$p.value, ft$conf.int)
+    output <- list(contingency_table = ct, pvalue = ft$p.value)
   }
   attr(output, 'query') <- query
   attr(output, 'analysis') <- analysis
   return(output)
 }
 
-## ---------------------------------------------------------------- ##
-#  go.enrich <- function(target, background, aspect = 'BP', n = 20)  #
-## ---------------------------------------------------------------- ##
-#' GO Terms Enrichment Tests
-#' @description Carry out GO term enrichment tests
-#' @usage go.enrich(target, background, aspect = 'BP', n = 20)
-#' @param target either a vector containing the UniProt IDs of the set of interest, or the path to the txt file containing the list of identifiers for the sample of interest.
-#' @param background  a dataframe with two columns (Uniprot ID and GO terms) and as many rows as different proteins there are in the background set.
-#' @param aspect  character string indicating the aspect or sub-ontology. It must be one of 'BP' (Biological Process), 'MF' (Molecular Function) or 'CC' (Cellular Component). acting as background.
-#' @param n maximum number of enriched GO terms reported.
-#' @details It is essential that the items in the 'sample' vector correspond to items within the background.
-#' @return Returns the results of the enrichement test as a dataframe.
-#' @author Juan Carlos Aledo
-#' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
-#' @seealso search.go(), term.go(), background.go(), get.go(), gorilla(), net.go()
-#' @examples \dontrun{go.enrich("../bench/sample.txt", "../bench/background.txt", 'CC', n = 10)}
-#' @importFrom topGO readMappings
-#' @importFrom topGO runTest
-#' @importFrom topGO GenTable
-#' @importFrom topGO annFUN
-#' @export
-
-go.enrich <- function(target, background, aspect = 'BP', n = 20){
-
-  ## ----- The target sample to be analyzed
-  if (is.character(target) & length(target) == 1){ # input as path to the txt
-    if (gregexpr('txt', target)[[1]] != -1){
-      sample <- read.csv(target, header = FALSE)
-      sample <- trimws(as.character(sample$V1))
-    } else {
-      stop("A proper path to a txt file should be provided for the target set")
-    }
-  } else if (is.character(target) & length(target) > 1){ # input as vector
-    sample <- trimws(as.character(target))
-  } else if (is.data.frame(target) & nrow(target) > 1){ # input as dataframe
-    sample <- trimws(as.character(target))
-  } else {
-    stop("A proper target set must be provided")
-  }
-
-  ## ----- Check the input background set
-  if (is.data.frame(background) & ncol(background) == 2){
-    bg <- trimws(as.character(background[,1]))
-  } else {
-    stop("A proper background set must be provided")
-  }
-
-  ## ----- Check that the target is included into the background set
-  sample_bg <- intersect(sample, bg)
-  if (length(sample) != sum(sample_bg == sample)){
-    stop("Please, make sure that all the target proteins are contained in the background set")
-  }
-
-  ## ----- Getting GO ids for the backgraund set
-  bg <- data.frame(up_id = bg, GO_id = background[,2])
-
-  bg_proteins <- bg$up_id
-  write.table(bg, file = "file_temp.map", quote = FALSE,
-              sep = "\t", row.names = FALSE, col.names = FALSE)
-  bg2GO <- topGO::readMappings(file = 'file_temp.map')
-  bg_proteins <- names(bg2GO)
-  file.remove("file_temp.map")
-
-  ## ------- Compare sample vs bg_proteins
-  # It is essential that the items in the 'sample' vector
-  # correspond to items within the background ie 'bg_proteins'
-  compared_proteins <- factor(as.integer(bg_proteins %in% sample))
-  names(compared_proteins) <- bg_proteins
-
-  ## ------- Create topGO object
-  GOdata <- new("topGOdata", ontology = aspect, allGenes = compared_proteins,
-                annot = annFUN.gene2GO, gene2GO = bg2GO)
-  ## ------- Run Fisher test
-  resultFisher <- topGO::runTest(GOdata, algorithm = "classic", statistic = "fisher")
-
-  ## --- Create table with enrichment result
-  output <- topGO::GenTable(GOdata, classicFisher = resultFisher, topNodes = n)
-  output <- as.data.frame(output)
-
-  return(output)
-}
-
 
 ## ---------------------------------------------------------------- ##
-#    net.go <- function(path2data, threshold = 0.2, silent = FALSE)  #                             #
+#     net.go <- function(data, threshold = 0.2, silent = FALSE)      #                             #
 ## ---------------------------------------------------------------- ##
 #' Gene Ontology Network
 #' @description Explores the relationship among proteins from a given set.
 #' @usage net.go(path2data, threshold = 0.2, silent = FALSE)
-#' @param path2data path to the dataset file.
+#' @param data either a vector containing the UniProt IDs (vertices) or the path to the txt or rda file containing them.
 #' @param threshold threshold value of the Jaccard index above which, two proteins are considered to be linked.
 #' @param silent logical, if FALSE print details of the running process.
-#' @details Finds the adjacency matrix for the relation among proteins from a given set based on their GO terms. The input data can be either a txt file containing UniProt IDs for the set protein of interest (one ID per line) or, alternatively, a Rda file containing a Jaccard matrix previously computed.
-#' @return a list containing (i) the dataframe corresponding to the computed Jaccard matrix and (ii) the adjacency matrix.
+#' @details This function first searchs the GO for each vertex and then computes the Jarcard index for each protein pair based on their GO terms. Afterwards, an adjacency matrix is computed, where two proteins are linked if their Jarcard index is greater than the selected threshold.
+#' @return Returns a list containing (i) the dataframe corresponding to the computed Jaccard matrix, (ii) the adjacency matrix, (iii) a vector containing the vertices, and (iv) a matrix describing the edges of the network.
 #' @author Juan Carlos Aledo
-#' @seealso search.go(), term.go(), get.go(), background.go(), go.enrich(), gorilla()
+#' @seealso search.go(), term.go(), get.go(), background.go(), gorilla()
+#' @references Aledo & Aledo (2020) Antioxidants 9, 987; doi:10.3390/antiox9100987.
 #' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 #' @examples \dontrun{net.go(path2data = "./GOvivo.txt")}
 #' @importFrom igraph graph_from_adjacency_matrix
@@ -481,9 +403,9 @@ net.go <- function(data, threshold = 0.2, silent = FALSE){
 
   ## ------- Assessing whether data are in txt or rda format -------- ##
   format <- format_ <- ""
-  if (is.data.frame(data)){ # --- Vertices are directely provided
-    vertices.df <- data
-    id <- vertices.df[,1]
+  if (is.vector(data) & length(data) > 1){ # --- Vertices are directely provided as a vector
+    vertices <- data
+    # id <- vertices[,1]
   } else if (is.character(data)){
     format <- strsplit(data, split = "\\.")[[1]]
     format <- format[length(format)]
@@ -494,16 +416,19 @@ net.go <- function(data, threshold = 0.2, silent = FALSE){
   }
   if (format_ == 'txt'){ # ----- Vertices are provided as txt file
     con <- file(data, 'r')
-    id <- readLines(con)
+    vertices <- readLines(con)
     close(con)
-    vertices.df <- data.frame(vertex = id)
+    # vertices.df <- data.frame(vertex = id)
   } else if (format_ == 'rda'){ # ----- Vertices are provided as rda file
     load(data)
-    vertices.df <- get(ls()[! ls() %in% c('format', 'format_',
-                                      'data', 'silent', 'threshold')])
-    id <- vertex.df[,1]
+    l <- ls()[! ls() %in% c('format', 'format_', 'silent', 'threshold')]
+    if (length(l) > 1){
+      vertices <- get(l[which(l != "data")])
+    } else {
+      vertices <- get(l)
+    }
   }
-
+  id <- vertices
   ## ----------------- Computing f(id) = GO_subset ------------------ ##
   fid <- lapply(id, function(x) get.go(id = x, filter = FALSE, format = "string"))
 
@@ -537,166 +462,172 @@ net.go <- function(data, threshold = 0.2, silent = FALSE){
   edges.df <- igraph::get.edgelist(g, names=TRUE)
 
   ## -------------------------- Output ------------------------------- ##
-  output <- list(jaccard, A, vertices.df, edges.df)
+  output <- list(jaccard, A, vertices, trimws(edges.df))
   attr(output, 'Jaccard threshold') <- threshold
   return(output)
 }
 
 
-#' ## ---------------------------------------------------------------- ##
-#' #   gorilla <- function()     #
-#' ## ---------------------------------------------------------------- ##
-#' #'
-#' #' @description
-#' #' @usage
-#' #' @param
-#' #' @param
-#' #' @param
-#' #' @details
-#' #' @return
-#' #' @author
-#' #' @examples
-#' #' @importFrom httr GET
-#' #' @importFrom httr content
-#' #' @importFrom jsonlite fromJSON
-#' #' @export
-#'
-# gorilla <- function(target, background = NULL, mode = 'mhg', db = 'proc', pvalue = 0.001, species = 'Homo sapiens'){
-#
-#   ## ------------------------------- Check arguments --------------------------------- ##
-#   warn <- FALSE
-#   warn_message <- c()
-#   if (! file.exists(target)){
-#     stop("Please, provide a proper target file")
-#   } else {
-#     target <- httr::upload_file(target)
-#   }
-#
-#   if (mode == 'mhg'){
-#     background = NULL
-#   } else if (mode == 'hg'){
-#     if (! file.exists(background)){
-#       stop("Please, provide a proper background file")
-#     } else {
-#       background <- httr::upload_file(background)
-#     }
-#   } else {
-#     mode <- 'mhg'
-#     warn <- TRUE
-#     warn_message <- c(warn_message, "Run mode has been set to 'mgh'")
-#   }
-#
-#   if (! db %in% c('proc', 'func', 'comp', 'all')){
-#     db <- 'all'
-#     warn <- TRUE
-#     warn_message <- c(warn_message, "db has been set to 'all")
-#   }
-#
-#   organism <- c('Arabidopsis thaliana', 'Caenorhabditis elegans', 'Danio rerio',
-#                 'Drosophila melanogaster', 'Homo sapiens', 'Mus musculus',
-#                 'Rattus norvegicus', 'Saccharomyces cerevisiae')
-#
-#   if (species %in% organism){
-#     sp <- gsub(' ', '_', toupper(species))
-#   } else {
-#     sp <- "HOMO_SAPIENS"
-#     warn <- TRUE
-#     warn_message <- c(warn_message, "species has been set to 'HOMO_SAPIENS")
-#   }
-#
-#   if (is.numeric(pvalue)){
-#     closest <- c()
-#     for (n in (3:11)){
-#       closest <- c(closest, abs(pvalue - (1/10^n)))
-#     }
-#     closest <- which(closest == min(closest)) + 2
-#     p <- 1/10^closest
-#     p <- as.character(p)
-#   } else {
-#     stop("A proper numeric p-Value should be provided")
-#   }
-#
-#   ## --------------------------------- Form ----------------------------------- ##
-#   query_parameters <- list(
-#                             application = "gorilla",
-#                             run_mode = mode,
-#                             target_file_name = target,
-#                             background_file_name = background,
-#                             db = db,
-#                             pvalue_thresh = p,
-#                             fast_mode = NA,
-#                             output_excel = NA,
-#                             output_revigo = NA,
-#                             output_unresolved = NA,
-#                             species = sp
-#                           )
-#
-#
-#
-#   resp_gorilla <- httr::POST(url = "http://cbl-gorilla.cs.technion.ac.il/servlet/GOrilla",
-#                              body = query_parameters)
-#
-#
-#   if (httr::status_code(resp_gorilla) > 300){
-#     stop(paste("The server responded: ", httr::status_code(resp_gorilla)))
-#   }
-#
-#   ## -------------------------------------- Results ---------------------------------------- ##
-#   response <- httr::GET(resp_gorilla$url)
-#   httr::status_code(response)
-#
-#   if (httr::status_code(response) >= 200 & httr::status_code(response) < 300){
-#     work_id <- strsplit(resp_gorilla$url, split = "id=")[[1]][2]
-#     base_res_url <- "http://cbl-gorilla.cs.technion.ac.il/GOrilla/"
-#
-#     if (db == 'proc'){
-#       process_url <- paste(base_res_url, work_id, "/GO.xls", sep = "")
-#       process_df <- read.delim(process_url)
-#       output <-  process_df
-#     } else if (db == 'func'){
-#       function_url <- paste(base_res_url, work_id, "/GO.xls", sep = "")
-#       function_df <- read.delim(function_url)
-#       output <-  function_df
-#     } else if (db == 'comp'){
-#       component_url <- paste(base_res_url, work_id, "/GO.xls", sep = "")
-#       component_df <- read.delim(component_url)
-#       output <-  component_df
-#     } else {
-#       process_url <- paste(base_res_url, work_id, "/GOPROCESS.xls", sep = "")
-#       function_url <- paste(base_res_url, work_id, "/GOFUNCTION.xls", sep = "")
-#       component_url <- paste(base_res_url, work_id, "/GOCOMPONENT.xls", sep = "")
-#       response_results <- httr::GET(process_url)
-#       wait <- TRUE
-#       times <- 0
-#       while (wait & times < 7){
-#         if (httr::status_code(response_results) == 200){
-#           wait <- FALSE
-#         }
-#         times <- times + 1
-#         Sys.sleep(10)
-#       }
-#
-#       process_df <- read.delim(process_url)
-#       function_df <- read.delim(function_url)
-#       component_df <- read.delim(component_url)
-#
-#       # Sys.sleep(60)
-#       output <- list(process_df, function_df, component_df)
-#     }
-#
-#     attr(output, 'target') <- target
-#     attr(output, 'background') <- background
-#     attr(output, 'run mode') <- mode
-#     attr(output, 'db') <- db
-#     attr(output, 'pValue') <- p
-#
-#     if (warn){
-#       warning(warn_message)
-#     }
-#
-#   } else {
-#     output <- httr::status_code(response)
-#   }
-#   return(output)
-# }
+## ---------------------------------------------------------------- ##
+#   gorilla <- function()     #
+## ---------------------------------------------------------------- ##
+#' GO Enrichment Analysis
+#' @description Performs GO terms enrichment analyses.
+#' @usage gorilla(target, background = NULL, mode = 'mhg', db = 'proc', pvalue = 0.001, species = 'Homo sapiens')
+#' @param target
+#' @param bacground
+#' @param mode
+#' @param db
+#' @param pvalue
+#' @param species
+#' @details
+#' @return
+#' @author
+#' @seealso
+#' @references Eden et al. (2009) BMC Bioinformatics 10:48.
+#' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
+#' @examples
+#' @importFrom httr GET
+#' @importFrom httr content
+#' @importFrom jsonlite fromJSON
+#' @export
+
+gorilla <- function(target, background = NULL, mode = 'mhg', db = 'proc', pvalue = 0.001, species = 'Homo sapiens'){
+
+  ## ------------------------------- Check arguments --------------------------------- ##
+  warn <- FALSE
+  warn_message <- c()
+  if (! file.exists(target)){
+    stop("Please, provide a proper target file")
+  } else {
+    target <- httr::upload_file(target)
+  }
+
+  if (mode == 'mhg'){
+    background = NULL
+  } else if (mode == 'hg'){
+    if (! file.exists(background)){
+      stop("Please, provide a proper background file")
+    } else {
+      background <- httr::upload_file(background)
+    }
+  } else {
+    mode <- 'mhg'
+    warn <- TRUE
+    warn_message <- c(warn_message, "Run mode has been set to 'mgh'")
+  }
+
+  if (! db %in% c('proc', 'func', 'comp', 'all')){
+    db <- 'all'
+    warn <- TRUE
+    warn_message <- c(warn_message, "db has been set to 'all")
+  }
+
+  organism <- c('Arabidopsis thaliana', 'Caenorhabditis elegans', 'Danio rerio',
+                'Drosophila melanogaster', 'Homo sapiens', 'Mus musculus',
+                'Rattus norvegicus', 'Saccharomyces cerevisiae')
+
+  if (species %in% organism){
+    sp <- gsub(' ', '_', toupper(species))
+  } else {
+    sp <- "HOMO_SAPIENS"
+    warn <- TRUE
+    warn_message <- c(warn_message, "species has been set to 'HOMO_SAPIENS")
+  }
+
+  if (is.numeric(pvalue)){
+    closest <- c()
+    for (n in (3:11)){
+      closest <- c(closest, abs(pvalue - (1/10^n)))
+    }
+    closest <- which(closest == min(closest)) + 2
+    p <- 1/10^closest
+    p <- as.character(p)
+  } else {
+    stop("A proper numeric p-Value should be provided")
+  }
+
+  ## --------------------------------- Form ----------------------------------- ##
+  query_parameters <- list(
+                            application = "gorilla",
+                            run_mode = mode,
+                            target_file_name = target,
+                            background_file_name = background,
+                            db = db,
+                            pvalue_thresh = p,
+                            fast_mode = NA,
+                            output_excel = NA,
+                            output_revigo = NA,
+                            output_unresolved = NA,
+                            species = sp
+                          )
+
+
+
+  resp_gorilla <- httr::POST(url = "http://cbl-gorilla.cs.technion.ac.il/servlet/GOrilla",
+                             body = query_parameters)
+
+
+  if (httr::status_code(resp_gorilla) > 300){
+    stop(paste("The server responded: ", httr::status_code(resp_gorilla)))
+  }
+
+  ## -------------------------------------- Results ---------------------------------------- ##
+  response <- httr::GET(resp_gorilla$url)
+  httr::status_code(response)
+
+  if (httr::status_code(response) >= 200 & httr::status_code(response) < 300){
+    work_id <- strsplit(resp_gorilla$url, split = "id=")[[1]][2]
+    base_res_url <- "http://cbl-gorilla.cs.technion.ac.il/GOrilla/"
+
+    if (db == 'proc'){
+      process_url <- paste(base_res_url, work_id, "/GO.xls", sep = "")
+      process_df <- read.delim(process_url)
+      output <-  process_df
+    } else if (db == 'func'){
+      function_url <- paste(base_res_url, work_id, "/GO.xls", sep = "")
+      function_df <- read.delim(function_url)
+      output <-  function_df
+    } else if (db == 'comp'){
+      component_url <- paste(base_res_url, work_id, "/GO.xls", sep = "")
+      component_df <- read.delim(component_url)
+      output <-  component_df
+    } else {
+      process_url <- paste(base_res_url, work_id, "/GOPROCESS.xls", sep = "")
+      function_url <- paste(base_res_url, work_id, "/GOFUNCTION.xls", sep = "")
+      component_url <- paste(base_res_url, work_id, "/GOCOMPONENT.xls", sep = "")
+      response_results <- httr::GET(process_url)
+      wait <- TRUE
+      times <- 0
+      while (wait & times < 7){
+        if (httr::status_code(response_results) == 200){
+          wait <- FALSE
+        }
+        times <- times + 1
+        Sys.sleep(10)
+      }
+
+      process_df <- read.delim(process_url)
+      function_df <- read.delim(function_url)
+      component_df <- read.delim(component_url)
+
+      # Sys.sleep(60)
+      output <- list(process_df, function_df, component_df)
+    }
+
+    attr(output, 'target') <- target
+    attr(output, 'background') <- background
+    attr(output, 'run mode') <- mode
+    attr(output, 'db') <- db
+    attr(output, 'pValue') <- p
+
+    if (warn){
+      warning(warn_message)
+    }
+
+  } else {
+    output <- httr::status_code(response)
+  }
+  return(output)
+}
 
