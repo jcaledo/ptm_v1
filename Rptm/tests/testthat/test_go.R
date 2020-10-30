@@ -201,11 +201,32 @@ test_that("net.go() works properly", {
 })
 
 ## ---------------------------------------------- ##
-#              Testing net.go                      #
+#              Testing gorilla                     #
 ## ---------------------------------------------- ##
-test_that("net.go() works properly", {
+test_that("gorila() works properly", {
 
   skip_on_cran()
   skip_on_travis()
+
+  a <- gorilla(target = './go/GOvivo.txt')
+  b <- gorilla(target = './go/GOvivo.txt', db = 'all')
+
+  c <- gorilla(target = './go/GOvivo.txt',
+               background = './go/GObackground.txt',
+               mode = 'hg')
+  d <- gorilla(target = './go/GOvivo.txt',
+               background = './go/GObackground.txt',
+               db = 'func', mode = 'hg')
+
+  expect_is(a, 'data.frame')
+  expect_gt(nrow(a), 100)
+  expect_gt(ncol(a), 8)
+
+  expect_is(b, 'list')
+  expect_is(b[[1]], 'data.frame')
+  expect_is(b[[2]], 'data.frame')
+  expect_is(b[[3]], 'data.frame')
+
+
 
 })

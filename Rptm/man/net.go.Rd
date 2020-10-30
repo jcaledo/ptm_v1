@@ -26,6 +26,8 @@ This function first searchs the GO for each vertex and then computes the Jarcard
 \dontrun{net.go(path2data = "./GOvivo.txt")}
 }
 \references{
+Aledo & Aledo (2020) Antioxidants 9, 987; doi:10.3390/antiox9100987.
+
 Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 }
 \seealso{

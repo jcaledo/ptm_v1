@@ -469,13 +469,14 @@ net.go <- function(data, threshold = 0.2, silent = FALSE){
 
 
 ## ---------------------------------------------------------------- ##
-#   gorilla <- function()     #
+#   gorilla <- function(target, background = NULL, mode = 'mhg',     #
+#         db = 'proc', pvalue = 0.001, species = 'Homo sapiens')     #
 ## ---------------------------------------------------------------- ##
 #' GO Enrichment Analysis
 #' @description Performs GO terms enrichment analyses.
 #' @usage gorilla(target, background = NULL, mode = 'mhg', db = 'proc', pvalue = 0.001, species = 'Homo sapiens')
 #' @param target
-#' @param bacground
+#' @param background
 #' @param mode
 #' @param db
 #' @param pvalue
@@ -579,13 +580,37 @@ gorilla <- function(target, background = NULL, mode = 'mhg', db = 'proc', pvalue
   if (httr::status_code(response) >= 200 & httr::status_code(response) < 300){
     work_id <- strsplit(resp_gorilla$url, split = "id=")[[1]][2]
     base_res_url <- "http://cbl-gorilla.cs.technion.ac.il/GOrilla/"
-
+    # Sys.sleep(10)
     if (db == 'proc'){
       process_url <- paste(base_res_url, work_id, "/GO.xls", sep = "")
+
+      response_results <- httr::GET(process_url)
+      wait <- TRUE
+      times <- 0
+      while (wait & times < 7){
+        if (httr::status_code(response_results) == 200){
+          wait <- FALSE
+        }
+        times <- times + 1
+        Sys.sleep(10)
+      }
+
       process_df <- read.delim(process_url)
       output <-  process_df
     } else if (db == 'func'){
       function_url <- paste(base_res_url, work_id, "/GO.xls", sep = "")
+
+      response_results <- httr::GET(function_url)
+      wait <- TRUE
+      times <- 0
+      while (wait & times < 7){
+        if (httr::status_code(response_results) == 200){
+          wait <- FALSE
+        }
+        times <- times + 1
+        Sys.sleep(10)
+      }
+
       function_df <- read.delim(function_url)
       output <-  function_df
     } else if (db == 'comp'){
