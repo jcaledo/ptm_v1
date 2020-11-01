@@ -82,7 +82,7 @@ pdb.quaternary <- function(pdb, keepfiles = FALSE){
 #           pdb.chain <- function(pdb, keepfiles = FALSE)            #
 ## ---------------------------------------------------------------- ##
 #' Download and/or Split PDB Files.
-#' @description Downloads a PDB file (if requiered) and splits it to provide a file by chain.
+#' @description Downloads a PDB file (if required) and splits it to provide a file by chain.
 #' @usage pdb.chain(pdb, keepfiles = FALSE)
 #' @param pdb the path to the PDB of interest or a 4-letter identifier.
 #' @param keepfiles logical, if TRUE the function makes a 'temp' directory within the current directory and save in it a pdb file for each chain present in the given structure.

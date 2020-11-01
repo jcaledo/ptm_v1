@@ -22,7 +22,7 @@ search.go('oxidative stress')
 Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 }
 \seealso{
-term.go(), get.go(), background.go(), go.enrich(), gorilla(), net.go()
+term.go(), get.go(), background.go(), gorilla(), net.go()
 }
 \author{
 Juan Carlos Aledo
