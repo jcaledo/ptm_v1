@@ -4,7 +4,7 @@
 \alias{hdfisher.go}
 \title{Hypothesis-driven Fisher Test}
 \usage{
-hdfisher.go(target, background, query)
+hdfisher.go(target, background, query, analysis = 'enrichment')
 }
 \arguments{
 \item{target}{either a vector containing the UniProt IDs of the target set or the path to the txt file containing the list of IDs.}

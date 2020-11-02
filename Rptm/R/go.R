@@ -59,8 +59,9 @@ search.go <- function(query){
 #' @description Gets core information about the GO term of interest.
 #' @usage term.go(go, children = FALSE)
 #' @param go GO id.
-#' @details When the argument children is set to TRUE, the output of this function is a list with two element: the first one is a dataframe with the core information, and the second one is a dataframe containing the children terms.
-#' @return Returns a dataframe containing core information such as term name and definition, reference, aspect, and whether or not the term is obsolete.
+#' @param children logical, when true GO children terms are returned.
+#' @details When the argument children is set to TRUE, the output of this function is a list with two elements: the first one is a dataframe with the core information, and the second one is a dataframe containing the children terms (see details).
+#' @return Returns a dataframe containing core information such as term name and definition, reference, aspect, and whether or not the term is obsolete. If children is set to TRUE, the function returns a list.
 #' @author Juan Carlos Aledo
 #' @seealso search.go(), get.go(), background.go(), go.enrich(), gorilla(), net.go()
 #' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
@@ -270,11 +271,12 @@ background.go <- function(ids){
 
 
 ## ---------------------------------------------------------------- ##
-#        hdfisher.go <- function(target, background, query)          #
+#   hdfisher.go <- function(target, background, query,               #
+#                                  analysis = 'enrichment')          #
 ## ---------------------------------------------------------------- ##
 #' Hypothesis-driven Fisher Test
 #' @description Carries out an enrichment Fisher's test using a hypothesis driven approach.
-#' @usage hdfisher.go(target, background, query)
+#' @usage hdfisher.go(target, background, query, analysis = 'enrichment')
 #' @param target either a vector containing the UniProt IDs of the target set or the path to the txt file containing the list of IDs.
 #' @param background  a dataframe with two columns (Uniprot ID and GO terms) and as many rows as different proteins there are in the background set.
 #' @param query character string defining the query.
@@ -387,7 +389,7 @@ hdfisher.go <- function(target, background, query, analysis = 'enrichment'){
 ## ---------------------------------------------------------------- ##
 #' Gene Ontology Network
 #' @description Explores the relationship among proteins from a given set.
-#' @usage net.go(path2data, threshold = 0.2, silent = FALSE)
+#' @usage net.go(data, threshold = 0.2, silent = FALSE)
 #' @param data either a vector containing the UniProt IDs (vertices) or the path to the txt or rda file containing them.
 #' @param threshold threshold value of the Jaccard index above which, two proteins are considered to be linked.
 #' @param silent logical, if FALSE print details of the running process.

@@ -49,6 +49,7 @@ pdb.seq <- function(pdb){
                     entity = rep(NA, length(t)),
                     chain = rep(NA, length(t)),
                     name = rep(NA, length(t)),
+                    species = rep(NA, length(t)),
                     sequence = rep(NA, length(t)))
 
   for (i in 1:nrow(seq)){
@@ -59,6 +60,7 @@ pdb.seq <- function(pdb){
     chains <- gsub('Chains', "", z[2])
     seq$chain[i] <- trimws(chains)
     seq$name[i] <- z[3]
+    seq$species[i] <- z[4]
     seq$sequence[i] <- tt[2]
   }
   ## ------------------ Output ------------------- #

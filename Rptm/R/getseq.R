@@ -46,9 +46,22 @@ get.seq <- function(id, db = 'uniprot', as.string = TRUE){
     call <- paste(baseUrl, "&val=", id, "&report=fasta", sep = "")
 
   } else if (db == 'pdb'){
+    text <- 'no text'
     id <- strsplit(id, split=':')[[1]]
-    baseUrl <- "https://www.rcsb.org/pdb/download/viewFastaFiles.do?structureIdList="
-    call <- paste(baseUrl, toupper(id[1]), "&compressionType=uncompressed", sep = "")
+    df <- pdb.seq(id[1])
+    call <- NULL
+    if (!is.na(id[2])){ # a given chain
+      chains <- strsplit(gsub(",", "", paste(df$chain, collapse = "")), split = "")[[1]]
+      if (id[2] %in% chains){
+        seq <- df$sequence[grepl(id[2], df$chain)]
+      } else if (grepl(id[2], chains)){
+        seq <- df$sequence[grepl(id[2], df$chain)]
+      } else {
+        stop("The chosen chain is not found in the PDB")
+      }
+    } else { # no chain specified
+      seq <- paste(df$sequence, collapse = "")
+    }
 
   } else if (db == 'kegg-aa' | db == 'kegg-nt'){
     t <- paste(strsplit(db, split = '-')[[1]][2], 'seq', sep = '')
@@ -101,20 +114,6 @@ get.seq <- function(id, db = 'uniprot', as.string = TRUE){
         warning("If you install the package 'jsonlite' this ugly output would be nicely parsed")
         return(text)
       }
-    } else if (db == 'pdb'){
-        ID <- toupper(id)
-        ID <- paste(ID, collapse = ":")
-        if (nchar(ID) == 4){ # No chain selector
-          seq <- strsplit(text, split = "\n")[[1]]
-          seq <- paste(seq[!grepl("^>", seq)], collapse = "")
-        } else if (nchar(ID) == 6){ # chain needs to be selected
-          seq <- strsplit(text, split = ">")[[1]][-1]
-          seq <- seq[grepl(ID, seq)]
-          seq <- strsplit(seq, "\n")[[1]][-1]
-          seq <- paste(seq, collapse = "")
-        } else {
-          stop("The PDB ID must be formated properly")
-        }
     } else if (db == 'ncbi'){
       seq <- strsplit(text, "\n")[[1]]
       seq <- paste(seq[-1], collapse = "")
