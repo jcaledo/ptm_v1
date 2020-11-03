@@ -6,7 +6,7 @@
 ## -------------------------------- ##
 
 ## ------------------------------------------------------------------------------- ##
-# ptm.plot <- function(up_id, pdb="", property, ptm, dssp, window, sdata=TRUE, ...)#
+# ptm.plot <- function(up_id, pdb="", property, ptm, dssp, window, sdata=TRUE, ...) #
 ## ------------------------------------------------------------------------------- ##
 #' Plot Values of a Property and PTM Sites Along the Protein Sequence
 #' @description Represents the values of a property and show the PTM sites along a protein sequence.

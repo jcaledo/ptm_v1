@@ -11,6 +11,7 @@ test_that('saro.dist() works properly', {
 
   a <- saro.dist('1cll', rawdata = TRUE)
   b <- saro.dist('3ug0')
+  c <- saro.dist('2lo1')
 
   expect_equal(typeof(a), 'list')
   expect_equal(class(a[[1]]), 'data.frame')
@@ -75,6 +76,7 @@ test_that('saro.motif() works properly', {
 
   a <- saro.motif('1cll', onlySaro = FALSE)
   b <- saro.motif(pdb = '1d0g', threshold = 5)
+  c <- saro.motif(pdb = '2lo1', threshold = 7) # No motifs
 
   expect_equal(class(a), 'data.frame')
   expect_equal(nrow(a), 10)
@@ -83,5 +85,10 @@ test_that('saro.motif() works properly', {
   expect_equal(class(b), 'data.frame')
   expect_equal(nrow(b), 12)
   expect_true(max(b$Length) < 5)
+
+  expect_is(c, 'data.frame')
+  expect_equal(nrow(c), 0)
+  expect_equal(ncol(c), 4)
+
 })
 
