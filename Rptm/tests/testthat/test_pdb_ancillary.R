@@ -9,6 +9,21 @@ test_that('pdb.quaternary works properly', {
   skip_on_cran()
   skip_on_travis()
 
+  a <- pdb.seq('1bpl')
+
+  expect_is(a, 'data.frame')
+  expect_equal(nrow(a), 2)
+  expect_equal(ncol(a), 6)
+})
+
+## ---------------------------------------------- ##
+#            Testing  pdb.quaternary               #
+## ---------------------------------------------- ##
+test_that('pdb.quaternary works properly', {
+
+  skip_on_cran()
+  skip_on_travis()
+
   a <- pdb.quaternary("./pdb/1u8f.pdb")
   b <- pdb.quaternary("2hhb", keepfiles = TRUE)
 

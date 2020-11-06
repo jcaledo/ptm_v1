@@ -4,7 +4,7 @@
 \alias{net.go}
 \title{Gene Ontology Network}
 \usage{
-net.go(path2data, threshold = 0.2, silent = FALSE)
+net.go(data, threshold = 0.2, silent = FALSE)
 }
 \arguments{
 \item{data}{either a vector containing the UniProt IDs (vertices) or the path to the txt or rda file containing them.}

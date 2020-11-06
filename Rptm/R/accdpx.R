@@ -82,7 +82,9 @@ acc.dssp <- function(pdb, dssp = 'compute', aa = 'all'){
   chain_files <- paste('./split_chain/', id, '_', chains,  '.pdb', sep = "")
   dssp_files <- paste('./split_chain/', id, '_', chains, '.dssp', sep = "")
   if (dssp == 'compute'){
+    chain_files <- chain_files[file.exists(chain_files)]
     lapply(chain_files, function(x) compute.dssp(x, destfile = './split_chain/'))
+    dssp_files <- dssp_files[file.exists(dssp_files)]
     df$sasa_chain <- unlist(lapply(dssp_files, function(x) parse.dssp(x, keepfiles = FALSE)$sasa))
   } else if (dssp == 'mkdssp'){
     df$sasa_chain <- unlist(lapply(chain_files, function(x) mkdssp(x, method = "ptm")$sasa))

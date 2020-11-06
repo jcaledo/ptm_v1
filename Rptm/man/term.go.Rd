@@ -8,15 +8,17 @@ term.go(go, children = FALSE)
 }
 \arguments{
 \item{go}{GO id.}
+
+\item{children}{logical, when true GO children terms are returned.}
 }
 \value{
-Returns a dataframe containing core information such as term name and definition, reference, aspect, and whether or not the term is obsolete.
+Returns a dataframe containing core information such as term name and definition, reference, aspect, and whether or not the term is obsolete. If children is set to TRUE, the function returns a list.
 }
 \description{
 Gets core information about the GO term of interest.
 }
 \details{
-When the argument children is set to TRUE, the output of this function is a list with two element: the first one is a dataframe with the core information, and the second one is a dataframe containing the children terms.
+When the argument children is set to TRUE, the output of this function is a list with two elements: the first one is a dataframe with the core information, and the second one is a dataframe containing the children terms (see details).
 }
 \examples{
 term.go('GO:0034599')

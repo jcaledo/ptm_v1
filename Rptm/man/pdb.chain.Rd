@@ -15,7 +15,7 @@ pdb.chain(pdb, keepfiles = FALSE)
 The function returns a chr vector where each coordinate is a chain from the structure.
 }
 \description{
-Downloads a PDB file (if requiered) and splits it to provide a file by chain.
+Downloads a PDB file (if required) and splits it to provide a file by chain.
 }
 \examples{
 pdb.chain('1bpl')

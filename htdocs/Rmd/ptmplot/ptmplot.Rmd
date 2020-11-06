@@ -1,0 +1,143 @@
+---
+title: "aa.at()"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+```
+
+### Description
+Represents the values of a property and show the PTM sites along a protein sequence
+
+### Usage
+ptm.plot(up_id, pdb = "", property, ptm, dssp = 'compute', window = 1, sdata = TRUE, ...)
+
+### Arguments
+
+_up_id_:	a character string for the UniProt ID of the protein of interest.
+
+_pdb_	Optional argument to indicate the PDB and chain to be used (i.e. '1u8f.O'). If we leave this argument empty, the function will make the election for us whenever possible. If we introduce 'none', no PDB will be used.
+
+_property_	a character string indicating the property of interest. It should be one of 'sasa', 'acc', 'dpx', 'entropy7.aa','entropy7.codon', 'entropy100.aa', 'entropy100.codon', 'eiip', 'volume', 'polarizability', 'av.hyd', 'pi.hel', 'a.hel', 'b.sheet', 'B.factor', or 'own'.
+
+_ptm_ a character vector indicating the PTMs of interest. It should be among: 'ac' (acetylation), 'me' (methylation), 'meto' (sulfoxidation), 'p' (phosphorylation), 'su' (sumoylation) or 'ub' (ubiquitination), 'gl' (glycosylation),'reg' (regulatory), 'dis' (disease).
+
+_dssp_ character string indicating the method to compute DSSP. It should be either 'compute' or 'mkdssp'.
+
+_window_ positive integer indicating the window size for smoothing with a sliding window average (default: 1, i.e. no smoothing).
+
+_sdata_ logical, if TRUE save a Rda file with the relevant data in the current directory.
+
+### Value
+
+### See Also
+_find.aaindex()_
+
+### Details
+
+This function returns a plot related to the choosen property along the primary structure. 
+
+Currently the supported properties are:
+
+* sasa:  Solvent-accessible surface area (3D)
+* acc: Accessibility (3D)
+* dpx: Depth (3D)
+* volume: Normalized van der Waals volume (1D)
+* mutability: Relative mutability, Jones 1992, (1D)
+* helix: Average relative probability of helix, Kanehisa-Tsong 1980,(1D)
+* beta-sheet: Average relative probability of beta-sheet, Kanehisa-Tsong 1980, (1D)
+* pi-helix: Propensity of amino acids within pi-helices, Fodje-Al-Karadaghi 2002, (1D)
+* hydropathy: Hydropathy index, Kyte-Doolittle 1982, (1D)
+* avg.hyd: Normalized average hydrophobicity scales, Cid et al 1992, (1D)
+* hplc: Retention coefficient in HPLC at pH7.4, Meek 1980, (1D)
+* argos: Hydrophobicity index, Argos et al 1982, (1D)
+* eiip: Electron-ion interaction potential, Veljkovic et al 1985, (1D)
+* polarizability: Polarizability parameter, Charton-Charton 1982, (1D)
+* entropy7.aa: Shannon entropy based on 7 species and protein sequences (EVO)
+* entropy100.aa: Shannon entropy based on 100 species and protein sequences (EVO)
+* entropy7.condon: Shannon entropy based on 7 species and codon sequences (EVO)
+* entropy100.codon: Shannon entropy based on 100 species and codon sequences (EVO)
+
+
+For 3D properties such as sasa, acc or dpx, for which different values can be obtained depending on the cuaternary structure, we first compute the property values for each residue in the whole protein and ploted them agains the residue position. Then, the value for this property is computed in the isolated chain (a single polypeptide chain) and in a second plot, the differences between the values in the whole protein and the chain are ploted against the residue position.
+
+The selected PTM sites are also pointed in the same plot. Currently the supported PTM are:
+
+* Acetylation (ac)
+* Disease (dis)
+* Glycosylation (gl)
+* Methylation (me)
+* Phosphorylation (p)
+* Regulatory (reg)
+* Sulfoxidation (meto)
+* Sumoylation (su)
+* Ubiquitination (ub)
+
+Let's look at an example using glyceraldehyde-3-phosphate Dehydrogenase (P04406), a homotetrameric protein. We choose methionine sulfoxidation as PTM and a hydrophobicity index as the property to be plotted along the primary sequence. 
+
+```{r}
+ptm.plot(up_id = "P04406", property = 'avg.hyd', ptm = 'meto')
+```
+
+```{r}
+ptm.plot(up_id = "P04406", property = 'avg.hyd', ptm = 'meto', window = 5)
+```
+
+```{r}
+ptm.plot(up_id = "P04406", property = 'polarizability', ptm = 'meto')
+ptm.plot(up_id = "P04406", property = 'mutability', ptm = 'meto')
+```
+
+
+```{r}
+ptm.plot(up_id = "P04406", property = 'entropy7.aa', ptm = 'meto')
+```
+
+```{r}
+ptm.plot(up_id = "P04406", property = 'entropy7.aa', ptm = 'meto', window = 25)
+```
+
+What if we want to use a different property than those listed above?
+
+
+, as well as the computed data if sdata has been setted to TRUE.
+
+The _ptm_ package offers a set of ancillary functions aimed to carry out rutinary work, which may be needed when more elaborated analysis are required. Among these ancillary function are:
+
+* aa.at (the current document)
+* [is.at](./is.at)
+* [aa.comp](./aa.comp)
+* [renum.pdb](./renum.pdb)
+* [renum.meto](./renum.meto)
+* [renum](./renum)
+
+The function **aa.at()** returns the amino acid found at the requested position of the target sequence. For instance, if we want to know what amino acid is found at the position 100 of the horse cytochrome c (P00004):
+ 
+```{r}
+
+```
+We can afirm that the amino acid found is a lysine (K).
+
+The _target_ sequence doen't need to be a UniProt sequence, it can be any string of amino acid, in that case we should pass the argument _uniprot = FALSE_:
+
+```{r}
+
+```
+In this case, at the position 10 of the string that we have passed as argument, we find a phenylalanine (F).
+
+We have found this function to be useful to carry out data quality controls. For instance, if we carry out a query in [MetOSite](https://metosite.uma.es) (a database for sulfoxidation sites), asking for the protein alpha1-antitrypsin (P01009), we obtain:
+
+```{r}
+
+```
+
+To verify that there was no error with the annotations, we checked that indeed methionine residues are found at this positions:
+
+```{r}
+
+```
+

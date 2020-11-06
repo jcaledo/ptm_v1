@@ -19,7 +19,7 @@
 #' @param query character string defining the query.
 #' @return Returns a dataframe containing the GO IDs found associated to the query, as well as other information related to these terms.
 #' @author Juan Carlos Aledo
-#' @seealso term.go(), get.go(), background.go(), go.enrich(), gorilla(), net.go()
+#' @seealso term.go(), get.go(), background.go(), gorilla(), net.go()
 #' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 #' @examples search.go('oxidative stress')
 #' @importFrom httr GET
@@ -59,8 +59,9 @@ search.go <- function(query){
 #' @description Gets core information about the GO term of interest.
 #' @usage term.go(go, children = FALSE)
 #' @param go GO id.
-#' @details When the argument children is set to TRUE, the output of this function is a list with two element: the first one is a dataframe with the core information, and the second one is a dataframe containing the children terms.
-#' @return Returns a dataframe containing core information such as term name and definition, reference, aspect, and whether or not the term is obsolete.
+#' @param children logical, when true GO children terms are returned.
+#' @details When the argument children is set to TRUE, the output of this function is a list with two elements: the first one is a dataframe with the core information, and the second one is a dataframe containing the children terms (see details).
+#' @return Returns a dataframe containing core information such as term name and definition, reference, aspect, and whether or not the term is obsolete. If children is set to TRUE, the function returns a list.
 #' @author Juan Carlos Aledo
 #' @seealso search.go(), get.go(), background.go(), go.enrich(), gorilla(), net.go()
 #' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
@@ -239,13 +240,14 @@ get.go <- function(id, filter = TRUE, format = 'dataframe', silent = FALSE){
 #' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 #' @seealso search.go(), term.go(), get.go(), go.enrich(), gorilla(), net.go()
 #' @examples background.go(c('P01009', 'P01374', 'Q86UP4'))
+#' @importFrom utils read.csv
 #' @export
 
 background.go <- function(ids){
   ## ----- The background set
   if (is.character(ids) & length(ids) == 1){ # input as path to the txt
     if (gregexpr('txt', ids)[[1]] != -1){
-      bg <- read.csv(ids, header = FALSE)
+      bg <- utils::read.csv(ids, header = FALSE)
       bg <- trimws(as.character(bg$V1))
     } else {
       stop("A proper path to a txt file should be provided for the background set")
@@ -269,27 +271,30 @@ background.go <- function(ids){
 
 
 ## ---------------------------------------------------------------- ##
-#        hdfisher.go <- function(target, background, query)          #
+#   hdfisher.go <- function(target, background, query,               #
+#                                  analysis = 'enrichment')          #
 ## ---------------------------------------------------------------- ##
 #' Hypothesis-driven Fisher Test
 #' @description Carries out an enrichment Fisher's test using a hypothesis driven approach.
-#' @usage hdfisher.go(target, background, query)
+#' @usage hdfisher.go(target, background, query, analysis = 'enrichment')
 #' @param target either a vector containing the UniProt IDs of the target set or the path to the txt file containing the list of IDs.
 #' @param background  a dataframe with two columns (Uniprot ID and GO terms) and as many rows as different proteins there are in the background set.
 #' @param query character string defining the query.
 #' @param analysis a character string indicating whether the desired analysis is the enrichment ('enrichment') or depletion ('depletion').
-#' @return Returns...
+#' @return Returns a list that contains the contingency table and the p-Value.
 #' @author Juan Carlos Aledo
 #' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 #' @seealso search.go(), term.go(), get.go(), background.go(), go.enrich(), gorilla(), net.go()
-#' @examples hdfisher.go(c('Q14667', 'Q5JSZ5'), background.go(c("Q13015", "Q14667", "P08575", "Q5JSZ5", "P13196")), 'extracellular')
+#' @examples hdfisher.go(c('Q14667', 'Q5JSZ5'), background.go(c("Q14667", "Q5JSZ5", "P13196")), 'extracellular')
+#' @importFrom utils read.csv
+#' @importFrom stats fisher.test
 #' @export
 
 hdfisher.go <- function(target, background, query, analysis = 'enrichment'){
   ## ----- The target sample to be analyzed
   if (is.character(target) & length(target) == 1){ # input as path to the txt
     if (gregexpr('txt', target)[[1]] != -1){
-      sample <- read.csv(target, header = FALSE)
+      sample <- utils::read.csv(target, header = FALSE)
       sample <- trimws(as.character(sample$V1))
     } else {
       stop("A proper path to a txt file should be provided for the target set")
@@ -370,8 +375,8 @@ hdfisher.go <- function(target, background, query, analysis = 'enrichment'){
     colnames(ct) <- c('target', 'target-complement')
     rownames(ct) <- c('query', 'non-query')
 
-    ft <- fisher.test(ct, alternative = alternative)
-    output <- list(contingency_table = ct, pvalue = ft$p.value)
+    ft <- stats::fisher.test(ct, alternative = alternative)
+    output <- list(contingency_table = ct, pv = ft$p.value)
   }
   attr(output, 'query') <- query
   attr(output, 'analysis') <- analysis
@@ -384,7 +389,7 @@ hdfisher.go <- function(target, background, query, analysis = 'enrichment'){
 ## ---------------------------------------------------------------- ##
 #' Gene Ontology Network
 #' @description Explores the relationship among proteins from a given set.
-#' @usage net.go(path2data, threshold = 0.2, silent = FALSE)
+#' @usage net.go(data, threshold = 0.2, silent = FALSE)
 #' @param data either a vector containing the UniProt IDs (vertices) or the path to the txt or rda file containing them.
 #' @param threshold threshold value of the Jaccard index above which, two proteins are considered to be linked.
 #' @param silent logical, if FALSE print details of the running process.
@@ -470,30 +475,31 @@ net.go <- function(data, threshold = 0.2, silent = FALSE){
 
 ## ---------------------------------------------------------------- ##
 #   gorilla <- function(target, background = NULL, mode = 'mhg',     #
-#         db = 'proc', pvalue = 0.001, species = 'Homo sapiens')     #
+#                       db = 'proc', pv = 0.001, spe = NULL)         #
 ## ---------------------------------------------------------------- ##
 #' GO Enrichment Analysis
 #' @description Performs GO terms enrichment analyses.
-#' @usage gorilla(target, background = NULL, mode = 'mhg', db = 'proc', pvalue = 0.001, species = 'Homo sapiens')
-#' @param target
-#' @param background
-#' @param mode
-#' @param db
-#' @param pvalue
-#' @param species
-#' @details
-#' @return
-#' @author
-#' @seealso
+#' @usage gorilla(target, background = NULL, mode = 'mhg', db = 'proc', pv = 0.001, spe = NULL)
+#' @param target path to the txt file containing (one per line) the UniProt id of the proteins belonging to the target set.
+#' @param background path to the txt file containing (one per line) the UniProt id of the proteins belonging to the background set.
+#' @param mode a character string specifying the desired analysis mode; it must be one of 'mhg' (identifies enriched GO terms in ranked lists), 'hg' (identifies enriched GO terms in the target set compared to the background set)
+#' @param db a character string specifying the chosen ontology; it must be one of 'proc' (biological process), 'func' (molecular function), 'comp' (cellular component), 'all' (all the three previous ontologies).
+#' @param pv a numeric value for the p-value threshold. Only GO terms with a p-value better than this threshold are reported.
+#' @param spe a character string specifying the organism of interest. The species supported by GOrilla are: (Arabidopsis thaliana, Saccharomyces cerevisiae, Caenorhabditis elegans, Drosophila melanogaster, Danio rerio, Homo sapiens, Mus musculus, Rattus norvegicus)
+#' @details This function is a client of GOrilla, which is a web-based application that identifies enriched GO terms.
+#' @return Returns either a dataframe with the enrichment results if a single ontology has been selected, or a list with three dataframe if the three ontologies were selected.
+#' @author Juan Carlos Aledo
+#' @seealso search.go(), term.go(), get.go(), background.go(), net.go()
 #' @references Eden et al. (2009) BMC Bioinformatics 10:48.
 #' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
-#' @examples
+#' @examples \dontrun{gorilla(target = './go/GOvivo.txt', db = 'all')}
 #' @importFrom httr GET
 #' @importFrom httr content
 #' @importFrom jsonlite fromJSON
+#' @importFrom utils read.delim
 #' @export
 
-gorilla <- function(target, background = NULL, mode = 'mhg', db = 'proc', pvalue = 0.001, species = 'Homo sapiens'){
+gorilla <- function(target, background = NULL, mode = 'mhg', db = 'proc', pv = 0.001, spe = NULL){
 
   ## ------------------------------- Check arguments --------------------------------- ##
   warn <- FALSE
@@ -527,19 +533,22 @@ gorilla <- function(target, background = NULL, mode = 'mhg', db = 'proc', pvalue
   organism <- c('Arabidopsis thaliana', 'Caenorhabditis elegans', 'Danio rerio',
                 'Drosophila melanogaster', 'Homo sapiens', 'Mus musculus',
                 'Rattus norvegicus', 'Saccharomyces cerevisiae')
-
-  if (species %in% organism){
-    sp <- gsub(' ', '_', toupper(species))
+  if (is.null(spe)){
+    sp <- "HOMO_SAPIENS"
+    warn <- TRUE
+    warn_message <- c(warn_message, "species has been set to 'HOMO_SAPIENS")
+  } else if (spe %in% organism){
+    sp <- gsub(' ', '_', toupper(spe))
   } else {
     sp <- "HOMO_SAPIENS"
     warn <- TRUE
     warn_message <- c(warn_message, "species has been set to 'HOMO_SAPIENS")
   }
 
-  if (is.numeric(pvalue)){
+  if (is.numeric(pv)){
     closest <- c()
     for (n in (3:11)){
-      closest <- c(closest, abs(pvalue - (1/10^n)))
+      closest <- c(closest, abs(pv - (1/10^n)))
     }
     closest <- which(closest == min(closest)) + 2
     p <- 1/10^closest
@@ -595,7 +604,7 @@ gorilla <- function(target, background = NULL, mode = 'mhg', db = 'proc', pvalue
         Sys.sleep(10)
       }
 
-      process_df <- read.delim(process_url)
+      process_df <- utils::read.delim(process_url)
       output <-  process_df
     } else if (db == 'func'){
       function_url <- paste(base_res_url, work_id, "/GO.xls", sep = "")
@@ -611,16 +620,29 @@ gorilla <- function(target, background = NULL, mode = 'mhg', db = 'proc', pvalue
         Sys.sleep(10)
       }
 
-      function_df <- read.delim(function_url)
+      function_df <- utils::read.delim(function_url)
       output <-  function_df
     } else if (db == 'comp'){
       component_url <- paste(base_res_url, work_id, "/GO.xls", sep = "")
-      component_df <- read.delim(component_url)
+
+      response_results <- httr::GET(component_url)
+      wait <- TRUE
+      times <- 0
+      while (wait & times < 7){
+        if (httr::status_code(response_results) == 200){
+          wait <- FALSE
+        }
+        times <- times + 1
+        Sys.sleep(10)
+      }
+
+      component_df <- utils::read.delim(component_url)
       output <-  component_df
     } else {
       process_url <- paste(base_res_url, work_id, "/GOPROCESS.xls", sep = "")
       function_url <- paste(base_res_url, work_id, "/GOFUNCTION.xls", sep = "")
       component_url <- paste(base_res_url, work_id, "/GOCOMPONENT.xls", sep = "")
+
       response_results <- httr::GET(process_url)
       wait <- TRUE
       times <- 0
@@ -632,9 +654,9 @@ gorilla <- function(target, background = NULL, mode = 'mhg', db = 'proc', pvalue
         Sys.sleep(10)
       }
 
-      process_df <- read.delim(process_url)
-      function_df <- read.delim(function_url)
-      component_df <- read.delim(component_url)
+      process_df <- utils::read.delim(process_url)
+      function_df <- utils::read.delim(function_url)
+      component_df <- utils::read.delim(component_url)
 
       # Sys.sleep(60)
       output <- list(process_df, function_df, component_df)

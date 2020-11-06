@@ -171,7 +171,7 @@ custom.aln <- function(target, species, molecule = 'protein',  sfile = FALSE){
     id <- c(id, orthDF$species[i])
   }
 
-  ## ----------------- Carrying out the alignment ------------------##
+  ## ----------------- Carrying out the alignment ------------------ ##
   fa_file <- paste(gsub(":", '_', target), 'aln.fa', sep = "_")
   aln <- bio3d::seqaln(sequences, id <- id, exefile = 'muscle',
                        outfile = fa_file,

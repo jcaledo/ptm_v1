@@ -89,15 +89,15 @@ test_that("background.go() works properly", {
   skip_on_travis()
 
   a <- background.go(ids = "./go/id_set.txt")
-  b <-  background.go(ids = c("Q13015", "Q14667", "P08575", "Q5JSZ5", "P13196"))
+  b <-  background.go(ids = c("Q13015", "Q14667", "P08575", "Q5JSZ5", "P13196", "H7C4H7"))
 
   expect_is(a, 'data.frame')
-  expect_equal(nrow(a), 5)
+  expect_equal(nrow(a), 6)
   expect_equal(ncol(a), 2)
 
-  expect_is(a, 'data.frame')
-  expect_equal(nrow(a), 5)
-  expect_equal(ncol(a), 2)
+  expect_is(b, 'data.frame')
+  expect_equal(nrow(b), 6)
+  expect_equal(ncol(b), 2)
 
   expect_equal(a, b)
 
@@ -123,48 +123,6 @@ test_that(" hdfisher.go() works properly", {
 
 
 ## ---------------------------------------------- ##
-#              Testing gorilla                     #
-## ---------------------------------------------- ##
-test_that("gorilla() works properly", {
-
-  skip_on_cran()
-  skip_on_travis()
-
-  a <- gorilla(target = './go/GOvivo.txt', mode = 'mhg', db = 'proc', pvalue = 0.001, species = 'Homo sapiens')
-  b <- gorilla(target = './go/GOvivo.txt', mode = 'mhg', db = 'all', pvalue = 0.001)
-  c <- gorilla(target = './go/GOvivo.txt', background = './go/GObackground.txt', mode = 'hg', db = 'all')
-
-  expect_is(a, 'data.frame')
-  expect_gt(nrow(a), 100)
-  expect_equal(ncol(a), 10)
-
-  expect_is(b, 'list')
-  expect_equal(length(b), 3)
-  expect_is(b[[1]], 'data.frame')
-  expect_gt(nrow(b[[1]]), 10)
-  expect_equal(ncol(b[[1]]), 10)
-  expect_is(b[[2]], 'data.frame')
-  expect_gt(nrow(b[[2]]), 10)
-  expect_equal(ncol(b[[2]]), 10)
-  expect_is(b[[3]], 'data.frame')
-  expect_gt(nrow(b[[3]]), 10)
-  expect_equal(ncol(b[[3]]), 10)
-
-  expect_is(c, 'list')
-  expect_equal(length(c), 3)
-  expect_is(c[[1]], 'data.frame')
-  expect_gt(nrow(c[[1]]), 10)
-  expect_equal(ncol(c[[1]]), 10)
-  expect_is(c[[2]], 'data.frame')
-  expect_gt(nrow(c[[2]]), 10)
-  expect_equal(ncol(c[[2]]), 10)
-  expect_is(c[[3]], 'data.frame')
-  expect_gt(nrow(c[[3]]), 10)
-  expect_equal(ncol(c[[3]]), 10)
-
-})
-
-## ---------------------------------------------- ##
 #              Testing net.go                      #
 ## ---------------------------------------------- ##
 test_that("net.go() works properly", {
@@ -172,8 +130,8 @@ test_that("net.go() works properly", {
   skip_on_cran()
   skip_on_travis()
 
-  a <- net.go(data = "./go/sample_vivo.txt", threshold = 0.5)
-  b <- net.go(data = "./go/sample_vv.Rda", threshold = 0.5)
+  a <- net.go(data = "./go/id_set.txt", threshold = 0.5)
+  b <- net.go(data = "./go/id_set.Rda", threshold = 0.5)
 
   expect_is(a, 'list')
   expect_is(a[[1]], 'matrix')
@@ -208,25 +166,61 @@ test_that("gorila() works properly", {
   skip_on_cran()
   skip_on_travis()
 
-  a <- gorilla(target = './go/GOvivo.txt')
-  b <- gorilla(target = './go/GOvivo.txt', db = 'all')
+  a <- gorilla(target = './go/GOvivo.txt', spe = 'Homo sapiens')
+  b <- gorilla(target = './go/GOvivo.txt', db = 'all', spe = 'Homo sapiens')
 
   c <- gorilla(target = './go/GOvivo.txt',
                background = './go/GObackground.txt',
-               mode = 'hg')
+               mode = 'hg', spe = 'Homo sapiens')
   d <- gorilla(target = './go/GOvivo.txt',
                background = './go/GObackground.txt',
-               db = 'func', mode = 'hg')
+               db = 'func', mode = 'hg', spe = 'Homo sapiens')
+  e <- gorilla(target = './go/GOvivo.txt',
+               background = './go/GObackground.txt',
+               db = 'comp', mode = 'hg', spe = 'Homo sapiens')
+  f <- gorilla(target = './go/GOvivo.txt',
+               background = './go/GObackground.txt',
+               db = 'all', mode = 'hg', spe = 'Homo sapiens')
 
   expect_is(a, 'data.frame')
   expect_gt(nrow(a), 100)
   expect_gt(ncol(a), 8)
 
   expect_is(b, 'list')
+  expect_equal(length(b), 3)
   expect_is(b[[1]], 'data.frame')
+  expect_gt(nrow(b[[1]]), 10)
+  expect_equal(ncol(b[[1]]), 10)
   expect_is(b[[2]], 'data.frame')
+  expect_gt(nrow(b[[2]]), 10)
+  expect_equal(ncol(b[[2]]), 10)
   expect_is(b[[3]], 'data.frame')
+  expect_gt(nrow(b[[3]]), 10)
+  expect_equal(ncol(b[[3]]), 10)
 
+  expect_is(c, 'data.frame')
+  expect_gt(nrow(c), 100)
+  expect_gt(ncol(c), 8)
 
+  expect_is(d, 'data.frame')
+  expect_gt(nrow(d), 50)
+  expect_gt(ncol(d), 8)
+
+  expect_is(e, 'data.frame')
+  expect_gt(nrow(e), 100)
+  expect_gt(ncol(e), 8)
+
+  expect_is(f, 'list')
+  expect_equal(length(f), 3)
+  expect_is(f[[1]], 'data.frame')
+  expect_gt(nrow(f[[1]]), 10)
+  expect_equal(ncol(f[[1]]), 10)
+  expect_is(f[[2]], 'data.frame')
+  expect_gt(nrow(f[[2]]), 10)
+  expect_equal(ncol(f[[2]]), 10)
+  expect_is(f[[3]], 'data.frame')
+  expect_gt(nrow(f[[3]]), 10)
+  expect_equal(ncol(f[[3]]), 10)
 
 })
+

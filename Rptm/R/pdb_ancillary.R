@@ -1,5 +1,6 @@
 ## ------- pdb_ancillary.R ------ ##
 #                                  #
+#   pdb.seq                        #
 #   pdb.quaternary                 #
 #   pdb.chain                      #
 #   pdb2uniprot                    #
@@ -10,6 +11,79 @@
 #                                  #
 ## ------------------------------ ##
 
+## ---------------------------------------------------------------- ##
+#             pdb.seq <- function(pdb)                               #
+## ---------------------------------------------------------------- ##
+#' Get Chain Sequences
+#' @description Gets the sequences of the chain find in a given PDB.
+#' @usage pdb.seq(pdb)
+#' @param pdb the 4-letter PDB identifier.
+#' @return  Returns a dataframe with as many rows as different chains are present in the PDB. For each row six variables are returned: (i) the entry id, (ii) the entity id, (iii) the chain, (iv) the protein name, (v) the species and (vi) the sequence.
+#' @author Juan Carlos Aledo
+#' @examples pdb.seq('1bpl')
+#' @importFrom httr GET
+#' @importFrom httr content
+#' @export
+
+pdb.seq <- function(pdb){
+
+  ## ----------------- Check PDB argument ------------ #
+  if (nchar(pdb) != 4){
+    stop( "Please, provide a proper PDB ID")
+  } else {
+    call <- paste('https://www.rcsb.org/fasta/entry/',
+                  pdb, '/download', sep = "")
+  }
+
+  ## -------- Client <-> Server Communication -------- #
+  if (!is.null(call)){
+    resp <- try(httr::GET(call), silent = FALSE)
+    if (inherits(resp, "try-error")) {
+      text <- "LOST CONNECTION"
+    } else {
+      text <- httr::content(resp, "text", encoding = "utf-8")
+    }
+    retry = 0
+    while ((grepl("^LOST CONNECTION", text) || httr::http_error(resp) ||
+            grepl("^ERROR", text) || grepl("Nothing has been found",
+                                           text)) && retry < 3) {
+      retry = retry + 1
+      Sys.sleep(5)
+      resp <- try(httr::GET(url), silent = TRUE)
+      if (inherits(resp, "try-error")) {
+        text <- "LOST CONNECTION"
+      }
+      else {
+        text <- httr::content(resp, "text", encoding = "utf-8")
+      }
+    }
+  }
+  ## ----------- Parsing the response ------------- #
+  t <- strsplit(text, split = ">")[[1]][-1]
+  seq <- data.frame(entry = rep(NA, length(t)),
+                    entity = rep(NA, length(t)),
+                    chain = rep(NA, length(t)),
+                    name = rep(NA, length(t)),
+                    species = rep(NA, length(t)),
+                    sequence = rep(NA, length(t)))
+
+  for (i in 1:nrow(seq)){
+    tt <- strsplit(t[i], split = "\n")[[1]]
+    z <- strsplit(tt[1], "\\|")[[1]]
+    seq$entry[i] <- strsplit(z[1], split = "_")[[1]][1]
+    seq$entity[i] <- strsplit(z[1], split = "_")[[1]][2]
+    chains <- strsplit(z[2], split = " ")[[1]][2]
+
+    # chains <- trimws(gsub('[Chains|Chain]', "", z[2]))
+
+    seq$chain[i] <- trimws(chains)
+    seq$name[i] <- z[3]
+    seq$species[i] <- z[4]
+    seq$sequence[i] <- tt[2]
+  }
+  ## ------------------ Output ------------------- #
+  return(seq)
+}
 
 ## ---------------------------------------------------------------- ##
 #      pdb.quaternary <- function(pdb, keepfiles = FALSE)                  #
@@ -82,7 +156,7 @@ pdb.quaternary <- function(pdb, keepfiles = FALSE){
 #           pdb.chain <- function(pdb, keepfiles = FALSE)            #
 ## ---------------------------------------------------------------- ##
 #' Download and/or Split PDB Files.
-#' @description Downloads a PDB file (if requiered) and splits it to provide a file by chain.
+#' @description Downloads a PDB file (if required) and splits it to provide a file by chain.
 #' @usage pdb.chain(pdb, keepfiles = FALSE)
 #' @param pdb the path to the PDB of interest or a 4-letter identifier.
 #' @param keepfiles logical, if TRUE the function makes a 'temp' directory within the current directory and save in it a pdb file for each chain present in the given structure.
@@ -262,6 +336,10 @@ pdb.select <- function(up_id, threshold = 0.9){
   if (grepl('Sorry', pdbs[1])){
     return("NO PDB FOUND")
   } else { ## --------- Choose the PDB and chain when they exist
+    pdbs <- pdbs[which(nchar(pdbs$CHAIN)==1),]
+    if (nrow(pdbs) == 0){
+      return("NO PDB FOUND")
+    }
     oldw <- getOption("warn") # To avoid some irrelevant warnings
     options(warn = -1)
     identity <- rep(NA, nrow(pdbs))

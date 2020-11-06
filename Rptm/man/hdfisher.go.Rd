@@ -4,7 +4,7 @@
 \alias{hdfisher.go}
 \title{Hypothesis-driven Fisher Test}
 \usage{
-hdfisher.go(target, background, query)
+hdfisher.go(target, background, query, analysis = 'enrichment')
 }
 \arguments{
 \item{target}{either a vector containing the UniProt IDs of the target set or the path to the txt file containing the list of IDs.}
@@ -16,13 +16,13 @@ hdfisher.go(target, background, query)
 \item{analysis}{a character string indicating whether the desired analysis is the enrichment ('enrichment') or depletion ('depletion').}
 }
 \value{
-Returns...
+Returns a list that contains the contingency table and the p-Value.
 }
 \description{
 Carries out an enrichment Fisher's test using a hypothesis driven approach.
 }
 \examples{
-hdfisher.go(c('Q14667', 'Q5JSZ5'), background.go(c("Q13015", "Q14667", "P08575", "Q5JSZ5", "P13196")), 'extracellular')
+hdfisher.go(c('Q14667', 'Q5JSZ5'), background.go(c("Q14667", "Q5JSZ5", "P13196")), 'extracellular')
 }
 \references{
 Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
