@@ -281,13 +281,13 @@ ptm.plot <- function(up_id, pdb = "", property, ptm , dssp = 'compute',
     t <- shannon(id.mapping(up_id, 'uniprot', 'kegg'), 'vertebrates', base = 21)
     property_seq_mon <- property_seq_com <- t$Haa
   } else if (property == "entropy7.codon"){
-    t <- shannon(id.mapping(up_id, 'uniprot', 'kegg'), 'vertebrates', base = 4, alphabet = 4)
+    t <- shannon(id.mapping(up_id, 'uniprot', 'kegg'), 'vertebrates', base = 21)
     property_seq_mon <- property_seq_com <- t$Hcodon
   } else if (property == "entropy100.aa"){
     t <- shannon(id.mapping(up_id, 'uniprot', 'kegg'), 'one-hundred', base = 21)
     property_seq_mon <- property_seq_com <- t$Haa
   } else if (property == "entropy100.codon"){
-    t <- shannon(id.mapping(up_id, 'uniprot', 'kegg'), 'one-hundred', base = 4, alphabet = 4)
+    t <- shannon(id.mapping(up_id, 'uniprot', 'kegg'), 'one-hundred', base = 21)
     property_seq_mon <- property_seq_com <- t$Hcodon
   }
 
