@@ -336,6 +336,10 @@ pdb.select <- function(up_id, threshold = 0.9){
   if (grepl('Sorry', pdbs[1])){
     return("NO PDB FOUND")
   } else { ## --------- Choose the PDB and chain when they exist
+    pdbs <- pdbs[which(nchar(pdbs$CHAIN)==1),]
+    if (nrow(pdbs) == 0){
+      return("NO PDB FOUND")
+    }
     oldw <- getOption("warn") # To avoid some irrelevant warnings
     options(warn = -1)
     identity <- rep(NA, nrow(pdbs))

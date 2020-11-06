@@ -13,8 +13,8 @@
 #' @usage ptm.plot(up_id, pdb = "", property, ptm, dssp = 'compute',
 #'                 window = 1, sdata = TRUE, ...)
 #' @param up_id a character string for the UniProt ID of the protein of interest.
-#' @param pdb Optional argument to indicate the PDB and chain to be used (i.e. '1u8f.O'). If we leave this argument empty, the function will make the election for us when possible. If we introduce 'none', no PDB will be used.
-#' @param property a character string indicating the property of interest. It should be one of 'sasa', 'acc', 'dpx', 'entropy7.aa','entropy7.codon', 'entropy100.aa', 'entropy100.codon', 'eiip', 'volume', 'polarizability', 'av.hyd', 'pi.hel', 'a.hel', 'b.sheet', 'B.factor', or 'own'.
+#' @param pdb Optional argument to indicate the PDB and chain to be used (i.e. '1u8f.O'). If we leave this argument empty, the function will make the election for us whenever possible. If we introduce 'none', no PDB will be used.
+#' @param property a character string indicating the property of interest. It should be one of 'sasa', 'acc', 'dpx', 'entropy7.aa','entropy7.codon', 'entropy100.aa', 'entropy100.codon', 'eiip', 'volume', 'polarizability', 'avg.hyd', 'pi.hel', 'a.hel', 'b.sheet', 'B.factor', or 'own'.
 #' @param ptm a character vector indicating the PTMs of interest. It should be among: 'ac' (acetylation), 'me' (methylation), 'meto' (sulfoxidation), 'p' (phosphorylation), 'su' (sumoylation) or 'ub' (ubiquitination), 'gl' (glycosylation),'reg' (regulatory), 'dis' (disease).
 #' @param dssp character string indicating the method to compute DSSP. It should be either 'compute' or 'mkdssp'.
 #' @param window positive integer indicating the window size for smoothing with a sliding window average (default: 1, i.e. no smoothing).
@@ -214,6 +214,7 @@ ptm.plot <- function(up_id, pdb = "", property, ptm , dssp = 'compute',
     }
     sse <- sse[which(sse$chain == pdb_chain), ]
     seq <- sse$aa # aa sequence
+    seq <- gsub("[a|b|c|d|e|f|g|h|i|j|k|l|m|n|o|p|q|r]", "C", seq) # half cystines
     names(seq) <- sse$respdb # position of each aa
 
     sse$sse <- NA
@@ -242,7 +243,12 @@ ptm.plot <- function(up_id, pdb = "", property, ptm , dssp = 'compute',
       # -------- TO BE COMPLETED
     }
   } else { # When there is no pdb to be used
-    seq <- get.seq(up_id, as.string = FALSE)[[1]] # aa sequence
+    if (property %in% c('entropy7.aa', 'entropy7.codon', 'entropy100.aa', 'entropy100.codon')){
+      seq <- get.seq(id.mapping(up_id, 'uniprot', 'kegg'),
+                     db = 'kegg-aa', as.string = FALSE)[[1]] # aa sequence from KEGG
+    } else {
+      seq <- get.seq(up_id, as.string = FALSE) # aa sequence from Uniprot
+    }
     names(seq) <- 1:length(seq) # aa position
     if (window >= length(aa)){
       stop("'window' must be smaller than the sequence length")
@@ -271,9 +277,20 @@ ptm.plot <- function(up_id, pdb = "", property, ptm , dssp = 'compute',
     ## ----------------------------------------- TO BE COMPLETED ----------------- ##
   } else if (property == "ncontacts"){
     ## ----------------------------------------- TO BE COMPLETED ----------------- ##
-  } else if (property == "entropy"){
-    ## ----------------------------------------- TO BE COMPLETED ----------------- ##
+  } else if (property == "entropy7.aa"){
+    t <- shannon(id.mapping(up_id, 'uniprot', 'kegg'), 'vertebrates', base = 21)
+    property_seq_mon <- property_seq_com <- t$Haa
+  } else if (property == "entropy7.codon"){
+    t <- shannon(id.mapping(up_id, 'uniprot', 'kegg'), 'vertebrates', base = 21)
+    property_seq_mon <- property_seq_com <- t$Hcodon
+  } else if (property == "entropy100.aa"){
+    t <- shannon(id.mapping(up_id, 'uniprot', 'kegg'), 'one-hundred', base = 21)
+    property_seq_mon <- property_seq_com <- t$Haa
+  } else if (property == "entropy100.codon"){
+    t <- shannon(id.mapping(up_id, 'uniprot', 'kegg'), 'one-hundred', base = 21)
+    property_seq_mon <- property_seq_com <- t$Hcodon
   }
+
 
   ## ------------------------------------------------------------------- ##
   ## ------- Smoothing the computed property values sequence ----------- ##
@@ -353,16 +370,16 @@ ptm.plot <- function(up_id, pdb = "", property, ptm , dssp = 'compute',
     ## ------- TO BE COMPLETED
     ylab <-'Number of intermolecular contacts'
   } else if (property == 'entropy7.aa'){
-    ## ------- TO BE COMPLETED
+    y <- s_property_seq_com
     ylab <- "Shannon's entropy.aa7"
   } else if (property == 'entropy7.codon'){
-    ## ------- TO BE COMPLETED
+    y <- s_property_seq_com
     ylab <- "Shannon's entropy.codon7"
   } else if (property == 'entropy100.aa'){
-    ## ------- TO BE COMPLETED
+    y <- s_property_seq_com
     ylab <- "Shannon's entropy.aa100"
   } else if (property == 'entropy100.codon'){
-    ## ------- TO BE COMPLETED
+    y <- s_property_seq_com
     ylab <- "Shannon's entropy.codon100"
   } else if (property == 'eiip'){
     y <- s_property_seq_com
@@ -370,7 +387,7 @@ ptm.plot <- function(up_id, pdb = "", property, ptm , dssp = 'compute',
   } else if (property == 'volume'){
     y <- s_property_seq_com
     ylab <- "Volume"
-  } else if (property == 'av.hyd'){
+  } else if (property == 'avg.hyd'){
     y <- s_property_seq_com
     ylab <- "Averaged Hydrophobicity Index"
   } else if (property == 'pi-helix'){

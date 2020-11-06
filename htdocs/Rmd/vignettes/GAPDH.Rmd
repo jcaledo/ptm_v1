@@ -16,7 +16,7 @@ The well known glycolytic enzyme glyceraldehyde-3-phosphate dehydgrogenase (GAPD
 Alineamiento de GAPDHs
 ```{r}
 k <- id.mapping("P04406", from = 'uniprot', to = 'kegg')
-S <- shannon(target = k, species = "seven")
+S <- shannon(target = k, species = "vertebrates", base = 21)
 ```
 
 The first time pdb = '1u8f' then pdb = './1u8f_Repair.pdb'

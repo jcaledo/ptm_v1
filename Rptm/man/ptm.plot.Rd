@@ -10,7 +10,7 @@ ptm.plot(up_id, pdb = "", property, ptm, dssp = 'compute',
 \arguments{
 \item{up_id}{a character string for the UniProt ID of the protein of interest.}
 
-\item{pdb}{Optional argument to indicate the PDB and chain to be used (i.e. '1u8f.O'). If we leave this argument empty, the function will make the election for us when possible. If we introduce 'none', no PDB will be used.}
+\item{pdb}{Optional argument to indicate the PDB and chain to be used (i.e. '1u8f.O'). If we leave this argument empty, the function will make the election for us whenever possible. If we introduce 'none', no PDB will be used.}
 
 \item{property}{a character string indicating the property of interest. It should be one of 'sasa', 'acc', 'dpx', 'entropy7.aa','entropy7.codon', 'entropy100.aa', 'entropy100.codon', 'eiip', 'volume', 'polarizability', 'av.hyd', 'pi.hel', 'a.hel', 'b.sheet', 'B.factor', or 'own'.}
 
