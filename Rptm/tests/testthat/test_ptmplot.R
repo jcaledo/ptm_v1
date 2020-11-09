@@ -27,42 +27,6 @@ test_that("ptm.plot() works properly",{
   expect_true(grepl("Work done.", c))
 })
 
-
-# test_that("plot.ptm() works properly",{
-#
-#   skip_on_cran()
-#   skip_on_travis()
-#
-#   a <- plot.ptm("P09803", property = 'eiip', window = 10, ptm = c('meto', 'p', 'ac'))
-#   b <- plot.ptm("P09803", property = 'dpx', ptm = c('meto', 'p', 'ac'))
-#   c <- plot.ptm("P09803", pdb = '1I7W.D', property = 'acc', ptm = c('meto', 'p', 'ac'))
-#
-#   expect_is(a, 'character') # --------------- length uniprot seq longer than the pdb seq
-#   expect_true(grepl("Work done.", a))
-#
-#   expect_is(b, 'character') # -------------- length pdb shorter than seq uniprot
-#   expect_true(grepl("Work done.", b))
-#
-#   expect_is(c, 'character') # -------------- length pdb with gaps
-#   expect_true(grepl("Work done.", c))
-# })
-
-# test_that("plot.ptm() works properly",{
-#
-#   skip_on_cran()
-#   skip_on_travis()
-#
-#   a <- plot.ptm("P18031", property = 'dpx', window = 1, ptm = 'all') # --- PTMs mostly on surface
-#   b <- plot.ptm("P84022", property = 'dpx', window = 1, ptm = 'all') # -- PTM only on surface
-#   # c <- plot.ptm("P02511", property = 'dpx', window = 1, dssp = 'mkdssp', ptm = 'all') # --- Disabling
-#
-#   expect_is(a, 'character')
-#   expect_true(grepl("Work done.", a))
-#
-#   expect_is(b, 'character')
-#   expect_true(grepl("Work done.", b))
-# })
-
 ## ---------------------------------------------- ##
 #             Testing find.aaindex                 #
 ## ---------------------------------------------- ##
