@@ -166,6 +166,7 @@ compute.dssp <- function(pdb, destfile = './'){
     ready <- FALSE
     attempts <- 0
     while(!ready & attempts < 3){
+      print(attempts)
       attempts <- attempts + 1
       if (job_status == 'SUCCESS'){
         ready = TRUE
@@ -176,7 +177,7 @@ compute.dssp <- function(pdb, destfile = './'){
       }
     }
 
-    if (del){ # if a pdb file was downloaded now is delated
+    if (del){ # if a pdb file was downloaded now is deleted
       file.remove(file)
     }
     if (job_status != 'SUCCESS'){

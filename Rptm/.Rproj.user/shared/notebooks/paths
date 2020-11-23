@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /Users/JCA/ptm_outdropbox/ptm/Rptm/R/aa.R="A32A40FC"
 /Users/JCA/ptm_outdropbox/ptm/Rptm/R/accdpx.R="733A669C"
 /Users/JCA/ptm_outdropbox/ptm/Rptm/R/deep_test_ptmplot.R="614C9405"
@@ -14,3 +15,22 @@
 /Users/JCA/ptm_outdropbox/ptm/htdocs/Rmd/vignettes/3D_MetO.Rmd="6E7F2DF4"
 /Users/JCA/ptm_outdropbox/ptm/htdocs/Rmd/vignettes/GAPDH.Rmd="83E26006"
 /Users/JCA/ptm_outdropbox/ptm/htdocs/Rmd/vignettes/vignettes.Rmd="177072B5"
+=======
+/Users/juancarlosaledo/ptm_outdropbox/ptm/Rptm/R/ptmScan.R="F9B1BA49"
+/Users/juancarlosaledo/ptm_outdropbox/ptm/Rptm/R/ptmplot.R="EB2C75DC"
+/Users/juancarlosaledo/ptm_outdropbox/ptm/Rptm/tests/testthat/test_aa.R="B3ADCE45"
+/Users/juancarlosaledo/ptm_outdropbox/ptm/Rptm/tests/testthat/test_accdpx.R="99A8E136"
+/Users/juancarlosaledo/ptm_outdropbox/ptm/Rptm/tests/testthat/test_ddG.R="88337DE2"
+/Users/juancarlosaledo/ptm_outdropbox/ptm/Rptm/tests/testthat/test_distances.R="0A86C273"
+/Users/juancarlosaledo/ptm_outdropbox/ptm/Rptm/tests/testthat/test_dssp.R="914A0CCC"
+/Users/juancarlosaledo/ptm_outdropbox/ptm/Rptm/tests/testthat/test_environment.R="D0F8CE60"
+/Users/juancarlosaledo/ptm_outdropbox/ptm/Rptm/tests/testthat/test_evolutionary.R="24362147"
+/Users/juancarlosaledo/ptm_outdropbox/ptm/Rptm/tests/testthat/test_getseq.R="B46BBEF5"
+/Users/juancarlosaledo/ptm_outdropbox/ptm/Rptm/tests/testthat/test_go.R="834B304A"
+/Users/juancarlosaledo/ptm_outdropbox/ptm/Rptm/tests/testthat/test_metosite.R="C5ACAAE8"
+/Users/juancarlosaledo/ptm_outdropbox/ptm/Rptm/tests/testthat/test_pdb_ancillary.R="71C77C86"
+/Users/juancarlosaledo/ptm_outdropbox/ptm/Rptm/tests/testthat/test_ptmScan.R="A53B862E"
+/Users/juancarlosaledo/ptm_outdropbox/ptm/Rptm/tests/testthat/test_ptmplot.R="2D0C4124"
+/Users/juancarlosaledo/ptm_outdropbox/ptm/Rptm/tests/testthat/test_saromatic.R="106A1076"
+/Users/juancarlosaledo/ptm_outdropbox/ptm/htdocs/Rmd/ptmplot/ptmplot.Rmd="3B64E833"
+>>>>>>> deaf768301543fff869e50a76b36e4177e292dcf

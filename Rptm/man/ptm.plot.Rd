@@ -10,11 +10,11 @@ ptm.plot(up_id, pdb = "", property, ptm, dssp = 'compute',
 \arguments{
 \item{up_id}{a character string for the UniProt ID of the protein of interest.}
 
-\item{pdb}{Optional argument to indicate the PDB and chain to be used (i.e. '1u8f.O'). If we leave this argument empty, the function will make the election for us whenever possible. If we introduce 'none', no PDB will be used.}
+\item{pdb}{Optional argument to indicate the PDB and chain to be used (i.e. '1u8f.O'). If we leave this argument empty, the function will make the election for us whenever possible.}
 
-\item{property}{a character string indicating the property of interest. It should be one of 'sasa', 'acc', 'dpx', 'entropy7.aa','entropy7.codon', 'entropy100.aa', 'entropy100.codon', 'eiip', 'volume', 'polarizability', 'av.hyd', 'pi.hel', 'a.hel', 'b.sheet', 'B.factor', or 'own'.}
+\item{property}{a character string indicating the property of interest. It should be one of 'sasa', 'acc', 'dpx', 'entropy7.aa','entropy7.codon', 'entropy100.aa', 'entropy100.codon', 'eiip', 'volume', 'polarizability', 'avg.hyd', 'pi.hel', 'a.hel', 'b.sheet', 'B.factor', or 'own'.}
 
-\item{ptm}{a character vector indicating the PTMs of interest. It should be among: 'ac' (acetylation), 'me' (methylation), 'meto' (sulfoxidation), 'p' (phosphorylation), 'su' (sumoylation) or 'ub' (ubiquitination), 'gl' (glycosylation),'reg' (regulatory), 'dis' (disease).}
+\item{ptm}{a character vector indicating the PTMs of interest. It should be among: 'ac' (acetylation), 'me' (methylation), 'meto' (sulfoxidation), 'p' (phosphorylation), 'ni' (nitration), 'su' (sumoylation) or 'ub' (ubiquitination), 'gl' (glycosylation), 'sni' (S-nitrosylation),'reg' (regulatory), 'dis' (disease).}
 
 \item{dssp}{character string indicating the method to compute DSSP. It should be either 'compute' or 'mkdssp'.}
 
@@ -25,7 +25,7 @@ ptm.plot(up_id, pdb = "", property, ptm, dssp = 'compute',
 \item{...}{when the user want to use his/her own amino acid index, it can be passed as a named vector.}
 }
 \value{
-This function returns either one or two plots related to the choosen property along the primary structure, as well as the computed data if sdata has been setted to TRUE.
+This function returns either one or two plots related to the chosen property along the primary structure, as well as the computed data if sdata has been set to TRUE.
 }
 \description{
 Represents the values of a property and show the PTM sites along a protein sequence.

@@ -13,9 +13,9 @@
 #' @usage ptm.plot(up_id, pdb = "", property, ptm, dssp = 'compute',
 #'                 window = 1, sdata = TRUE, ...)
 #' @param up_id a character string for the UniProt ID of the protein of interest.
-#' @param pdb Optional argument to indicate the PDB and chain to be used (i.e. '1u8f.O'). If we leave this argument empty, the function will make the election for us whenever possible. If we introduce 'none', no PDB will be used.
+#' @param pdb Optional argument to indicate the PDB and chain to be used (i.e. '1u8f.O'). If we leave this argument empty, the function will make the election for us whenever possible.
 #' @param property a character string indicating the property of interest. It should be one of 'sasa', 'acc', 'dpx', 'entropy7.aa','entropy7.codon', 'entropy100.aa', 'entropy100.codon', 'eiip', 'volume', 'polarizability', 'avg.hyd', 'pi.hel', 'a.hel', 'b.sheet', 'B.factor', or 'own'.
-#' @param ptm a character vector indicating the PTMs of interest. It should be among: 'ac' (acetylation), 'me' (methylation), 'meto' (sulfoxidation), 'p' (phosphorylation), 'su' (sumoylation) or 'ub' (ubiquitination), 'gl' (glycosylation),'reg' (regulatory), 'dis' (disease).
+#' @param ptm a character vector indicating the PTMs of interest. It should be among: 'ac' (acetylation), 'me' (methylation), 'meto' (sulfoxidation), 'p' (phosphorylation), 'ni' (nitration), 'su' (sumoylation) or 'ub' (ubiquitination), 'gl' (glycosylation), 'sni' (S-nitrosylation),'reg' (regulatory), 'dis' (disease).
 #' @param dssp character string indicating the method to compute DSSP. It should be either 'compute' or 'mkdssp'.
 #' @param window positive integer indicating the window size for smoothing with a sliding window average (default: 1, i.e. no smoothing).
 #' @param sdata logical, if TRUE save a Rda file with the relevant data in the current directory.
@@ -43,7 +43,7 @@
 #' \item{entropy100.codon:} {Shannon entropy based on 100 species and codon sequences (EVO)}
 #' }
 #' For 3D properties such as sasa, acc or dpx, for which different values can be obtained depending on the cuaternary structure, we first compute the property values for each residue in the whole protein and ploted agains the residue position. Then, the value for this property is computed in the isolated chain (a single polypeptide chain) and in a second plot, the differences between the values in the whole protein and the chain are ploted against the residue position.
-#' @return This function returns either one or two plots related to the choosen property along the primary structure, as well as the computed data if sdata has been setted to TRUE.
+#' @return This function returns either one or two plots related to the chosen property along the primary structure, as well as the computed data if sdata has been set to TRUE.
 #' @author Juan Carlos Aledo
 #' @examples \dontrun{ptm.plot('P04406', property = 'sasa', window = 10, ptm = 'meto')}
 #' @examples \dontrun{ptm.ptm('P04406', property = 'dpx', ptm = c('meto', 'p'))}
@@ -58,6 +58,14 @@ ptm.plot <- function(up_id, pdb = "", property, ptm , dssp = 'compute',
                      window = 1, sdata = TRUE, ...){
 
   aa <- aai$aa
+
+  ## -- Check if already exists a directory named 'split_chain'
+  if (file.exists("./split_chain")){
+    borrar <- FALSE
+  } else {
+    borrar <- TRUE
+  }
+
   ## ------------------------------------------------------------------- ##
   ## ---------------- Is there any PDB for this protein? --------------- ##
   ## ------------------------------------------------------------------- ##
@@ -127,7 +135,7 @@ ptm.plot <- function(up_id, pdb = "", property, ptm , dssp = 'compute',
 
     if (property == 'own'){
     z <- list(...)
-    if (length(z) == 0){
+    if (length(z[[1]]) == 0){
       stop("No aa index has been provided")
     } else {
       index <- z[[1]]
@@ -247,7 +255,7 @@ ptm.plot <- function(up_id, pdb = "", property, ptm , dssp = 'compute',
       seq <- get.seq(id.mapping(up_id, 'uniprot', 'kegg'),
                      db = 'kegg-aa', as.string = FALSE)[[1]] # aa sequence from KEGG
     } else {
-      seq <- get.seq(up_id, as.string = FALSE) # aa sequence from Uniprot
+      seq <- get.seq(up_id, as.string = FALSE)[[1]] # aa sequence from Uniprot
     }
     names(seq) <- 1:length(seq) # aa position
     if (window >= length(aa)){
@@ -502,6 +510,10 @@ ptm.plot <- function(up_id, pdb = "", property, ptm , dssp = 'compute',
     attr(output, "chain") <- pdb_chain
   } else {
     attr(output, "pdb") <- "No pdb found for this protein"
+  }
+
+  if (borrar & file.exists("./split_chain")){
+    unlink("./split_chain", recursive = TRUE)
   }
 
   return(output)

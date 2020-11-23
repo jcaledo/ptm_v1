@@ -48,7 +48,10 @@ Thumbs.db
 *.mov
 *.wmv
 
+# History anr Rproj
 .Rproj.user
 .Rproj.user*
 .Rhistory
+*.Rhistory
 Rptm/.Rhistory
+
