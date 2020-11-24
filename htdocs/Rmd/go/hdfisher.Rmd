@@ -1,0 +1,37 @@
+---
+title: "gogo()"
+author: "Juan Carlos Aledo"
+date: "24/10/2020"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+library(knitr)
+```
+
+
+if we wish to use as background the set of all the proteins whose modification of any of their methionine residues has been reported to have an effect on the protein activity, we start getting the Uniprot ID of the proteins forming such a set:
+
+
+```{r}
+sites <- meto.search(highthroughput.group = FALSE,
+                 bodyguard.group = FALSE,
+                 regulatory.group = TRUE)
+ids <- unique(sites$prot_id)
+```
+
+Now, we are ready to use background.go():
+
+```{r}
+bs <- background.go(ids)
+kable(head(bs))
+```
+Let's put the focus on the protein in the second row. We can get its name and a vector containing its GO terms:
+
+```{r}
+id.features(bs$up_id[2], features = "protein_names")$Protein_names
+strsplit(bs$GO_id[2], split = ",")[[1]]
+```

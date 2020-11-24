@@ -177,6 +177,7 @@ prot2codon <- function(prot, chain = "", laxity = TRUE){
 
   } else { # input should be a uniprot ID
     seq <- ptm::get.seq(prot, as.string = FALSE)[[1]]
+    if (length(seq) == 0) {return("Sorry, no Uniprot seq could be found!")}
     t <- prot
     source <- 'uniprot'
   }
