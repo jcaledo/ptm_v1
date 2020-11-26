@@ -59,7 +59,7 @@ enrichment[[2]]
 Note that the hdfisher.go() function compute the p-value for an enrichment test by default. However, we can also address depletion hypothesis. For instance, if we hypothesize that protein related to the RNA metabolism are underrepresented in the background set, se can set the "analysis" argument to "depletion":
 
 ```{r}
-depletion   <- hdfisher.go(target = gids, 
+depletion   <- hdfisher.go(target = target, 
                            background = bs, 
                            query = "RNA", 
                            analysis = "depletion")

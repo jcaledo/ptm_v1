@@ -391,13 +391,13 @@ hdfisher.go <- function(target, background, query, analysis = 'enrichment'){
 #' @description Explores the relationship among proteins from a given set.
 #' @usage net.go(data, threshold = 0.2, silent = FALSE)
 #' @param data either a vector containing the UniProt IDs (vertices) or the path to the txt or rda file containing them.
-#' @param threshold threshold value of the Jaccard index above which, two proteins are considered to be linked.
+#' @param threshold threshold value of the Jaccard index above which two proteins are considered to be linked.
 #' @param silent logical, if FALSE print details of the running process.
-#' @details This function first searchs the GO for each vertex and then computes the Jarcard index for each protein pair based on their GO terms. Afterwards, an adjacency matrix is computed, where two proteins are linked if their Jarcard index is greater than the selected threshold.
+#' @details This function first searchs the GO for each vertex and then computes the Jaccard index for each protein pair based on their GO terms. Afterwards, an adjacency matrix is computed, where two proteins are linked if their Jaccard index is greater than the selected threshold.
 #' @return Returns a list containing (i) the dataframe corresponding to the computed Jaccard matrix, (ii) the adjacency matrix, (iii) a vector containing the vertices, and (iv) a matrix describing the edges of the network.
-#' @author Juan Carlos Aledo
+#' @author Pablo Aledo & Juan Carlos Aledo
 #' @seealso search.go(), term.go(), get.go(), background.go(), gorilla()
-#' @references Aledo & Aledo (2020) Antioxidants 9, 987; doi:10.3390/antiox9100987.
+#' @references Aledo & Aledo (2020) Antioxidants 9(10), 987.
 #' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 #' @examples \dontrun{net.go(path2data = "./GOvivo.txt")}
 #' @importFrom igraph graph_from_adjacency_matrix

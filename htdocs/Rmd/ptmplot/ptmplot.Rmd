@@ -1,5 +1,5 @@
 ---
-title: "plot.ptm()"
+title: "ptm.plot()"
 # author: "Juan Carlos Aledo"
 # date: "11/07/2020"
 output: html_document
@@ -18,21 +18,23 @@ ptm.plot(up_id, pdb = "", property, ptm, dssp = 'compute', window = 1, sdata = T
 
 ### Arguments
 
-_up_id_:	a character string for the UniProt ID of the protein of interest.
+_up_id_	a character string for the UniProt ID of the protein of interest.
 
-_pdb_:	Optional argument to indicate the PDB and chain to be used (i.e. '1u8f.O'). If we leave this argument empty, the function will make the election for us whenever possible. 
+_pdb_	Optional argument to indicate the PDB and chain to be used (i.e. '1u8f.O'). If we leave this argument empty, the function will make the election for us whenever possible. 
 
-_property_:	a character string indicating the property of interest. It should be one of 'sasa', 'acc', 'dpx', 'entropy7.aa','entropy7.codon', 'entropy100.aa', 'entropy100.codon', 'eiip', 'volume', 'polarizability', 'av.hyd', 'pi.hel', 'a.hel', 'b.sheet', 'B.factor', or 'own'.
+_property_	a character string indicating the property of interest. It should be one of 'sasa', 'acc', 'dpx', 'entropy7.aa','entropy7.codon', 'entropy100.aa', 'entropy100.codon', 'eiip', 'volume', 'polarizability', 'av.hyd', 'pi.hel', 'a.hel', 'b.sheet', 'B.factor', or 'own'.
 
-_ptm_: a character vector indicating the PTMs of interest. It should be among: 'ac' (acetylation), 'me' (methylation), 'meto' (sulfoxidation), 'p' (phosphorylation), 'ni' (nitration), 'su' (sumoylation) or 'ub' (ubiquitination), 'gl' (glycosylation), 'sni' (S-nitrosylation),'reg' (regulatory), 'dis' (disease).
+_ptm_ a character vector indicating the PTMs of interest. It should be among: 'ac' (acetylation), 'me' (methylation), 'meto' (sulfoxidation), 'p' (phosphorylation), 'ni' (nitration), 'su' (sumoylation) or 'ub' (ubiquitination), 'gl' (glycosylation), 'sni' (S-nitrosylation),'reg' (regulatory), 'dis' (disease).
 
-_dssp_: character string indicating the method to compute DSSP. It should be either 'compute' or 'mkdssp'.
+_dssp_ character string indicating the method to compute DSSP. It should be either 'compute' or 'mkdssp'.
 
-_window_: positive integer indicating the window size for smoothing with a sliding window average (default: 1, i.e. no smoothing).
+_window_ positive integer indicating the window size for smoothing with a sliding window average (default: 1, i.e. no smoothing).
 
-_sdata_: logical, if TRUE save a Rda file with the relevant data in the current directory.
+_sdata_ logical, if TRUE save a Rda file with the relevant data in the current directory.
 
 ### Value
+
+This function returns either one or two plots related to the chosen property along the primary structure, as well as the computed data if sdata has been set to TRUE.
 
 ### See Also
 _find.aaindex()_
@@ -93,6 +95,7 @@ Herein, we are using window = 1 (the default value), at each position we plot th
 ```{r}
 ptm.plot(up_id = "P04406", property = 'avg.hyd', ptm = 'meto', window = 5)
 ```
+
 Now we have obtain a smoother plot and more interestingly, we observe that the oxidized methionines are distributed through regions of different hydrophobicity. We can also observe that the plot shows, at the bottom, a bar indicating the secondary structure coded with different colors (cyan for helices, magenta for sheets and pink for loops).
 
 Of course, we can combine different PTMs:
@@ -135,6 +138,7 @@ Let's now try to plot a 3D property, for instance, the accessibility of the resi
 ```{r}
 ptm.plot(up_id = "P04406", property = 'acc', ptm = 'meto')
 ```
+
 As expected, we obtain two plots. One with the accessibility of each residue when considered in the context of the whole protein (the tetramer), and a second plot showing the increase in accessibility when a single monomer is considered. Thus, the picks in this second plot represent those residues that are forming part of the subunit-subunit interfaces. Three MetO are found within these regions (at positions 43, 46 and 231).
 
 Now, we are going to plot an evolutionary property, for instance the Shannon entropy:
@@ -157,11 +161,13 @@ names(f) <- c('A', 'R', 'N', 'D', 'C', 'Q', 'E', 'G', 'H', 'I',
 ```{r}
 ptm.plot(up_id = "P04406", property = 'own', ptm = 'meto', window = 5, index = f)
 ```
+
 More than 500 different [amino acid indices](https://www.genome.jp/aaindex/) have been described. If you want to use some of them,  **ptm** provides a useful function that will help you to find the desired index. Let's say we are interested in the number of hydrogen bond donors, then we could use the keyword 'hydrogen bond' as argument for the function __find.aaindex()__:
 
 ```{r}
 find.aaindex('hydrogen bond')
 ```
+
 This function returns the ID of the index of interest, but we can easily have more detailed information as follows:
 
 ```{r}

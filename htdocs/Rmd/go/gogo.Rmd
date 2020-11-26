@@ -1,0 +1,69 @@
+---
+title: "gogo()"
+author: "Juan Carlos Aledo"
+date: "24/10/2020"
+output: html_document
+---
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+library(knitr)
+```
+
+Thus, our first goal is to get the set we have called P:
+
+```{r}
+sites <- meto.search(organism = 'Homo sapiens',
+                     oxidant = 'hydrogen peroxide')
+P <- unique(sites$prot_id[which(sites$met_vivo_vitro == "vivo")])
+```
+
+Once we have the set P, we are ready to use the function net.go():
+
+```{r}
+network <- net.go(P, threshold = 0.5, silent = TRUE)
+```
+
+This function first search the GO terms for each node (protein in P) and then compute the Jaccard index for each protein pair based on their GO terms. Afterwards, an adjacency matrix is computed, where two proteins are linked if their Jaccard index is greater than the selected threshold.
+
+Let's examine the first 10 columns and rows from the Jaccard matrix we have obtained:
+
+```{r}
+Jaccard <- network[[1]]
+Jaccard[1:10, 1:10]
+```
+
+As expected, we note that Jaccard is an upper triangular matrix.Now we also examine first rows and columns from the adjancency matrix:
+
+```{r}
+Adjacency <- network[[2]]
+Adjacency[1:10, 1:10]
+```
+
+Not surprisingly, this submatrix is the zero matrix. That is, any of the 10 first proteins are related according to our criteria (threshold = 0.3). Nevertheless, we can check that our graph will have ... edges (pairs of related proteins):
+
+
+```{r}
+edges <- network[[4]]
+nrow(edges)
+head(edges)
+```
+
+Now, if we have previously installed the package igraph, we are in conditions to plot our network:
+
+```{r}
+G <- igraph::graph_from_data_frame(d = edges, 
+                                   vertices = network[[3]],
+                                   directed = FALSE)
+plot(G, 
+     vertex.label = NA,
+     edge.color = "black",
+     vertex.size = 0.5 + (igraph::degree(G))^(1/5),
+     layout = igraph::layout_components(G)
+    )
+```
+
