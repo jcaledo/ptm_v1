@@ -15,7 +15,7 @@ The _ptm_ package, writen to assist the study of protein post-translational modi
 * Functions exploring data from [MetOSite](https://metosite.uma.es) (a methionine sulfoxidation database).
 * Functions integrating data from other main PTM databases.
 * Functions to study S-aromatic motifs.
-* Functions to analyse sequence environment.
+* Functions to analyze sequence environment.
 * Functions to handle sequences from different databases.
 * Evolutionary analysis tools.
 * GO network analysis.
@@ -23,8 +23,9 @@ The _ptm_ package, writen to assist the study of protein post-translational modi
 * Functions to explore protein surfaces.
 * Functions to explore thermodynamic stability.
 * Tools for sequence re-numbering.
-* Functions related to inter-atomic and inter-residue distances
-* Funtions related to data visualization.
+* Functions related to inter-atomic and inter-residue distances.
+* Miscellanea functions related to protein properties.
+* Functions related to data visualization.
 
 Major functions are listed below with links to further documentation that includes example code and results.
 
@@ -96,7 +97,8 @@ We also distribute a number of extended _ptm_ vignettes that provide worked exam
 * [search.go](/search-go): Searchs a Simple User Query.
 * [term.go](/search-go): Gets core information about the GO term of interest.
 * [get.go](/get-go): Gets the gene ontology annotations for a given protein.
-* [go.enrich](/go-enrich): Carries out GO term enrichment tests
+* [background.go](/background.go): Searchs GO terms for background set.
+* [hdfisher.go](/hdfisher.go): Carries out an enrichment Fisher's test using a hypothesis-driven approach.
 
 ### Ancillary tools dealing with PDB files
 
@@ -141,6 +143,10 @@ We also distribute a number of extended _ptm_ vignettes that provide worked exam
 * [dist2closest](./dist2closest): Computes the Distance to the Closest Amino Acid of the Indicated Type.
 * [ball](./ball): Finds the Atoms Within a Sphere with the Indicated Center and Radius.
 * [pairwise.dist](./pairwise.dist): Computes the Pairwise Distance Matrix Between Two Sets of Points.
+
+### Miscellanea functions related to protein properties
+
+* [abundance](/abundance):
 
 ### Data visualization
 

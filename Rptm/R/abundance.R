@@ -1,4 +1,4 @@
-## ------------- aa.R ------------- ##
+## ------ abundance.R ------------- ##
 #                                    #
 #     abundance                      #
 #                                    #
@@ -7,19 +7,17 @@
 ## --------------------------------------------------------------- ##
 #                         abundance(id, ...)                        #
 ## --------------------------------------------------------------- ##
-#' Residue Found at the Requested Position
-#' @description Returns the residue found at the requested position
+#' Protein Abundance Data
+#' @description Returns data regarding the abundance of a given protein.
 #' @usage abundance(id, ...)
 #' @param id the UniProt identifier of the protein of interest.
-#' @details For human proteins, in addition to the abundance in the whole organism (by default), the abundance found in Jurkat or HeLa cells can be requested.
+#' @details For human proteins, in addition to the abundance in the whole organism (by default), the abundance found in Jurkat or HeLa cells can be requested. The data are obtained from the PaxDb.
 #' @return A numeric value for the abundance, expressed a parts per million (ppm), of the requested protein.
 #' @author Juan Carlos Aledo
 #' @examples abundance(id = 'A0AVT1')
 #' abundance(id = 'A0AVT1', 'jurkat')
 #' abundance(id = 'A0AVT1', 'hela')
 #' @references Wang et al. Proteomics 2015, 10.1002/pmic.201400441. (PMID: 25656970)
-#' @seealso
-#' @export
 
 abundance <- function(id, ...){
 
