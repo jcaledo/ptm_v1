@@ -31,7 +31,7 @@ get.go('P01009')
 Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 }
 \seealso{
-search.go, term.go(), background.go(), go.enrich(), gorilla(), net.go()
+search.go, term.go(), background.go(), hdfisher.go(), gorilla(), net.go()
 }
 \author{
 Juan Carlos Aledo

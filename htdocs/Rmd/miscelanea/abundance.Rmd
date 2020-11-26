@@ -1,0 +1,136 @@
+---
+title: "abundance()"
+# author: "Juan Carlos Aledo"
+# date: "10/25/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+```
+
+### Description
+Searchs a simple user query.
+
+### Usage
+search.go(query)
+
+### Arguments
+_query_	character string defining the query.
+
+### Value
+
+Returns a dataframe containing the GO IDs found associated to the query, as well as additional information related to these terms.
+
+### References
+Rhee, Wood, Dolinkski & Draghici, [Nature Reviews Genetics 2008, 9:509–515](https://pubmed.ncbi.nlm.nih.gov/18475267/).
+
+### See Also
+term.go(), get.go(), go.enrich(), gorilla() 
+
+### Details
+The _ptm_ package offers a set of ancillary functions aimed to carry out rutinary work, which may be needed when more elaborated analysis are required. The functions that we will document herein are:
+
+* aa.at()
+* is.at()
+* aa.comp()
+* renum.pdb()
+* renum.meto()
+* renum()
+
+The function <font size="1">**aa.at()**</font> returns the amino acid found at the requested position of the target sequence. For instance, if we want to know what amino acid is found at the position 100 of the horse cytochrome c (P00004):
+ 
+```{r}
+aa.at(100, 'P00004')
+```
+
+The _target_ sequence doen't need to be a UniProt sequence, it can be any string of amino acid, in that case we should pass the argument _uniprot = FALSE_:
+
+```{r}
+aa.at(at = 10, target = "GDVEKGKKIFVQKCAQCHTVEKGGK", uniprot = FALSE)
+```
+
+Sometimes it may be convinient just to check if the reside found at a given position is the one we expect, then we resort to the function <font size="1">**is.at()**</font>:
+
+```{r}
+is.at(at = 100, target = 'P00004', aa = 'K')
+is.at(at = 10, target = "GDVEKGKKIFVQKCAQCHTVEKGGK", aa = 'L', uniprot = FALSE)
+```
+
+In many ocasions the numeration of the sequences coming from a [PDB](https://www.rcsb.org/) structure and its corresponding sequence from UniProt don't match. When this happens it is useful to have a tool such as <font size="1">**renum.pdb()**</font> that will re-numerate the residues for us.
+
+Let's see an example using the protein alpha-1-antitrypsin as model. The mature form of the protein (sequence given by PDB) is formed by proteolytic cleavage of a precursor (sequence given by UniProt). Thus, the processed protein starts at the position 25 from the precursor. Furthermore, the first 23 residues of the mature form are not resolved in the structure given by 3CWM. Thus, the first residue in the 3CWM structure correspond to asparragine 48 in the UniProt sequence.
+
+```{r}
+library(knitr)
+up_pdb <- renum.pdb(pdb = '3CWM', chain = 'A', uniprot = 'P01009')
+kable(up_pdb[43:53, ])
+```
+
+We can see that the function <font size="1">**renum.pdb()**</font> has renumerated all the residues from the PDB structure to force them matching the UniProt numeration.
+
+Something similar can happen when comparing sequence from other databases. For instance, if we compare the sequence recovered for this protein from [MetOSite](https://metosite.uma.es) and [UniProt](https://www.uniprot.org/uniprot/P01009):
+
+```{r}
+library(bio3d)
+up_seq <- ptm::get.seq('P01009', db = 'uniprot')
+meto_seq <- ptm::get.seq('P01009', db = 'metosite')
+seqs <- bio3d::seqbind(up_seq, meto_seq, blank = '-')
+aln <- seqaln(seqs, id = c(c("UniProt", "MetOSite")))
+aln
+```
+
+We can observe that while the sequence recovered from MetOSite corresponds to the mature form of the protein, UniProt provides the sequence of the precursor. 
+
+To renumerate residues when UniProt-MetOSite compararison are required, we have the function <font size="1">**renum.meto()**</font>
+
+```{r}
+library(knitr)
+up_meto <- renum.meto('P01009')
+kable(up_meto[20:35, ])
+```
+
+Sometimes we may need just renumerate a single residue. For instance, [according to the literature](https://www.ncbi.nlm.nih.gov/pubmed/10867014), oxidation of either M351 or  M358 in alpha-1-antitrypsin causes loss of anti-neutrophil elastase activity. If we check what residues are found at these positions in the alpha-1-antitrypsin sequence downloaded from MetOSite, we'll find, as expected, that they are two methionine residues 
+
+```{r}
+is.at(351, ptm::get.seq('P01009', db = 'metosite'), aa = 'M', uniprot = FALSE)
+is.at(358, ptm::get.seq('P01009', db = 'metosite'), aa = 'M', uniprot = FALSE)
+```
+
+However, if we check for the amino acids found at these positions in the sequence downloaded from UniProt,
+
+```{r}
+aa.at(351, 'P01009', uniprot = TRUE)
+aa.at(358, 'P01009', uniprot = TRUE)
+```
+We find leucine and histidine, respectively! That is because the numeration use in the literature, as well as in MetOSite, is that for the mature form, while the UniProt sequence corresponds to the precursor protein. 
+
+In this case, we can use the function <font size="1">**renum()**</font> to renumerate one specific residue:
+
+```{r}
+renum('P01009', pos = 351, from = 'metosite', to = 'uniprot')
+```
+Let's check that at position 375 in the UniProt sequence we find indeed a methionine:
+
+```{r}
+is.at(375, 'P01009', aa = 'M', uniprot = TRUE)
+```
+
+Finally, the function <font size="1">**aa.comp()**</font> provides us the amino acid composition of a given sequence.
+
+```{r}
+library(knitr)
+mytable <- aa.comp('P01009')
+mytable$percent <- round(100 * mytable$frequency/sum(mytable$frequency), 1)                
+kable(mytable)
+```
+
+Above we have passed the UniProt ID of the protein of interest, but we can also provide any customized sequence:
+
+```{r}
+library(knitr)
+mytable <- aa.comp('MAARESAPFDR', uniprot = FALSE)
+mytable$relative <- round(100 * mytable$frequency/sum(mytable$frequency), 1)                
+kable(mytable)
+```

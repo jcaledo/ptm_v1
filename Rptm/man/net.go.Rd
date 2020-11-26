@@ -9,7 +9,7 @@ net.go(data, threshold = 0.2, silent = FALSE)
 \arguments{
 \item{data}{either a vector containing the UniProt IDs (vertices) or the path to the txt or rda file containing them.}
 
-\item{threshold}{threshold value of the Jaccard index above which, two proteins are considered to be linked.}
+\item{threshold}{threshold value of the Jaccard index above which two proteins are considered to be linked.}
 
 \item{silent}{logical, if FALSE print details of the running process.}
 }
@@ -20,13 +20,13 @@ Returns a list containing (i) the dataframe corresponding to the computed Jaccar
 Explores the relationship among proteins from a given set.
 }
 \details{
-This function first searchs the GO for each vertex and then computes the Jarcard index for each protein pair based on their GO terms. Afterwards, an adjacency matrix is computed, where two proteins are linked if their Jarcard index is greater than the selected threshold.
+This function first searchs the GO for each vertex and then computes the Jaccard index for each protein pair based on their GO terms. Afterwards, an adjacency matrix is computed, where two proteins are linked if their Jaccard index is greater than the selected threshold.
 }
 \examples{
 \dontrun{net.go(path2data = "./GOvivo.txt")}
 }
 \references{
-Aledo & Aledo (2020) Antioxidants 9, 987; doi:10.3390/antiox9100987.
+Aledo & Aledo (2020) Antioxidants 9(10), 987.
 
 Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 }
@@ -34,5 +34,5 @@ Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 search.go(), term.go(), get.go(), background.go(), gorilla()
 }
 \author{
-Juan Carlos Aledo
+Pablo Aledo & Juan Carlos Aledo
 }
