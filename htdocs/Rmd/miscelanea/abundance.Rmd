@@ -11,126 +11,89 @@ library(ptm)
 ```
 
 ### Description
-Searchs a simple user query.
+Provides the protein abundance, in parts per million, of the requested protein.
 
 ### Usage
-search.go(query)
+abundance(id, ...)
 
 ### Arguments
-_query_	character string defining the query.
+id the UniProt identifier of the protein of interest.
 
 ### Value
 
-Returns a dataframe containing the GO IDs found associated to the query, as well as additional information related to these terms.
+A numeric value for the abundance, expressed a parts per million (ppm), of the requested protein. 
 
 ### References
-Rhee, Wood, Dolinkski & Draghici, [Nature Reviews Genetics 2008, 9:509–515](https://pubmed.ncbi.nlm.nih.gov/18475267/).
+Wang et al. [Proteomics 2015, 15(18):3163-3168](https://pubmed.ncbi.nlm.nih.gov/25656970/).
 
-### See Also
-term.go(), get.go(), go.enrich(), gorilla() 
 
 ### Details
-The _ptm_ package offers a set of ancillary functions aimed to carry out rutinary work, which may be needed when more elaborated analysis are required. The functions that we will document herein are:
 
-* aa.at()
-* is.at()
-* aa.comp()
-* renum.pdb()
-* renum.meto()
-* renum()
+Protein quantification at proteome‐wide scale is an important aim, being protein abundance a relevant variable in many biological studies. Indeed, protein abundance is a major factor for the detection of PTMs by mass spectrometry. Thus, avoiding abundance bias in the functional annotation of post-translationally modified proteins is a real concern. Therefore, when performing analyses of data related to PTMs often is necessary to account for potential biases due to differential protein abundance. For this purpose, an accurate knowledge of abundance data of the protein being analyzed is necessary. 
 
-The function <font size="1">**aa.at()**</font> returns the amino acid found at the requested position of the target sequence. For instance, if we want to know what amino acid is found at the position 100 of the horse cytochrome c (P00004):
- 
-```{r}
-aa.at(100, 'P00004')
-```
+The function abundance() provides protein abundance data that are taken from [PaxDB](https://pax-db.org), which is a comprehensive absolute protein abundance database. Currently, the function provides data for proteins from the species:
 
-The _target_ sequence doen't need to be a UniProt sequence, it can be any string of amino acid, in that case we should pass the argument _uniprot = FALSE_:
+* Arabidopsis thaliana
+* Bos taurus
+* Dictyostelium discoideum
+* Drosophila melanogaster
+* Equus caballus
+* Escherichia coli
+* Gallus gallus
+* Homo sapiens
 
-```{r}
-aa.at(at = 10, target = "GDVEKGKKIFVQKCAQCHTVEKGGK", uniprot = FALSE)
-```
+For human proteins, in addition to the abundance in the whole organism (by default), the abundance found in Jurkat or HeLa cells can be requested.
 
-Sometimes it may be convinient just to check if the reside found at a given position is the one we expect, then we resort to the function <font size="1">**is.at()**</font>:
+To illustrase the use of abundance() we are going to reproduce a result recently published ([Antioxidants 2020, 9(10), 987](https://www.mdpi.com/2076-3921/9/10/987)) where we showed that human proteins being oxidized within living cells are less abundant than proteins oxidized in vitro in cell extracts.
+
+First we download from MetOSite the set of relevant proteins.
 
 ```{r}
-is.at(at = 100, target = 'P00004', aa = 'K')
-is.at(at = 10, target = "GDVEKGKKIFVQKCAQCHTVEKGGK", aa = 'L', uniprot = FALSE)
+sites <- ptm::meto.search(organism = 'Homo sapiens',
+                     oxidant = 'hydrogen peroxide')
+vivo <- unique(sites$prot_id[which(sites$met_vivo_vitro == "vivo")])
+vitro <- unique(sites$prot_id[which(sites$met_vivo_vitro == "vitro")])
+intersection <- intersect(vivo, vitro)
+vivo <- setdiff(vivo, intersection)
+vitro <- setdiff(vitro, intersection) 
+
+data <- data.frame(id = c(vivo, vitro), 
+                   category = c(rep("vivo", length(vivo)), rep("vitro", length(vitro))))
 ```
 
-In many ocasions the numeration of the sequences coming from a [PDB](https://www.rcsb.org/) structure and its corresponding sequence from UniProt don't match. When this happens it is useful to have a tool such as <font size="1">**renum.pdb()**</font> that will re-numerate the residues for us.
 
-Let's see an example using the protein alpha-1-antitrypsin as model. The mature form of the protein (sequence given by PDB) is formed by proteolytic cleavage of a precursor (sequence given by UniProt). Thus, the processed protein starts at the position 25 from the precursor. Furthermore, the first 23 residues of the mature form are not resolved in the structure given by 3CWM. Thus, the first residue in the 3CWM structure correspond to asparragine 48 in the UniProt sequence.
+Now we compute the protein abundance for each protein from our set.
 
 ```{r}
-library(knitr)
-up_pdb <- renum.pdb(pdb = '3CWM', chain = 'A', uniprot = 'P01009')
-kable(up_pdb[43:53, ])
+data$abu <- NA
+for (i in 1:nrow(data)){
+  t <- abundance(as.character(data$id[i]))
+  if (length(t) > 0){
+    data$abu[i] <- t[1]
+  }
+}
 ```
 
-We can see that the function <font size="1">**renum.pdb()**</font> has renumerated all the residues from the PDB structure to force them matching the UniProt numeration.
-
-Something similar can happen when comparing sequence from other databases. For instance, if we compare the sequence recovered for this protein from [MetOSite](https://metosite.uma.es) and [UniProt](https://www.uniprot.org/uniprot/P01009):
+Afterwards, the MetO-containing proteins are ranked in increasing order
+according to their abundances. Those rank positions occupied by a protein from the in vivo set are
+marked in red while rank positions where a protein from the in vitro set is present are in blue.
 
 ```{r}
-library(bio3d)
-up_seq <- ptm::get.seq('P01009', db = 'uniprot')
-meto_seq <- ptm::get.seq('P01009', db = 'metosite')
-seqs <- bio3d::seqbind(up_seq, meto_seq, blank = '-')
-aln <- seqaln(seqs, id = c(c("UniProt", "MetOSite")))
-aln
+data <- data[!is.na(data$abu), ]
+data <- data[order(data$abu), ]
+data$rank <- 1:nrow(data)
+data$bar <- 1
+data$color <- NA
+data$color[which(data$category == 'vivo')] <- 'red'
+data$color[which(data$category == 'vitro')] <- 'blue'
+
+
+plot(1:nrow(data), data$bar, ty='h', ylim = c(0,1),
+      yaxt = 'n', axes = FALSE, ylab = '', xlab = "Abundance rank", col = data$color)
+axis(side = 1)
 ```
 
-We can observe that while the sequence recovered from MetOSite corresponds to the mature form of the protein, UniProt provides the sequence of the precursor. 
 
-To renumerate residues when UniProt-MetOSite compararison are required, we have the function <font size="1">**renum.meto()**</font>
+We can observe that the red bars (proteins oxidized in vivo) are predominant in the low rank region while the blue bars (protein oxidized in vitro) are abundan in the high rank region.
 
-```{r}
-library(knitr)
-up_meto <- renum.meto('P01009')
-kable(up_meto[20:35, ])
-```
 
-Sometimes we may need just renumerate a single residue. For instance, [according to the literature](https://www.ncbi.nlm.nih.gov/pubmed/10867014), oxidation of either M351 or  M358 in alpha-1-antitrypsin causes loss of anti-neutrophil elastase activity. If we check what residues are found at these positions in the alpha-1-antitrypsin sequence downloaded from MetOSite, we'll find, as expected, that they are two methionine residues 
-
-```{r}
-is.at(351, ptm::get.seq('P01009', db = 'metosite'), aa = 'M', uniprot = FALSE)
-is.at(358, ptm::get.seq('P01009', db = 'metosite'), aa = 'M', uniprot = FALSE)
-```
-
-However, if we check for the amino acids found at these positions in the sequence downloaded from UniProt,
-
-```{r}
-aa.at(351, 'P01009', uniprot = TRUE)
-aa.at(358, 'P01009', uniprot = TRUE)
-```
-We find leucine and histidine, respectively! That is because the numeration use in the literature, as well as in MetOSite, is that for the mature form, while the UniProt sequence corresponds to the precursor protein. 
-
-In this case, we can use the function <font size="1">**renum()**</font> to renumerate one specific residue:
-
-```{r}
-renum('P01009', pos = 351, from = 'metosite', to = 'uniprot')
-```
-Let's check that at position 375 in the UniProt sequence we find indeed a methionine:
-
-```{r}
-is.at(375, 'P01009', aa = 'M', uniprot = TRUE)
-```
-
-Finally, the function <font size="1">**aa.comp()**</font> provides us the amino acid composition of a given sequence.
-
-```{r}
-library(knitr)
-mytable <- aa.comp('P01009')
-mytable$percent <- round(100 * mytable$frequency/sum(mytable$frequency), 1)                
-kable(mytable)
-```
-
-Above we have passed the UniProt ID of the protein of interest, but we can also provide any customized sequence:
-
-```{r}
-library(knitr)
-mytable <- aa.comp('MAARESAPFDR', uniprot = FALSE)
-mytable$relative <- round(100 * mytable$frequency/sum(mytable$frequency), 1)                
-kable(mytable)
-```
