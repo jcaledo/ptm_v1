@@ -265,7 +265,7 @@ env.Ztest <- function(pos, ctr, alpha = 0.05){
 #' @param Z a matrix containing the standardized difference in frequencies (positive - control).
 #' @param aa the amino acid of interest.
 #' @param pValue the p-Value chosen to confer statistical significance.
-#' @param ylim range of the dependent variable.
+#' @param ylim range of the dependent variable. If we pass the argument 'automatic', the function will choose a suitable range for you.
 #' @param ty what type of plot should be drawn ("p": points, "l": lines, "b": both).
 #' @param title character string giving a title for the plot.
 #' @details  The p-Value is used to draw two horizontal lines delimiting the region supporting the null hypothesis: no significant differences. Points laying above or below of these lines cannot be explained by randomness.
@@ -294,6 +294,11 @@ env.plot <- function(Z, aa, pValue = 0.001, ylim = c(-8,6), ty = 'p', title = ""
   AA <- which(amino_acids == aa) # alphabetical order of the amino acid
   positions <- as.numeric(colnames(Z))
 
+  if (ylim[1] == 'automatic'){
+    u <- max(Z[AA, ], cv)
+    l <- min(Z[AA, ], -cv)
+    ylim <- c((l + 0.1*l), (u + 0.1*u))
+  }
   plot(positions, Z[AA,], ylab="Z value", ylim = ylim, ty = ty )
   title(main = aa, sub = title)
   abline(-cv, 0, lty=2)
