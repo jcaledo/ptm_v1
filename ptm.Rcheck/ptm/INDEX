@@ -1,0 +1,101 @@
+.get.exepath            Find Full Paths to Executables
+.get.url                Get Web Resource
+aa.at                   Residue Found at the Requested Position
+aa.comp                 Amino Acid Composition
+abundance               Protein Abundance Data
+ac.scan                 Scan a Protein in Search of Acetylation Sites
+acc.dssp                Compute Residue Accessibility and SASA
+atom.dpx                Atom Depth Analysis
+background.go           Search GO Terms for Background Set
+ball                    Search for Atoms Close to a Given Atom
+compute.dssp            Compute and Return a DSSP File
+custom.aln              Download and Align Orthologous Sequences
+ddG.profile             Contribution of a given position to changes in
+                        stability
+ddG.ptm                 PDB Model and Change in Stability of a Modified
+                        Protein
+dis.scan                Scan a Protein in Search of Disease-Related PTM
+                        Sites
+dist2closest            Search and Compute the Distance to the Closest
+                        Aa
+dpx                     Atom Depth Analysis
+env.Ztest               Preferred/Avoided Amino Acids Within an
+                        Environment
+env.extract             Sequence Environment Around a Given Position
+env.matrices            Environment Matrices
+env.plot                Differential Sequence Environment Plot
+find.aaindex            Find the Amino Acid Indexes
+foldx.assembly          Compute Assembly Free Energy
+foldx.mut               Compute Changes in Stability (DDG)
+foldx.stab              Compute Folding Free Energy (DG)
+get.area                Atomic Solvation Energies.
+get.go                  Get Gene Ontology Annotation
+get.hssp                Get a HSSP File
+get.seq                 Import a Protein Sequence from a Database
+gl.scan                 Scan a Protein in Search of OGlcNAc Sites
+gorilla                 GO Enrichment Analysis
+hdfisher.go             Hypothesis-driven Fisher Test
+hmeto                   Human MetO sites oxidized by hydrogen peroxide
+                        treatment.
+id.features             Features Related to the Protein Entry
+id.mapping              Identifier Mapping
+imutant                 Compute Changes in Stability (DDG)
+is.at                   Check Residue a Fixed Position
+list.hom                Search Homologous Entries
+me.scan                 Scan a Protein in Search of Methylation Sites
+meto.list               List Proteins Found in MetOSite Matching a
+                        Keyword
+meto.scan               Scans a Protein in Search of MetO Sites
+meto.search             Search for Specific MetO Sites
+mkdssp                  Compute DSSP File Using an In-House Version of
+                        the DSSP Software
+msa                     Multiple Sequence Alignment
+net.go                  Gene Ontology Network
+ni.scan                 Scan a Protein in Search of Nitration Sites
+p.scan                  Scan a Protein in Search of Phosphosites
+pairwise.dist           Compute Euclidean Distances
+parse.dssp              Parse a DSSP File to Return a Dataframe
+parse.hssp              Parse a HSSP File to Return Dataframes
+pdb.chain               Download and/or Split PDB Files.
+pdb.pep                 Check Whether an Oligopeptide is Found in the
+                        PDB
+pdb.quaternary          Protein Subunit Composition
+pdb.res                 Check Whether a Given Residue is Found in the
+                        PDB
+pdb.select              Select the PDB with the Optimal Coverage to the
+                        UniProt Sequence
+pdb.seq                 Get Chain Sequences
+pdb2uniprot             Returns the UniProt ID Given the PDB and Chain
+                        IDs
+prot2codon              Find the Coding Triplets for a Given Protein
+ptm.plot                Plot Values of a Property and PTM Sites Along
+                        the Protein Sequence
+ptm.scan                Scan a Protein in Search of PTM Sites
+reg.scan                Scan a Protein in Search of Regulatory PTM
+                        Sites
+renum                   Renumerate Residue Position
+renum.meto              Renumerate Residue Position
+renum.pdb               Renumerate Residue Position
+res.dist                Compute Distances Between Residues
+res.dpx                 Residue Depth Analysis
+saro.dist               Compute Distances to the Closest Aromatic
+                        Residues
+saro.geometry           Compute Geometric Parameters of S-Aromatic
+                        Motifs
+saro.motif              Search for S-Aromatic Motifs
+search.go               Search a Simple User Query
+shannon                 Compute Shannon Entropy
+site.type               Compute Shannon Entropy and Sort out the Sites
+sni.scan                Scan a Protein in Search of S-nitrosylation
+                        Sites
+species.kegg            Convert Between Species Name and KEGG 3-Letter
+                        Code Format
+species.mapping         Map Protein ID to Species
+stru.part               Partition of Structural Regions
+su.scan                 Scan a Protein in Search of Sumoylation Sites
+term.go                 Get Core Information About the GO Term
+ub.scan                 Scan a Protein in Search of Ubiquitination
+                        Sites
+uniprot2pdb             Return the PDB and Chain IDs of the Provided
+                        UniProt Protein
+xprod                   Compute Cross Product

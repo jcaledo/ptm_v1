@@ -11,6 +11,7 @@
 #' @description Returns data regarding the abundance of a given protein.
 #' @usage abundance(id, ...)
 #' @param id the UniProt identifier of the protein of interest.
+#' @param ... either 'jarkat' or 'hela' if required.
 #' @details For human proteins, in addition to the abundance in the whole organism (by default), the abundance found in Jurkat or HeLa cells can be requested. The data are obtained from the PaxDb.
 #' @return A numeric value for the abundance, expressed a parts per million (ppm), of the requested protein.
 #' @author Juan Carlos Aledo
@@ -18,6 +19,7 @@
 #' abundance(id = 'A0AVT1', 'jurkat')
 #' abundance(id = 'A0AVT1', 'hela')
 #' @references Wang et al. Proteomics 2015, 10.1002/pmic.201400441. (PMID: 25656970)
+#' @export
 
 abundance <- function(id, ...){
 
@@ -25,39 +27,39 @@ abundance <- function(id, ...){
   sp <- species.mapping(id)
 
   if (sp == 'Arabidopsis thaliana'){
-    paxdb <- ptm:::pax.ath
+    paxdb <- pax.ath
   } else if (sp == 'Bos taurus' ){
-    paxdb <- ptm:::pax.bta
+    paxdb <- pax.bta
   } else if (sp == 'Dictyostelium discoideum'){
-    paxdb <- ptm:::pax.ddi
+    paxdb <- pax.ddi
   } else if (sp == 'Drosophila melanogaster'){
-    paxdb <- ptm:::pax.dme
+    paxdb <- pax.dme
   } else if (sp == 'Equus caballus'){
-    paxdb <- ptm:::pax.ecb
+    paxdb <- pax.ecb
   } else if (sp == 'Escherichia coli'){
-    paxdb <- ptm:::pax.eco
+    paxdb <- pax.eco
   } else if (sp == 'Gallus gallus'){
-    paxdb <- ptm:::pax.gga
+    paxdb <- pax.gga
   } else if (sp == 'Homo sapiens'){
     if (length(tissue) == 0){
-      paxdb <- ptm:::pax.hsa
+      paxdb <- pax.hsa
     } else if (tissue[[1]] == 'jurkat'){
-      paxdb <- ptm:::pax.jurkat
+      paxdb <- pax.jurkat
     } else if (tissue[[1]] == 'hela') {
-      paxdb <- ptm:::pax.hela
+      paxdb <- pax.hela
     } else {
       stop('A proper tissue should be provided!')
     }
   } else if (sp == 'Mus musculus'){
-    paxdb <- ptm:::pax.mmu
+    paxdb <- pax.mmu
   } else if (sp == 'Mycobacterium tuberculosis'){
-    paxdb <- ptm:::pax.mtu
+    paxdb <- pax.mtu
   } else if (sp == 'Rattus norvegicus'){
-    paxdb <- ptm:::pax.rno
+    paxdb <- pax.rno
   } else if (sp == 'Saccharomyces cerevisiae'){
-    paxdb <- ptm:::pax.sce
+    paxdb <- pax.sce
   } else if (sp == 'Sus scrofa'){
-    paxdb <- ptm:::pax.scr
+    paxdb <- pax.scr
   } else {
     warning <- paste('Abundance data for proteins of the species ',
                      sp, " couldn't be found", sep = "")
