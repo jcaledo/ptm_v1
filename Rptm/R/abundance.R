@@ -59,7 +59,7 @@ abundance <- function(id, ...){
   } else if (sp == 'Saccharomyces cerevisiae'){
     paxdb <- pax.sce
   } else if (sp == 'Sus scrofa'){
-    paxdb <- pax.scr
+    paxdb <- pax.ssc
   } else {
     warning <- paste('Abundance data for proteins of the species ',
                      sp, " couldn't be found", sep = "")

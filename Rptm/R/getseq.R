@@ -17,7 +17,7 @@
 #' @description Imports a protein sequence from a selected database.
 #' @usage get.seq(id, db = 'uniprot', as.string = TRUE)
 #' @param id the identifier of the protein of interest.
-#' @param db a character string specifying the desired database; it must be one of 'uniprot', 'metosite', 'ncbi','pdb', 'kegg-aa', 'kegg-nt'.
+#' @param db a character string specifying the desired database; it must be one of 'uniprot', 'metosite', 'pdb', 'kegg-aa', 'kegg-nt'.
 #' @param as.string logical, if TRUE the imported sequence will be returned as a character string.
 #' @details MetOSite and NCBI use the same type of protein ID than UniProt. However, if the chosen database is PDB, the identifier should be the 4-character unique identifier characteristic of PDB, followed by colon and the chain of interest. For instance, '2OCC:B' means we are interested in the sequence of chain B from the structure 2OCC. KEGG used its own IDs (see examples).
 #' @return Returns a protein (or nucleotide) sequence either as a character vector or a as a character string.
@@ -40,10 +40,6 @@ get.seq <- function(id, db = 'uniprot', as.string = TRUE){
   } else if (db == 'metosite'){
     baseUrl <- 'https://metosite.uma.es/api/proteins/scan/'
     call <- paste(baseUrl, id, sep = "")
-
-  } else if (db == 'ncbi'){
-    baseUrl <- "https://www.ncbi.nlm.nih.gov/sviewer/viewer.fcgi?db=protein"
-    call <- paste(baseUrl, "&val=", id, "&report=fasta", sep = "")
 
   } else if (db == 'pdb'){
     text <- 'no text'

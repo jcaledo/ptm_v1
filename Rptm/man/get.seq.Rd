@@ -9,7 +9,7 @@ get.seq(id, db = 'uniprot', as.string = TRUE)
 \arguments{
 \item{id}{the identifier of the protein of interest.}
 
-\item{db}{a character string specifying the desired database; it must be one of 'uniprot', 'metosite', 'ncbi','pdb', 'kegg-aa', 'kegg-nt'.}
+\item{db}{a character string specifying the desired database; it must be one of 'uniprot', 'metosite', 'pdb', 'kegg-aa', 'kegg-nt'.}
 
 \item{as.string}{logical, if TRUE the imported sequence will be returned as a character string.}
 }
