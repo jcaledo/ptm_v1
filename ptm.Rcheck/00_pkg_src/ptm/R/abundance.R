@@ -55,11 +55,11 @@ abundance <- function(id, ...){
   } else if (sp == 'Mycobacterium tuberculosis'){
     paxdb <- pax.mtu
   } else if (sp == 'Rattus norvegicus'){
-    paxdb <- ptm:::pax.rno
+    paxdb <- pax.rno
   } else if (sp == 'Saccharomyces cerevisiae'){
-    paxdb <- pax.sce
+    # paxdb <- pax.sce
   } else if (sp == 'Sus scrofa'){
-    paxdb <- pax.scr
+    # paxdb <- pax.scr
   } else {
     warning <- paste('Abundance data for proteins of the species ',
                      sp, " couldn't be found", sep = "")

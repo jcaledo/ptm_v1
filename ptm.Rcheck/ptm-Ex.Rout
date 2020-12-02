@@ -1745,7 +1745,7 @@ http://www.drive5.com/muscle
 This software is donated to the public domain.
 Please cite: Edgar, R.C. Nucleic Acids Res 32(5), 1792-97.
 
-fileea736d157b93 2 seqs, max length 294, avg  length 241
+filef4a66645930e 2 seqs, max length 294, avg  length 241
 375 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1375 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
 375 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2375 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
 375 MB(1%)00:00:00                Iter   1  100.00%  Align node       375 MB(1%)00:00:00                Iter   1  100.00%  Align node
@@ -1785,11 +1785,11 @@ B 0.9058985 0.0000000
 > 
 > pdb.res(at = 361, up = 'P48163', pdb = '2aw5', chain = 'A')
   Note: Accessing on-line PDB file
-fileea731a73e4fb 2 seqs, max length 572, avg  length 551
-377 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1377 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-377 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2377 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-377 MB(1%)00:00:00                Iter   1  100.00%  Align node       377 MB(1%)00:00:00                Iter   1  100.00%  Align node
-377 MB(1%)00:00:00                Iter   1   50.00%  Root alignment377 MB(1%)00:00:00                Iter   1  100.00%  Root alignment377 MB(1%)00:00:00                Iter   1  100.00%  Root alignment
+filef4a665f879f9 2 seqs, max length 572, avg  length 551
+378 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1378 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+378 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2378 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+378 MB(1%)00:00:00                Iter   1  100.00%  Align node       378 MB(1%)00:00:00                Iter   1  100.00%  Align node
+378 MB(1%)00:00:00                Iter   1   50.00%  Root alignment378 MB(1%)00:00:00                Iter   1  100.00%  Root alignment378 MB(1%)00:00:00                Iter   1  100.00%  Root alignment
 [1] TRUE
 attr(,"pdb_pos")
 [1] 341
@@ -1813,11 +1813,11 @@ attr(,"pdb_pos")
 > 
 > pdb.select('P01009', threshold = 0.8)
   Note: Accessing on-line PDB file
-fileea73464830db 2 seqs, max length 418, avg  length 396
-381 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1381 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-381 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2381 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-381 MB(1%)00:00:00                Iter   1  100.00%  Align node       381 MB(1%)00:00:00                Iter   1  100.00%  Align node
-381 MB(1%)00:00:00                Iter   1   50.00%  Root alignment381 MB(1%)00:00:00                Iter   1  100.00%  Root alignment381 MB(1%)00:00:00                Iter   1  100.00%  Root alignment
+filef4a65e1cf708 2 seqs, max length 418, avg  length 396
+382 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1382 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+382 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2382 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+382 MB(1%)00:00:00                Iter   1  100.00%  Align node       382 MB(1%)00:00:00                Iter   1  100.00%  Align node
+382 MB(1%)00:00:00                Iter   1   50.00%  Root alignment382 MB(1%)00:00:00                Iter   1  100.00%  Root alignment382 MB(1%)00:00:00                Iter   1  100.00%  Root alignment
 [[1]]
 [1] "1atu"
 
@@ -1903,7 +1903,7 @@ attr(,"PDB_END")
 > prot2codon('P01009')
 
 *** WARNING *** Invalid character '*' in FASTA sequence data, ignored
-fileea7355ac8c65 2 seqs, max length 418, avg  length 418
+filef4a61a5b8b8e 2 seqs, max length 418, avg  length 418
 382 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1382 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
 382 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2382 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
 382 MB(1%)00:00:00                Iter   1  100.00%  Align node       382 MB(1%)00:00:00                Iter   1  100.00%  Align node
@@ -2410,7 +2410,7 @@ fileea7355ac8c65 2 seqs, max length 418, avg  length 418
 > ### ** Examples
 > 
 > renum(up_id = 'P01009', pos = 351, from = 'metosite', to = 'uniprot')
-fileea7376f2028f 2 seqs, max length 418, avg  length 406
+filef4a619f81b50 2 seqs, max length 418, avg  length 406
 382 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1382 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
 382 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2382 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
 382 MB(1%)00:00:00                Iter   1  100.00%  Align node       382 MB(1%)00:00:00                Iter   1  100.00%  Align node
@@ -2439,7 +2439,7 @@ fileea7376f2028f 2 seqs, max length 418, avg  length 406
 > ### ** Examples
 > 
 > renum.meto('P01009')
-fileea7371982252 2 seqs, max length 418, avg  length 406
+filef4a610c507d 2 seqs, max length 418, avg  length 406
 382 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1382 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
 382 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2382 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
 382 MB(1%)00:00:00                Iter   1  100.00%  Align node       382 MB(1%)00:00:00                Iter   1  100.00%  Align node
@@ -2883,7 +2883,7 @@ fileea7371982252 2 seqs, max length 418, avg  length 406
 > 
 > renum.pdb(pdb = '121P', chain = 'A', uniprot = 'P01112')
   Note: Accessing on-line PDB file
-fileea73477c0624 2 seqs, max length 189, avg  length 177
+filef4a65f7562ce 2 seqs, max length 189, avg  length 177
 382 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1382 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
 382 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2382 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
 382 MB(1%)00:00:00                Iter   1  100.00%  Align node       382 MB(1%)00:00:00                Iter   1  100.00%  Align node
@@ -4904,7 +4904,7 @@ attr(,"backbone")
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  19.419 0.417 106.09 0.002 0.002 
+Time elapsed:  20.706 0.458 106.893 0.002 0.002 
 > grDevices::dev.off()
 null device 
           1 

@@ -27,44 +27,44 @@ http://www.drive5.com/muscle
 This software is donated to the public domain.
 Please cite: Edgar, R.C. Nucleic Acids Res 32(5), 1792-97.
 
-fileeaac2267e732 2 seqs, max length 189, avg  length 177
-388 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1388 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-388 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2388 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-388 MB(1%)00:00:00                Iter   1  100.00%  Align node       388 MB(1%)00:00:00                Iter   1  100.00%  Align node
-388 MB(1%)00:00:00                Iter   1   50.00%  Root alignment388 MB(1%)00:00:00                Iter   1  100.00%  Root alignment388 MB(1%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c29848b67 2 seqs, max length 189, avg  length 177
+400 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1400 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+400 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2400 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+400 MB(1%)00:00:00                Iter   1  100.00%  Align node       400 MB(1%)00:00:00                Iter   1  100.00%  Align node
+400 MB(1%)00:00:00                Iter   1   50.00%  Root alignment400 MB(1%)00:00:00                Iter   1  100.00%  Root alignment400 MB(1%)00:00:00                Iter   1  100.00%  Root alignment
    PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac56848c86 2 seqs, max length 335, avg  length 334
-402 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1402 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-402 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2402 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-402 MB(1%)00:00:00                Iter   1  100.00%  Align node       403 MB(1%)00:00:00                Iter   1  100.00%  Align node
-403 MB(1%)00:00:00                Iter   1   50.00%  Root alignment403 MB(1%)00:00:00                Iter   1  100.00%  Root alignment403 MB(1%)00:00:00                Iter   1  100.00%  Root alignment
-fileeaac5e040528 2 seqs, max length 418, avg  length 406
-403 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1403 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-403 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2403 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-403 MB(1%)00:00:00                Iter   1  100.00%  Align node       403 MB(1%)00:00:00                Iter   1  100.00%  Align node
-403 MB(1%)00:00:00                Iter   1   50.00%  Root alignment403 MB(1%)00:00:00                Iter   1  100.00%  Root alignment403 MB(1%)00:00:00                Iter   1  100.00%  Root alignment
-fileeaac46c1c550 2 seqs, max length 418, avg  length 406
-409 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1409 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-409 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2409 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-409 MB(1%)00:00:00                Iter   1  100.00%  Align node       409 MB(1%)00:00:00                Iter   1  100.00%  Align node
-409 MB(1%)00:00:00                Iter   1   50.00%  Root alignment409 MB(1%)00:00:00                Iter   1  100.00%  Root alignment409 MB(1%)00:00:00                Iter   1  100.00%  Root alignment
-fileeaac7d4d8584 2 seqs, max length 418, avg  length 406
-415 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1415 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-415 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2415 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+filef4c276b7115e 2 seqs, max length 335, avg  length 334
+416 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1416 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+416 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2416 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
 416 MB(1%)00:00:00                Iter   1  100.00%  Align node       416 MB(1%)00:00:00                Iter   1  100.00%  Align node
 416 MB(1%)00:00:00                Iter   1   50.00%  Root alignment416 MB(1%)00:00:00                Iter   1  100.00%  Root alignment416 MB(1%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c230783865 2 seqs, max length 418, avg  length 406
+421 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1421 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+421 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2421 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+421 MB(1%)00:00:00                Iter   1  100.00%  Align node       422 MB(1%)00:00:00                Iter   1  100.00%  Align node
+422 MB(1%)00:00:00                Iter   1   50.00%  Root alignment422 MB(1%)00:00:00                Iter   1  100.00%  Root alignment422 MB(1%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c258c21f71 2 seqs, max length 418, avg  length 406
+422 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1422 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+422 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2422 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+422 MB(1%)00:00:00                Iter   1  100.00%  Align node       422 MB(1%)00:00:00                Iter   1  100.00%  Align node
+422 MB(1%)00:00:00                Iter   1   50.00%  Root alignment422 MB(1%)00:00:00                Iter   1  100.00%  Root alignment422 MB(1%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c26e0204ba 2 seqs, max length 418, avg  length 406
+427 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1427 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+427 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2427 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+427 MB(1%)00:00:00                Iter   1  100.00%  Align node       427 MB(1%)00:00:00                Iter   1  100.00%  Align node
+427 MB(1%)00:00:00                Iter   1   50.00%  Root alignment427 MB(1%)00:00:00                Iter   1  100.00%  Root alignment427 MB(1%)00:00:00                Iter   1  100.00%  Root alignment
   Note: Accessing on-line PDB file
-fileeaac730e0142 2 seqs, max length 418, avg  length 396
-423 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1423 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-423 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2423 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-423 MB(1%)00:00:00                Iter   1  100.00%  Align node       423 MB(1%)00:00:00                Iter   1  100.00%  Align node
-423 MB(1%)00:00:00                Iter   1   50.00%  Root alignment423 MB(1%)00:00:00                Iter   1  100.00%  Root alignment423 MB(1%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c226ecf5b9 2 seqs, max length 418, avg  length 396
+435 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1435 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+435 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2435 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+435 MB(1%)00:00:00                Iter   1  100.00%  Align node       436 MB(1%)00:00:00                Iter   1  100.00%  Align node
+436 MB(1%)00:00:00                Iter   1   50.00%  Root alignment436 MB(1%)00:00:00                Iter   1  100.00%  Root alignment436 MB(1%)00:00:00                Iter   1  100.00%  Root alignment
   Note: Accessing on-line PDB file
-fileeaac38c673af 2 seqs, max length 418, avg  length 396
-423 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1423 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-423 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2423 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-423 MB(1%)00:00:00                Iter   1  100.00%  Align node       423 MB(1%)00:00:00                Iter   1  100.00%  Align node
-423 MB(1%)00:00:00                Iter   1   50.00%  Root alignment423 MB(1%)00:00:00                Iter   1  100.00%  Root alignment423 MB(1%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c2528401f7 2 seqs, max length 418, avg  length 396
+436 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1436 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+436 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2436 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+436 MB(1%)00:00:00                Iter   1  100.00%  Align node       436 MB(1%)00:00:00                Iter   1  100.00%  Align node
+436 MB(1%)00:00:00                Iter   1   50.00%  Root alignment436 MB(1%)00:00:00                Iter   1  100.00%  Root alignment436 MB(1%)00:00:00                Iter   1  100.00%  Root alignment
    PDB has ALT records, taking A only, rm.alt=TRUE
   |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%  |                                                                              |===================================                                   |  50%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================================| 100%
 [1] 0
@@ -241,6 +241,7 @@ Foldx will end
    ********************************************
 
 1 models read: 1b4i_Repair.pdb
+Output: ./1b4i_Repair.log
 
 BackHbond       =               -5.73
 SideHbond       =               -8.11
@@ -362,8 +363,8 @@ Mutating residue = SERA8 into VAL
 Mutating residue = SERA8 into VAL
 Mutating residue = SERA8 into VAL
 Your file run OK
-End time of FoldX: Tue Dec  1 12:50:56 2020
-Total time spend: 87.92 seconds.
+End time of FoldX: Wed Dec  2 09:14:53 2020
+Total time spend: 89.86 seconds.
 validated file "1b4i_Repair_1_0.pdb" => successfully finished
 validated file "1b4i_Repair_1_1.pdb" => successfully finished
 validated file "1b4i_Repair_1_2.pdb" => successfully finished
@@ -1186,8 +1187,8 @@ Entropy Complex =               0.00
 Total          = 				  53.70
 
 Your file run OK
-End time of FoldX: Tue Dec  1 12:51:42 2020
-Total time spend: 44.51 seconds.
+End time of FoldX: Wed Dec  2 09:15:39 2020
+Total time spend: 45.14 seconds.
 Cleaning PositionScan...DONE
    ********************************************
    ***                                      ***
@@ -1235,8 +1236,8 @@ Total          = 				  -323.95
 FINISHING STABILITY ANALYSIS OPTION
 
 Your file run OK
-End time of FoldX: Tue Dec  1 12:51:47 2020
-Total time spend: 4.97 seconds.
+End time of FoldX: Wed Dec  2 09:15:45 2020
+Total time spend: 5.06 seconds.
    ********************************************
    ***                                      ***
    ***             FoldX 5 (c)              ***
@@ -1337,18 +1338,8 @@ Total          = 				  -55.17
 Complex Analysis of ./pdb/2dfd_Repair.pdb went fine
 
 Your file run OK
-End time of FoldX: Tue Dec  1 12:51:53 2020
-Total time spend: 4.87 seconds.
-[31m──[39m [31m1. Error: ddG.profile() works properly (@test_ddG.R#149) [39m [31m───────────────────[39m
-Timeout was reached: [folding.biofold.org] Operation timed out after 137054 milliseconds with 0 out of 0 bytes received
-[1mBacktrace:[22m
-[90m 1. [39mptm::ddG.profile(prot = "1b4i", ch = "A", pos = 8)
-[90m 2. [39mptm::imutant(protein = prot, ch = ch, pos = pos, pH = pH, Te = Te)
-[90m 3. [39mhttr::GET(url)
-[90m 4. [39mhttr:::request_perform(req, hu$handle$handle)
-[90m 6. [39mhttr:::request_fetch.write_memory(req$output, req$url, handle)
-[90m 7. [39mcurl::curl_fetch_memory(url, handle = handle)
-
+End time of FoldX: Wed Dec  2 09:15:51 2020
+Total time spend: 4.96 seconds.
    ********************************************
    ***                                      ***
    ***             FoldX 5 (c)              ***
@@ -1366,7 +1357,6 @@ Timeout was reached: [folding.biofold.org] Operation timed out after 137054 mill
    ********************************************
 
 1 models read: 1b4i_Repair.pdb
-Output: ./1b4i_Repair.log
 
 BackHbond       =               -5.73
 SideHbond       =               -8.11
@@ -1396,8 +1386,8 @@ Reading SA8s;
 Residue to Mutate SERA8 has residue index 7
 Mutating residue = SERA8 into SEP
 Your file run OK
-End time of FoldX: Tue Dec  1 12:54:34 2020
-Total time spend: 0.93 seconds.
+End time of FoldX: Wed Dec  2 09:16:37 2020
+Total time spend: 0.90 seconds.
 validated file "1b4i_Repair_1.pdb" => successfully finished
 Cleaning BuildModel...DONE
 [1] "THE FILE 1b4i_pSer8.pdb HAS BEEN SAVED IN THE CURRENT DIRECTORY"
@@ -1418,7 +1408,6 @@ Cleaning BuildModel...DONE
    ********************************************
 
 1 models read: 1b4i_Repair.pdb
-Output: ./1b4i_Repair.log
 
 BackHbond       =               -5.73
 SideHbond       =               -8.11
@@ -1448,8 +1437,8 @@ Reading sA15S;
 Residue to Mutate SEPA15 has residue index 14
 Mutating residue = SEPA15 into SER
 Your file run OK
-End time of FoldX: Tue Dec  1 12:54:43 2020
-Total time spend: 6.48 seconds.
+End time of FoldX: Wed Dec  2 09:16:45 2020
+Total time spend: 6.58 seconds.
 validated file "1b4i_Repair_1.pdb" => successfully finished
 Cleaning BuildModel...DONE
 [1] "THE FILE 1b4i_pSer15.pdb HAS BEEN SAVED IN THE CURRENT DIRECTORY"
@@ -1500,8 +1489,8 @@ Reading TA23p;
 Residue to Mutate THRA23 has residue index 22
 Mutating residue = THRA23 into TPO
 Your file run OK
-End time of FoldX: Tue Dec  1 12:54:45 2020
-Total time spend: 1.71 seconds.
+End time of FoldX: Wed Dec  2 09:16:47 2020
+Total time spend: 1.75 seconds.
 validated file "1b4i_Repair_1.pdb" => successfully finished
 Cleaning BuildModel...DONE
 [1] "THE FILE 1b4i_pThr23.pdb HAS BEEN SAVED IN THE CURRENT DIRECTORY"
@@ -1522,6 +1511,7 @@ Cleaning BuildModel...DONE
    ********************************************
 
 1 models read: 1b4i_Repair.pdb
+Output: ./1b4i_Repair.log
 
 BackHbond       =               -5.73
 SideHbond       =               -8.11
@@ -1551,8 +1541,8 @@ Reading MA29Q;
 Residue to Mutate META29 has residue index 28
 Mutating residue = META29 into GLN
 Your file run OK
-End time of FoldX: Tue Dec  1 12:54:50 2020
-Total time spend: 3.86 seconds.
+End time of FoldX: Wed Dec  2 09:16:52 2020
+Total time spend: 3.90 seconds.
 validated file "1b4i_Repair_1.pdb" => successfully finished
 Cleaning BuildModel...DONE
 [1] "THE FILE 1b4i_MetO-Q29.pdb HAS BEEN SAVED IN THE CURRENT DIRECTORY"
@@ -1603,8 +1593,8 @@ Reading MA29T;
 Residue to Mutate META29 has residue index 28
 Mutating residue = META29 into THR
 Your file run OK
-End time of FoldX: Tue Dec  1 12:54:52 2020
-Total time spend: 1.41 seconds.
+End time of FoldX: Wed Dec  2 09:16:54 2020
+Total time spend: 1.44 seconds.
 validated file "1b4i_Repair_1.pdb" => successfully finished
 Cleaning BuildModel...DONE
 [1] "THE FILE 1b4i_MetO-T29.pdb HAS BEEN SAVED IN THE CURRENT DIRECTORY"
@@ -1654,7 +1644,7 @@ Reading sA21p;
 Residue to Mutate SEPA21 has residue index 20
 Mutating residue = SEPA21 into TPO
 Your file run OK
-End time of FoldX: Tue Dec  1 12:54:54 2020
+End time of FoldX: Wed Dec  2 09:16:56 2020
 Total time spend: 1.30 seconds.
 validated file "1b4i_Repair_1.pdb" => successfully finished
 Cleaning BuildModel...DONE
@@ -1708,60 +1698,69 @@ downloaded 621 KB
 
    PDB has ALT records, taking A only, rm.alt=TRUE
    PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac4015da5e 3 seqs, max length 356, avg  length 342
-3651 MB(11%)00:00:00                Iter   1   16.67%  K-mer dist pass 13651 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3651 MB(11%)00:00:00                Iter   1   16.67%  K-mer dist pass 23651 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3651 MB(11%)00:00:00                Iter   1   50.00%  Align node       3651 MB(11%)00:00:00                Iter   1  100.00%  Align node3651 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3651 MB(11%)00:00:00                Iter   1   33.33%  Root alignment3651 MB(11%)00:00:00                Iter   1   66.67%  Root alignment3651 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3651 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-3651 MB(11%)00:00:00                Iter   2  100.00%  Root alignment
-3651 MB(11%)00:00:00                Iter   3   66.67%  Refine biparts3651 MB(11%)00:00:00                Iter   3  100.00%  Refine biparts3651 MB(11%)00:00:00                Iter   3  133.33%  Refine biparts3651 MB(11%)00:00:00                Iter   3  100.00%  Refine biparts
-3651 MB(11%)00:00:00                Iter   4   66.67%  Refine biparts3651 MB(11%)00:00:00                Iter   4  100.00%  Refine biparts3651 MB(11%)00:00:00                Iter   4  133.33%  Refine biparts3651 MB(11%)00:00:00                Iter   4  100.00%  Refine biparts
-[31m──[39m [31m2. Error: custom.aln() works properly (@test_evolutionary.R#40) [39m [31m────────────[39m
-transfer closed with outstanding read data remaining
-[1mBacktrace:[22m
-[90m 1. [39mptm::custom.aln("eco:b2114", species = "plants")
-[90m 2. [39mptm::list.hom(target)
-[90m 3. [39mhttr::GET(url)
-[90m 4. [39mhttr:::request_perform(req, hu$handle$handle)
-[90m 6. [39mhttr:::request_fetch.write_memory(req$output, req$url, handle)
-[90m 7. [39mcurl::curl_fetch_memory(url, handle = handle)
+filef4c2302d6fbd 3 seqs, max length 356, avg  length 342
+3608 MB(10%)00:00:00                Iter   1   16.67%  K-mer dist pass 13608 MB(10%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3608 MB(10%)00:00:00                Iter   1   16.67%  K-mer dist pass 23608 MB(10%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3608 MB(10%)00:00:00                Iter   1   50.00%  Align node       3608 MB(10%)00:00:00                Iter   1  100.00%  Align node3608 MB(10%)00:00:00                Iter   1  100.00%  Align node
+3608 MB(10%)00:00:00                Iter   1   33.33%  Root alignment3608 MB(10%)00:00:00                Iter   1   66.67%  Root alignment3608 MB(10%)00:00:00                Iter   1  100.00%  Root alignment3608 MB(10%)00:00:00                Iter   1  100.00%  Root alignment
+3608 MB(10%)00:00:00                Iter   2  100.00%  Root alignment
+3608 MB(10%)00:00:00                Iter   3   66.67%  Refine biparts3608 MB(10%)00:00:00                Iter   3  100.00%  Refine biparts3608 MB(10%)00:00:00                Iter   3  133.33%  Refine biparts3608 MB(10%)00:00:00                Iter   3  100.00%  Refine biparts
+3608 MB(10%)00:00:00                Iter   4   66.67%  Refine biparts3608 MB(10%)00:00:00                Iter   4  100.00%  Refine biparts3608 MB(10%)00:00:00                Iter   4  133.33%  Refine biparts3608 MB(10%)00:00:00                Iter   4  100.00%  Refine biparts
+[31m──[39m [31m1. Failure: get.seq() works properly with NCBI (@test_getseq.R#31) [39m [31m─────────[39m
+nchar(a) not equal to 418.
+1/1 mismatches
+[1] 15 - 418 == -403
+
+[31m──[39m [31m2. Failure: get.seq() works properly with NCBI (@test_getseq.R#32) [39m [31m─────────[39m
+`t` inherits from `character` not `list`.
+
+[31m──[39m [31m3. Failure: get.seq() works properly with NCBI (@test_getseq.R#33) [39m [31m─────────[39m
+length(t[[1]]) not equal to 418.
+1/1 mismatches
+[1] 1 - 418 == -417
+
+[31m──[39m [31m4. Failure: get.seq() works properly with NCBI (@test_getseq.R#34) [39m [31m─────────[39m
+t[[1]][28] not equal to "Q".
+1/1 mismatches
+x[1]: NA
+y[1]: "Q"
 
 
 *** WARNING *** Invalid character '*' in FASTA sequence data, ignored
-fileeaac6f970d65 2 seqs, max length 418, avg  length 418
-3771 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13771 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3771 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23771 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3771 MB(11%)00:00:00                Iter   1  100.00%  Align node       3771 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3771 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3771 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3771 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c24bc093ec 2 seqs, max length 418, avg  length 418
+3675 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13675 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3675 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23675 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3675 MB(11%)00:00:00                Iter   1  100.00%  Align node       3675 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3675 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3675 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3675 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
 
 *** WARNING *** Invalid character '*' in FASTA sequence data, ignored
-fileeaac5b8ea14e 2 seqs, max length 418, avg  length 396
-3771 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13771 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3771 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23771 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3771 MB(11%)00:00:00                Iter   1  100.00%  Align node       3771 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3771 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3771 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3771 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c21091159c 2 seqs, max length 418, avg  length 396
+3675 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13675 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3675 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23675 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3675 MB(11%)00:00:00                Iter   1  100.00%  Align node       3675 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3675 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3675 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3675 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
    PDB has ALT records, taking A only, rm.alt=TRUE
 
 *** WARNING *** Invalid character '*' in FASTA sequence data, ignored
-fileeaac44377da6 2 seqs, max length 335, avg  length 334
-3773 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13773 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3773 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23773 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3773 MB(11%)00:00:00                Iter   1  100.00%  Align node       3773 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3773 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3773 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3773 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c2488b73d 2 seqs, max length 335, avg  length 334
+3675 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13675 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3675 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23675 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3675 MB(11%)00:00:00                Iter   1  100.00%  Align node       3675 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3675 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3675 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3675 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
 
 *** WARNING *** Invalid character '*' in FASTA sequence data, ignored
-fileeaac60aa8b66 2 seqs, max length 142, avg  length 141
-3773 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13773 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3773 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23773 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3773 MB(11%)00:00:00                Iter   1  100.00%  Align node       3773 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3773 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3773 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3773 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c2130859b8 2 seqs, max length 142, avg  length 141
+3675 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13675 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3675 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23675 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3675 MB(11%)00:00:00                Iter   1  100.00%  Align node       3675 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3675 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3675 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3675 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
 
 *** WARNING *** Invalid character '*' in FASTA sequence data, ignored
-fileeaac352d505f 2 seqs, max length 167, avg  length 165
-3773 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13773 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3773 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23773 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3773 MB(11%)00:00:00                Iter   1  100.00%  Align node       3773 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3773 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3773 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3773 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c26f453fe5 2 seqs, max length 167, avg  length 165
+3675 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13675 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3675 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23675 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3675 MB(11%)00:00:00                Iter   1  100.00%  Align node       3675 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3675 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3675 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3675 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
 [1] "Getting GO terms for P01009"
 [1] "Getting GO terms for P01009"
 [1] "Getting GO terms for P04406"
@@ -1836,304 +1835,304 @@ List of 1
  $ echo: logi FALSE
 
    PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac4dddae7a 4 seqs, max length 335, avg  length 335
-3776 MB(11%)00:00:00                Iter   1   10.00%  K-mer dist pass 13776 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3776 MB(11%)00:00:00                Iter   1   10.00%  K-mer dist pass 23776 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3776 MB(11%)00:00:00                Iter   1   33.33%  Align node       3776 MB(11%)00:00:00                Iter   1   66.67%  Align node3776 MB(11%)00:00:00                Iter   1  100.00%  Align node3776 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3776 MB(11%)00:00:00                Iter   1   25.00%  Root alignment3776 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3776 MB(11%)00:00:00                Iter   1   75.00%  Root alignment3776 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3776 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-3776 MB(11%)00:00:00                Iter   2  100.00%  Root alignment
-3776 MB(11%)00:00:00                Iter   3   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter   3   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter   3   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter   3  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter   3  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter   3  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter   4   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter   4   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter   4   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter   4  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter   4  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter   4  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter   5   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter   5   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter   5   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter   5  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter   5  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter   5  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter   6   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter   6   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter   6   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter   6  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter   6  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter   6  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter   7   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter   7   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter   7   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter   7  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter   7  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter   7  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter   8   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter   8   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter   8   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter   8  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter   8  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter   8  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter   9   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter   9   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter   9   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter   9  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter   9  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter   9  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter  10   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter  10   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter  10   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter  10  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter  10  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter  10  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter  11   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter  11   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter  11   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter  11  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter  11  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter  11  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter  12   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter  12   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter  12   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter  12  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter  12  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter  12  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter  13   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter  13   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter  13   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter  13  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter  13  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter  13  100.00%  Refine biparts
+filef4c2375713b8 4 seqs, max length 335, avg  length 335
+3677 MB(11%)00:00:00                Iter   1   10.00%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   10.00%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1   33.33%  Align node       3677 MB(11%)00:00:00                Iter   1   66.67%  Align node3677 MB(11%)00:00:00                Iter   1  100.00%  Align node3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   25.00%  Root alignment3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1   75.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+3677 MB(11%)00:00:00                Iter   2  100.00%  Root alignment
+3677 MB(11%)00:00:00                Iter   3   40.00%  Refine biparts3677 MB(11%)00:00:00                Iter   3   60.00%  Refine biparts3677 MB(11%)00:00:00                Iter   3   80.00%  Refine biparts3677 MB(11%)00:00:00                Iter   3  100.00%  Refine biparts3677 MB(11%)00:00:00                Iter   3  120.00%  Refine biparts3677 MB(11%)00:00:00                Iter   3  100.00%  Refine biparts
+3677 MB(11%)00:00:00                Iter   4   40.00%  Refine biparts3677 MB(11%)00:00:00                Iter   4   60.00%  Refine biparts3677 MB(11%)00:00:00                Iter   4   80.00%  Refine biparts3677 MB(11%)00:00:00                Iter   4  100.00%  Refine biparts3677 MB(11%)00:00:00                Iter   4  120.00%  Refine biparts3677 MB(11%)00:00:00                Iter   4  100.00%  Refine biparts
+3677 MB(11%)00:00:00                Iter   5   40.00%  Refine biparts3677 MB(11%)00:00:00                Iter   5   60.00%  Refine biparts3677 MB(11%)00:00:00                Iter   5   80.00%  Refine biparts3677 MB(11%)00:00:00                Iter   5  100.00%  Refine biparts3677 MB(11%)00:00:00                Iter   5  120.00%  Refine biparts3677 MB(11%)00:00:00                Iter   5  100.00%  Refine biparts
+3677 MB(11%)00:00:00                Iter   6   40.00%  Refine biparts3677 MB(11%)00:00:00                Iter   6   60.00%  Refine biparts3677 MB(11%)00:00:00                Iter   6   80.00%  Refine biparts3677 MB(11%)00:00:00                Iter   6  100.00%  Refine biparts3677 MB(11%)00:00:00                Iter   6  120.00%  Refine biparts3677 MB(11%)00:00:00                Iter   6  100.00%  Refine biparts
+3677 MB(11%)00:00:00                Iter   7   40.00%  Refine biparts3677 MB(11%)00:00:00                Iter   7   60.00%  Refine biparts3677 MB(11%)00:00:00                Iter   7   80.00%  Refine biparts3677 MB(11%)00:00:00                Iter   7  100.00%  Refine biparts3677 MB(11%)00:00:00                Iter   7  120.00%  Refine biparts3677 MB(11%)00:00:00                Iter   7  100.00%  Refine biparts
+3677 MB(11%)00:00:00                Iter   8   40.00%  Refine biparts3677 MB(11%)00:00:00                Iter   8   60.00%  Refine biparts3677 MB(11%)00:00:00                Iter   8   80.00%  Refine biparts3677 MB(11%)00:00:00                Iter   8  100.00%  Refine biparts3677 MB(11%)00:00:00                Iter   8  120.00%  Refine biparts3677 MB(11%)00:00:00                Iter   8  100.00%  Refine biparts
+3677 MB(11%)00:00:00                Iter   9   40.00%  Refine biparts3677 MB(11%)00:00:00                Iter   9   60.00%  Refine biparts3677 MB(11%)00:00:00                Iter   9   80.00%  Refine biparts3677 MB(11%)00:00:00                Iter   9  100.00%  Refine biparts3677 MB(11%)00:00:00                Iter   9  120.00%  Refine biparts3677 MB(11%)00:00:00                Iter   9  100.00%  Refine biparts
+3677 MB(11%)00:00:00                Iter  10   40.00%  Refine biparts3677 MB(11%)00:00:00                Iter  10   60.00%  Refine biparts3677 MB(11%)00:00:00                Iter  10   80.00%  Refine biparts3677 MB(11%)00:00:00                Iter  10  100.00%  Refine biparts3677 MB(11%)00:00:00                Iter  10  120.00%  Refine biparts3677 MB(11%)00:00:00                Iter  10  100.00%  Refine biparts
+3677 MB(11%)00:00:00                Iter  11   40.00%  Refine biparts3677 MB(11%)00:00:00                Iter  11   60.00%  Refine biparts3677 MB(11%)00:00:00                Iter  11   80.00%  Refine biparts3677 MB(11%)00:00:00                Iter  11  100.00%  Refine biparts3677 MB(11%)00:00:00                Iter  11  120.00%  Refine biparts3677 MB(11%)00:00:00                Iter  11  100.00%  Refine biparts
+3677 MB(11%)00:00:00                Iter  12   40.00%  Refine biparts3677 MB(11%)00:00:00                Iter  12   60.00%  Refine biparts3677 MB(11%)00:00:00                Iter  12   80.00%  Refine biparts3677 MB(11%)00:00:00                Iter  12  100.00%  Refine biparts3677 MB(11%)00:00:00                Iter  12  120.00%  Refine biparts3677 MB(11%)00:00:00                Iter  12  100.00%  Refine biparts
+3677 MB(11%)00:00:00                Iter  13   40.00%  Refine biparts3677 MB(11%)00:00:00                Iter  13   60.00%  Refine biparts3677 MB(11%)00:00:00                Iter  13   80.00%  Refine biparts3677 MB(11%)00:00:00                Iter  13  100.00%  Refine biparts3677 MB(11%)00:00:00                Iter  13  120.00%  Refine biparts3677 MB(11%)00:00:00                Iter  13  100.00%  Refine biparts
   Note: Accessing on-line PDB file
-fileeaacb72ed24 4 seqs, max length 146, avg  length 143
-3776 MB(11%)00:00:00                Iter   1   10.00%  K-mer dist pass 13776 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3776 MB(11%)00:00:00                Iter   1   10.00%  K-mer dist pass 23776 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3776 MB(11%)00:00:00                Iter   1   33.33%  Align node       3776 MB(11%)00:00:00                Iter   1   66.67%  Align node3776 MB(11%)00:00:00                Iter   1  100.00%  Align node3776 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3776 MB(11%)00:00:00                Iter   1   25.00%  Root alignment3776 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3776 MB(11%)00:00:00                Iter   1   75.00%  Root alignment3776 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3776 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-3776 MB(11%)00:00:00                Iter   2  100.00%  Root alignment
-3776 MB(11%)00:00:00                Iter   3   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter   3   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter   3   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter   3  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter   3  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter   3  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter   4   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter   4   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter   4   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter   4  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter   4  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter   4  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter   5   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter   5   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter   5   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter   5  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter   5  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter   5  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter   6   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter   6   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter   6   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter   6  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter   6  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter   6  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter   7   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter   7   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter   7   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter   7  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter   7  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter   7  100.00%  Refine biparts
+filef4c25688c1bf 4 seqs, max length 146, avg  length 143
+3677 MB(11%)00:00:00                Iter   1   10.00%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   10.00%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1   33.33%  Align node       3677 MB(11%)00:00:00                Iter   1   66.67%  Align node3677 MB(11%)00:00:00                Iter   1  100.00%  Align node3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   25.00%  Root alignment3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1   75.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+3677 MB(11%)00:00:00                Iter   2  100.00%  Root alignment
+3677 MB(11%)00:00:00                Iter   3   40.00%  Refine biparts3677 MB(11%)00:00:00                Iter   3   60.00%  Refine biparts3677 MB(11%)00:00:00                Iter   3   80.00%  Refine biparts3677 MB(11%)00:00:00                Iter   3  100.00%  Refine biparts3677 MB(11%)00:00:00                Iter   3  120.00%  Refine biparts3677 MB(11%)00:00:00                Iter   3  100.00%  Refine biparts
+3677 MB(11%)00:00:00                Iter   4   40.00%  Refine biparts3677 MB(11%)00:00:00                Iter   4   60.00%  Refine biparts3677 MB(11%)00:00:00                Iter   4   80.00%  Refine biparts3677 MB(11%)00:00:00                Iter   4  100.00%  Refine biparts3677 MB(11%)00:00:00                Iter   4  120.00%  Refine biparts3677 MB(11%)00:00:00                Iter   4  100.00%  Refine biparts
+3677 MB(11%)00:00:00                Iter   5   40.00%  Refine biparts3677 MB(11%)00:00:00                Iter   5   60.00%  Refine biparts3677 MB(11%)00:00:00                Iter   5   80.00%  Refine biparts3677 MB(11%)00:00:00                Iter   5  100.00%  Refine biparts3677 MB(11%)00:00:00                Iter   5  120.00%  Refine biparts3677 MB(11%)00:00:00                Iter   5  100.00%  Refine biparts
+3677 MB(11%)00:00:00                Iter   6   40.00%  Refine biparts3677 MB(11%)00:00:00                Iter   6   60.00%  Refine biparts3677 MB(11%)00:00:00                Iter   6   80.00%  Refine biparts3677 MB(11%)00:00:00                Iter   6  100.00%  Refine biparts3677 MB(11%)00:00:00                Iter   6  120.00%  Refine biparts3677 MB(11%)00:00:00                Iter   6  100.00%  Refine biparts
+3677 MB(11%)00:00:00                Iter   7   40.00%  Refine biparts3677 MB(11%)00:00:00                Iter   7   60.00%  Refine biparts3677 MB(11%)00:00:00                Iter   7   80.00%  Refine biparts3677 MB(11%)00:00:00                Iter   7  100.00%  Refine biparts3677 MB(11%)00:00:00                Iter   7  120.00%  Refine biparts3677 MB(11%)00:00:00                Iter   7  100.00%  Refine biparts
   Note: Accessing on-line PDB file
    PDB has ALT records, taking A only, rm.alt=TRUE
   |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%  |                                                                              |===================================                                   |  50%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================================| 100%
   Note: Accessing on-line PDB file
-fileeaac4e84edf2 2 seqs, max length 572, avg  length 551
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c263af9783 2 seqs, max length 572, avg  length 551
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
   Note: Accessing on-line PDB file
-fileeaac1bacdcf6 2 seqs, max length 418, avg  length 394
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c25401abc 2 seqs, max length 418, avg  length 394
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
   Note: Accessing on-line PDB file
   Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac5113acf4 2 seqs, max length 335, avg  length 334
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac2757418d 2 seqs, max length 389, avg  length 269
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac6f0967ed 2 seqs, max length 390, avg  length 269
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac681f8bf5 2 seqs, max length 390, avg  length 269
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac7e879d4 2 seqs, max length 406, avg  length 277
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac35b7041e 2 seqs, max length 406, avg  length 277
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac605e7378 2 seqs, max length 404, avg  length 276
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac3210fcb0 2 seqs, max length 404, avg  length 276
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
   Note: Accessing on-line PDB file
    PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac3cf3acba 2 seqs, max length 151, avg  length 150
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c211408feb 2 seqs, max length 335, avg  length 334
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+  Note: Accessing on-line PDB file
+filef4c25f19ac1a 2 seqs, max length 389, avg  length 269
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+  Note: Accessing on-line PDB file
+filef4c2626748b3 2 seqs, max length 390, avg  length 269
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+  Note: Accessing on-line PDB file
+filef4c2c479997 2 seqs, max length 390, avg  length 269
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+  Note: Accessing on-line PDB file
+filef4c21e0b4db6 2 seqs, max length 406, avg  length 277
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+  Note: Accessing on-line PDB file
+filef4c2325716c8 2 seqs, max length 406, avg  length 277
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+  Note: Accessing on-line PDB file
+filef4c230f4e5e9 2 seqs, max length 404, avg  length 276
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+  Note: Accessing on-line PDB file
+filef4c259d9c711 2 seqs, max length 404, avg  length 276
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
   Note: Accessing on-line PDB file
    PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac22083827 2 seqs, max length 707, avg  length 480
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c27125db5b 2 seqs, max length 151, avg  length 150
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
   Note: Accessing on-line PDB file
    PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac4b89af25 2 seqs, max length 707, avg  length 476
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c2354a397b 2 seqs, max length 707, avg  length 480
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
   Note: Accessing on-line PDB file
    PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac1129e6b3 2 seqs, max length 707, avg  length 502
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c23fba729c 2 seqs, max length 707, avg  length 476
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
   Note: Accessing on-line PDB file
    PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac329ab34e 2 seqs, max length 707, avg  length 504
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac7a1e80c8 2 seqs, max length 707, avg  length 467
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac1724bf9c 2 seqs, max length 707, avg  length 466
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c25347343f 2 seqs, max length 707, avg  length 502
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
   Note: Accessing on-line PDB file
    PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaacc750de8 2 seqs, max length 707, avg  length 465
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-fileeaac60ec2294 2 seqs, max length 418, avg  length 406
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-fileeaac7299d111 2 seqs, max length 418, avg  length 406
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-fileeaac1f74b312 2 seqs, max length 418, avg  length 406
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-fileeaac629de3eb 2 seqs, max length 418, avg  length 406
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-fileeaac5fb1981a 2 seqs, max length 418, avg  length 406
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-fileeaac24f87078 2 seqs, max length 476, avg  length 476
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c22f7cbd3b 2 seqs, max length 707, avg  length 504
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
   Note: Accessing on-line PDB file
-fileeaac2089ff69 2 seqs, max length 453, avg  length 290
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c25cde949c 2 seqs, max length 707, avg  length 467
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
   Note: Accessing on-line PDB file
-fileeaac7bd4f178 2 seqs, max length 453, avg  length 284
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac3cc66130 2 seqs, max length 453, avg  length 284
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac6ee4e1fc 2 seqs, max length 453, avg  length 289
-3779 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13779 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3779 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23779 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3779 MB(11%)00:00:00                Iter   1  100.00%  Align node       3779 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3779 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3779 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3779 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac77ea0c35 2 seqs, max length 453, avg  length 286
-3779 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13779 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3779 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23779 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3779 MB(11%)00:00:00                Iter   1  100.00%  Align node       3779 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3779 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3779 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3779 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac7e2d73ef 2 seqs, max length 453, avg  length 286
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac7f712694 2 seqs, max length 453, avg  length 281
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac2cbe4a02 2 seqs, max length 453, avg  length 281
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac3f76cbe0 2 seqs, max length 453, avg  length 289
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac1e9fbf32 2 seqs, max length 453, avg  length 289
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac7d878b25 2 seqs, max length 453, avg  length 283
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac139169a4 2 seqs, max length 453, avg  length 283
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c261d48053 2 seqs, max length 707, avg  length 466
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
   Note: Accessing on-line PDB file
    PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac352cbb1f 2 seqs, max length 707, avg  length 480
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c2405fe880 2 seqs, max length 707, avg  length 465
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c2386e9b8d 2 seqs, max length 418, avg  length 406
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c2ea8a817 2 seqs, max length 418, avg  length 406
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c278031162 2 seqs, max length 418, avg  length 406
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c26488cfd2 2 seqs, max length 418, avg  length 406
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c2aa695b3 2 seqs, max length 418, avg  length 406
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c219c621a3 2 seqs, max length 476, avg  length 476
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+  Note: Accessing on-line PDB file
+filef4c278ca7fc5 2 seqs, max length 453, avg  length 290
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+  Note: Accessing on-line PDB file
+filef4c24626649a 2 seqs, max length 453, avg  length 284
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+  Note: Accessing on-line PDB file
+filef4c27ee5ce0a 2 seqs, max length 453, avg  length 284
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+  Note: Accessing on-line PDB file
+filef4c2741257ce 2 seqs, max length 453, avg  length 289
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+  Note: Accessing on-line PDB file
+filef4c242a1e405 2 seqs, max length 453, avg  length 286
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+  Note: Accessing on-line PDB file
+filef4c25d028c8d 2 seqs, max length 453, avg  length 286
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+  Note: Accessing on-line PDB file
+filef4c27d583f65 2 seqs, max length 453, avg  length 281
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+  Note: Accessing on-line PDB file
+filef4c25d5b6143 2 seqs, max length 453, avg  length 281
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+  Note: Accessing on-line PDB file
+filef4c2215969ff 2 seqs, max length 453, avg  length 289
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+  Note: Accessing on-line PDB file
+filef4c236bd8d27 2 seqs, max length 453, avg  length 289
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+  Note: Accessing on-line PDB file
+filef4c2703a0778 2 seqs, max length 453, avg  length 283
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+  Note: Accessing on-line PDB file
+filef4c219654d99 2 seqs, max length 453, avg  length 283
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
   Note: Accessing on-line PDB file
    PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac1469c4d8 2 seqs, max length 707, avg  length 476
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c25bba751b 2 seqs, max length 707, avg  length 480
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
   Note: Accessing on-line PDB file
    PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac3d6aa22e 2 seqs, max length 707, avg  length 502
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c239b33107 2 seqs, max length 707, avg  length 476
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
   Note: Accessing on-line PDB file
    PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac74a93822 2 seqs, max length 707, avg  length 504
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac45c9f3a8 2 seqs, max length 707, avg  length 467
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac2bf07d63 2 seqs, max length 707, avg  length 466
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c25e3db5df 2 seqs, max length 707, avg  length 502
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
   Note: Accessing on-line PDB file
    PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac6058122c 2 seqs, max length 707, avg  length 465
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+filef4c2381c2e3c 2 seqs, max length 707, avg  length 504
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+  Note: Accessing on-line PDB file
+filef4c2228a8d37 2 seqs, max length 707, avg  length 467
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+  Note: Accessing on-line PDB file
+filef4c268f287f9 2 seqs, max length 707, avg  length 466
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
+  Note: Accessing on-line PDB file
+   PDB has ALT records, taking A only, rm.alt=TRUE
+filef4c27146237 2 seqs, max length 707, avg  length 465
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
+3677 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23677 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
+3677 MB(11%)00:00:00                Iter   1  100.00%  Align node       3677 MB(11%)00:00:00                Iter   1  100.00%  Align node
+3677 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3677 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
   Note: Accessing on-line PDB file
    PDB has ALT records, taking A only, rm.alt=TRUE
   Note: Accessing on-line PDB file
@@ -2189,9 +2188,11 @@ fileeaac6058122c 2 seqs, max length 707, avg  length 465
    PDB has ALT records, taking A only, rm.alt=TRUE
   Note: Accessing on-line PDB file
 ══ testthat results  ═══════════════════════════════════════════════════════════
-[ OK: 908 | SKIPPED: 1 | WARNINGS: 0 | FAILED: 2 ]
-1. Error: ddG.profile() works properly (@test_ddG.R#149) 
-2. Error: custom.aln() works properly (@test_evolutionary.R#40) 
+[ OK: 922 | SKIPPED: 1 | WARNINGS: 0 | FAILED: 4 ]
+1. Failure: get.seq() works properly with NCBI (@test_getseq.R#31) 
+2. Failure: get.seq() works properly with NCBI (@test_getseq.R#32) 
+3. Failure: get.seq() works properly with NCBI (@test_getseq.R#33) 
+4. Failure: get.seq() works properly with NCBI (@test_getseq.R#34) 
 
 Error: testthat unit tests failed
 Execution halted
