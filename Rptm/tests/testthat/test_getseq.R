@@ -19,21 +19,6 @@ test_that("get.seq() works properly with UniProt",{
   expect_equal(t[[1]][28], 'Q')
 })
 
-test_that("get.seq() works properly with NCBI",{
-
-  skip_on_cran()
-  skip_on_travis()
-
-  a <- get.seq('P01009', db = 'ncbi')
-  t <- get.seq('P01009', db = 'ncbi', as.string = FALSE)
-
-  expect_is(a, 'character')
-  expect_equal(nchar(a), 418)
-  expect_is(t, 'list')
-  expect_equal(length(t[[1]]), 418)
-  expect_equal(t[[1]][28], 'Q')
-})
-
 test_that("get.seq() works properly with MetOSite",{
 
   skip_on_cran()
