@@ -1,2197 +1,0 @@
-
-R version 3.6.2 (2019-12-12) -- "Dark and Stormy Night"
-Copyright (C) 2019 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin15.6.0 (64-bit)
-
-R is free software and comes with ABSOLUTELY NO WARRANTY.
-You are welcome to redistribute it under certain conditions.
-Type 'license()' or 'licence()' for distribution details.
-
-R is a collaborative project with many contributors.
-Type 'contributors()' for more information and
-'citation()' on how to cite R or R packages in publications.
-
-Type 'demo()' for some demos, 'help()' for on-line help, or
-'help.start()' for an HTML browser interface to help.
-Type 'q()' to quit R.
-
-> library(testthat)
-> library(ptm)
-> 
-> test_check("ptm")
-  Note: Accessing on-line PDB file
-
-MUSCLE v3.8.31 by Robert C. Edgar
-
-http://www.drive5.com/muscle
-This software is donated to the public domain.
-Please cite: Edgar, R.C. Nucleic Acids Res 32(5), 1792-97.
-
-fileeaac2267e732 2 seqs, max length 189, avg  length 177
-388 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1388 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-388 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2388 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-388 MB(1%)00:00:00                Iter   1  100.00%  Align node       388 MB(1%)00:00:00                Iter   1  100.00%  Align node
-388 MB(1%)00:00:00                Iter   1   50.00%  Root alignment388 MB(1%)00:00:00                Iter   1  100.00%  Root alignment388 MB(1%)00:00:00                Iter   1  100.00%  Root alignment
-   PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac56848c86 2 seqs, max length 335, avg  length 334
-402 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1402 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-402 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2402 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-402 MB(1%)00:00:00                Iter   1  100.00%  Align node       403 MB(1%)00:00:00                Iter   1  100.00%  Align node
-403 MB(1%)00:00:00                Iter   1   50.00%  Root alignment403 MB(1%)00:00:00                Iter   1  100.00%  Root alignment403 MB(1%)00:00:00                Iter   1  100.00%  Root alignment
-fileeaac5e040528 2 seqs, max length 418, avg  length 406
-403 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1403 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-403 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2403 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-403 MB(1%)00:00:00                Iter   1  100.00%  Align node       403 MB(1%)00:00:00                Iter   1  100.00%  Align node
-403 MB(1%)00:00:00                Iter   1   50.00%  Root alignment403 MB(1%)00:00:00                Iter   1  100.00%  Root alignment403 MB(1%)00:00:00                Iter   1  100.00%  Root alignment
-fileeaac46c1c550 2 seqs, max length 418, avg  length 406
-409 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1409 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-409 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2409 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-409 MB(1%)00:00:00                Iter   1  100.00%  Align node       409 MB(1%)00:00:00                Iter   1  100.00%  Align node
-409 MB(1%)00:00:00                Iter   1   50.00%  Root alignment409 MB(1%)00:00:00                Iter   1  100.00%  Root alignment409 MB(1%)00:00:00                Iter   1  100.00%  Root alignment
-fileeaac7d4d8584 2 seqs, max length 418, avg  length 406
-415 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1415 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-415 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2415 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-416 MB(1%)00:00:00                Iter   1  100.00%  Align node       416 MB(1%)00:00:00                Iter   1  100.00%  Align node
-416 MB(1%)00:00:00                Iter   1   50.00%  Root alignment416 MB(1%)00:00:00                Iter   1  100.00%  Root alignment416 MB(1%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac730e0142 2 seqs, max length 418, avg  length 396
-423 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1423 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-423 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2423 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-423 MB(1%)00:00:00                Iter   1  100.00%  Align node       423 MB(1%)00:00:00                Iter   1  100.00%  Align node
-423 MB(1%)00:00:00                Iter   1   50.00%  Root alignment423 MB(1%)00:00:00                Iter   1  100.00%  Root alignment423 MB(1%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac38c673af 2 seqs, max length 418, avg  length 396
-423 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 1423 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-423 MB(1%)00:00:00                Iter   1   33.33%  K-mer dist pass 2423 MB(1%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-423 MB(1%)00:00:00                Iter   1  100.00%  Align node       423 MB(1%)00:00:00                Iter   1  100.00%  Align node
-423 MB(1%)00:00:00                Iter   1   50.00%  Root alignment423 MB(1%)00:00:00                Iter   1  100.00%  Root alignment423 MB(1%)00:00:00                Iter   1  100.00%  Root alignment
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%  |                                                                              |===================================                                   |  50%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================================| 100%
-[1] 0
-[1] 0
-[1] 0
-[1] 0
-[1] 0
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%  |                                                                              |===================================                                   |  50%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================================| 100%
-[1] 0
-[1] 0
-[1] 0
-[1] 0
-[1] 0
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%  |                                                                              |===================================                                   |  50%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================================| 100%
-trying URL 'https://files.rcsb.org/download/1U8F.pdb'
-downloaded 948 KB
-
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%  |                                                                              |===================================                                   |  50%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================================| 100%
-trying URL 'https://files.rcsb.org/download/1U8F.pdb'
-downloaded 948 KB
-
-trying URL 'https://files.rcsb.org/download/6lu7.pdb'
-downloaded 231 KB
-
-  |                                                                              |                                                                      |   0%  |                                                                              |===================================                                   |  50%  |                                                                              |======================================================================| 100%
-[1] 0
-[1] 0
-[1] 0
-trying URL 'https://files.rcsb.org/download/6lu7.pdb'
-downloaded 231 KB
-
-  |                                                                              |                                                                      |   0%  |                                                                              |===================================                                   |  50%  |                                                                              |======================================================================| 100%
-[1] 0
-[1] 0
-[1] 0
-trying URL 'https://files.rcsb.org/download/6lu7.pdb'
-downloaded 231 KB
-
-  |                                                                              |                                                                      |   0%  |                                                                              |===================================                                   |  50%  |                                                                              |======================================================================| 100%
-trying URL 'https://files.rcsb.org/download/6lu7.pdb'
-downloaded 231 KB
-
-  |                                                                              |                                                                      |   0%  |                                                                              |===================================                                   |  50%  |                                                                              |======================================================================| 100%
-trying URL 'https://files.rcsb.org/download/1h9d.pdb'
-downloaded 434 KB
-
-  |                                                                              |                                                                      |   0%  |                                                                              |=========                                                             |  12%  |                                                                              |==================                                                    |  25%  |                                                                              |==========================                                            |  38%  |                                                                              |===================================                                   |  50%  |                                                                              |============================================                          |  62%  |                                                                              |====================================================                  |  75%  |                                                                              |=============================================================         |  88%  |                                                                              |======================================================================| 100%
-[1] 0
-[1] 0
-[1] 0
-[1] 0
-[1] 0
-trying URL 'https://files.rcsb.org/download/3cwm.pdb'
-downloaded 280 KB
-
-trying URL 'https://files.rcsb.org/download/3cwm.pdb'
-downloaded 280 KB
-
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-trying URL 'https://files.rcsb.org/download/1hxp.pdb'
-downloaded 526 KB
-
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-trying URL 'https://files.rcsb.org/download/1hxp.pdb'
-downloaded 526 KB
-
-  |                                                                              |                                                                      |   0%  |                                                                              |===================================                                   |  50%  |                                                                              |======================================================================| 100%
-   PDB has ALT records, taking A only, rm.alt=TRUE
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%  |                                                                              |===================================                                   |  50%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================================| 100%
-   PDB has ALT records, taking A only, rm.alt=TRUE
-   PDB has ALT records, taking A only, rm.alt=TRUE
-   PDB has ALT records, taking A only, rm.alt=TRUE
-trying URL 'https://files.rcsb.org/download/1hxp.pdb'
-downloaded 526 KB
-
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-trying URL 'https://files.rcsb.org/download/1hxp.pdb'
-downloaded 526 KB
-
-  |                                                                              |                                                                      |   0%  |                                                                              |===================================                                   |  50%  |                                                                              |======================================================================| 100%
-   PDB has ALT records, taking A only, rm.alt=TRUE
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%  |                                                                              |===================================                                   |  50%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================================| 100%
-   PDB has ALT records, taking A only, rm.alt=TRUE
-   PDB has ALT records, taking A only, rm.alt=TRUE
-   PDB has ALT records, taking A only, rm.alt=TRUE
-trying URL 'https://files.rcsb.org/download/1cll.pdb'
-downloaded 143 KB
-
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-trying URL 'https://files.rcsb.org/download/1cll.pdb'
-downloaded 143 KB
-
-  |                                                                              |                                                                      |   0%  |                                                                              |======================================================================| 100%
-   PDB has ALT records, taking A only, rm.alt=TRUE
-trying URL 'https://files.rcsb.org/download/2xqq.pdb'
-downloaded 621 KB
-
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  |                                                                              |                                                                      |   0%  |                                                                              |=========                                                             |  12%  |                                                                              |==================                                                    |  25%  |                                                                              |==========================                                            |  38%  |                                                                              |===================================                                   |  50%  |                                                                              |============================================                          |  62%  |                                                                              |====================================================                  |  75%  |                                                                              |=============================================================         |  88%  |                                                                              |======================================================================| 100%
-[1] 0
-[1] 0
-[1] 0
-[1] 0
-[1] 0
-[1] 0
-[1] 0
-[1] 0
-[1] 0
-trying URL 'https://files.rcsb.org/download/2xqq.pdb'
-downloaded 621 KB
-
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  |                                                                              |                                                                      |   0%  |                                                                              |=========                                                             |  12%  |                                                                              |==================                                                    |  25%  |                                                                              |==========================                                            |  38%  |                                                                              |===================================                                   |  50%  |                                                                              |============================================                          |  62%  |                                                                              |====================================================                  |  75%  |                                                                              |=============================================================         |  88%  |                                                                              |======================================================================| 100%
-[1] 0
-[1] 0
-[1] 0
-[1] 0
-[1] 0
-[1] 0
-[1] 0
-[1] 0
-[1] 0
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%  |                                                                              |===================================                                   |  50%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================================| 100%
-[1] 0
-[1] 0
-[1] 0
-[1] 0
-[1] 0
-   ********************************************
-   ***                                      ***
-   ***             FoldX 5 (c)              ***
-   ***                                      ***
-   ***     code by the FoldX Consortium     ***
-   ***                                      ***
-   ***     Jesper Borg, Frederic Rousseau   ***
-   ***    Joost Schymkowitz, Luis Serrano   ***
-   ***    Peter Vanhee, Erik Verschueren    ***
-   ***     Lies Baeten, Javier Delgado      ***
-   ***       and Francois Stricher          ***
-   *** and any other of the 9! permutations ***
-   ***   based on an original concept by    ***
-   ***   Raphael Guerois and Luis Serrano   ***
-   ********************************************
-
-No pdbs for the run found at:
-"./"
-Foldx will end
-   ********************************************
-   ***                                      ***
-   ***             FoldX 5 (c)              ***
-   ***                                      ***
-   ***     code by the FoldX Consortium     ***
-   ***                                      ***
-   ***     Jesper Borg, Frederic Rousseau   ***
-   ***    Joost Schymkowitz, Luis Serrano   ***
-   ***    Peter Vanhee, Erik Verschueren    ***
-   ***     Lies Baeten, Javier Delgado      ***
-   ***       and Francois Stricher          ***
-   *** and any other of the 9! permutations ***
-   ***   based on an original concept by    ***
-   ***   Raphael Guerois and Luis Serrano   ***
-   ********************************************
-
-1 models read: 1b4i_Repair.pdb
-
-BackHbond       =               -5.73
-SideHbond       =               -8.11
-Energy_VdW      =               -22.10
-Electro         =               -2.08
-Energy_SolvP    =               39.31
-Energy_SolvH    =               -25.92
-Energy_vdwclash =               11.24
-energy_torsion  =               3.04
-backbone_vdwclash=              25.03
-Entropy_sidec   =               13.87
-Entropy_mainc   =               52.33
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  55.86
-
-Starting BuildModel
-Reading SA8A;
-Reading SA8R;
-Reading SA8N;
-Reading SA8D;
-Reading SA8C;
-Reading SA8Q;
-Reading SA8E;
-Reading SA8G;
-Reading SA8H;
-Reading SA8I;
-Reading SA8L;
-Reading SA8K;
-Reading SA8M;
-Reading SA8F;
-Reading SA8P;
-Reading SA8T;
-Reading SA8W;
-Reading SA8Y;
-Reading SA8V;
-Residue to Mutate SERA8 has residue index 7
-Residue to Mutate SERA8 has residue index 7
-Residue to Mutate SERA8 has residue index 7
-Residue to Mutate SERA8 has residue index 7
-Residue to Mutate SERA8 has residue index 7
-Residue to Mutate SERA8 has residue index 7
-Residue to Mutate SERA8 has residue index 7
-Residue to Mutate SERA8 has residue index 7
-Residue to Mutate SERA8 has residue index 7
-Residue to Mutate SERA8 has residue index 7
-Residue to Mutate SERA8 has residue index 7
-Residue to Mutate SERA8 has residue index 7
-Residue to Mutate SERA8 has residue index 7
-Residue to Mutate SERA8 has residue index 7
-Residue to Mutate SERA8 has residue index 7
-Residue to Mutate SERA8 has residue index 7
-Residue to Mutate SERA8 has residue index 7
-Residue to Mutate SERA8 has residue index 7
-Residue to Mutate SERA8 has residue index 7
-Mutating residue = SERA8 into ALA
-Mutating residue = SERA8 into ALA
-Mutating residue = SERA8 into ALA
-Mutating residue = SERA8 into ARG
-Mutating residue = SERA8 into ARG
-Mutating residue = SERA8 into ARG
-Mutating residue = SERA8 into ASN
-Mutating residue = SERA8 into ASN
-Mutating residue = SERA8 into ASN
-Mutating residue = SERA8 into ASP
-Mutating residue = SERA8 into ASP
-Mutating residue = SERA8 into ASP
-Mutating residue = SERA8 into CYS
-Mutating residue = SERA8 into CYS
-Mutating residue = SERA8 into CYS
-Mutating residue = SERA8 into GLN
-Mutating residue = SERA8 into GLN
-Mutating residue = SERA8 into GLN
-Mutating residue = SERA8 into GLU
-Mutating residue = SERA8 into GLU
-Mutating residue = SERA8 into GLU
-Mutating residue = SERA8 into GLY
-Mutating residue = SERA8 into GLY
-Mutating residue = SERA8 into GLY
-Mutating residue = SERA8 into HIS
-Mutating residue = SERA8 into HIS
-Mutating residue = SERA8 into HIS
-Mutating residue = SERA8 into ILE
-Mutating residue = SERA8 into ILE
-Mutating residue = SERA8 into ILE
-Mutating residue = SERA8 into LEU
-Mutating residue = SERA8 into LEU
-Mutating residue = SERA8 into LEU
-Mutating residue = SERA8 into LYS
-Mutating residue = SERA8 into LYS
-Mutating residue = SERA8 into LYS
-Mutating residue = SERA8 into MET
-Mutating residue = SERA8 into MET
-Mutating residue = SERA8 into MET
-Mutating residue = SERA8 into PHE
-Mutating residue = SERA8 into PHE
-Mutating residue = SERA8 into PHE
-Mutating residue = SERA8 into PRO
-Mutating residue = SERA8 into PRO
-Mutating residue = SERA8 into PRO
-Mutating residue = SERA8 into THR
-Mutating residue = SERA8 into THR
-Mutating residue = SERA8 into THR
-Mutating residue = SERA8 into TRP
-Mutating residue = SERA8 into TRP
-Mutating residue = SERA8 into TRP
-Mutating residue = SERA8 into TYR
-Mutating residue = SERA8 into TYR
-Mutating residue = SERA8 into TYR
-Mutating residue = SERA8 into VAL
-Mutating residue = SERA8 into VAL
-Mutating residue = SERA8 into VAL
-Your file run OK
-End time of FoldX: Tue Dec  1 12:50:56 2020
-Total time spend: 87.92 seconds.
-validated file "1b4i_Repair_1_0.pdb" => successfully finished
-validated file "1b4i_Repair_1_1.pdb" => successfully finished
-validated file "1b4i_Repair_1_2.pdb" => successfully finished
-validated file "1b4i_Repair_2_0.pdb" => successfully finished
-validated file "1b4i_Repair_2_1.pdb" => successfully finished
-validated file "1b4i_Repair_2_2.pdb" => successfully finished
-validated file "1b4i_Repair_3_0.pdb" => successfully finished
-validated file "1b4i_Repair_3_1.pdb" => successfully finished
-validated file "1b4i_Repair_3_2.pdb" => successfully finished
-validated file "1b4i_Repair_4_0.pdb" => successfully finished
-validated file "1b4i_Repair_4_1.pdb" => successfully finished
-validated file "1b4i_Repair_4_2.pdb" => successfully finished
-validated file "1b4i_Repair_5_0.pdb" => successfully finished
-validated file "1b4i_Repair_5_1.pdb" => successfully finished
-validated file "1b4i_Repair_5_2.pdb" => successfully finished
-validated file "1b4i_Repair_6_0.pdb" => successfully finished
-validated file "1b4i_Repair_6_1.pdb" => successfully finished
-validated file "1b4i_Repair_6_2.pdb" => successfully finished
-validated file "1b4i_Repair_7_0.pdb" => successfully finished
-validated file "1b4i_Repair_7_1.pdb" => successfully finished
-validated file "1b4i_Repair_7_2.pdb" => successfully finished
-validated file "1b4i_Repair_8_0.pdb" => successfully finished
-validated file "1b4i_Repair_8_1.pdb" => successfully finished
-validated file "1b4i_Repair_8_2.pdb" => successfully finished
-validated file "1b4i_Repair_9_0.pdb" => successfully finished
-validated file "1b4i_Repair_9_1.pdb" => successfully finished
-validated file "1b4i_Repair_9_2.pdb" => successfully finished
-validated file "1b4i_Repair_10_0.pdb" => successfully finished
-validated file "1b4i_Repair_10_1.pdb" => successfully finished
-validated file "1b4i_Repair_10_2.pdb" => successfully finished
-validated file "1b4i_Repair_11_0.pdb" => successfully finished
-validated file "1b4i_Repair_11_1.pdb" => successfully finished
-validated file "1b4i_Repair_11_2.pdb" => successfully finished
-validated file "1b4i_Repair_12_0.pdb" => successfully finished
-validated file "1b4i_Repair_12_1.pdb" => successfully finished
-validated file "1b4i_Repair_12_2.pdb" => successfully finished
-validated file "1b4i_Repair_13_0.pdb" => successfully finished
-validated file "1b4i_Repair_13_1.pdb" => successfully finished
-validated file "1b4i_Repair_13_2.pdb" => successfully finished
-validated file "1b4i_Repair_14_0.pdb" => successfully finished
-validated file "1b4i_Repair_14_1.pdb" => successfully finished
-validated file "1b4i_Repair_14_2.pdb" => successfully finished
-validated file "1b4i_Repair_15_0.pdb" => successfully finished
-validated file "1b4i_Repair_15_1.pdb" => successfully finished
-validated file "1b4i_Repair_15_2.pdb" => successfully finished
-validated file "1b4i_Repair_16_0.pdb" => successfully finished
-validated file "1b4i_Repair_16_1.pdb" => successfully finished
-validated file "1b4i_Repair_16_2.pdb" => successfully finished
-validated file "1b4i_Repair_17_0.pdb" => successfully finished
-validated file "1b4i_Repair_17_1.pdb" => successfully finished
-validated file "1b4i_Repair_17_2.pdb" => successfully finished
-validated file "1b4i_Repair_18_0.pdb" => successfully finished
-validated file "1b4i_Repair_18_1.pdb" => successfully finished
-validated file "1b4i_Repair_18_2.pdb" => successfully finished
-validated file "1b4i_Repair_19_0.pdb" => successfully finished
-validated file "1b4i_Repair_19_1.pdb" => successfully finished
-validated file "1b4i_Repair_19_2.pdb" => successfully finished
-Cleaning BuildModel...DONE
-   ********************************************
-   ***                                      ***
-   ***             FoldX 5 (c)              ***
-   ***                                      ***
-   ***     code by the FoldX Consortium     ***
-   ***                                      ***
-   ***     Jesper Borg, Frederic Rousseau   ***
-   ***    Joost Schymkowitz, Luis Serrano   ***
-   ***    Peter Vanhee, Erik Verschueren    ***
-   ***     Lies Baeten, Javier Delgado      ***
-   ***       and Francois Stricher          ***
-   *** and any other of the 9! permutations ***
-   ***   based on an original concept by    ***
-   ***   Raphael Guerois and Luis Serrano   ***
-   ********************************************
-
-No pdbs for the run found at:
-"./"
-Foldx will end
-   ********************************************
-   ***                                      ***
-   ***             FoldX 5 (c)              ***
-   ***                                      ***
-   ***     code by the FoldX Consortium     ***
-   ***                                      ***
-   ***     Jesper Borg, Frederic Rousseau   ***
-   ***    Joost Schymkowitz, Luis Serrano   ***
-   ***    Peter Vanhee, Erik Verschueren    ***
-   ***     Lies Baeten, Javier Delgado      ***
-   ***       and Francois Stricher          ***
-   *** and any other of the 9! permutations ***
-   ***   based on an original concept by    ***
-   ***   Raphael Guerois and Luis Serrano   ***
-   ********************************************
-
-Start FoldX PositionScan >>>
-
-1 models read: 1b4i_Repair.pdb
-
-BackHbond       =               -5.73
-SideHbond       =               -8.11
-Energy_VdW      =               -22.10
-Electro         =               -2.08
-Energy_SolvP    =               39.31
-Energy_SolvH    =               -25.92
-Energy_vdwclash =               11.24
-energy_torsion  =               3.04
-backbone_vdwclash=              25.03
-Entropy_sidec   =               13.87
-Entropy_mainc   =               52.33
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  55.86
-
-Residue SER8 identified.
-running mutagenesis SERA8 in SER
-0 MOVING NEIGHBOUR RESIDUE = 6 VAL
-0 MOVING NEIGHBOUR RESIDUE = 9 TYR
-0 MOVING NEIGHBOUR RESIDUE = 0 MET
-Residue Number= 8 SER	
-BackHbond       =               -5.03
-SideHbond       =               -7.48
-Energy_VdW      =               -20.75
-Electro         =               -2.06
-Energy_SolvP    =               38.00
-Energy_SolvH    =               -24.27
-Energy_vdwclash =               8.12
-energy_torsion  =               2.32
-backbone_vdwclash=              23.95
-Entropy_sidec   =               13.37
-Entropy_mainc   =               51.76
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  53.97
-
-running mutagenesis SERA8 in GLY
-1 MOVING NEIGHBOUR RESIDUE = 6 VAL
-1 MOVING NEIGHBOUR RESIDUE = 9 TYR
-1 MOVING NEIGHBOUR RESIDUE = 0 MET
-Residue Number= 8 GLY	
-BackHbond       =               -5.03
-SideHbond       =               -7.48
-Energy_VdW      =               -20.57
-Electro         =               -2.06
-Energy_SolvP    =               37.69
-Energy_SolvH    =               -24.11
-Energy_vdwclash =               8.12
-energy_torsion  =               2.31
-backbone_vdwclash=              23.83
-Entropy_sidec   =               13.32
-Entropy_mainc   =               51.42
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  53.60
-
-running mutagenesis SERA8 in ALA
-2 MOVING NEIGHBOUR RESIDUE = 6 VAL
-2 MOVING NEIGHBOUR RESIDUE = 9 TYR
-2 MOVING NEIGHBOUR RESIDUE = 0 MET
-Residue Number= 8 ALA	
-BackHbond       =               -5.03
-SideHbond       =               -7.48
-Energy_VdW      =               -20.75
-Electro         =               -2.06
-Energy_SolvP    =               37.91
-Energy_SolvH    =               -24.38
-Energy_vdwclash =               8.14
-energy_torsion  =               2.32
-backbone_vdwclash=              23.94
-Entropy_sidec   =               13.34
-Entropy_mainc   =               51.83
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  53.85
-
-running mutagenesis SERA8 in LEU
-3 MOVING NEIGHBOUR RESIDUE = 6 VAL
-3 MOVING NEIGHBOUR RESIDUE = 9 TYR
-3 MOVING NEIGHBOUR RESIDUE = 0 MET
-Residue Number= 8 LEU	
-BackHbond       =               -5.03
-SideHbond       =               -7.48
-Energy_VdW      =               -20.82
-Electro         =               -2.06
-Energy_SolvP    =               37.75
-Energy_SolvH    =               -24.59
-Energy_vdwclash =               8.25
-energy_torsion  =               2.35
-backbone_vdwclash=              23.84
-Entropy_sidec   =               13.47
-Entropy_mainc   =               51.53
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  53.36
-
-running mutagenesis SERA8 in VAL
-4 MOVING NEIGHBOUR RESIDUE = 6 VAL
-4 MOVING NEIGHBOUR RESIDUE = 9 TYR
-4 MOVING NEIGHBOUR RESIDUE = 0 MET
-Residue Number= 8 VAL	
-BackHbond       =               -5.03
-SideHbond       =               -7.48
-Energy_VdW      =               -21.06
-Electro         =               -2.06
-Energy_SolvP    =               38.22
-Energy_SolvH    =               -24.80
-Energy_vdwclash =               8.26
-energy_torsion  =               2.35
-backbone_vdwclash=              24.19
-Entropy_sidec   =               13.49
-Entropy_mainc   =               52.08
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  53.98
-
-running mutagenesis SERA8 in ILE
-5 MOVING NEIGHBOUR RESIDUE = 6 VAL
-5 MOVING NEIGHBOUR RESIDUE = 9 TYR
-5 MOVING NEIGHBOUR RESIDUE = 0 MET
-Residue Number= 8 ILE	
-BackHbond       =               -5.03
-SideHbond       =               -7.48
-Energy_VdW      =               -21.39
-Electro         =               -2.06
-Energy_SolvP    =               38.42
-Energy_SolvH    =               -25.39
-Energy_vdwclash =               8.24
-energy_torsion  =               2.33
-backbone_vdwclash=              24.25
-Entropy_sidec   =               13.74
-Entropy_mainc   =               52.18
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  53.56
-
-running mutagenesis SERA8 in PRO
-6 MOVING NEIGHBOUR RESIDUE = 6 VAL
-6 MOVING NEIGHBOUR RESIDUE = 9 TYR
-6 MOVING NEIGHBOUR RESIDUE = 0 MET
-Residue Number= 8 PRO	
-BackHbond       =               -5.03
-SideHbond       =               -7.48
-Energy_VdW      =               -20.97
-Electro         =               -2.06
-Energy_SolvP    =               37.88
-Energy_SolvH    =               -24.82
-Energy_vdwclash =               8.12
-energy_torsion  =               2.33
-backbone_vdwclash=              23.27
-Entropy_sidec   =               13.48
-Entropy_mainc   =               51.65
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  53.09
-
-running mutagenesis SERA8 in ARG
-7 MOVING NEIGHBOUR RESIDUE = 6 VAL
-7 MOVING NEIGHBOUR RESIDUE = 9 TYR
-7 MOVING NEIGHBOUR RESIDUE = 0 MET
-Residue Number= 8 ARG	
-BackHbond       =               -5.03
-SideHbond       =               -7.48
-Energy_VdW      =               -21.19
-Electro         =               -1.94
-Energy_SolvP    =               38.08
-Energy_SolvH    =               -25.11
-Energy_vdwclash =               8.29
-energy_torsion  =               2.40
-backbone_vdwclash=              24.10
-Entropy_sidec   =               13.65
-Entropy_mainc   =               51.89
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  53.56
-
-running mutagenesis SERA8 in THR
-8 MOVING NEIGHBOUR RESIDUE = 6 VAL
-8 MOVING NEIGHBOUR RESIDUE = 9 TYR
-8 MOVING NEIGHBOUR RESIDUE = 0 MET
-Residue Number= 8 THR	
-BackHbond       =               -5.03
-SideHbond       =               -7.48
-Energy_VdW      =               -20.77
-Electro         =               -2.06
-Energy_SolvP    =               38.04
-Energy_SolvH    =               -24.31
-Energy_vdwclash =               8.12
-energy_torsion  =               2.33
-backbone_vdwclash=              24.03
-Entropy_sidec   =               13.39
-Entropy_mainc   =               51.89
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  54.13
-
-running mutagenesis SERA8 in SER
-9 MOVING NEIGHBOUR RESIDUE = 6 VAL
-9 MOVING NEIGHBOUR RESIDUE = 9 TYR
-9 MOVING NEIGHBOUR RESIDUE = 0 MET
-Residue Number= 8 SER	
-BackHbond       =               -5.03
-SideHbond       =               -7.48
-Energy_VdW      =               -20.75
-Electro         =               -2.06
-Energy_SolvP    =               38.00
-Energy_SolvH    =               -24.27
-Energy_vdwclash =               8.12
-energy_torsion  =               2.32
-backbone_vdwclash=              23.95
-Entropy_sidec   =               13.37
-Entropy_mainc   =               51.76
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  53.97
-
-running mutagenesis SERA8 in CYS
-10 MOVING NEIGHBOUR RESIDUE = 6 VAL
-10 MOVING NEIGHBOUR RESIDUE = 9 TYR
-10 MOVING NEIGHBOUR RESIDUE = 0 MET
-Residue Number= 8 CYS	
-BackHbond       =               -5.03
-SideHbond       =               -7.48
-Energy_VdW      =               -21.02
-Electro         =               -2.06
-Energy_SolvP    =               38.09
-Energy_SolvH    =               -24.75
-Energy_vdwclash =               8.21
-energy_torsion  =               2.37
-backbone_vdwclash=              24.08
-Entropy_sidec   =               13.57
-Entropy_mainc   =               51.91
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  53.81
-
-running mutagenesis SERA8 in MET
-11 MOVING NEIGHBOUR RESIDUE = 6 VAL
-11 MOVING NEIGHBOUR RESIDUE = 9 TYR
-11 MOVING NEIGHBOUR RESIDUE = 0 MET
-Residue Number= 8 MET	
-BackHbond       =               -5.03
-SideHbond       =               -7.48
-Energy_VdW      =               -21.40
-Electro         =               -2.06
-Energy_SolvP    =               38.25
-Energy_SolvH    =               -25.55
-Energy_vdwclash =               8.22
-energy_torsion  =               2.33
-backbone_vdwclash=              24.12
-Entropy_sidec   =               13.84
-Entropy_mainc   =               52.27
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  53.39
-
-running mutagenesis SERA8 in LYS
-12 MOVING NEIGHBOUR RESIDUE = 6 VAL
-12 MOVING NEIGHBOUR RESIDUE = 9 TYR
-12 MOVING NEIGHBOUR RESIDUE = 0 MET
-Residue Number= 8 LYS	
-BackHbond       =               -5.03
-SideHbond       =               -7.48
-Energy_VdW      =               -21.33
-Electro         =               -1.94
-Energy_SolvP    =               38.28
-Energy_SolvH    =               -25.35
-Energy_vdwclash =               8.33
-energy_torsion  =               2.34
-backbone_vdwclash=              24.13
-Entropy_sidec   =               13.83
-Entropy_mainc   =               51.98
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  53.65
-
-running mutagenesis SERA8 in GLU
-13 MOVING NEIGHBOUR RESIDUE = 6 VAL
-13 MOVING NEIGHBOUR RESIDUE = 9 TYR
-13 MOVING NEIGHBOUR RESIDUE = 0 MET
-Residue Number= 8 GLU	
-BackHbond       =               -5.03
-SideHbond       =               -7.48
-Energy_VdW      =               -21.14
-Electro         =               -2.25
-Energy_SolvP    =               38.21
-Energy_SolvH    =               -25.02
-Energy_vdwclash =               8.22
-energy_torsion  =               2.35
-backbone_vdwclash=              24.08
-Entropy_sidec   =               13.87
-Entropy_mainc   =               51.88
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  53.60
-
-running mutagenesis SERA8 in GLN
-14 MOVING NEIGHBOUR RESIDUE = 6 VAL
-14 MOVING NEIGHBOUR RESIDUE = 9 TYR
-14 MOVING NEIGHBOUR RESIDUE = 0 MET
-Residue Number= 8 GLN	
-BackHbond       =               -5.03
-SideHbond       =               -7.48
-Energy_VdW      =               -21.14
-Electro         =               -2.06
-Energy_SolvP    =               38.17
-Energy_SolvH    =               -25.02
-Energy_vdwclash =               8.23
-energy_torsion  =               2.34
-backbone_vdwclash=              24.10
-Entropy_sidec   =               13.65
-Entropy_mainc   =               51.84
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  53.51
-
-running mutagenesis SERA8 in ASP
-15 MOVING NEIGHBOUR RESIDUE = 6 VAL
-15 MOVING NEIGHBOUR RESIDUE = 9 TYR
-15 MOVING NEIGHBOUR RESIDUE = 0 MET
-Residue Number= 8 ASP	
-BackHbond       =               -5.03
-SideHbond       =               -7.48
-Energy_VdW      =               -20.81
-Electro         =               -2.10
-Energy_SolvP    =               38.03
-Energy_SolvH    =               -24.42
-Energy_vdwclash =               8.12
-energy_torsion  =               2.32
-backbone_vdwclash=              24.02
-Entropy_sidec   =               13.46
-Entropy_mainc   =               51.51
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  53.59
-
-running mutagenesis SERA8 in ASN
-16 MOVING NEIGHBOUR RESIDUE = 6 VAL
-16 MOVING NEIGHBOUR RESIDUE = 9 TYR
-16 MOVING NEIGHBOUR RESIDUE = 0 MET
-Residue Number= 8 ASN	
-BackHbond       =               -5.03
-SideHbond       =               -7.48
-Energy_VdW      =               -20.82
-Electro         =               -2.06
-Energy_SolvP    =               38.03
-Energy_SolvH    =               -24.43
-Energy_vdwclash =               8.12
-energy_torsion  =               2.32
-backbone_vdwclash=              24.04
-Entropy_sidec   =               13.38
-Entropy_mainc   =               51.37
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  53.42
-
-running mutagenesis SERA8 in TRP
-17 MOVING NEIGHBOUR RESIDUE = 6 VAL
-17 MOVING NEIGHBOUR RESIDUE = 9 TYR
-17 MOVING NEIGHBOUR RESIDUE = 0 MET
-Residue Number= 8 TRP	
-BackHbond       =               -5.03
-SideHbond       =               -7.48
-Energy_VdW      =               -21.17
-Electro         =               -2.06
-Energy_SolvP    =               38.05
-Energy_SolvH    =               -24.99
-Energy_vdwclash =               8.30
-energy_torsion  =               2.45
-backbone_vdwclash=              24.11
-Entropy_sidec   =               13.61
-Entropy_mainc   =               52.21
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  53.88
-
-running mutagenesis SERA8 in TYR
-18 MOVING NEIGHBOUR RESIDUE = 6 VAL
-18 MOVING NEIGHBOUR RESIDUE = 9 TYR
-18 MOVING NEIGHBOUR RESIDUE = 0 MET
-Residue Number= 8 TYR	
-BackHbond       =               -5.03
-SideHbond       =               -7.48
-Energy_VdW      =               -20.94
-Electro         =               -2.01
-Energy_SolvP    =               37.95
-Energy_SolvH    =               -24.60
-Energy_vdwclash =               8.27
-energy_torsion  =               2.36
-backbone_vdwclash=              24.00
-Entropy_sidec   =               13.48
-Entropy_mainc   =               51.77
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  53.77
-
-running mutagenesis SERA8 in PHE
-19 MOVING NEIGHBOUR RESIDUE = 6 VAL
-19 MOVING NEIGHBOUR RESIDUE = 9 TYR
-19 MOVING NEIGHBOUR RESIDUE = 0 MET
-Residue Number= 8 PHE	
-BackHbond       =               -5.03
-SideHbond       =               -7.48
-Energy_VdW      =               -21.50
-Electro         =               -2.06
-Energy_SolvP    =               38.62
-Energy_SolvH    =               -25.45
-Energy_vdwclash =               8.21
-energy_torsion  =               2.36
-backbone_vdwclash=              24.03
-Entropy_sidec   =               13.77
-Entropy_mainc   =               52.01
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  53.46
-
-running mutagenesis SERA8 in HIS
-20 MOVING NEIGHBOUR RESIDUE = 6 VAL
-20 MOVING NEIGHBOUR RESIDUE = 9 TYR
-20 MOVING NEIGHBOUR RESIDUE = 0 MET
-Residue Number= 8 H1S	
-BackHbond       =               -5.03
-SideHbond       =               -7.48
-Energy_VdW      =               -20.86
-Electro         =               -2.06
-Energy_SolvP    =               38.11
-Energy_SolvH    =               -24.46
-Energy_vdwclash =               8.13
-energy_torsion  =               2.34
-backbone_vdwclash=              24.06
-Entropy_sidec   =               13.37
-Entropy_mainc   =               51.86
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.05
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  53.97
-
-running mutagenesis SERA8 in PTR
-21 MOVING NEIGHBOUR RESIDUE = 6 VAL
-21 MOVING NEIGHBOUR RESIDUE = 9 TYR
-21 MOVING NEIGHBOUR RESIDUE = 0 MET
-Residue Number= 8 PTR	
-BackHbond       =               -5.03
-SideHbond       =               -7.48
-Energy_VdW      =               -21.71
-Electro         =               -2.26
-Energy_SolvP    =               38.79
-Energy_SolvH    =               -25.70
-Energy_vdwclash =               8.22
-energy_torsion  =               2.38
-backbone_vdwclash=              24.00
-Entropy_sidec   =               14.20
-Entropy_mainc   =               51.95
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  53.36
-
-running mutagenesis SERA8 in TPO
-22 MOVING NEIGHBOUR RESIDUE = 6 VAL
-22 MOVING NEIGHBOUR RESIDUE = 9 TYR
-22 MOVING NEIGHBOUR RESIDUE = 0 MET
-Residue Number= 8 TPO	
-BackHbond       =               -5.03
-SideHbond       =               -7.48
-Energy_VdW      =               -21.32
-Electro         =               -2.42
-Energy_SolvP    =               38.97
-Energy_SolvH    =               -24.92
-Energy_vdwclash =               8.21
-energy_torsion  =               2.37
-backbone_vdwclash=              24.21
-Entropy_sidec   =               14.14
-Entropy_mainc   =               52.16
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  54.67
-
-running mutagenesis SERA8 in SEP
-23 MOVING NEIGHBOUR RESIDUE = 6 VAL
-23 MOVING NEIGHBOUR RESIDUE = 9 TYR
-23 MOVING NEIGHBOUR RESIDUE = 0 MET
-Residue Number= 8 SEP	
-BackHbond       =               -5.03
-SideHbond       =               -7.48
-Energy_VdW      =               -20.92
-Electro         =               -2.17
-Energy_SolvP    =               38.14
-Energy_SolvH    =               -24.42
-Energy_vdwclash =               8.15
-energy_torsion  =               2.32
-backbone_vdwclash=              24.01
-Entropy_sidec   =               13.61
-Entropy_mainc   =               51.88
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  54.07
-
-running mutagenesis SERA8 in HYP
-24 MOVING NEIGHBOUR RESIDUE = 6 VAL
-24 MOVING NEIGHBOUR RESIDUE = 9 TYR
-24 MOVING NEIGHBOUR RESIDUE = 0 MET
-Residue Number= 8 HYP	
-BackHbond       =               -5.03
-SideHbond       =               -7.48
-Energy_VdW      =               -21.03
-Electro         =               -2.06
-Energy_SolvP    =               38.20
-Energy_SolvH    =               -24.73
-Energy_vdwclash =               8.19
-energy_torsion  =               2.39
-backbone_vdwclash=              23.30
-Entropy_sidec   =               13.55
-Entropy_mainc   =               51.70
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  53.70
-
-Your file run OK
-End time of FoldX: Tue Dec  1 12:51:42 2020
-Total time spend: 44.51 seconds.
-Cleaning PositionScan...DONE
-   ********************************************
-   ***                                      ***
-   ***             FoldX 5 (c)              ***
-   ***                                      ***
-   ***     code by the FoldX Consortium     ***
-   ***                                      ***
-   ***     Jesper Borg, Frederic Rousseau   ***
-   ***    Joost Schymkowitz, Luis Serrano   ***
-   ***    Peter Vanhee, Erik Verschueren    ***
-   ***     Lies Baeten, Javier Delgado      ***
-   ***       and Francois Stricher          ***
-   *** and any other of the 9! permutations ***
-   ***   based on an original concept by    ***
-   ***   Raphael Guerois and Luis Serrano   ***
-   ********************************************
-
-Stability >>>
-
-1 models read: 2dfd_Repair.pdb
-
-BackHbond       =               -1006.28
-SideHbond       =               -340.42
-Energy_VdW      =               -1542.15
-Electro         =               -48.84
-Energy_SolvP    =               2019.03
-Energy_SolvH    =               -2076.40
-Energy_vdwclash =               33.57
-energy_torsion  =               27.01
-backbone_vdwclash=              889.45
-Entropy_sidec   =               736.13
-Entropy_mainc   =               1878.47
-water bonds     =               0.00
-helix dipole    =               -13.93
-loop_entropy    =               0.00
-cis_bond        =               8.99
-disulfide       =               0.00
-kn electrostatic=               -2.98
-partial covalent interactions = 0.00
-Energy_Ionisation =             3.85
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  -323.95
-
-FINISHING STABILITY ANALYSIS OPTION
-
-Your file run OK
-End time of FoldX: Tue Dec  1 12:51:47 2020
-Total time spend: 4.97 seconds.
-   ********************************************
-   ***                                      ***
-   ***             FoldX 5 (c)              ***
-   ***                                      ***
-   ***     code by the FoldX Consortium     ***
-   ***                                      ***
-   ***     Jesper Borg, Frederic Rousseau   ***
-   ***    Joost Schymkowitz, Luis Serrano   ***
-   ***    Peter Vanhee, Erik Verschueren    ***
-   ***     Lies Baeten, Javier Delgado      ***
-   ***       and Francois Stricher          ***
-   *** and any other of the 9! permutations ***
-   ***   based on an original concept by    ***
-   ***   Raphael Guerois and Luis Serrano   ***
-   ********************************************
-
-Start FoldX AnalyseComplex >>>
-
-1 models read: 2dfd_Repair.pdb
-RUNNING COMPLEX ANALYSIS
-./pdb/2dfd_Repair.pdb
-
-BackHbond       =               -1006.28
-SideHbond       =               -340.42
-Energy_VdW      =               -1542.15
-Electro         =               -48.84
-Energy_SolvP    =               2019.03
-Energy_SolvH    =               -2076.40
-Energy_vdwclash =               33.57
-energy_torsion  =               27.01
-backbone_vdwclash=              889.45
-Entropy_sidec   =               736.13
-Entropy_mainc   =               1878.47
-water bonds     =               0.00
-helix dipole    =               -13.93
-loop_entropy    =               0.00
-cis_bond        =               8.99
-disulfide       =               0.00
-kn electrostatic=               -2.98
-partial covalent interactions = 0.00
-Energy_Ionisation =             3.85
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  -323.95
-
-Group 0 is composed of chains : A(0)
-Group 1 is composed of chains : B(1)
-Total 
-
-BackHbond       =               -494.07
-SideHbond       =               -164.13
-Energy_VdW      =               -759.59
-Electro         =               -20.52
-Energy_SolvP    =               988.56
-Energy_SolvH    =               -1025.05
-Energy_vdwclash =               14.79
-energy_torsion  =               14.34
-backbone_vdwclash=              439.82
-Entropy_sidec   =               360.82
-Entropy_mainc   =               932.97
-water bonds     =               0.00
-helix dipole    =               -5.63
-loop_entropy    =               0.00
-cis_bond        =               4.50
-disulfide       =               0.00
-kn electrostatic=               -1.33
-partial covalent interactions = 0.00
-Energy_Ionisation =             1.07
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  -153.26
-
-interaction between A and B
-
-BackHbond       =               -5.49
-SideHbond       =               -18.68
-Energy_VdW      =               -31.96
-Electro         =               -8.50
-Energy_SolvP    =               40.63
-Energy_SolvH    =               -45.76
-Energy_vdwclash =               1.71
-energy_torsion  =               0.50
-backbone_vdwclash=              8.23
-Entropy_sidec   =               14.08
-Entropy_mainc   =               1.83
-water bonds     =               0.00
-helix dipole    =               -2.36
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               -1.33
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.17
-Entropy Complex =               2.38
------------------------------------------------------------
-Total          = 				  -55.17
-
-Complex Analysis of ./pdb/2dfd_Repair.pdb went fine
-
-Your file run OK
-End time of FoldX: Tue Dec  1 12:51:53 2020
-Total time spend: 4.87 seconds.
-[31m──[39m [31m1. Error: ddG.profile() works properly (@test_ddG.R#149) [39m [31m───────────────────[39m
-Timeout was reached: [folding.biofold.org] Operation timed out after 137054 milliseconds with 0 out of 0 bytes received
-[1mBacktrace:[22m
-[90m 1. [39mptm::ddG.profile(prot = "1b4i", ch = "A", pos = 8)
-[90m 2. [39mptm::imutant(protein = prot, ch = ch, pos = pos, pH = pH, Te = Te)
-[90m 3. [39mhttr::GET(url)
-[90m 4. [39mhttr:::request_perform(req, hu$handle$handle)
-[90m 6. [39mhttr:::request_fetch.write_memory(req$output, req$url, handle)
-[90m 7. [39mcurl::curl_fetch_memory(url, handle = handle)
-
-   ********************************************
-   ***                                      ***
-   ***             FoldX 5 (c)              ***
-   ***                                      ***
-   ***     code by the FoldX Consortium     ***
-   ***                                      ***
-   ***     Jesper Borg, Frederic Rousseau   ***
-   ***    Joost Schymkowitz, Luis Serrano   ***
-   ***    Peter Vanhee, Erik Verschueren    ***
-   ***     Lies Baeten, Javier Delgado      ***
-   ***       and Francois Stricher          ***
-   *** and any other of the 9! permutations ***
-   ***   based on an original concept by    ***
-   ***   Raphael Guerois and Luis Serrano   ***
-   ********************************************
-
-1 models read: 1b4i_Repair.pdb
-Output: ./1b4i_Repair.log
-
-BackHbond       =               -5.73
-SideHbond       =               -8.11
-Energy_VdW      =               -22.10
-Electro         =               -2.08
-Energy_SolvP    =               39.31
-Energy_SolvH    =               -25.92
-Energy_vdwclash =               11.24
-energy_torsion  =               3.04
-backbone_vdwclash=              25.03
-Entropy_sidec   =               13.87
-Entropy_mainc   =               52.33
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  55.86
-
-Starting BuildModel
-Reading SA8s;
-Residue to Mutate SERA8 has residue index 7
-Mutating residue = SERA8 into SEP
-Your file run OK
-End time of FoldX: Tue Dec  1 12:54:34 2020
-Total time spend: 0.93 seconds.
-validated file "1b4i_Repair_1.pdb" => successfully finished
-Cleaning BuildModel...DONE
-[1] "THE FILE 1b4i_pSer8.pdb HAS BEEN SAVED IN THE CURRENT DIRECTORY"
-   ********************************************
-   ***                                      ***
-   ***             FoldX 5 (c)              ***
-   ***                                      ***
-   ***     code by the FoldX Consortium     ***
-   ***                                      ***
-   ***     Jesper Borg, Frederic Rousseau   ***
-   ***    Joost Schymkowitz, Luis Serrano   ***
-   ***    Peter Vanhee, Erik Verschueren    ***
-   ***     Lies Baeten, Javier Delgado      ***
-   ***       and Francois Stricher          ***
-   *** and any other of the 9! permutations ***
-   ***   based on an original concept by    ***
-   ***   Raphael Guerois and Luis Serrano   ***
-   ********************************************
-
-1 models read: 1b4i_Repair.pdb
-Output: ./1b4i_Repair.log
-
-BackHbond       =               -5.73
-SideHbond       =               -8.11
-Energy_VdW      =               -22.10
-Electro         =               -2.08
-Energy_SolvP    =               39.31
-Energy_SolvH    =               -25.92
-Energy_vdwclash =               11.24
-energy_torsion  =               3.04
-backbone_vdwclash=              25.03
-Entropy_sidec   =               13.87
-Entropy_mainc   =               52.33
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  55.86
-
-Starting BuildModel
-Reading sA15S;
-Residue to Mutate SEPA15 has residue index 14
-Mutating residue = SEPA15 into SER
-Your file run OK
-End time of FoldX: Tue Dec  1 12:54:43 2020
-Total time spend: 6.48 seconds.
-validated file "1b4i_Repair_1.pdb" => successfully finished
-Cleaning BuildModel...DONE
-[1] "THE FILE 1b4i_pSer15.pdb HAS BEEN SAVED IN THE CURRENT DIRECTORY"
-   ********************************************
-   ***                                      ***
-   ***             FoldX 5 (c)              ***
-   ***                                      ***
-   ***     code by the FoldX Consortium     ***
-   ***                                      ***
-   ***     Jesper Borg, Frederic Rousseau   ***
-   ***    Joost Schymkowitz, Luis Serrano   ***
-   ***    Peter Vanhee, Erik Verschueren    ***
-   ***     Lies Baeten, Javier Delgado      ***
-   ***       and Francois Stricher          ***
-   *** and any other of the 9! permutations ***
-   ***   based on an original concept by    ***
-   ***   Raphael Guerois and Luis Serrano   ***
-   ********************************************
-
-1 models read: 1b4i_Repair.pdb
-Output: ./1b4i_Repair.log
-
-BackHbond       =               -5.73
-SideHbond       =               -8.11
-Energy_VdW      =               -22.10
-Electro         =               -2.08
-Energy_SolvP    =               39.31
-Energy_SolvH    =               -25.92
-Energy_vdwclash =               11.24
-energy_torsion  =               3.04
-backbone_vdwclash=              25.03
-Entropy_sidec   =               13.87
-Entropy_mainc   =               52.33
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  55.86
-
-Starting BuildModel
-Reading TA23p;
-Residue to Mutate THRA23 has residue index 22
-Mutating residue = THRA23 into TPO
-Your file run OK
-End time of FoldX: Tue Dec  1 12:54:45 2020
-Total time spend: 1.71 seconds.
-validated file "1b4i_Repair_1.pdb" => successfully finished
-Cleaning BuildModel...DONE
-[1] "THE FILE 1b4i_pThr23.pdb HAS BEEN SAVED IN THE CURRENT DIRECTORY"
-   ********************************************
-   ***                                      ***
-   ***             FoldX 5 (c)              ***
-   ***                                      ***
-   ***     code by the FoldX Consortium     ***
-   ***                                      ***
-   ***     Jesper Borg, Frederic Rousseau   ***
-   ***    Joost Schymkowitz, Luis Serrano   ***
-   ***    Peter Vanhee, Erik Verschueren    ***
-   ***     Lies Baeten, Javier Delgado      ***
-   ***       and Francois Stricher          ***
-   *** and any other of the 9! permutations ***
-   ***   based on an original concept by    ***
-   ***   Raphael Guerois and Luis Serrano   ***
-   ********************************************
-
-1 models read: 1b4i_Repair.pdb
-
-BackHbond       =               -5.73
-SideHbond       =               -8.11
-Energy_VdW      =               -22.10
-Electro         =               -2.08
-Energy_SolvP    =               39.31
-Energy_SolvH    =               -25.92
-Energy_vdwclash =               11.24
-energy_torsion  =               3.04
-backbone_vdwclash=              25.03
-Entropy_sidec   =               13.87
-Entropy_mainc   =               52.33
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  55.86
-
-Starting BuildModel
-Reading MA29Q;
-Residue to Mutate META29 has residue index 28
-Mutating residue = META29 into GLN
-Your file run OK
-End time of FoldX: Tue Dec  1 12:54:50 2020
-Total time spend: 3.86 seconds.
-validated file "1b4i_Repair_1.pdb" => successfully finished
-Cleaning BuildModel...DONE
-[1] "THE FILE 1b4i_MetO-Q29.pdb HAS BEEN SAVED IN THE CURRENT DIRECTORY"
-   ********************************************
-   ***                                      ***
-   ***             FoldX 5 (c)              ***
-   ***                                      ***
-   ***     code by the FoldX Consortium     ***
-   ***                                      ***
-   ***     Jesper Borg, Frederic Rousseau   ***
-   ***    Joost Schymkowitz, Luis Serrano   ***
-   ***    Peter Vanhee, Erik Verschueren    ***
-   ***     Lies Baeten, Javier Delgado      ***
-   ***       and Francois Stricher          ***
-   *** and any other of the 9! permutations ***
-   ***   based on an original concept by    ***
-   ***   Raphael Guerois and Luis Serrano   ***
-   ********************************************
-
-1 models read: 1b4i_Repair.pdb
-Output: ./1b4i_Repair.log
-
-BackHbond       =               -5.73
-SideHbond       =               -8.11
-Energy_VdW      =               -22.10
-Electro         =               -2.08
-Energy_SolvP    =               39.31
-Energy_SolvH    =               -25.92
-Energy_vdwclash =               11.24
-energy_torsion  =               3.04
-backbone_vdwclash=              25.03
-Entropy_sidec   =               13.87
-Entropy_mainc   =               52.33
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  55.86
-
-Starting BuildModel
-Reading MA29T;
-Residue to Mutate META29 has residue index 28
-Mutating residue = META29 into THR
-Your file run OK
-End time of FoldX: Tue Dec  1 12:54:52 2020
-Total time spend: 1.41 seconds.
-validated file "1b4i_Repair_1.pdb" => successfully finished
-Cleaning BuildModel...DONE
-[1] "THE FILE 1b4i_MetO-T29.pdb HAS BEEN SAVED IN THE CURRENT DIRECTORY"
-   ********************************************
-   ***                                      ***
-   ***             FoldX 5 (c)              ***
-   ***                                      ***
-   ***     code by the FoldX Consortium     ***
-   ***                                      ***
-   ***     Jesper Borg, Frederic Rousseau   ***
-   ***    Joost Schymkowitz, Luis Serrano   ***
-   ***    Peter Vanhee, Erik Verschueren    ***
-   ***     Lies Baeten, Javier Delgado      ***
-   ***       and Francois Stricher          ***
-   *** and any other of the 9! permutations ***
-   ***   based on an original concept by    ***
-   ***   Raphael Guerois and Luis Serrano   ***
-   ********************************************
-
-1 models read: 1b4i_Repair.pdb
-
-BackHbond       =               -5.73
-SideHbond       =               -8.11
-Energy_VdW      =               -22.10
-Electro         =               -2.08
-Energy_SolvP    =               39.31
-Energy_SolvH    =               -25.92
-Energy_vdwclash =               11.24
-energy_torsion  =               3.04
-backbone_vdwclash=              25.03
-Entropy_sidec   =               13.87
-Entropy_mainc   =               52.33
-water bonds     =               0.00
-helix dipole    =               0.00
-loop_entropy    =               0.00
-cis_bond        =               0.00
-disulfide       =               0.00
-kn electrostatic=               0.00
-partial covalent interactions = 0.00
-Energy_Ionisation =             0.00
-Entropy Complex =               0.00
------------------------------------------------------------
-Total          = 				  55.86
-
-Starting BuildModel
-Reading sA21p;
-Residue to Mutate SEPA21 has residue index 20
-Mutating residue = SEPA21 into TPO
-Your file run OK
-End time of FoldX: Tue Dec  1 12:54:54 2020
-Total time spend: 1.30 seconds.
-validated file "1b4i_Repair_1.pdb" => successfully finished
-Cleaning BuildModel...DONE
-[1] "THE FILE 1b4i_pThr21.pdb HAS BEEN SAVED IN THE CURRENT DIRECTORY"
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-trying URL 'https://files.rcsb.org/download/1a1x.pdb'
-downloaded 97 KB
-
-trying URL 'https://files.rcsb.org/download/1GZX.pdb'
-downloaded 454 KB
-
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-trying URL 'https://files.rcsb.org/download/3cwm.pdb'
-downloaded 280 KB
-
-[1] 0
-[1] 0
-trying URL 'https://files.rcsb.org/download/2xqq.pdb'
-downloaded 621 KB
-
-trying URL 'https://files.rcsb.org/download/2xqq.pdb'
-downloaded 621 KB
-
-   PDB has ALT records, taking A only, rm.alt=TRUE
-   PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac4015da5e 3 seqs, max length 356, avg  length 342
-3651 MB(11%)00:00:00                Iter   1   16.67%  K-mer dist pass 13651 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3651 MB(11%)00:00:00                Iter   1   16.67%  K-mer dist pass 23651 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3651 MB(11%)00:00:00                Iter   1   50.00%  Align node       3651 MB(11%)00:00:00                Iter   1  100.00%  Align node3651 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3651 MB(11%)00:00:00                Iter   1   33.33%  Root alignment3651 MB(11%)00:00:00                Iter   1   66.67%  Root alignment3651 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3651 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-3651 MB(11%)00:00:00                Iter   2  100.00%  Root alignment
-3651 MB(11%)00:00:00                Iter   3   66.67%  Refine biparts3651 MB(11%)00:00:00                Iter   3  100.00%  Refine biparts3651 MB(11%)00:00:00                Iter   3  133.33%  Refine biparts3651 MB(11%)00:00:00                Iter   3  100.00%  Refine biparts
-3651 MB(11%)00:00:00                Iter   4   66.67%  Refine biparts3651 MB(11%)00:00:00                Iter   4  100.00%  Refine biparts3651 MB(11%)00:00:00                Iter   4  133.33%  Refine biparts3651 MB(11%)00:00:00                Iter   4  100.00%  Refine biparts
-[31m──[39m [31m2. Error: custom.aln() works properly (@test_evolutionary.R#40) [39m [31m────────────[39m
-transfer closed with outstanding read data remaining
-[1mBacktrace:[22m
-[90m 1. [39mptm::custom.aln("eco:b2114", species = "plants")
-[90m 2. [39mptm::list.hom(target)
-[90m 3. [39mhttr::GET(url)
-[90m 4. [39mhttr:::request_perform(req, hu$handle$handle)
-[90m 6. [39mhttr:::request_fetch.write_memory(req$output, req$url, handle)
-[90m 7. [39mcurl::curl_fetch_memory(url, handle = handle)
-
-
-*** WARNING *** Invalid character '*' in FASTA sequence data, ignored
-fileeaac6f970d65 2 seqs, max length 418, avg  length 418
-3771 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13771 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3771 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23771 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3771 MB(11%)00:00:00                Iter   1  100.00%  Align node       3771 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3771 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3771 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3771 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-
-*** WARNING *** Invalid character '*' in FASTA sequence data, ignored
-fileeaac5b8ea14e 2 seqs, max length 418, avg  length 396
-3771 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13771 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3771 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23771 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3771 MB(11%)00:00:00                Iter   1  100.00%  Align node       3771 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3771 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3771 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3771 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-   PDB has ALT records, taking A only, rm.alt=TRUE
-
-*** WARNING *** Invalid character '*' in FASTA sequence data, ignored
-fileeaac44377da6 2 seqs, max length 335, avg  length 334
-3773 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13773 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3773 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23773 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3773 MB(11%)00:00:00                Iter   1  100.00%  Align node       3773 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3773 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3773 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3773 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-
-*** WARNING *** Invalid character '*' in FASTA sequence data, ignored
-fileeaac60aa8b66 2 seqs, max length 142, avg  length 141
-3773 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13773 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3773 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23773 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3773 MB(11%)00:00:00                Iter   1  100.00%  Align node       3773 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3773 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3773 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3773 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-
-*** WARNING *** Invalid character '*' in FASTA sequence data, ignored
-fileeaac352d505f 2 seqs, max length 167, avg  length 165
-3773 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13773 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3773 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23773 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3773 MB(11%)00:00:00                Iter   1  100.00%  Align node       3773 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3773 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3773 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3773 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-[1] "Getting GO terms for P01009"
-[1] "Getting GO terms for P01009"
-[1] "Getting GO terms for P04406"
-[1] "Getting GO terms for P04406"
-[1] "Getting GO terms for P00367"
-[1] "Getting GO terms for Q14687"
-[1] "Getting GO terms for Q13015"
-[1] "Getting GO terms for Q14667"
-[1] "Getting GO terms for P08575"
-[1] "Getting GO terms for Q5JSZ5"
-[1] "Getting GO terms for P13196"
-[1] "Getting GO terms for H7C4H7"
-[1] "Getting GO terms for Q13015"
-[1] "Getting GO terms for Q14667"
-[1] "Getting GO terms for P08575"
-[1] "Getting GO terms for Q5JSZ5"
-[1] "Getting GO terms for P13196"
-[1] "Getting GO terms for H7C4H7"
-[1] "Getting GO terms for Q13015"
-[1] "Getting GO terms for Q14667"
-[1] "Getting GO terms for P08575"
-[1] "Getting GO terms for Q5JSZ5"
-[1] "Getting GO terms for P13196"
-[1] "Getting GO terms for Q13015 "
-[1] "Getting GO terms for Q14667 "
-[1] "Getting GO terms for P08575 "
-[1] "Getting GO terms for Q5JSZ5 "
-[1] "Getting GO terms for P13196"
-[1] "Getting GO terms for H7C4H7"
-[1] "1  .....  Q13015 "
-[1] "2  .....  Q14667 "
-[1] "3  .....  P08575 "
-[1] "4  .....  Q5JSZ5 "
-[1] "5  .....  P13196"
-[1] "Getting GO terms for Q13015"
-[1] "Getting GO terms for Q14667"
-[1] "Getting GO terms for P08575"
-[1] "Getting GO terms for Q5JSZ5"
-[1] "Getting GO terms for P13196"
-[1] "Getting GO terms for H7C4H7"
-[1] "1  .....  Q13015"
-[1] "2  .....  Q14667"
-[1] "3  .....  P08575"
-[1] "4  .....  Q5JSZ5"
-[1] "5  .....  P13196"
-  ordinary text without R code
-
-label: unnamed-chunk-1 (with options) 
-List of 3
- $ out.width: chr "50px"
- $ fig.align: chr "left"
- $ echo     : logi FALSE
-
-  ordinary text without R code
-
-label: unnamed-chunk-2 (with options) 
-List of 1
- $ echo: logi FALSE
-
-label: unnamed-chunk-3 (with options) 
-List of 1
- $ echo: logi FALSE
-
-label: unnamed-chunk-4 (with options) 
-List of 1
- $ echo: logi FALSE
-
-  ordinary text without R code
-
-label: unnamed-chunk-5 (with options) 
-List of 1
- $ echo: logi FALSE
-
-   PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac4dddae7a 4 seqs, max length 335, avg  length 335
-3776 MB(11%)00:00:00                Iter   1   10.00%  K-mer dist pass 13776 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3776 MB(11%)00:00:00                Iter   1   10.00%  K-mer dist pass 23776 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3776 MB(11%)00:00:00                Iter   1   33.33%  Align node       3776 MB(11%)00:00:00                Iter   1   66.67%  Align node3776 MB(11%)00:00:00                Iter   1  100.00%  Align node3776 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3776 MB(11%)00:00:00                Iter   1   25.00%  Root alignment3776 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3776 MB(11%)00:00:00                Iter   1   75.00%  Root alignment3776 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3776 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-3776 MB(11%)00:00:00                Iter   2  100.00%  Root alignment
-3776 MB(11%)00:00:00                Iter   3   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter   3   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter   3   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter   3  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter   3  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter   3  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter   4   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter   4   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter   4   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter   4  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter   4  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter   4  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter   5   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter   5   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter   5   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter   5  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter   5  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter   5  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter   6   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter   6   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter   6   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter   6  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter   6  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter   6  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter   7   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter   7   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter   7   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter   7  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter   7  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter   7  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter   8   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter   8   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter   8   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter   8  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter   8  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter   8  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter   9   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter   9   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter   9   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter   9  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter   9  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter   9  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter  10   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter  10   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter  10   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter  10  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter  10  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter  10  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter  11   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter  11   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter  11   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter  11  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter  11  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter  11  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter  12   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter  12   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter  12   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter  12  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter  12  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter  12  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter  13   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter  13   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter  13   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter  13  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter  13  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter  13  100.00%  Refine biparts
-  Note: Accessing on-line PDB file
-fileeaacb72ed24 4 seqs, max length 146, avg  length 143
-3776 MB(11%)00:00:00                Iter   1   10.00%  K-mer dist pass 13776 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3776 MB(11%)00:00:00                Iter   1   10.00%  K-mer dist pass 23776 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3776 MB(11%)00:00:00                Iter   1   33.33%  Align node       3776 MB(11%)00:00:00                Iter   1   66.67%  Align node3776 MB(11%)00:00:00                Iter   1  100.00%  Align node3776 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3776 MB(11%)00:00:00                Iter   1   25.00%  Root alignment3776 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3776 MB(11%)00:00:00                Iter   1   75.00%  Root alignment3776 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3776 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-3776 MB(11%)00:00:00                Iter   2  100.00%  Root alignment
-3776 MB(11%)00:00:00                Iter   3   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter   3   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter   3   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter   3  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter   3  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter   3  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter   4   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter   4   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter   4   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter   4  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter   4  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter   4  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter   5   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter   5   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter   5   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter   5  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter   5  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter   5  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter   6   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter   6   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter   6   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter   6  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter   6  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter   6  100.00%  Refine biparts
-3776 MB(11%)00:00:00                Iter   7   40.00%  Refine biparts3776 MB(11%)00:00:00                Iter   7   60.00%  Refine biparts3776 MB(11%)00:00:00                Iter   7   80.00%  Refine biparts3776 MB(11%)00:00:00                Iter   7  100.00%  Refine biparts3776 MB(11%)00:00:00                Iter   7  120.00%  Refine biparts3776 MB(11%)00:00:00                Iter   7  100.00%  Refine biparts
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  |                                                                              |                                                                      |   0%  |                                                                              |==================                                                    |  25%  |                                                                              |===================================                                   |  50%  |                                                                              |====================================================                  |  75%  |                                                                              |======================================================================| 100%
-  Note: Accessing on-line PDB file
-fileeaac4e84edf2 2 seqs, max length 572, avg  length 551
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac1bacdcf6 2 seqs, max length 418, avg  length 394
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac5113acf4 2 seqs, max length 335, avg  length 334
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac2757418d 2 seqs, max length 389, avg  length 269
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac6f0967ed 2 seqs, max length 390, avg  length 269
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac681f8bf5 2 seqs, max length 390, avg  length 269
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac7e879d4 2 seqs, max length 406, avg  length 277
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac35b7041e 2 seqs, max length 406, avg  length 277
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac605e7378 2 seqs, max length 404, avg  length 276
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac3210fcb0 2 seqs, max length 404, avg  length 276
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac3cf3acba 2 seqs, max length 151, avg  length 150
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac22083827 2 seqs, max length 707, avg  length 480
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac4b89af25 2 seqs, max length 707, avg  length 476
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac1129e6b3 2 seqs, max length 707, avg  length 502
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac329ab34e 2 seqs, max length 707, avg  length 504
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac7a1e80c8 2 seqs, max length 707, avg  length 467
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac1724bf9c 2 seqs, max length 707, avg  length 466
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaacc750de8 2 seqs, max length 707, avg  length 465
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-fileeaac60ec2294 2 seqs, max length 418, avg  length 406
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-fileeaac7299d111 2 seqs, max length 418, avg  length 406
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-fileeaac1f74b312 2 seqs, max length 418, avg  length 406
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-fileeaac629de3eb 2 seqs, max length 418, avg  length 406
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-fileeaac5fb1981a 2 seqs, max length 418, avg  length 406
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-fileeaac24f87078 2 seqs, max length 476, avg  length 476
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac2089ff69 2 seqs, max length 453, avg  length 290
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac7bd4f178 2 seqs, max length 453, avg  length 284
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac3cc66130 2 seqs, max length 453, avg  length 284
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3778 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23778 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3778 MB(11%)00:00:00                Iter   1  100.00%  Align node       3778 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3778 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3778 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac6ee4e1fc 2 seqs, max length 453, avg  length 289
-3779 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13779 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3779 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23779 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3779 MB(11%)00:00:00                Iter   1  100.00%  Align node       3779 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3779 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3779 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3779 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac77ea0c35 2 seqs, max length 453, avg  length 286
-3779 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13779 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3779 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23779 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3779 MB(11%)00:00:00                Iter   1  100.00%  Align node       3779 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3779 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3779 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3779 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac7e2d73ef 2 seqs, max length 453, avg  length 286
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac7f712694 2 seqs, max length 453, avg  length 281
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac2cbe4a02 2 seqs, max length 453, avg  length 281
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac3f76cbe0 2 seqs, max length 453, avg  length 289
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac1e9fbf32 2 seqs, max length 453, avg  length 289
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac7d878b25 2 seqs, max length 453, avg  length 283
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac139169a4 2 seqs, max length 453, avg  length 283
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac352cbb1f 2 seqs, max length 707, avg  length 480
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac1469c4d8 2 seqs, max length 707, avg  length 476
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac3d6aa22e 2 seqs, max length 707, avg  length 502
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac74a93822 2 seqs, max length 707, avg  length 504
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac45c9f3a8 2 seqs, max length 707, avg  length 467
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-fileeaac2bf07d63 2 seqs, max length 707, avg  length 466
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-fileeaac6058122c 2 seqs, max length 707, avg  length 465
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 13780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 1
-3780 MB(11%)00:00:00                Iter   1   33.33%  K-mer dist pass 23780 MB(11%)00:00:00                Iter   1  100.00%  K-mer dist pass 2
-3780 MB(11%)00:00:00                Iter   1  100.00%  Align node       3780 MB(11%)00:00:00                Iter   1  100.00%  Align node
-3780 MB(11%)00:00:00                Iter   1   50.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment3780 MB(11%)00:00:00                Iter   1  100.00%  Root alignment
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-   PDB has ALT records, taking A only, rm.alt=TRUE
-  Note: Accessing on-line PDB file
-══ testthat results  ═══════════════════════════════════════════════════════════
-[ OK: 908 | SKIPPED: 1 | WARNINGS: 0 | FAILED: 2 ]
-1. Error: ddG.profile() works properly (@test_ddG.R#149) 
-2. Error: custom.aln() works properly (@test_evolutionary.R#40) 
-
-Error: testthat unit tests failed
-Execution halted
