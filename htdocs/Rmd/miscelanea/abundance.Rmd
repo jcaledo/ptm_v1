@@ -94,6 +94,6 @@ axis(side = 1)
 ```
 
 
-We can observe that the red bars (proteins oxidized in vivo) are predominant in the low rank region while the blue bars (protein oxidized in vitro) are abundan in the high rank region.
+We can observe that the red bars (proteins oxidized in vivo) are predominant in the low rank region while the blue bars (protein oxidized in vitro) are abundand in the high rank region.
 
 
