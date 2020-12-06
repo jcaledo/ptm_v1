@@ -2,7 +2,7 @@
 % Please edit documentation in R/go.R
 \name{hdfisher.go}
 \alias{hdfisher.go}
-\title{Hypothesis-driven Fisher Test}
+\title{Hypothesis-Driven Fisher Test}
 \usage{
 hdfisher.go(target, background, query, analysis = 'enrichment')
 }

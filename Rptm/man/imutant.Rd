@@ -7,7 +7,7 @@
 imutant(protein, ch = "_", pos, newres = "", pH = 7, Te = 25, timeout = 60)
 }
 \arguments{
-\item{protein}{eihter the 4-letter identifier of a PDB structure, or the amino acid sequence (one letter amino acid code) of a protein.}
+\item{protein}{either the 4-letter identifier of a PDB structure, or the amino acid sequence (one letter amino acid code) of a protein.}
 
 \item{ch}{a letter identifying the chain of interest.}
 

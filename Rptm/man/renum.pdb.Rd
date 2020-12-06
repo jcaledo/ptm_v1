@@ -23,7 +23,7 @@ Renumerates residue position of a PDB sequence to match the corresponding UniPro
 renum.pdb(pdb = '121P', chain = 'A', uniprot = 'P01112')
 }
 \seealso{
-is.at(), aa.at(), renum.meto(), renum()
+is.at(), aa.at(), renum.meto(), renum(), aa.compo()
 }
 \author{
 Juan Carlos Aledo

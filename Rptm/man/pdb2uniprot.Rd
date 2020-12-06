@@ -2,7 +2,7 @@
 % Please edit documentation in R/pdb_ancillary.R
 \name{pdb2uniprot}
 \alias{pdb2uniprot}
-\title{Returns the UniProt ID Given the PDB and Chain IDs}
+\title{Return the UniProt ID Given the PDB and Chain IDs}
 \usage{
 pdb2uniprot(pdb, chain)
 }
@@ -15,7 +15,7 @@ pdb2uniprot(pdb, chain)
 The function returns the UniProt ID for the chain of interest.
 }
 \description{
-Return the uniprot id of a given chain within a PDB structure.
+Returns the uniprot id of a given chain within a PDB structure.
 }
 \examples{
 pdb2uniprot('1u8f', 'O')

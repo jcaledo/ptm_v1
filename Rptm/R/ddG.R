@@ -17,7 +17,7 @@
 #' Compute Changes in Stability (DDG)
 #' @description Computes changes in the stability of a protein after a residue mutation using a machine-learning approach.
 #' @usage imutant(protein, ch = "_", pos, newres = "", pH = 7, Te = 25, timeout = 60)
-#' @param protein eihter the 4-letter identifier of a PDB structure, or the amino acid sequence (one letter amino acid code) of a protein.
+#' @param protein either the 4-letter identifier of a PDB structure, or the amino acid sequence (one letter amino acid code) of a protein.
 #' @param ch a letter identifying the chain of interest.
 #' @param pos the position, in the primary structure, of the residue to be mutated.
 #' @param newres the one letter code of the residue to be incorporated. When a value is not entered for this parameter, then the function will compute DDG for the mutation to any possible amino acid.
@@ -625,7 +625,7 @@ foldx.assembly <- function(pdb, mol1, mol2, pH = 7, I = 0.05) {
 #' Contribution of a given position to changes in stability
 #' @description Represents the sensitivity of a given position to changes in stability of a protein (DDG).
 #' @usage ddG.profile(prot, ch, pos, pH = 7, Te = 25)
-#' @param prot eihter the 4-letter identifier of a PDB structure, or the amino acid sequence (one letter amino acid code) of a protein.
+#' @param prot either the 4-letter identifier of a PDB structure, or the amino acid sequence (one letter amino acid code) of a protein.
 #' @param ch a letter identifying the chain of interest.
 #' @param pos the position, in the primary structure, of the residue to be mutated.
 #' @param pH a numeric value between 0 and 14.
@@ -731,7 +731,7 @@ ddG.profile <- function(prot, ch, pos, pH = 7, Te = 25){
 #' @param ptm the post-translational modification to be considered. It should be one among: 'pSer', 'pThr', 'pTyr', 'MetO-Q', 'MetO-T'.
 #' @param dir indicates the direction of the PTM reaction: either forward ('f'), or backward ('b').
 #' @param pH a numeric value between 0 and 14.
-#' @details The current fucntion uses FoldX to build the model of the modified protein. Currently, FoldX does not allow to change Met by MetO, so we
+#' @details The current fucntion uses FoldX to build the model of the modified protein. Currently, FoldX does not allow to change Met by MetO, so we use glutamine (Q) or threonine (T) to mimic MetO.
 #' @return The function computes and returns the DDG (kcal/mol) for the requested modification, defined as DDG = DGmodified - DGunmodified, where DG is the Gibbs free energy for the folding of the protein from its unfolded state. Thus, a positive value means a destabilizing effect, and vice versa. A PDB model contining the modified target is saved in the current directory.
 #' @author Juan Carlos Aledo
 #' @examples \dontrun{ddG.ptm('./1u8f_Repair.pdb', 'O', pos = 246, ptm = 'pThr')}

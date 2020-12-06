@@ -42,7 +42,7 @@
 #' \item{entropy7.condon:} {Shannon entropy based on 7 species and codon sequences (EVO)}
 #' \item{entropy100.codon:} {Shannon entropy based on 100 species and codon sequences (EVO)}
 #' }
-#' For 3D properties such as sasa, acc or dpx, for which different values can be obtained depending on the cuaternary structure, we first compute the property values for each residue in the whole protein and ploted agains the residue position. Then, the value for this property is computed in the isolated chain (a single polypeptide chain) and in a second plot, the differences between the values in the whole protein and the chain are ploted against the residue position.
+#' For 3D properties such as sasa, acc or dpx, for which different values can be obtained depending on the quaternary structure, we first compute the property values for each residue in the whole protein and plotted them againts the residue position. Then, the value for this property is computed in the isolated chain (a single polypeptide chain) and in a second plot, the differences between the values in the whole protein and the chain are plotted against the residue position.
 #' @return This function returns either one or two plots related to the chosen property along the primary structure, as well as the computed data if sdata has been set to TRUE.
 #' @author Juan Carlos Aledo
 #' @examples \dontrun{ptm.plot('P04406', property = 'sasa', window = 10, ptm = 'meto')}

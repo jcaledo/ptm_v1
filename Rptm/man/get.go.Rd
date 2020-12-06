@@ -9,7 +9,7 @@ get.go(id, filter = TRUE, format = 'dataframe', silent = FALSE)
 \arguments{
 \item{id}{the UniProt identifier of the protein of interest.}
 
-\item{filter}{logical, if TRUE a reduced number of terms, selected on the basis of astringent criteria (see details), is returned.}
+\item{filter}{logical, if TRUE a reduced number of terms, selected on the basis of astringent criteria (see details) is returned.}
 
 \item{format}{string indicating the output's format. It should be either 'dataframe' or 'string'. The 'string' format may be convenient when subsequent GO terms enrichment analysis is intended.}
 

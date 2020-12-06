@@ -18,7 +18,7 @@ Returns a dataframe containing core information such as term name and definition
 Gets core information about the GO term of interest.
 }
 \details{
-When the argument children is set to TRUE, the output of this function is a list with two elements: the first one is a dataframe with the core information, and the second one is a dataframe containing the children terms (see details).
+When the argument children is set to TRUE, the output of this function is a list with two elements: the first one is a dataframe with the core information, and the second one is a dataframe containing the children terms.
 }
 \examples{
 term.go('GO:0034599')

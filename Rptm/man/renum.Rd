@@ -32,7 +32,7 @@ renum(up_id = 'P01009', pos = 351, from = 'metosite', to = 'uniprot')
                          to = 'pdb', pdb = '1ATU', chain = 'A')}
 }
 \seealso{
-is.at(), aa.at(), renum.pdb(), renum.meto()
+is.at(), aa.at(), renum.pdb(), renum.meto(), aa.comp()
 }
 \author{
 Juan Carlos Aledo

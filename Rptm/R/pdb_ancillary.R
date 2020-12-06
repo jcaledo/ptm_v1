@@ -189,8 +189,8 @@ pdb.chain <- function(pdb, keepfiles = FALSE){
 ## ---------------------------------------------------------------- ##
 #          pdb2uniprot <- function(pdb, chain)              #
 ## ---------------------------------------------------------------- ##
-#' Returns the UniProt ID Given the PDB and Chain IDs
-#' @description Return the uniprot id of a given chain within a PDB structure.
+#' Return the UniProt ID Given the PDB and Chain IDs
+#' @description Returns the uniprot id of a given chain within a PDB structure.
 #' @usage pdb2uniprot(pdb, chain)
 #' @param pdb the 4-letter PDB identifier.
 #' @param chain letter identifying the chain.

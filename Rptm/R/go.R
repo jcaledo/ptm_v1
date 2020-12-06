@@ -60,7 +60,7 @@ search.go <- function(query){
 #' @usage term.go(go, children = FALSE)
 #' @param go GO id.
 #' @param children logical, when true GO children terms are returned.
-#' @details When the argument children is set to TRUE, the output of this function is a list with two elements: the first one is a dataframe with the core information, and the second one is a dataframe containing the children terms (see details).
+#' @details When the argument children is set to TRUE, the output of this function is a list with two elements: the first one is a dataframe with the core information, and the second one is a dataframe containing the children terms.
 #' @return Returns a dataframe containing core information such as term name and definition, reference, aspect, and whether or not the term is obsolete. If children is set to TRUE, the function returns a list.
 #' @author Juan Carlos Aledo
 #' @seealso search.go(), get.go(), background.go(), hdfisher.go(), gorilla(), net.go()
@@ -117,7 +117,7 @@ term.go <- function(go, children = FALSE){
 #' @description Gets the gene ontology annotations for a given protein.
 #' @usage get.go(id, filter = TRUE, format = 'dataframe', silent = FALSE)
 #' @param id the UniProt identifier of the protein of interest.
-#' @param filter logical, if TRUE a reduced number of terms, selected on the basis of astringent criteria (see details), is returned.
+#' @param filter logical, if TRUE a reduced number of terms, selected on the basis of astringent criteria (see details) is returned.
 #' @param format string indicating the output's format. It should be either 'dataframe' or 'string'. The 'string' format may be convenient when subsequent GO terms enrichment analysis is intended.
 #' @param silent logical, if FALSE print details of the reading process.
 #' @details Since some well-characterized proteins can have many GO annotations, it may be convenient to filter the shown GO terms. When filter is set to TRUE, the annotated terms displayed are those provided by the corresponding UniProtKB entry, which are selected based on their granularity and evidence code quality (with manual annotations preferred over automatic predictions). Annotations that have been made to isoform identifiers, or use any of the GO annotation qualifiers (NOT, contributes_to, colocalizes_with) are also removed.
@@ -274,7 +274,7 @@ background.go <- function(ids){
 #   hdfisher.go <- function(target, background, query,               #
 #                                  analysis = 'enrichment')          #
 ## ---------------------------------------------------------------- ##
-#' Hypothesis-driven Fisher Test
+#' Hypothesis-Driven Fisher Test
 #' @description Carries out an enrichment Fisher's test using a hypothesis driven approach.
 #' @usage hdfisher.go(target, background, query, analysis = 'enrichment')
 #' @param target either a vector containing the UniProt IDs of the target set or the path to the txt file containing the list of IDs.
@@ -393,7 +393,7 @@ hdfisher.go <- function(target, background, query, analysis = 'enrichment'){
 #' @param data either a vector containing the UniProt IDs (vertices) or the path to the txt or rda file containing them.
 #' @param threshold threshold value of the Jaccard index above which two proteins are considered to be linked.
 #' @param silent logical, if FALSE print details of the running process.
-#' @details This function first searchs the GO for each vertex and then computes the Jaccard index for each protein pair based on their GO terms. Afterwards, an adjacency matrix is computed, where two proteins are linked if their Jaccard index is greater than the selected threshold.
+#' @details This function first searches the GO terms for each vertex and then computes the Jaccard index for each protein pair, based on their GO terms. Afterwards, an adjacency matrix is computed, where two proteins are linked if their Jaccard index is greater than the selected threshold.
 #' @return Returns a list containing (i) the dataframe corresponding to the computed Jaccard matrix, (ii) the adjacency matrix, (iii) a vector containing the vertices, and (iv) a matrix describing the edges of the network.
 #' @author Pablo Aledo & Juan Carlos Aledo
 #' @seealso search.go(), term.go(), get.go(), background.go(), gorilla()

@@ -68,6 +68,7 @@ test_that('get.seq() works properly with KEGG', {
   b <- get.seq('hsa:5265', db = 'kegg-aa', as.string = FALSE)
   c <- get.seq('hsa:5265', 'kegg-nt')
   d <- get.seq('hsa:5265', db = 'kegg-nt', as.string = FALSE)
+  e <- get.seq('eih:ECOK1_2344', 'kegg-aa')
 
   expect_is(a, 'character')
   expect_equivalent(nchar(a), 418)
@@ -79,6 +80,7 @@ test_that('get.seq() works properly with KEGG', {
   expect_is(d, 'list')
   expect_is(d[[1]], 'character')
   expect_equal(length(d[[1]]), 1257)
+  expect_is(e, 'character')
 })
 
 

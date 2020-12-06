@@ -19,7 +19,7 @@ Renumerates residue position of a MetOSite sequence to match the corresponding U
 renum.meto('P01009')
 }
 \seealso{
-is.at(), aa.at(), renum.pdb(), renum()
+is.at(), aa.at(), renum.pdb(), renum(), aa.comp()
 }
 \author{
 Juan Carlos Aledo

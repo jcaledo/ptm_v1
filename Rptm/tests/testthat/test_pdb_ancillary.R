@@ -2,7 +2,7 @@ library(ptm)
 context("PDB Ancillary")
 
 ## ---------------------------------------------- ##
-#            Testing  pdb.quaternary               #
+#               Testing  pdb.seq                   #
 ## ---------------------------------------------- ##
 test_that('pdb.quaternary works properly', {
 

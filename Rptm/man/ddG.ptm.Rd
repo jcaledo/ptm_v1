@@ -26,7 +26,7 @@ The function computes and returns the DDG (kcal/mol) for the requested modificat
 Builds a PDB model of the modified protein and computes the corresponding change in stability.
 }
 \details{
-The current fucntion uses FoldX to build the model of the modified protein. Currently, FoldX does not allow to change Met by MetO, so we
+The current fucntion uses FoldX to build the model of the modified protein. Currently, FoldX does not allow to change Met by MetO, so we use glutamine (Q) or threonine (T) to mimic MetO.
 }
 \examples{
 \dontrun{ddG.ptm('./1u8f_Repair.pdb', 'O', pos = 246, ptm = 'pThr')}

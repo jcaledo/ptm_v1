@@ -20,7 +20,7 @@ Returns a list containing (i) the dataframe corresponding to the computed Jaccar
 Explores the relationship among proteins from a given set.
 }
 \details{
-This function first searchs the GO for each vertex and then computes the Jaccard index for each protein pair based on their GO terms. Afterwards, an adjacency matrix is computed, where two proteins are linked if their Jaccard index is greater than the selected threshold.
+This function first searches the GO terms for each vertex and then computes the Jaccard index for each protein pair, based on their GO terms. Afterwards, an adjacency matrix is computed, where two proteins are linked if their Jaccard index is greater than the selected threshold.
 }
 \examples{
 \dontrun{net.go(path2data = "./GOvivo.txt")}

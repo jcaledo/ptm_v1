@@ -23,7 +23,7 @@
 #' @author Juan Carlos Aledo
 #' @examples aa.at(28, 'P01009')
 #' aa.at(at = 80, target = get.seq('P00004', 'metosite'), uniprot = FALSE)
-#' @seealso is.at(), renum.pdb(), renum.meto(), renum()
+#' @seealso is.at(), renum.pdb(), renum.meto(), renum(), aa.comp()
 #' @importFrom bio3d read.fasta
 #' @export
 
@@ -58,7 +58,7 @@ aa.at <- function(at, target, uniprot = TRUE){
 #' @author Juan Carlos Aledo
 #' @examples is.at(28, 'P01009', 'Q')
 #' is.at(at = 80, target = get.seq('P00004', 'metosite'), uniprot = FALSE)
-#' @seealso aa.at(), renum.pdb(), renum.meto(), renum()
+#' @seealso aa.at(), renum.pdb(), renum.meto(), renum(), aa.comp()
 #' @export
 
 is.at <- function(at, target, aa = 'M', uniprot = TRUE){
@@ -121,7 +121,7 @@ aa.comp <- function(target, uniprot = TRUE){
 #' @return Returns a dataframe containing the re-numerated sequence.
 #' @author Juan Carlos Aledo
 #' @examples renum.pdb(pdb = '121P', chain = 'A', uniprot = 'P01112')
-#' @seealso is.at(), aa.at(), renum.meto(), renum()
+#' @seealso is.at(), aa.at(), renum.meto(), renum(), aa.compo()
 #' @importFrom bio3d read.pdb
 #' @importFrom bio3d aa321
 #' @export
@@ -180,7 +180,7 @@ renum.pdb <- function(pdb, chain, uniprot){
 #' @return Returns a dataframe containing the re-numerated sequence.
 #' @author Juan Carlos Aledo
 #' @examples renum.meto('P01009')
-#' @seealso is.at(), aa.at(), renum.pdb(), renum()
+#' @seealso is.at(), aa.at(), renum.pdb(), renum(), aa.comp()
 #' @export
 
 renum.meto <- function(uniprot){
@@ -236,7 +236,7 @@ renum.meto <- function(uniprot){
 #' @examples renum(up_id = 'P01009', pos = 351, from = 'metosite', to = 'uniprot')
 #' @examples \dontrun{renum(up_id = 'P01009', pos = 60, from = 'uniprot',
 #'                          to = 'pdb', pdb = '1ATU', chain = 'A')}
-#' @seealso is.at(), aa.at(), renum.pdb(), renum.meto()
+#' @seealso is.at(), aa.at(), renum.pdb(), renum.meto(), aa.comp()
 #' @export
 
 renum <- function(up_id, pos, from, to, ...){

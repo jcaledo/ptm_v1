@@ -162,7 +162,7 @@ env.matrices <- function(env){
 #            env.Ztest <- function(pos, ctr, alpha = 0.05)           #
 ## ---------------------------------------------------------------- ##
 #' Preferred/Avoided Amino Acids Within an Environment
-#' @description Searchs for amino acids either overrepresented or avoided at given position within a sequence environment.
+#' @description Searchs for amino acids either overrepresented or avoided at given positions within a sequence environment.
 #' @usage env.Ztest(pos, ctr, alpha = 0.05)
 #' @param pos a 21 x m matrix containing the absolute frequencies of 21 amino acids at the m positions, in the positive environments.
 #' @param ctr a 21 x m matrix containing the absolute frequencies of 21 amino acids at the m positions, in the control environments.

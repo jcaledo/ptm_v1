@@ -29,7 +29,7 @@ is.at(28, 'P01009', 'Q')
 is.at(at = 80, target = get.seq('P00004', 'metosite'), uniprot = FALSE)
 }
 \seealso{
-aa.at(), renum.pdb(), renum.meto(), renum()
+aa.at(), renum.pdb(), renum.meto(), renum(), aa.comp()
 }
 \author{
 Juan Carlos Aledo

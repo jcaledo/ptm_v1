@@ -5,7 +5,7 @@
 #       dpx                                    #
 #       atom.dpx                               #
 #       res.dpx                                #
-#       str.part                               #
+#       stru.part                               #
 #                                              #
 ## ------------------------------------------ ##
 
@@ -514,7 +514,7 @@ res.dpx <- function(pdb, aa = 'all'){
 #           stru.part <- function(pdb, cutoff = 0.25)                #
 ## ---------------------------------------------------------------- ##
 #' Partition of Structural Regions
-#' @description Carries out a partition of the estructural regions of a given protein.
+#' @description Carries out a partition of the structural regions of a given protein.
 #' @usage stru.part(pdb, cutoff = 0.25)
 #' @param pdb is either a PDB id, or the path to a pdb file
 #' @param cutoff accessibility below which a residue is considered to be buried.

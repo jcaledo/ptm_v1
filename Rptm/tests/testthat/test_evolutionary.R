@@ -28,7 +28,7 @@ test_that("msa() works properly", {
 })
 
 ## ---------------------------------------------- ##
-#            Testing curstom.aln                   #
+#             Testing custom.aln                   #
 ## ---------------------------------------------- ##
 test_that("custom.aln() works properly", {
 

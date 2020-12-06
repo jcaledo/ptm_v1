@@ -27,7 +27,7 @@ aa.at(28, 'P01009')
 aa.at(at = 80, target = get.seq('P00004', 'metosite'), uniprot = FALSE)
 }
 \seealso{
-is.at(), renum.pdb(), renum.meto(), renum()
+is.at(), renum.pdb(), renum.meto(), renum(), aa.comp()
 }
 \author{
 Juan Carlos Aledo
