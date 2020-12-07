@@ -15,10 +15,10 @@ compute.dssp(pdb, destfile = './')
 an online computed dssp file that is saved at the indicated location.
 }
 \description{
-Computes and retuns a DSSP file.
+Computes and returns a DSSP file.
 }
 \details{
-A drawback of this function is that it depends on DSSP's server and in ocasions it can take a long time to process the request.
+A drawback of this function is that it depends on DSSP's server and in occasions it can take a long time to process the request.
 }
 \examples{
 \dontrun{compute.dssp(pdb = '3cwm', destfile = './')}

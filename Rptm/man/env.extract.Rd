@@ -26,7 +26,7 @@ Returns a  list of two strings (environments).
 Extracts the sequence environment around a given position.
 }
 \details{
-The radom control returns an environment center at a random position containing the same type or amino acid than the positive environment. The closest control searchs for the closest position where such a type of amino acid is found and returns its environment.
+The random control returns an environment center at a random position containing the same type or amino acid than the positive environment. The closest control searches for the closest position where such a type of amino acid is found and returns its environment.
 }
 \examples{
 env.extract('P01009', db = 'uniprot', 271, 10, ctr = 'random')

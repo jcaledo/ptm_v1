@@ -18,17 +18,17 @@ meto.search(highthroughput.group = TRUE,
 
 \item{regulatory.group}{logical, when FALSE the sites whose oxidation affect the properties of the protein (and therefore may be involved in regulation) are filtered out.}
 
-\item{gain.activity}{introduce 1 or 0 to indicate wether the oxidation of the selected sites implies a gain of activity or not, respectively. If we do not wish to use this property to filter, introduce 2.}
+\item{gain.activity}{introduce 1 or 0 to indicate whether the oxidation of the selected sites implies a gain of activity or not, respectively. If we do not wish to use this property to filter, introduce 2.}
 
-\item{loss.activity}{introduce 1 or 0 to indicate wether or not the oxidation of the selected sites implies a loss of activity or not, respectively. If we do not wish to use this property to filter, introduce 2.}
+\item{loss.activity}{introduce 1 or 0 to indicate whether or not the oxidation of the selected sites implies a loss of activity or not, respectively. If we do not wish to use this property to filter, introduce 2.}
 
-\item{gain.ppi}{introduce 1 or 0 to indicate wether the oxidation of the selected sites implies a gain of protein-protein interaction or not, respectively. If we do not wish to use this property to filter, introduce 2.}
+\item{gain.ppi}{introduce 1 or 0 to indicate whether the oxidation of the selected sites implies a gain of protein-protein interaction or not, respectively. If we do not wish to use this property to filter, introduce 2.}
 
-\item{loss.ppi}{introduce 1 or 0 to indicate wether or not the oxidation of the selected sites implies a loss of protein-protein interaction or not, respectively. If we do not wish to use this property to filter, introduce 2.}
+\item{loss.ppi}{introduce 1 or 0 to indicate whether or not the oxidation of the selected sites implies a loss of protein-protein interaction or not, respectively. If we do not wish to use this property to filter, introduce 2.}
 
-\item{change.stability}{introduce 1 or 0 to indicate wether the oxidation of the selected sites leads to a change in the protein stability or not, respectively. If we do not wish to use this property to filter, introduce 2.}
+\item{change.stability}{introduce 1 or 0 to indicate whether the oxidation of the selected sites leads to a change in the protein stability or not, respectively. If we do not wish to use this property to filter, introduce 2.}
 
-\item{change.location}{introduce 1 or 0 to indicate wether or not the oxidation of the selected sites implies a change of localization or not, respectively. If we do not wish to use this property to filter, introduce 2.}
+\item{change.location}{introduce 1 or 0 to indicate whether or not the oxidation of the selected sites implies a change of localization or not, respectively. If we do not wish to use this property to filter, introduce 2.}
 
 \item{organism}{a character string indicating the scientific name of the species of interest, or -1 if we do not wish to filter by species.}
 
@@ -38,7 +38,7 @@ meto.search(highthroughput.group = TRUE,
 This function returns a dataframe with a line per MetO site.
 }
 \description{
-Searchs for specific MetO sites filtering MetOSite according to the selected criteria.
+Searches for specific MetO sites filtering MetOSite according to the selected criteria.
 }
 \details{
 Note that all the arguments of this function are optional. We only pass an argument to the function when we want to use that parameter to filter. Thus, meto.search() will return all the MetO sites found in the database MetOSite.

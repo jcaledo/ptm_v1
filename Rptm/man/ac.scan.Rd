@@ -18,7 +18,7 @@ Returns a dataframe where each row corresponds to an acetylable residue.
 Scans the indicated protein in search of acetylation sites.
 }
 \details{
-If db = 'all' has been selected, it may hapen that the same residue appears in several rows if it is present in diffent databases.
+If db = 'all' has been selected, it may happen that the same residue appears in several rows if it is present in different databases.
 }
 \examples{
 ac.scan('P01009', db = 'PSP')

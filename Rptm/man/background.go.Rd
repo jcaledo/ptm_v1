@@ -13,7 +13,7 @@ background.go(ids)
 Returns a dataframe with two columns (Uniprot ID, GO terms) and as many rows as different proteins there are in the input set.
 }
 \description{
-Searchs the GO terms of the protein contained in a given set.
+Searches the GO terms of the protein contained in a given set.
 }
 \examples{
 background.go(c('P01009', 'P01374', 'Q86UP4'))

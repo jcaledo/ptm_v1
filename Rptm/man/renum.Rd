@@ -11,7 +11,7 @@ renum(up_id, pos, from, to, ...)
 
 \item{pos}{position in the initial sequence.}
 
-\item{from}{origen of the initial sequence, it should be one among 'uniprot', 'metosite' and 'pdb'.}
+\item{from}{origin of the initial sequence, it should be one among 'uniprot', 'metosite' and 'pdb'.}
 
 \item{to}{target sequence, it should be one among 'uniprot', 'metosite' and 'pdb'.}
 

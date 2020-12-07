@@ -18,7 +18,7 @@ Returns a dataframe where each row corresponds to a modifiable residue.
 Scans the indicated protein in search of sumoylation sites.
 }
 \details{
-If db = 'all' has been selected, it may hapen that the same residue appears in several rows if it is present in diffent databases.
+If db = 'all' has been selected, it may happen that the same residue appears in several rows if it is present in different databases.
 }
 \examples{
 su.scan('Q16695', db = 'PSP')

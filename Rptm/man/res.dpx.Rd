@@ -27,7 +27,7 @@ This function computes the depth, defined as the distance in angstroms between t
 Pintar et al. 2003. Bioinformatics 19:313-314 (PMID: 12538266)
 }
 \seealso{
-atom.dpx(), acc.dssp(), str.partitio()
+atom.dpx(), acc.dssp(), str.part()
 }
 \author{
 Juan Carlos Aledo

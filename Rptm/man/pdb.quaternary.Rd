@@ -9,7 +9,7 @@ pdb.quaternary(pdb, keepfiles = FALSE)
 \arguments{
 \item{pdb}{the path to the PDB of interest or a 4-letter identifier.}
 
-\item{keepfiles}{logical, if TRUE the fasta file containing the alignment of the subunits is saved in the current directory, as well as the splitted pdb files.}
+\item{keepfiles}{logical, if TRUE the fasta file containing the alignment of the subunits is saved in the current directory, as well as the split pdb files.}
 }
 \value{
 This function returns a list with four elements: (i) a distances matrix, (ii) the sequences, (iii) chains id, (iv) the PDB ID used.

@@ -16,7 +16,7 @@ get.go(id, filter = TRUE, format = 'dataframe', silent = FALSE)
 \item{silent}{logical, if FALSE print details of the reading process.}
 }
 \value{
-Returns a dataframe (by deafult) with GO IDs linked to the protein of interest, as well as additional information related to these GO ids. A string with the GO ids can be obtained as output if indicated by means of the argument 'format'.
+Returns a dataframe (by default) with GO IDs linked to the protein of interest, as well as additional information related to these GO ids. A string with the GO ids can be obtained as output if indicated by means of the argument 'format'.
 }
 \description{
 Gets the gene ontology annotations for a given protein.

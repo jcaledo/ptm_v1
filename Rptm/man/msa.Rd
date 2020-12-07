@@ -11,12 +11,12 @@ msa(sequences, ids = names(sequences), sfile = FALSE, inhouse = FALSE)
 
 \item{ids}{vector containing the sequences' ids.}
 
-\item{sfile}{path to the file where the fasta alignmet should be saved, if any.}
+\item{sfile}{path to the file where the fasta alignment should be saved, if any.}
 
 \item{inhouse}{logical, if TRUE the in-house MUSCLE software is used. It must be installed on your system and in the search path for executables.}
 }
 \value{
-Returns a list of four elements. The first one ($seq) provides the sequences analyzed, the second element ($ids) retuns the identifiers, ther third element ($aln) provides the alignment in fasta format and the fourth element ($ali) gives the alignment in matricial format.
+Returns a list of four elements. The first one ($seq) provides the sequences analyzed, the second element ($ids) returns the identifiers, the third element ($aln) provides the alignment in fasta format and the fourth element ($ali) gives the alignment in matrix format.
 }
 \description{
 Aligns multiple protein sequences.

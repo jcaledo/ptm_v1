@@ -11,9 +11,9 @@ is.at(at, target, aa = 'M', uniprot = TRUE)
 
 \item{target}{a character string specifying the UniProt ID of the protein of interest or, alternatively, the sequence of that protein.}
 
-\item{aa}{the amino acid of interst.}
+\item{aa}{the amino acid of interest.}
 
-\item{uniprot}{logical, if TRUE the argument 'target' shoud be an ID.}
+\item{uniprot}{logical, if TRUE the argument 'target' should be an ID.}
 }
 \value{
 Returns a boolean. Either the residue is present at that position or not.

@@ -17,10 +17,10 @@ saro.motif(pdb, threshold = 7, onlySaro = TRUE)
 The function returns a dataframe reporting the S-aromatic motifs found for the protein of interest.
 }
 \description{
-Searchs for S-aromatic motifs in proteins.
+Searches for S-aromatic motifs in proteins.
 }
 \details{
-For each methionyl residue taking place in a S-aromatic motif, this function cumputes the aromatic residues involved, the distance between the delta sulfur and the aromatic ring's centroid, as well as the angle between the sulfur-aromatic vector and the normal vector of the plane containing the aromatic ring.
+For each methionyl residue taking place in a S-aromatic motif, this function computes the aromatic residues involved, the distance between the delta sulfur and the aromatic ring's centroid, as well as the angle between the sulfur-aromatic vector and the normal vector of the plane containing the aromatic ring.
 }
 \examples{
 saro.motif('1CLL')

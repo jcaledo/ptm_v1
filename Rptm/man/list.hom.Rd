@@ -9,13 +9,13 @@ list.hom(target, homology = 'o')
 \arguments{
 \item{target}{the KEGG identifier of the protein of interest.}
 
-\item{homology}{one letter indicanting the type of homology. It should be either 'o' (orthologs) or 'p' (paralogs).}
+\item{homology}{one letter indicating the type of homology. It should be either 'o' (orthologs) or 'p' (paralogs).}
 }
 \value{
 Returns a dataframe with the requested entries.
 }
 \description{
-Searchs for homologous entries.
+Searches for homologous entries.
 }
 \details{
 This application rests on the KEGG Sequence Similarity Database, which contains the information about amino acid sequence similarities among all protein-coding genes in the complete genomes, as well as the addendum and virus categories, of the GENES database.

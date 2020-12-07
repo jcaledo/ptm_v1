@@ -13,7 +13,7 @@ ball(pdb, chain, res, r, backbone = FALSE)
 
 \item{res}{position in the primary structure of the residue of interest, which will be use as center of the sphere.}
 
-\item{r}{radious in ångströms of the sphere.}
+\item{r}{radius in ångströms of the sphere.}
 
 \item{backbone}{logical, when TRUE it means that we include those atoms belonging to the main chain (CA, N, O and C) beside all the side chain atoms.}
 }

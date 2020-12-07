@@ -18,7 +18,7 @@ Returns a dataframe where each row corresponds to a residue, and the colums info
 Scans the indicated protein in search of PTM sites.
 }
 \details{
-The numerations of the sequences given by UniProt and MetOSite may or may not match. Sometimes one of the sequences corresponds to the precursor protein and the other to the procesed mature protein.
+The numerations of the sequences given by UniProt and MetOSite may or may not match. Sometimes one of the sequences corresponds to the precursor protein and the other to the processed mature protein.
 }
 \examples{
 \dontrun{ptm.scan('P01009', renumerate = TRUE)}

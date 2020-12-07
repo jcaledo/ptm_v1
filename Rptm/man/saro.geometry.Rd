@@ -18,7 +18,7 @@ saro.geometry(pdb, rA, chainA = 'A', rB, chainB = 'A')
 \item{chainB}{a character indicating the chain to which belong the second residue.}
 }
 \value{
-The function returns a dataframe providing the coordinates of the sulfur atom and the centroid (centroids when the aromatic residue is tryptophan), as well as the distance (ångströms) and the angle (degrees) mentionated above.
+The function returns a dataframe providing the coordinates of the sulfur atom and the centroid (centroids when the aromatic residue is tryptophan), as well as the distance (ångströms) and the angle (degrees) mentioned above.
 }
 \description{
 Computes distances and angles of S-aromatic motifs.

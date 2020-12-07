@@ -23,7 +23,7 @@ If the argument 'keepfiles' is not set to TRUE, the hssp file used to get the pa
 \item{id_seq_list.Rda:}  {This block of information holds the metadata per sequence, and some alignment statistic. See https://swift.cmbi.umcn.nl/gv/hssp for a detailed description of the information that can be find in this block.}
 \item{id_aln.Rda:}  {This dataframe contains the alignment itself (each sequence is a column). Additional information such as secondary structure, SASA, etc., is also found in this block.}
 \item{id_profile.Rda:}  {This dataframe holds per amino acid type its percentage in the list of residues observed at that position. In addition, this dataframe also informs about the entropy at each position, as well as the number of sequences spanning this position (NOOC).}
-\item{id_insertions.Rda:} {A dataframe with information regarding those sequences that contain inserctions. See https://swift.cmbi.umcn.nl/gv/hssp for further deteails.}
+\item{id_insertions.Rda:} {A dataframe with information regarding those sequences that contain insertions. See https://swift.cmbi.umcn.nl/gv/hssp for further details.}
 }
 }
 \examples{

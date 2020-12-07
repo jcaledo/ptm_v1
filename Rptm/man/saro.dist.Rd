@@ -20,7 +20,7 @@ The function returns a dataframe with as many rows as methionyl residues are fou
 Computes distances to the closest aromatic residues.
 }
 \details{
-For each methionyl residue this function cumputes the distances to the closest aromatic ring from Y, F and W. When that distance is equal or lower to the threshold, it will be computed as a S-aromatic motif.
+For each methionyl residue this function computes the distances to the closest aromatic ring from Y, F and W. When that distance is equal or lower to the threshold, it will be computed as a S-aromatic motif.
 }
 \examples{
 saro.dist('1CLL')
@@ -29,7 +29,7 @@ saro.dist('1CLL')
 Reid, Lindley & Thornton, FEBS Lett. 1985, 190:209-213.
 }
 \seealso{
-saro.motif(), saro.geomety()
+saro.motif(), saro.geometry()
 }
 \author{
 Juan Carlos Aledo

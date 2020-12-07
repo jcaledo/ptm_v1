@@ -13,7 +13,7 @@ search.go(query)
 Returns a dataframe containing the GO IDs found associated to the query, as well as other information related to these terms.
 }
 \description{
-Searchs a simple user query.
+Searches a simple user query.
 }
 \examples{
 search.go('oxidative stress')

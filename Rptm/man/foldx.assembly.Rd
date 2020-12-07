@@ -24,7 +24,7 @@ The function returns a dataframe with the residues that make up the interface be
 Computes changes in the Gibbs free energy of the assembly process of a protein.
 }
 \details{
-This function implements the FoldX's command 'AnalyseComplex', which allows to determine the interaction energy between two molecues or two groups of molecules. For instance, if in a dimeric protein, formed by chain A and B, we may set: mol1 = 'A', mol2 = 'B'. If we are dealing with a trimer, we may set: mol1 = 'A', mol2: 'AB'.
+This function implements the FoldX's command 'AnalyseComplex', which allows to determine the interaction energy between two molecules or two groups of molecules. For instance, if in a dimeric protein, formed by chain A and B, we may set: mol1 = 'A', mol2 = 'B'. If we are dealing with a trimer, we may set: mol1 = 'A', mol2: 'AB'.
 }
 \examples{
 \dontrun{foldx.assembly(pdb = '1sev', mol1 = 'A'), mol2 = 'B'}

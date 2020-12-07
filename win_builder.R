@@ -17,4 +17,8 @@ devtools::run_examples(pkg = ".",
                        run_donttest = FALSE,
                        document = TRUE)
 
+rhub::validate_email()
+devtools::check_rhub(pkg = ".", email = "caledo@uma.es")
 
+devtools::spell_check(pkg = ".")
+devtools::release(pkg = ".")
