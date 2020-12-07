@@ -288,7 +288,7 @@ pdb.res <- function(at, up, pdb, chain){
 #' @details The oligopeptide sequence must be given in one letter amino acid code.
 #' @return The functions returns TRUE if peptide is found in the PDB sequence (and gives the starting position), and FALSE otherwise.
 #' @author Juan Carlos Aledo
-#' @examples pdb.pep(pep = 'IVKGRASLTQEQ' , pdb = '2aw5')
+#' @examples \dontrun{pdb.pep(pep = 'IVKGRASLTQEQ' , pdb = '2aw5')}
 #' @seealso pdb.res()
 #' @importFrom bio3d read.pdb
 #' @importFrom bio3d aa321

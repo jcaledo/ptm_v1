@@ -239,7 +239,7 @@ get.go <- function(id, filter = TRUE, format = 'dataframe', silent = FALSE){
 #' @author Juan Carlos Aledo
 #' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 #' @seealso search.go(), term.go(), get.go(), go.enrich(), gorilla(), net.go()
-#' @examples background.go(c('P01009', 'P01374', 'Q86UP4'))
+#' @examples \dontrun{background.go(c('P01009', 'P01374', 'Q86UP4'))}
 #' @importFrom utils read.csv
 #' @export
 

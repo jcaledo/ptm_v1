@@ -1006,7 +1006,7 @@ shannon <- function(target, species, base = 2, alphabet = 21){
 #' @details Each site can be classified according to their entropies into the following categories: invariant, pseudo-invariant, constrained, conservative, unconstrained, drastic.
 #' @return Returns a dataframe including the category of each site according to its variability.
 #' @author Juan Carlos Aledo
-#' @examples \donttest{site.type('hsa:4069', 'vertebrates')}
+#' @examples \dontrun{site.type('hsa:4069', 'vertebrates')}
 #' @seealso msa(), custom.aln(), parse.hssp(), get.hssp(), shannon()
 #' @importFrom seqinr translate
 #' @importFrom seqinr s2c
