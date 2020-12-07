@@ -30,7 +30,7 @@
 #' acc.dssp(pdb = '3cwm', aa = 'M')}
 #' @references Miller et al (1987) J. Mol. Biol. 196: 641-656 (PMID: 3681970).
 #' @references Touw et al (2015) Nucl. Ac. Res. 43(Database issue): D364-D368 (PMID: 25352545).
-#' @seealso compute.dssp(), atom.dpx(), res.dpx(), str.partition()
+#' @seealso compute.dssp(), atom.dpx(), res.dpx(), str.part()
 #' @importFrom bio3d get.pdb
 #' @importFrom bio3d pdbsplit
 #' @importFrom bio3d read.pdb
@@ -233,7 +233,7 @@ acc.dssp <- function(pdb, dssp = 'compute', aa = 'all'){
 #' @author Juan Carlos Aledo
 #' @examples \dontrun{get.area('3cwm')}
 #' @references Fraczkiewicz, R. and Braun, W. (1998) J. Comp. Chem., 19, 319-333.
-#' @seealso compute.dssp(), atom.dpx(), res.dpx(), acc.dssp(), str.partition()
+#' @seealso compute.dssp(), atom.dpx(), res.dpx(), acc.dssp(), str.part()
 #' @importFrom bio3d aa321
 #' @importFrom RCurl fileUpload
 #' @importFrom RCurl postForm
@@ -343,7 +343,7 @@ get.area <- function(pdb, keepfiles = FALSE){
 #' @return A dataframe with the computed depths.
 #' @author Juan Carlos Aledo
 #' @references Pintar et al. 2003. Bioinformatics 19:313-314 (PMID: 12538266)
-#' @seealso compute.dssp(), atom.dpx(), res.dpx(), acc.dssp(), str.partition()
+#' @seealso compute.dssp(), atom.dpx(), res.dpx(), acc.dssp(), str.part()
 #' @importFrom bio3d read.pdb
 #' @export
 
@@ -386,7 +386,7 @@ dpx <- function(pdb){
 #' @author Juan Carlos Aledo
 #' @examples \dontrun{atom.dpx('1cll')}
 #' @references Pintar et al. 2003. Bioinformatics 19:313-314 (PMID: 12538266)
-#' @seealso res.dpx(), acc.dssp(), str.partition()
+#' @seealso res.dpx(), acc.dssp(), str.part()
 #' @importFrom bio3d read.pdb
 #' @export
 
@@ -456,7 +456,7 @@ atom.dpx <- function(pdb){
 #' @author Juan Carlos Aledo
 #' @examples \dontrun{res.dpx('1cll')}
 #' @references Pintar et al. 2003. Bioinformatics 19:313-314 (PMID: 12538266)
-#' @seealso atom.dpx(), acc.dssp(), str.partitio()
+#' @seealso atom.dpx(), acc.dssp(), str.part()
 #' @export
 
 res.dpx <- function(pdb, aa = 'all'){

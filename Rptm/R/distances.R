@@ -243,7 +243,7 @@ dist2closest <- function(pdb, chain, res, aa = 'M', backbone = FALSE){
 #' @param pdb is either a PDB id, or the path to a pdb file.
 #' @param chain a character indicating the chain to which the residue belongs
 #' @param res position in the primary structure of the residue of interest, which will be use as center of the sphere.
-#' @param r radious in ångströms of the sphere.
+#' @param r radius in ångströms of the sphere.
 #' @param backbone logical, when TRUE it means that we include those atoms belonging to the main chain (CA, N, O and C) beside all the side chain atoms.
 #' @details The position indicated by res must be occupied by one of the following amino acids (otherwise the function will return an error message): Met (SD atom), Cys (SG atom), Glu (centroid of OE1 and OE2 atoms), Asp (centroid of OD1 and OD2 atoms), His (centroid of ND1 and NE2 atoms), Lys (NZ atom), Arg (centroid of NE, NH1 and NH2 atoms), Phe (centroid of CG, CD1, CD2, CE1, CE2 and CZ atoms), Tyr  (centroid of CG, CD1, CD2, CE1, CE2 and CZ atoms), Trp (centroid of the indol rings, ring-1: CG, CD1, CD2, NE1, CE2; ring-2: CD2, CE3, CZ2, CZ3, CE2). All the atoms belonging to the central residue are excluded from the results.
 #' @return A dataframe with the atoms identification and their distances to the central atom.

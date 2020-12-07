@@ -4,7 +4,7 @@ The current submission is a first submission of the package ptm.
 
 ## Test environments
 
-* local OS X install, R 3.6.2
+* local OS X install, R 4.0.2
 
 * win-builder (devel and release)
 

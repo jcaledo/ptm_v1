@@ -29,7 +29,7 @@
 #' \itemize{
 #' \item{Position:}  {Position in the primary structure of the mutated residue.}
 #' \item{WT:}  {Amino acid found at that position in the wild-type protein.}
-#' \item{NW:}  {New amino aicd found in the mutated protein.}
+#' \item{NW:}  {New amino acid found in the mutated protein.}
 #' \item{DDG:} {Change in Gibbs free energy (kcal/mol), defined as DDG = DGmt - DGwt, where DG is the change in Gibbs free energy for the folding of the protein from its unfolded state. Thus, a positive value means a stabilizing effect, and vice versa.}
 #' \item{pH:}  {-log[H+]}
 #' \item{T:}   {Temperature in Celsius degrees.}
@@ -159,7 +159,7 @@ imutant <- function(protein, ch = "_", pos, newres = "",
 #' @param pH a numeric value between 0 and 14.
 #' @param method a character string specifying the approach to be used; it must be one of 'buildmodel', 'positionscan'.
 #' @param keepfiles logical, when TRUE the repaired PDB file is saved in the working directory.
-#' @details Two computational approaches for prediction of the effect of amino acid changes on protein stability are implemented. FoldX (buildmodel and positionscan methods) uses a force field approach and athough it has been proved to be satisfactorily accurate, it is also a time-consuming method. An alternative much faster is I-Mutant, a method base on machine-learning
+#' @details Two computational approaches for prediction of the effect of amino acid changes on protein stability are implemented. FoldX (buildmodel and positionscan methods) uses a force field approach and although it has been proved to be satisfactorily accurate, it is also a time-consuming method. An alternative much faster is I-Mutant, a method base on machine-learning
 #' @return The function computes and returns the DDG (kcal/mol) for the requested residue change, defined as DDG = DGmt - DGwt, where DG is the Gibbs free energy for the folding of the protein from its unfolded state. Thus, a positive value means a destabilizing effect, and vice versa.
 #' @author Juan Carlos Aledo
 #' @examples \dontrun{foldx('1aaq', 'A', 45, 'R')}
@@ -513,7 +513,7 @@ foldx.stab <- function(pdb, pH = 7, I = 0.05) {
 #' @param mol2 molecule or group of molecules interacting with mol1 (see details)
 #' @param pH a numeric value between 0 and 14.
 #' @param I a value indicating the molar ionic strength.
-#' @details This function implements the FoldX's command 'AnalyseComplex', which allows to determine the interaction energy between two molecues or two groups of molecules. For instance, if in a dimeric protein, formed by chain A and B, we may set: mol1 = 'A', mol2 = 'B'. If we are dealing with a trimer, we may set: mol1 = 'A', mol2: 'AB'.
+#' @details This function implements the FoldX's command 'AnalyseComplex', which allows to determine the interaction energy between two molecules or two groups of molecules. For instance, if in a dimeric protein, formed by chain A and B, we may set: mol1 = 'A', mol2 = 'B'. If we are dealing with a trimer, we may set: mol1 = 'A', mol2: 'AB'.
 #' @return The function returns a dataframe with the residues that make up the interface between mol1 and mol2, as well as the change in Gibbs free energy, DG, of the assembly process for the requested subunits.
 #' @author Juan Carlos Aledo
 #' @examples \dontrun{foldx.assembly(pdb = '1sev', mol1 = 'A'), mol2 = 'B'}
@@ -731,8 +731,8 @@ ddG.profile <- function(prot, ch, pos, pH = 7, Te = 25){
 #' @param ptm the post-translational modification to be considered. It should be one among: 'pSer', 'pThr', 'pTyr', 'MetO-Q', 'MetO-T'.
 #' @param dir indicates the direction of the PTM reaction: either forward ('f'), or backward ('b').
 #' @param pH a numeric value between 0 and 14.
-#' @details The current fucntion uses FoldX to build the model of the modified protein. Currently, FoldX does not allow to change Met by MetO, so we use glutamine (Q) or threonine (T) to mimic MetO.
-#' @return The function computes and returns the DDG (kcal/mol) for the requested modification, defined as DDG = DGmodified - DGunmodified, where DG is the Gibbs free energy for the folding of the protein from its unfolded state. Thus, a positive value means a destabilizing effect, and vice versa. A PDB model contining the modified target is saved in the current directory.
+#' @details The current function uses FoldX to build the model of the modified protein. Currently, FoldX does not allow to change Met by MetO, so we use glutamine (Q) or threonine (T) to mimic MetO.
+#' @return The function computes and returns the DDG (kcal/mol) for the requested modification, defined as DDG = DGmodified - DGunmodified, where DG is the Gibbs free energy for the folding of the protein from its unfolded state. Thus, a positive value means a destabilizing effect, and vice versa. A PDB model containing the modified target is saved in the current directory.
 #' @author Juan Carlos Aledo
 #' @examples \dontrun{ddG.ptm('./1u8f_Repair.pdb', 'O', pos = 246, ptm = 'pThr')}
 #' @seealso imutant(), foldx.mut(), ddG.profile()

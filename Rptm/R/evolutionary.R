@@ -19,9 +19,9 @@
 #' @usage msa(sequences, ids = names(sequences), sfile = FALSE, inhouse = FALSE)
 #' @param sequences vector containing the sequences.
 #' @param ids vector containing the sequences' ids.
-#' @param sfile path to the file where the fasta alignmet should be saved, if any.
+#' @param sfile path to the file where the fasta alignment should be saved, if any.
 #' @param inhouse logical, if TRUE the in-house MUSCLE software is used. It must be installed on your system and in the search path for executables.
-#' @return Returns a list of four elements. The first one ($seq) provides the sequences analyzed, the second element ($ids) retuns the identifiers, ther third element ($aln) provides the alignment in fasta format and the fourth element ($ali) gives the alignment in matricial format.
+#' @return Returns a list of four elements. The first one ($seq) provides the sequences analyzed, the second element ($ids) returns the identifiers, the third element ($aln) provides the alignment in fasta format and the fourth element ($ali) gives the alignment in matrix format.
 #' @examples \dontrun{msa(sequences = sapply(c("P19446", "P40925", "P40926"), ptm::get.seq),
 #'  ids = c("wmelon", "cyt", "mit"))}
 #' @references Edgar RC. Nucl. Ac. Res. 2004 32:1792-1797.
@@ -194,13 +194,13 @@ custom.aln <- function(target, species, molecule = 'protein',  sfile = FALSE){
 
 
 ## ---------------------------------------------------------------- ##
-#         list.hom <- function(target, homology = 'o')                    #
+#         list.hom <- function(target, homology = 'o')               #
 ## ---------------------------------------------------------------- ##
 #' Search Homologous Entries
-#' @description Searchs for homologous entries.
+#' @description Searches for homologous entries.
 #' @usage list.hom(target, homology = 'o')
 #' @param target the KEGG identifier of the protein of interest.
-#' @param homology one letter indicanting the type of homology. It should be either 'o' (orthologs) or 'p' (paralogs).
+#' @param homology one letter indicating the type of homology. It should be either 'o' (orthologs) or 'p' (paralogs).
 #' @details This application rests on the KEGG Sequence Similarity Database, which contains the information about amino acid sequence similarities among all protein-coding genes in the complete genomes, as well as the addendum and virus categories, of the GENES database.
 #' @return Returns a dataframe with the requested entries.
 #' @author Juan Carlos Aledo
@@ -314,7 +314,7 @@ list.hom <- function(target, homology = 'o'){
 #' \item{id_seq_list.Rda:}  {This block of information holds the metadata per sequence, and some alignment statistic. See https://swift.cmbi.umcn.nl/gv/hssp for a detailed description of the information that can be find in this block.}
 #' \item{id_aln.Rda:}  {This dataframe contains the alignment itself (each sequence is a column). Additional information such as secondary structure, SASA, etc., is also found in this block.}
 #' \item{id_profile.Rda:}  {This dataframe holds per amino acid type its percentage in the list of residues observed at that position. In addition, this dataframe also informs about the entropy at each position, as well as the number of sequences spanning this position (NOOC).}
-#' \item{id_insertions.Rda:} {A dataframe with information regarding those sequences that contain inserctions. See https://swift.cmbi.umcn.nl/gv/hssp for further deteails.}
+#' \item{id_insertions.Rda:} {A dataframe with information regarding those sequences that contain insertions. See https://swift.cmbi.umcn.nl/gv/hssp for further details.}
 #' }
 #' @return Returns a dataframe corresponding to the profile.Rda described above.
 #' @author Juan Carlos Aledo
@@ -436,7 +436,7 @@ parse.hssp <- function(file, keepfiles = TRUE){
     c <- 0
     block <- as.data.frame(matrix(rep(NA, nres * 70), ncol = 70))
 
-    for (j in (head[i]+2):(head[i]+1+nres)){ # Within each block (of 70 sequences in the alingment)
+    for (j in (head[i]+2):(head[i]+1+nres)){ # Within each block (of 70 sequences in the alignment)
       c <- c + 1
       t <- l[j] # each line is 121 char long
       a <- gsub(" ", "-", strsplit(substring(t, 52,121), split = "")[[1]])
@@ -567,7 +567,7 @@ parse.hssp <- function(file, keepfiles = TRUE){
 #' \item{id_seq_list.Rda:}  {This block of information holds the metadata per sequence, and some alignment statistic. See https://swift.cmbi.umcn.nl/gv/hssp for a detailed description of the information that can be find in this block.}
 #' \item{id_aln.Rda}  {This dataframe contains the alignment itself (each sequence is a column). Additional information such as secondary structure, SASA, etc., is also found in this block.}
 #' \item{id_profile.Rda}  {This dataframe holds per amino acid type its percentage in the list of residues observed at that position. In addition, this dataframe also informs about the entropy at each position, as well as the number of sequences spanning this position (NOOC).}
-#' \item{id_insertions.Rda} {A dataframe with information regarding those sequences that contain inserctions. See https://swift.cmbi.umcn.nl/gv/hssp for further deteails.}
+#' \item{id_insertions.Rda} {A dataframe with information regarding those sequences that contain insertions. See https://swift.cmbi.umcn.nl/gv/hssp for further details.}
 #' }
 #' @return Returns a dataframe corresponding to the profile.Rda described above.
 #' @author Juan Carlos Aledo
@@ -1002,8 +1002,8 @@ shannon <- function(target, species, base = 2, alphabet = 21){
 #' @usage site.type(target, species, th = 0.25)
 #' @param target the KEGG identifier of the protein of interest.
 #' @param species a character vector containing the KEGG code for the species of interest.
-#' @param th value between 0 and 1 indicating the percentil driving the site partition.
-#' @details Each site can be clasified according to their entropies into the following categories: invariant, pseudo-invariant, constrained, conservative, unconstrained, drastic.
+#' @param th value between 0 and 1 indicating the percentile driving the site partition.
+#' @details Each site can be classified according to their entropies into the following categories: invariant, pseudo-invariant, constrained, conservative, unconstrained, drastic.
 #' @return Returns a dataframe including the category of each site according to its variability.
 #' @author Juan Carlos Aledo
 #' @examples \donttest{site.type('hsa:4069', 'vertebrates')}

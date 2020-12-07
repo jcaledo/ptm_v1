@@ -22,7 +22,7 @@
 #' @usage p.scan(up_id, db = 'all')
 #' @param up_id a character string corresponding to the UniProt ID.
 #' @param db the database where to search. It should be one among 'PSP', 'dbPTM','dbPAF', 'PhosPhAt', 'Phospho.ELM', 'all'.
-#' @details If db = 'all' has been selected, it may hapen that the same residue appears in several rows if it is present in diffent databases.
+#' @details If db = 'all' has been selected, it may happen that the same residue appears in several rows if it is present in different databases.
 #' @return Returns a dataframe where each row corresponds to a phosphorylatable residue.
 #' @author Juan Carlos Aledo
 #' @examples \dontrun{p.scan('P01009', db = 'PSP')}
@@ -66,7 +66,7 @@ p.scan <- function(up_id, db = 'all'){
 #' @usage ac.scan(up_id, db = 'all')
 #' @param up_id a character string corresponding to the UniProt ID.
 #' @param db the database where to search. It should be one among 'PSP', 'dbPTM', 'all'.
-#' @details If db = 'all' has been selected, it may hapen that the same residue appears in several rows if it is present in diffent databases.
+#' @details If db = 'all' has been selected, it may happen that the same residue appears in several rows if it is present in different databases.
 #' @return Returns a dataframe where each row corresponds to an acetylable residue.
 #' @author Juan Carlos Aledo
 #' @examples ac.scan('P01009', db = 'PSP')
@@ -106,7 +106,7 @@ ac.scan <- function(up_id, db = 'all'){
 #' @usage me.scan(up_id, db = 'all')
 #' @param up_id a character string corresponding to the UniProt ID.
 #' @param db the database where to search. It should be one among 'PSP', 'dbPTM', 'all'.
-#' @details If db = 'all' has been selected, it may hapen that the same residue appears in several rows if it is present in diffent databases.
+#' @details If db = 'all' has been selected, it may happen that the same residue appears in several rows if it is present in different databases.
 #' @return Returns a dataframe where each row corresponds to a modifiable residue.
 #' @author Juan Carlos Aledo
 #' @references Hornbeck et al. Nucleic Acids Res. 2019 47:D433-D441, (PMID: 30445427).
@@ -146,7 +146,7 @@ me.scan <- function(up_id, db = 'all'){
 #' @usage ub.scan(up_id, db = 'all')
 #' @param up_id a character string corresponding to the UniProt ID.
 #' @param db the database where to search. It should be one among 'PSP', 'dbPTM', 'all'.
-#' @details If db = 'all' has been selected, it may hapen that the same residue appears in several rows if it is present in diffent databases.
+#' @details If db = 'all' has been selected, it may happen that the same residue appears in several rows if it is present in different databases.
 #' @return Returns a dataframe where each row corresponds to a modifiable residue.
 #' @author Juan Carlos Aledo
 #' @examples ub.scan('Q16695', db = 'PSP')
@@ -186,7 +186,7 @@ ub.scan <- function(up_id, db = 'all'){
 #' @usage su.scan(up_id, db = 'all')
 #' @param up_id a character string corresponding to the UniProt ID.
 #' @param db the database where to search. It should be one among 'PSP', 'dbPTM', 'all'.
-#' @details If db = 'all' has been selected, it may hapen that the same residue appears in several rows if it is present in diffent databases.
+#' @details If db = 'all' has been selected, it may happen that the same residue appears in several rows if it is present in different databases.
 #' @return Returns a dataframe where each row corresponds to a modifiable residue.
 #' @author Juan Carlos Aledo
 #' @examples su.scan('Q16695', db = 'PSP')
@@ -226,7 +226,7 @@ su.scan <- function(up_id, db = 'all'){
 #' @usage gl.scan(up_id, db = 'all')
 #' @param up_id a character string corresponding to the UniProt ID.
 #' @param db the database where to search. It should be one among 'PSP', 'dbPTM', 'all'.
-#' @details If db = 'all' has been selected, it may hapen that the same residue appears in several rows if it is present in diffent databases.
+#' @details If db = 'all' has been selected, it may happen that the same residue appears in several rows if it is present in different databases.
 #' @return Returns a dataframe where each row corresponds to a modifiable residue.
 #' @author Juan Carlos Aledo
 #' @examples gl.scan('P08670', db = 'PSP')
@@ -343,7 +343,7 @@ ni.scan <- function(up_id, db = 'all'){
 #' @usage ptm.scan(up_id, renumerate = TRUE)
 #' @param up_id a character string corresponding to the UniProt ID.
 #' @param renumerate logical, when TRUE the  sequence numeration of MetO sites is that given by Uniprot, which may not coincide with that from MetOSite.
-#' @details The numerations of the sequences given by UniProt and MetOSite may or may not match. Sometimes one of the sequences corresponds to the precursor protein and the other to the procesed mature protein.
+#' @details The numerations of the sequences given by UniProt and MetOSite may or may not match. Sometimes one of the sequences corresponds to the precursor protein and the other to the processed mature protein.
 #' @return Returns a dataframe where each row corresponds to a residue, and the colums inform about the modifications.
 #' @author Juan Carlos Aledo
 #' @examples \dontrun{ptm.scan('P01009', renumerate = TRUE)}

@@ -570,7 +570,7 @@ species.mapping <- function(id, db = 'uniprot'){
 #' @usage species.kegg(organism, from = 'scientific')
 #' @param organism character string defining the organisms.
 #' @param from string indicating the character of the provided name. It should be one of 'vulgar', 'scientific', '3-letter'.
-#' @return Returns a dataframe with the entries matchin the request.
+#' @return Returns a dataframe with the entries matching the request.
 #' @author Juan Carlos Aledo
 #' @examples species.kegg('chempanzee', from = 'vulgar')
 #' @examples species.kegg('Pan paniscus')

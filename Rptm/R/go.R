@@ -14,7 +14,7 @@
 #           search.go <- function(query)                             #
 ## ---------------------------------------------------------------- ##
 #' Search a Simple User Query
-#' @description Searchs a simple user query.
+#' @description Searches a simple user query.
 #' @usage search.go(query)
 #' @param query character string defining the query.
 #' @return Returns a dataframe containing the GO IDs found associated to the query, as well as other information related to these terms.
@@ -121,7 +121,7 @@ term.go <- function(go, children = FALSE){
 #' @param format string indicating the output's format. It should be either 'dataframe' or 'string'. The 'string' format may be convenient when subsequent GO terms enrichment analysis is intended.
 #' @param silent logical, if FALSE print details of the reading process.
 #' @details Since some well-characterized proteins can have many GO annotations, it may be convenient to filter the shown GO terms. When filter is set to TRUE, the annotated terms displayed are those provided by the corresponding UniProtKB entry, which are selected based on their granularity and evidence code quality (with manual annotations preferred over automatic predictions). Annotations that have been made to isoform identifiers, or use any of the GO annotation qualifiers (NOT, contributes_to, colocalizes_with) are also removed.
-#' @return Returns a dataframe (by deafult) with GO IDs linked to the protein of interest, as well as additional information related to these GO ids. A string with the GO ids can be obtained as output if indicated by means of the argument 'format'.
+#' @return Returns a dataframe (by default) with GO IDs linked to the protein of interest, as well as additional information related to these GO ids. A string with the GO ids can be obtained as output if indicated by means of the argument 'format'.
 #' @author Juan Carlos Aledo
 #' @seealso search.go, term.go(), background.go(), hdfisher.go(), gorilla(), net.go()
 #' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
@@ -232,7 +232,7 @@ get.go <- function(id, filter = TRUE, format = 'dataframe', silent = FALSE){
 #             background.go <- function(ids)                         #
 ## ---------------------------------------------------------------- ##
 #' Search GO Terms for Background Set
-#' @description Searchs the GO terms of the protein contained in a given set.
+#' @description Searches the GO terms of the protein contained in a given set.
 #' @usage background.go(ids)
 #' @param ids either a vector containing the UniProt IDs of the background set or the path to the txt file containing the list of IDs acting as background.
 #' @return Returns a dataframe with two columns (Uniprot ID, GO terms) and as many rows as different proteins there are in the input set.

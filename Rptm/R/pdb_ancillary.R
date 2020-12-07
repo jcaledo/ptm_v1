@@ -92,7 +92,7 @@ pdb.seq <- function(pdb){
 #' @description Determines the subunit composition of a given protein.
 #' @usage pdb.quaternary(pdb, keepfiles = FALSE)
 #' @param pdb the path to the PDB of interest or a 4-letter identifier.
-#' @param keepfiles logical, if TRUE the fasta file containing the alignment of the subunits is saved in the current directory, as well as the splitted pdb files.
+#' @param keepfiles logical, if TRUE the fasta file containing the alignment of the subunits is saved in the current directory, as well as the split pdb files.
 #' @details A fasta file containing the alignment among the subunit sequences can be saved in the current directory if required.
 #' @return This function returns a list with four elements: (i) a distances matrix, (ii) the sequences, (iii) chains id, (iv) the PDB ID used.
 #' @author Juan Carlos Aledo
