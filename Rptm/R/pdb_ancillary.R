@@ -327,7 +327,7 @@ pdb.pep <- function(pep, pdb){
 #' @param threshold coverage value that when reached the search is halted.
 #' @return A list of two elements: (i) the PDB ID and (ii) the chain. The coverage with the UniProt sequence is given as an attribute.
 #' @author Juan Carlos Aledo
-#' @examples pdb.select('P01009', threshold = 0.8)
+#' @examples \dontrun{pdb.select('P01009', threshold = 0.8)}
 #' @seealso pdb.quaternary(), pdb.chain(), pdb.res(), pdb.pep(), uniprot2pdb(), pdb2uniprot()
 #' @export
 pdb.select <- function(up_id, threshold = 0.9){

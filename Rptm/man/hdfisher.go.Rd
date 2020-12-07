@@ -22,13 +22,13 @@ Returns a list that contains the contingency table and the p-Value.
 Carries out an enrichment Fisher's test using a hypothesis driven approach.
 }
 \examples{
-hdfisher.go(c('Q14667', 'Q5JSZ5'), background.go(c("Q14667", "Q5JSZ5", "P13196")), 'extracellular')
+\dontrun{hdfisher.go(c('Q14667', 'Q5JSZ5'), bg.go(c('Q14667', 'Q5JSZ5', 'P13196')), 'ion')}
 }
 \references{
 Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 }
 \seealso{
-search.go(), term.go(), get.go(), background.go(), go.enrich(), gorilla(), net.go()
+search.go(), term.go(), get.go(), bg.go(), go.enrich(), gorilla(), net.go()
 }
 \author{
 Juan Carlos Aledo

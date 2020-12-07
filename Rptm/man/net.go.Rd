@@ -31,7 +31,7 @@ Aledo & Aledo (2020) Antioxidants 9(10), 987.
 Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 }
 \seealso{
-search.go(), term.go(), get.go(), background.go(), gorilla()
+search.go(), term.go(), get.go(), bg.go(), gorilla()
 }
 \author{
 Pablo Aledo & Juan Carlos Aledo

@@ -572,9 +572,9 @@ species.mapping <- function(id, db = 'uniprot'){
 #' @param from string indicating the character of the provided name. It should be one of 'vulgar', 'scientific', '3-letter'.
 #' @return Returns a dataframe with the entries matching the request.
 #' @author Juan Carlos Aledo
-#' @examples species.kegg('chempanzee', from = 'vulgar')
-#' @examples species.kegg('Pan paniscus')
-#' @examples species.kegg('ppo', from = '3-letter')
+#' @examples \dontrun{species.kegg('chempanzee', from = 'vulgar')}
+#' @examples \dontrun{species.kegg('Pan paniscus')}
+#' @examples \dontrun{species.kegg('ppo', from = '3-letter')}
 #' @seealso id.features(), species.mapping()
 #' @importFrom httr GET
 #' @importFrom httr content

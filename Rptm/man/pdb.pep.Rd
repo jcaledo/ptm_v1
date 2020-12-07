@@ -21,7 +21,7 @@ Checks whether a given oligopeptide is resolved in the PDB.
 The oligopeptide sequence must be given in one letter amino acid code.
 }
 \examples{
-pdb.pep(pep = 'IVKGRASLTQEQ' , pdb = '2aw5')
+\dontrun{pdb.pep(pep = 'IVKGRASLTQEQ' , pdb = '2aw5')}
 }
 \seealso{
 pdb.res()

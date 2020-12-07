@@ -37,7 +37,7 @@ Eden et al. (2009) BMC Bioinformatics 10:48.
 Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 }
 \seealso{
-search.go(), term.go(), get.go(), background.go(), net.go()
+search.go(), term.go(), get.go(), bg.go(), net.go()
 }
 \author{
 Juan Carlos Aledo

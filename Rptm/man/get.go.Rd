@@ -25,13 +25,13 @@ Gets the gene ontology annotations for a given protein.
 Since some well-characterized proteins can have many GO annotations, it may be convenient to filter the shown GO terms. When filter is set to TRUE, the annotated terms displayed are those provided by the corresponding UniProtKB entry, which are selected based on their granularity and evidence code quality (with manual annotations preferred over automatic predictions). Annotations that have been made to isoform identifiers, or use any of the GO annotation qualifiers (NOT, contributes_to, colocalizes_with) are also removed.
 }
 \examples{
-get.go('P01009')
+\dontrun{get.go('P01009')}
 }
 \references{
 Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 }
 \seealso{
-search.go, term.go(), background.go(), hdfisher.go(), gorilla(), net.go()
+search.go, term.go(), bg.go(), hdfisher.go(), gorilla(), net.go()
 }
 \author{
 Juan Carlos Aledo

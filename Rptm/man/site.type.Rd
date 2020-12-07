@@ -23,7 +23,7 @@ Computes Shannon's entropies and performs a partition of the sites set.
 Each site can be classified according to their entropies into the following categories: invariant, pseudo-invariant, constrained, conservative, unconstrained, drastic.
 }
 \examples{
-\donttest{site.type('hsa:4069', 'vertebrates')}
+\dontrun{site.type('hsa:4069', 'vertebrates')}
 }
 \seealso{
 msa(), custom.aln(), parse.hssp(), get.hssp(), shannon()

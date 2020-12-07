@@ -69,7 +69,7 @@ p.scan <- function(up_id, db = 'all'){
 #' @details If db = 'all' has been selected, it may happen that the same residue appears in several rows if it is present in different databases.
 #' @return Returns a dataframe where each row corresponds to an acetylable residue.
 #' @author Juan Carlos Aledo
-#' @examples ac.scan('P01009', db = 'PSP')
+#' @examples \dontrun{ac.scan('P01009', db = 'PSP')}
 #' @references Hornbeck et al. Nucleic Acids Res. 2019 47:D433-D441, (PMID: 30445427).
 #' @references Huang et al. Nucleic Acids Res. 2019 47:D298-D308, (PMID: 30418626).
 #' @seealso meto.scan(), p.scan(), me.scan(), ub.scan(), su.scan(), gl.scan(), sni.scan(), ni.scan(), ptm.scan(), reg.scan(), dis.scan()
