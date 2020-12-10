@@ -19,9 +19,9 @@
 #' @usage msa(sequences, ids = names(sequences), sfile = FALSE, inhouse = FALSE)
 #' @param sequences vector containing the sequences.
 #' @param ids vector containing the sequences' ids.
-#' @param sfile path to the file where the fasta alignmet should be saved, if any.
+#' @param sfile path to the file where the fasta alignment should be saved, if any.
 #' @param inhouse logical, if TRUE the in-house MUSCLE software is used. It must be installed on your system and in the search path for executables.
-#' @return Returns a list of four elements. The first one ($seq) provides the sequences analyzed, the second element ($ids) retuns the identifiers, ther third element ($aln) privides the alignment in fasta format and the fourth element ($ali) gives the alignment in matricial format.
+#' @return Returns a list of four elements. The first one ($seq) provides the sequences analyzed, the second element ($ids) returns the identifiers, the third element ($aln) provides the alignment in fasta format and the fourth element ($ali) gives the alignment in matrix format.
 #' @examples \dontrun{msa(sequences = sapply(c("P19446", "P40925", "P40926"), ptm::get.seq),
 #'  ids = c("wmelon", "cyt", "mit"))}
 #' @references Edgar RC. Nucl. Ac. Res. 2004 32:1792-1797.
@@ -157,18 +157,25 @@ custom.aln <- function(target, species, molecule = 'protein',  sfile = FALSE){
     protein <- TRUE
   }
   ref_seq <- ptm::get.seq(target, db = db, as.string = FALSE)
-  # sequences <- bio3d::seqbind(ref_seq, blank = "-")
   id <- c('ref')
-  for (i in 1:n){
+  i <- 1
+  while (length(id) <= n & i <= nrow(orthDF)){
     t <- ptm::get.seq(paste(orthDF$species[i], orthDF$entry[i], sep = ":"),
                       db = db, as.string = FALSE)
-    if (i == 1){
-      sequences <- seqbind(ref_seq[[1]], t[[1]], blank = "-")
-    } else {
-      sequences <- seqbind(sequences, t[[1]])
+    if (!grepl("Sorry", t)){
+      if (i == 1){
+        sequences <- seqbind(ref_seq[[1]], t[[1]], blank = "-")
+      } else {
+        sequences <- seqbind(sequences, t[[1]])
+      }
+      id <- c(id, orthDF$species[i])
     }
-
-    id <- c(id, orthDF$species[i])
+    i <- i + 1
+  }
+  if (length(id) < n){
+    status <- paste("Only ", length(id), " species could be aligned!")
+  } else {
+    status <- "Success"
   }
 
   ## ----------------- Carrying out the alignment ------------------ ##
@@ -181,18 +188,19 @@ custom.aln <- function(target, species, molecule = 'protein',  sfile = FALSE){
       file.remove(fa_file)
     }
   }
+  attr(aln, 'status') <- status
   return(aln)
 }
 
 
 ## ---------------------------------------------------------------- ##
-#         list.hom <- function(target, homology = 'o')                    #
+#         list.hom <- function(target, homology = 'o')               #
 ## ---------------------------------------------------------------- ##
 #' Search Homologous Entries
-#' @description Searchs for homologous entries.
+#' @description Searches for homologous entries.
 #' @usage list.hom(target, homology = 'o')
 #' @param target the KEGG identifier of the protein of interest.
-#' @param homology one letter indicanting the type of homology. It should be either 'o' (orthologs) or 'p' (paralogs).
+#' @param homology one letter indicating the type of homology. It should be either 'o' (orthologs) or 'p' (paralogs).
 #' @details This application rests on the KEGG Sequence Similarity Database, which contains the information about amino acid sequence similarities among all protein-coding genes in the complete genomes, as well as the addendum and virus categories, of the GENES database.
 #' @return Returns a dataframe with the requested entries.
 #' @author Juan Carlos Aledo
@@ -306,7 +314,7 @@ list.hom <- function(target, homology = 'o'){
 #' \item{id_seq_list.Rda:}  {This block of information holds the metadata per sequence, and some alignment statistic. See https://swift.cmbi.umcn.nl/gv/hssp for a detailed description of the information that can be find in this block.}
 #' \item{id_aln.Rda:}  {This dataframe contains the alignment itself (each sequence is a column). Additional information such as secondary structure, SASA, etc., is also found in this block.}
 #' \item{id_profile.Rda:}  {This dataframe holds per amino acid type its percentage in the list of residues observed at that position. In addition, this dataframe also informs about the entropy at each position, as well as the number of sequences spanning this position (NOOC).}
-#' \item{id_insertions.Rda:} {A dataframe with information regarding those sequences that contain inserctions. See https://swift.cmbi.umcn.nl/gv/hssp for further deteails.}
+#' \item{id_insertions.Rda:} {A dataframe with information regarding those sequences that contain insertions. See https://swift.cmbi.umcn.nl/gv/hssp for further details.}
 #' }
 #' @return Returns a dataframe corresponding to the profile.Rda described above.
 #' @author Juan Carlos Aledo
@@ -428,7 +436,7 @@ parse.hssp <- function(file, keepfiles = TRUE){
     c <- 0
     block <- as.data.frame(matrix(rep(NA, nres * 70), ncol = 70))
 
-    for (j in (head[i]+2):(head[i]+1+nres)){ # Within each block (of 70 sequences in the alingment)
+    for (j in (head[i]+2):(head[i]+1+nres)){ # Within each block (of 70 sequences in the alignment)
       c <- c + 1
       t <- l[j] # each line is 121 char long
       a <- gsub(" ", "-", strsplit(substring(t, 52,121), split = "")[[1]])
@@ -554,14 +562,13 @@ parse.hssp <- function(file, keepfiles = TRUE){
 #' @param pdb the 4-letter identifier of the PDB file.
 #' @param path character string providing the path to the in-house HSSP database.
 #' @param keepfiles logical, if TRUE the dataframes will be saved in the working directory and we will keep the hssp file.
-#' @details If the argument 'keepfiles' is not set to TRUE, the hssp file used to get the parsed dataframe will be removed. Otherwise, 4 dataframes will be saved:
+#' @details In order to use this function, you need to obtain a local copy of the HSSB database. This function will obtain and parse the requested HSSP file. When the argument ‘keepfiles’ is set to TRUE, the get.hssp() function will build and save (in the working directory) the following 4 dataframes:
 #' \itemize{
 #' \item{id_seq_list.Rda:}  {This block of information holds the metadata per sequence, and some alignment statistic. See https://swift.cmbi.umcn.nl/gv/hssp for a detailed description of the information that can be find in this block.}
 #' \item{id_aln.Rda}  {This dataframe contains the alignment itself (each sequence is a column). Additional information such as secondary structure, SASA, etc., is also found in this block.}
 #' \item{id_profile.Rda}  {This dataframe holds per amino acid type its percentage in the list of residues observed at that position. In addition, this dataframe also informs about the entropy at each position, as well as the number of sequences spanning this position (NOOC).}
-#' \item{id_insertions.Rda} {A dataframe with information regarding those sequences that contain inserctions. See https://swift.cmbi.umcn.nl/gv/hssp for further deteails.}
+#' \item{id_insertions.Rda} {A dataframe with information regarding those sequences that contain insertions. See https://swift.cmbi.umcn.nl/gv/hssp for further details.}
 #' }
-#' @details If the argument 'keepfiles' is not set to TRUE, the hssp file used to get the parsed dataframe will be removed. Otherwise, 4 dataframes will be saved:
 #' @return Returns a dataframe corresponding to the profile.Rda described above.
 #' @author Juan Carlos Aledo
 #' @examples \dontrun{get.hssp(file = './1u8f.hssp')}
@@ -811,7 +818,7 @@ get.hssp <- function(pdb, path = "/Users/juancarlosaledo/Dropbox/local_HSSP/", k
 #' @param species a character vector containing the KEGG code for the species of interest.
 #' @param base integer that must take an allowed value: 2, 4 or 21 (see details).
 #' @param alphabet a numeric value that can be either 21 or 4 (see details).
-#' @details To compute the entropy at a given position in an amino acid alignment, we can consider an alphabet of 21 (20 amino acids plus the gap symbol, "-"), or alternatively an alphabet of 4 symbols when the amino acids are grouped according to their properties: charged (E,D,H,R,K), hydrophobic (A,L,I,V,M,F,W,Y), polar (S,T,C,Q,N) and special (G,P,-). The logarithm base used to compute the Shannon entropy can be set to 2 when we want to interpret the entropy in terms of bits, or it can be chosen to be  4 or 21 in order to get relative entropy values (ranging from 0 to 1) when we are using 4 or 21 letters alphabets, respectively. In the case of the codon entropy, we always use an alphabet of 62 codons. The logarithm base can be set to 2, in any other case it will take the value 62. Regarding the species included in the alingment We can build the list of species or, alternatively, we can choose between pre-established options: 'vertebrates', 'plants', 'one-hundred', 'two-hundred'. The first will use the following seven species: human (hsa), chimp (ptr), gorilla (ggo), rat (rno), cow (bta), chicken (gga), western clawed frog (xtr) and zebrafish (dre). The second, A. thaliana (ara), A. lyrata (aly), B. oleracea (boe), G. max (gmax), S. lycopersicum (sly), O. sativa (osa) and C. reinhardtii (cre). The third and fourth options will use orthologous sequences from one hundred and two hundred different species, respectively.
+#' @details To compute the entropy at a given position in an amino acid alignment, we can consider an alphabet of 21 (20 amino acids plus the gap symbol, "-"), or alternatively an alphabet of 4 symbols when the amino acids are grouped according to their properties: charged (E,D,H,R,K), hydrophobic (A,L,I,V,M,F,W,Y), polar (S,T,C,Q,N) and special (G,P,-). The logarithm base used to compute the Shannon entropy can be set to 2 when we want to interpret the entropy in terms of bits, or it can be chosen to be  4 or 21 in order to get relative entropy values (ranging from 0 to 1) when we are using 4 or 21 letters alphabets, respectively. In the case of the codon entropy, we always use an alphabet of 62 codons. The logarithm base can be set to 2, in any other case it will take the value 62. Regarding the species included in the alingment, we can build the list of species or, alternatively, we can choose between pre-established options: 'vertebrates', 'plants', 'one-hundred', 'two-hundred'. The first will use the following seven species: human (hsa), chimp (ptr), gorilla (ggo), rat (rno), cow (bta), chicken (gga), western clawed frog (xtr) and zebrafish (dre). The second, A. thaliana (ara), A. lyrata (aly), B. oleracea (boe), G. max (gmax), S. lycopersicum (sly), O. sativa (osa) and C. reinhardtii (cre). The third and fourth options will use orthologous sequences from one hundred and two hundred different species, respectively.
 #' @return Returns the computed entropy for each position of the molecular sequence of reference (both protein and cDNA sequences are considered).
 #' @author Juan Carlos Aledo
 #' @examples \dontrun{shannon('hsa:4069', 'vertebrates')}
@@ -995,11 +1002,11 @@ shannon <- function(target, species, base = 2, alphabet = 21){
 #' @usage site.type(target, species, th = 0.25)
 #' @param target the KEGG identifier of the protein of interest.
 #' @param species a character vector containing the KEGG code for the species of interest.
-#' @param th value between 0 and 1 indicating the percentil driving the site partition.
-#' @details Each site can be clasified according to their entropies into the following categories: invariant, pseudo-invariant, constrained, conservative, unconstrained, drastic.
+#' @param th value between 0 and 1 indicating the percentile driving the site partition.
+#' @details Each site can be classified according to their entropies into the following categories: invariant, pseudo-invariant, constrained, conservative, unconstrained, drastic.
 #' @return Returns a dataframe including the category of each site according to its variability.
 #' @author Juan Carlos Aledo
-#' @examples \donttest{site.type('hsa:4069', 'vertebrates')}
+#' @examples \dontrun{site.type('hsa:4069', 'vertebrates')}
 #' @seealso msa(), custom.aln(), parse.hssp(), get.hssp(), shannon()
 #' @importFrom seqinr translate
 #' @importFrom seqinr s2c

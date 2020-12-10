@@ -19,7 +19,7 @@
 #' @param id the identifier of the protein of interest.
 #' @param db a character string specifying the desired database; it must be one of 'uniprot', 'metosite', 'pdb', 'kegg-aa', 'kegg-nt'.
 #' @param as.string logical, if TRUE the imported sequence will be returned as a character string.
-#' @details MetOSite and NCBI use the same type of protein ID than UniProt. However, if the chosen database is PDB, the identifier should be the 4-character unique identifier characteristic of PDB, followed by colon and the chain of interest. For instance, '2OCC:B' means we are interested in the sequence of chain B from the structure 2OCC. KEGG used its own IDs (see examples).
+#' @details MetOSite uses the same type of protein ID than UniProt. However, if the chosen database is PDB, the identifier should be the 4-character unique identifier characteristic of PDB, followed by colon and the chain of interest. For instance, '2OCC:B' means we are interested in the sequence of chain B from the structure 2OCC. KEGG used its own IDs (see examples).
 #' @return Returns a protein (or nucleotide) sequence either as a character vector or a as a character string.
 #' @author Juan Carlos Aledo
 #' @examples get.seq('P01009')
@@ -62,7 +62,15 @@ get.seq <- function(id, db = 'uniprot', as.string = TRUE){
   } else if (db == 'kegg-aa' | db == 'kegg-nt'){
     t <- paste(strsplit(db, split = '-')[[1]][2], 'seq', sep = '')
     if (requireNamespace('KEGGREST', quietly = TRUE)){
-      text <- as.character(KEGGREST::keggGet(id, t))
+      text <- tryCatch(
+        {
+          as.character(KEGGREST::keggGet(id, t))
+        },
+        error = function(cond){
+          # message(cond)
+          return(paste("Sorry, the entry ", id, " couldn't be retrieved!"))
+        }
+      )
     } else {
       stop("Please, install the KEGGREST pakage to get this functionality")
     }
@@ -110,9 +118,6 @@ get.seq <- function(id, db = 'uniprot', as.string = TRUE){
         warning("If you install the package 'jsonlite' this ugly output would be nicely parsed")
         return(text)
       }
-    } else if (db == 'ncbi'){
-      seq <- strsplit(text, "\n")[[1]]
-      seq <- paste(seq[-1], collapse = "")
     } else if (db == 'kegg-aa' | db == 'kegg-nt'){
       seq <- text
     }
@@ -565,11 +570,11 @@ species.mapping <- function(id, db = 'uniprot'){
 #' @usage species.kegg(organism, from = 'scientific')
 #' @param organism character string defining the organisms.
 #' @param from string indicating the character of the provided name. It should be one of 'vulgar', 'scientific', '3-letter'.
-#' @return Returns a dataframe with the entries matchin the request.
+#' @return Returns a dataframe with the entries matching the request.
 #' @author Juan Carlos Aledo
-#' @examples species.kegg('chempanzee', from = 'vulgar')
-#' @examples species.kegg('Pan paniscus')
-#' @examples species.kegg('ppo', from = '3-letter')
+#' @examples \dontrun{species.kegg('chempanzee', from = 'vulgar')}
+#' @examples \dontrun{species.kegg('Pan paniscus')}
+#' @examples \dontrun{species.kegg('ppo', from = '3-letter')}
 #' @seealso id.features(), species.mapping()
 #' @importFrom httr GET
 #' @importFrom httr content

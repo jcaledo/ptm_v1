@@ -17,13 +17,13 @@
 #' @usage aa.at(at, target, uniprot = TRUE)
 #' @param at the position in the primary structure of the protein.
 #' @param target a character string specifying the UniProt ID of the protein of interest or, alternatively, the sequence of that protein.
-#' @param uniprot logical, if TRUE the argument 'target' shoud be an ID.
+#' @param uniprot logical, if TRUE the argument 'target' should be an ID.
 #' @details Please, note that when uniprot is set to FALSE, target can be the string returned by a suitable function, such as get.seq or other.
 #' @return Returns a single character representing the residue found at the indicated position in the indicated protein.
 #' @author Juan Carlos Aledo
 #' @examples aa.at(28, 'P01009')
 #' aa.at(at = 80, target = get.seq('P00004', 'metosite'), uniprot = FALSE)
-#' @seealso is.at(), renum.pdb(), renum.meto(), renum()
+#' @seealso is.at(), renum.pdb(), renum.meto(), renum(), aa.comp()
 #' @importFrom bio3d read.fasta
 #' @export
 
@@ -51,14 +51,14 @@ aa.at <- function(at, target, uniprot = TRUE){
 #' @usage  is.at(at, target, aa = 'M', uniprot = TRUE)
 #' @param at the position in the primary structure of the protein.
 #' @param target a character string specifying the UniProt ID of the protein of interest or, alternatively, the sequence of that protein.
-#' @param aa the amino acid of interst.
-#' @param uniprot logical, if TRUE the argument 'target' shoud be an ID.
+#' @param aa the amino acid of interest.
+#' @param uniprot logical, if TRUE the argument 'target' should be an ID.
 #' @details Please, note that when uniprot is set to FALSE, target can be the string returned by a suitable function, such as get.seq or other.
 #' @return Returns a boolean. Either the residue is present at that position or not.
 #' @author Juan Carlos Aledo
 #' @examples is.at(28, 'P01009', 'Q')
 #' is.at(at = 80, target = get.seq('P00004', 'metosite'), uniprot = FALSE)
-#' @seealso aa.at(), renum.pdb(), renum.meto(), renum()
+#' @seealso aa.at(), renum.pdb(), renum.meto(), renum(), aa.comp()
 #' @export
 
 is.at <- function(at, target, aa = 'M', uniprot = TRUE){
@@ -76,7 +76,7 @@ is.at <- function(at, target, aa = 'M', uniprot = TRUE){
 #' @description Returns a table with the amino acid composition of the target protein.
 #' @usage aa.comp(target, uniprot = TRUE)
 #' @param target a character string specifying the UniProt ID of the protein of interest or, alternatively, the sequence of that protein.
-#' @param uniprot logical, if TRUE the argument 'target' shoud be an ID.
+#' @param uniprot logical, if TRUE the argument 'target' should be an ID.
 #' @return Returns a dataframe with the absolute frequency of each type of residue found in the target peptide.
 #' @author Juan Carlos Aledo
 #' @examples aa.comp('MPSSVSWGILLLAGLCCLVPVSLAEDPQGDAAQK', uniprot = FALSE)
@@ -121,7 +121,7 @@ aa.comp <- function(target, uniprot = TRUE){
 #' @return Returns a dataframe containing the re-numerated sequence.
 #' @author Juan Carlos Aledo
 #' @examples renum.pdb(pdb = '121P', chain = 'A', uniprot = 'P01112')
-#' @seealso is.at(), aa.at(), renum.meto(), renum()
+#' @seealso is.at(), aa.at(), renum.meto(), renum(), aa.compo()
 #' @importFrom bio3d read.pdb
 #' @importFrom bio3d aa321
 #' @export
@@ -180,7 +180,7 @@ renum.pdb <- function(pdb, chain, uniprot){
 #' @return Returns a dataframe containing the re-numerated sequence.
 #' @author Juan Carlos Aledo
 #' @examples renum.meto('P01009')
-#' @seealso is.at(), aa.at(), renum.pdb(), renum()
+#' @seealso is.at(), aa.at(), renum.pdb(), renum(), aa.comp()
 #' @export
 
 renum.meto <- function(uniprot){
@@ -227,7 +227,7 @@ renum.meto <- function(uniprot){
 #' @usage  renum(up_id, pos, from, to, ...)
 #' @param up_id the UniProt ID.
 #' @param pos position in the initial sequence.
-#' @param from origen of the initial sequence, it should be one among 'uniprot', 'metosite' and 'pdb'.
+#' @param from origin of the initial sequence, it should be one among 'uniprot', 'metosite' and 'pdb'.
 #' @param to target sequence, it should be one among 'uniprot', 'metosite' and 'pdb'.
 #' @param ...  additional arguments (PDB ID and chain) when 'pdb' is either origin or destination.
 #' @details Either the origin sequence or the target sequence should be uniprot. Nevertheless, the conversion pdb -> metosite, for instance, can be achieved through the path: pdb -> uniprot -> metosite. If 'pdb' is selected, then the PDB ID and the involved chain must be provided, in that order.
@@ -236,7 +236,7 @@ renum.meto <- function(uniprot){
 #' @examples renum(up_id = 'P01009', pos = 351, from = 'metosite', to = 'uniprot')
 #' @examples \dontrun{renum(up_id = 'P01009', pos = 60, from = 'uniprot',
 #'                          to = 'pdb', pdb = '1ATU', chain = 'A')}
-#' @seealso is.at(), aa.at(), renum.pdb(), renum.meto()
+#' @seealso is.at(), aa.at(), renum.pdb(), renum.meto(), aa.comp()
 #' @export
 
 renum <- function(up_id, pos, from, to, ...){

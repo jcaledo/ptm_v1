@@ -10,7 +10,7 @@ env.matrices(env)
 \item{env}{a character string vector containing the environments.}
 }
 \value{
-Returns a list of two dataframes. The first, shown the environment in matricial form. The second provides the frequencies of each amino acid within the environments.
+Returns a list of two dataframes. The first, shown the environment in matrix form. The second provides the frequencies of each amino acid within the environments.
 }
 \description{
 Provides the frequencies of each amino acid within the environment.

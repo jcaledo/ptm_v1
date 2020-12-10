@@ -28,7 +28,7 @@ The function computes and returns the DDG (kcal/mol) for the requested residue c
 Computes changes in the stability of a protein after a residue mutation using a force-field approach.
 }
 \details{
-Two computational approaches for prediction of the effect of amino acid changes on protein stability are implemented. FoldX (buildmodel and positionscan methods) uses a force field approach and athough it has been proved to be satisfactorily accurate, it is also a time-consuming method. An alternative much faster is I-Mutant, a method base on machine-learning
+Two computational approaches for prediction of the effect of amino acid changes on protein stability are implemented. FoldX (buildmodel and positionscan methods) uses a force field approach and although it has been proved to be satisfactorily accurate, it is also a time-consuming method. An alternative much faster is I-Mutant, a method base on machine-learning
 }
 \examples{
 \dontrun{foldx('1aaq', 'A', 45, 'R')}

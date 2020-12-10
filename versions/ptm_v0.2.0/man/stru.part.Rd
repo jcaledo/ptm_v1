@@ -15,7 +15,7 @@ stru.part(pdb, cutoff = 0.25)
 A dataframe where each residue is assigned to one of the four structural groups considered.
 }
 \description{
-Carries out a partition of the estructural regions of a given protein.
+Carries out a partition of the structural regions of a given protein.
 }
 \details{
 The accessibilities of a residue computed in the complex (ACCc) and in the monomer (ACCm) allow to distinguish four structural regions as follows.

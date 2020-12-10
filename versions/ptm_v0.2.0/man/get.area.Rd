@@ -27,7 +27,7 @@ If the option keepfiles is set as TRUE, then txt and Rda files are saved in the 
 Fraczkiewicz, R. and Braun, W. (1998) J. Comp. Chem., 19, 319-333.
 }
 \seealso{
-compute.dssp(), atom.dpx(), res.dpx(), acc.dssp(), str.partition()
+compute.dssp(), atom.dpx(), res.dpx(), acc.dssp(), str.part()
 }
 \author{
 Juan Carlos Aledo

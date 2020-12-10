@@ -11,7 +11,7 @@ site.type(target, species, th = 0.25)
 
 \item{species}{a character vector containing the KEGG code for the species of interest.}
 
-\item{th}{value between 0 and 1 indicating the percentil driving the site partition.}
+\item{th}{value between 0 and 1 indicating the percentile driving the site partition.}
 }
 \value{
 Returns a dataframe including the category of each site according to its variability.
@@ -20,10 +20,10 @@ Returns a dataframe including the category of each site according to its variabi
 Computes Shannon's entropies and performs a partition of the sites set.
 }
 \details{
-Each site can be clasified according to their entropies into the following categories: invariant, pseudo-invariant, constrained, conservative, unconstrained, drastic.
+Each site can be classified according to their entropies into the following categories: invariant, pseudo-invariant, constrained, conservative, unconstrained, drastic.
 }
 \examples{
-\donttest{site.type('hsa:4069', 'vertebrates')}
+\dontrun{site.type('hsa:4069', 'vertebrates')}
 }
 \seealso{
 msa(), custom.aln(), parse.hssp(), get.hssp(), shannon()

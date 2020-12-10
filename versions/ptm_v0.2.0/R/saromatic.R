@@ -16,12 +16,12 @@
 #' @param pdb either the path to the PDB file of interest or the 4-letters identifier.
 #' @param threshold distance in ångströms, between the S atom and the aromatic ring centroid, used as threshold.
 #' @param rawdata logical to indicate whether we also want the raw distance matrix between delta S and aromatic ring centroids.
-#' @details For each methionyl residue this function cumputes the distances to the closest aromatic ring from Y, F and W. When that distance is equal or lower to the threshold, it will be computed as a S-aromatic motif.
+#' @details For each methionyl residue this function computes the distances to the closest aromatic ring from Y, F and W. When that distance is equal or lower to the threshold, it will be computed as a S-aromatic motif.
 #' @return The function returns a dataframe with as many rows as methionyl residues are found in the protein. The distances in ångströms to the closest tyrosine, phenylalanine and triptophan are given in the columns, as well as the number of S-aromatic motifs detected with each of these amino acids. Also a raw distance matrix can be provided.
 #' @author Juan Carlos Aledo
 #' @examples saro.dist('1CLL')
 #' @references Reid, Lindley & Thornton, FEBS Lett. 1985, 190:209-213.
-#' @seealso saro.motif(), saro.geomety()
+#' @seealso saro.motif(), saro.geometry()
 #' @importFrom bio3d read.pdb
 #' @export
 
@@ -293,7 +293,7 @@ saro.dist <- function(pdb, threshold = 7, rawdata = FALSE){
 #' @param rB numeric position of the second residue involved in the motif.
 #' @param chainB a character indicating the chain to which belong the second residue.
 #' @details The distance between the delta sulfur atom and the centroid of the aromatic ring is computed, as well as the angle between this vector and the one perpendicular to the plane containing the aromatic ring. Based on the distance (d) and the angle (theta) the user decide whether the two residues are considered to be S-bonded or not (usually when d < 7 and theta < 60º).
-#' @return The function returns a dataframe providing the coordinates of the sulfur atom and the centroid (centroids when the aromatic residue is tryptophan), as well as the distance (ångströms) and the angle (degrees) mentionated above.
+#' @return The function returns a dataframe providing the coordinates of the sulfur atom and the centroid (centroids when the aromatic residue is tryptophan), as well as the distance (ångströms) and the angle (degrees) mentioned above.
 #' @author Juan Carlos Aledo
 #' @examples saro.geometry('1CLL', rA = 141, rB = 145)
 #' saro.geometry(pdb = '1d0g', rA = 99, chainA = 'R', rB = 237, chainB = 'A')
@@ -433,12 +433,12 @@ saro.geometry <- function(pdb, rA, chainA = 'A', rB, chainB = 'A'){
 #     saro.motif <- function(pdb,  threshold = 7, onlySaro = T)      #
 ## ---------------------------------------------------------------- ##
 #' Search for S-Aromatic Motifs
-#' @description Searchs for S-aromatic motifs in proteins.
+#' @description Searches for S-aromatic motifs in proteins.
 #' @usage saro.motif(pdb, threshold = 7, onlySaro = TRUE)
 #' @param pdb either the path to the PDB file of interest or the 4-letters identifier.
 #' @param threshold distance in ångströms, between the S atom and the aromatic ring centroid, used as threshold.
 #' @param onlySaro logical, if FALSE the output includes information about Met residues that are not involved in S-aromatic motifs.
-#' @details For each methionyl residue taking place in a S-aromatic motif, this function cumputes the aromatic residues involved, the distance between the delta sulfur and the aromatic ring's centroid, as well as the angle between the sulfur-aromatic vector and the normal vector of the plane containing the aromatic ring.
+#' @details For each methionyl residue taking place in a S-aromatic motif, this function computes the aromatic residues involved, the distance between the delta sulfur and the aromatic ring's centroid, as well as the angle between the sulfur-aromatic vector and the normal vector of the plane containing the aromatic ring.
 #' @return The function returns a dataframe reporting the S-aromatic motifs found for the protein of interest.
 #' @author Juan Carlos Aledo
 #' @examples saro.motif('1CLL')
@@ -518,7 +518,7 @@ saro.motif <- function(pdb, threshold = 7, onlySaro = TRUE){
 #' @description Computes the  cross product of two vectors in three-dimensional euclidean space.
 #' @usage xprod(...)
 #' @param ... vectors involved in the cross product.
-#' @details For each methionyl residue taking place in a S-aromatic motif, this function cumputes the aromatic residue involved, the distance between the delta sulfur and the aromatic ring's centroid, as well as the angle between the sulfur-aromatic vector and the normal vector of the plane containing the aromatic ring.
+#' @details For each methionyl residue taking place in a S-aromatic motif, this function computes the aromatic residue involved, the distance between the delta sulfur and the aromatic ring's centroid, as well as the angle between the sulfur-aromatic vector and the normal vector of the plane containing the aromatic ring.
 #' @return This function returns a vector that is orthogonal to the plane containing the two vector used as arguments.
 #' @author Juan Carlos Aledo
 #' @examples xprod(c(1,1,1), c(1,2,1))

@@ -17,10 +17,10 @@ env.Ztest(pos, ctr, alpha = 0.05)
 Returns a list with three elements: (1) a matrix with the values of the Z statistical. (2) A dataframe with information regarding amino acid overrepresented in the positive environments, and (3) a dataframe similar to the previous one, but for amino acids avoided from the positive environments.
 }
 \description{
-Searchs for amino acids either overrepresented or avoided at given position within a sequence environment.
+Searches for amino acids either overrepresented or avoided at given positions within a sequence environment.
 }
 \details{
-Please, note that in addition to the 20 proteinogenetic amino acid we are using the symbol X when the target (central) residue is closer to the N-terminal or C-terminal of the protein than the radious used.
+Please, note that in addition to the 20 proteinogenetic amino acid we are using the symbol X when the target (central) residue is closer to the N-terminal or C-terminal of the protein than the radius used.
 }
 \examples{
 \dontrun{## Get the matrices

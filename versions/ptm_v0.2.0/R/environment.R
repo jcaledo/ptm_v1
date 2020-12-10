@@ -20,7 +20,7 @@
 #' @param r radius of the environment.
 #' @param ctr the type of control environment; it must be one of 'random', 'closest', or 'none'.
 #' @param exclude a vector containing the positions to be excluded as control.
-#' @details The radom control returns an environment center at a random position containing the same type or amino acid than the positive environment. The closest control searchs for the closest position where such a type of amino acid is found and returns its environment.
+#' @details The random control returns an environment center at a random position containing the same type or amino acid than the positive environment. The closest control searches for the closest position where such a type of amino acid is found and returns its environment.
 #' @return Returns a  list of two strings (environments).
 #' @author Juan Carlos Aledo
 #' @examples env.extract('P01009', db = 'uniprot', 271, 10, ctr = 'random')
@@ -104,7 +104,7 @@ env.extract <- function(prot, db = 'none', c, r, ctr = 'none', exclude = c()){
 #' @description Provides the frequencies of each amino acid within the environment.
 #' @usage env.matrices(env)
 #' @param env a character string vector containing the environments.
-#' @return Returns a list of two dataframes. The first, shown the environment in matricial form. The second provides the frequencies of each amino acid within the environments.
+#' @return Returns a list of two dataframes. The first, shown the environment in matrix form. The second provides the frequencies of each amino acid within the environments.
 #' @author Juan Carlos Aledo
 #' @references Aledo et al. Sci Rep. 2015; 5: 16955. (PMID: 26597773)
 #' @examples env.matrices(c('ANQRmCTPQ', 'LYPPmQTPC', 'XXGSmSGXX'))
@@ -128,7 +128,7 @@ env.matrices <- function(env){
           "N","P","Q","R","S","T","V","W","Y", "X")
   n_env <- length(env) # number of environments being analyzed
 
-  r <- L %/% 2 # environment's radious
+  r <- L %/% 2 # environment's radius
 
   ## ---- Dealing with the amino acids DF ---- ##
   g <- mapply(strsplit,  env, "")
@@ -162,12 +162,12 @@ env.matrices <- function(env){
 #            env.Ztest <- function(pos, ctr, alpha = 0.05)           #
 ## ---------------------------------------------------------------- ##
 #' Preferred/Avoided Amino Acids Within an Environment
-#' @description Searchs for amino acids either overrepresented or avoided at given position within a sequence environment.
+#' @description Searches for amino acids either overrepresented or avoided at given positions within a sequence environment.
 #' @usage env.Ztest(pos, ctr, alpha = 0.05)
 #' @param pos a 21 x m matrix containing the absolute frequencies of 21 amino acids at the m positions, in the positive environments.
 #' @param ctr a 21 x m matrix containing the absolute frequencies of 21 amino acids at the m positions, in the control environments.
 #' @param alpha significance level.
-#' @details Please, note that in addition to the 20 proteinogenetic amino acid we are using the symbol X when the target (central) residue is closer to the N-terminal or C-terminal of the protein than the radious used.
+#' @details Please, note that in addition to the 20 proteinogenetic amino acid we are using the symbol X when the target (central) residue is closer to the N-terminal or C-terminal of the protein than the radius used.
 #' @return Returns a list with three elements: (1) a matrix with the values of the Z statistical. (2) A dataframe with information regarding amino acid overrepresented in the positive environments, and (3) a dataframe similar to the previous one, but for amino acids avoided from the positive environments.
 #' @author Juan Carlos Aledo
 #' @examples \dontrun{## Get the matrices

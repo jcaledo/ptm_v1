@@ -12,15 +12,15 @@ species.kegg(organism, from = 'scientific')
 \item{from}{string indicating the character of the provided name. It should be one of 'vulgar', 'scientific', '3-letter'.}
 }
 \value{
-Returns a dataframe with the entries matchin the request.
+Returns a dataframe with the entries matching the request.
 }
 \description{
 Converts between species name and KEGG 3-letter code format.
 }
 \examples{
-species.kegg('chempanzee', from = 'vulgar')
-species.kegg('Pan paniscus')
-species.kegg('ppo', from = '3-letter')
+\dontrun{species.kegg('chempanzee', from = 'vulgar')}
+\dontrun{species.kegg('Pan paniscus')}
+\dontrun{species.kegg('ppo', from = '3-letter')}
 }
 \seealso{
 id.features(), species.mapping()

@@ -7,7 +7,7 @@
 ddG.profile(prot, ch, pos, pH = 7, Te = 25)
 }
 \arguments{
-\item{prot}{eihter the 4-letter identifier of a PDB structure, or the amino acid sequence (one letter amino acid code) of a protein.}
+\item{prot}{either the 4-letter identifier of a PDB structure, or the amino acid sequence (one letter amino acid code) of a protein.}
 
 \item{ch}{a letter identifying the chain of interest.}
 

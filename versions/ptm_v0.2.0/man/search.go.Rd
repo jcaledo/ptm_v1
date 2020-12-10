@@ -13,7 +13,7 @@ search.go(query)
 Returns a dataframe containing the GO IDs found associated to the query, as well as other information related to these terms.
 }
 \description{
-Searchs a simple user query.
+Searches a simple user query.
 }
 \examples{
 search.go('oxidative stress')
@@ -22,7 +22,7 @@ search.go('oxidative stress')
 Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 }
 \seealso{
-term.go(), get.go(), background.go(), hdfisher.go(), gorilla(), net.go()
+term.go(), get.go(), bg.go(), hdfisher.go(), gorilla(), net.go()
 }
 \author{
 Juan Carlos Aledo

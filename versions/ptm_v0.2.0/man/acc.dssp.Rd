@@ -37,7 +37,7 @@ Miller et al (1987) J. Mol. Biol. 196: 641-656 (PMID: 3681970).
 Touw et al (2015) Nucl. Ac. Res. 43(Database issue): D364-D368 (PMID: 25352545).
 }
 \seealso{
-compute.dssp(), atom.dpx(), res.dpx(), str.partition()
+compute.dssp(), atom.dpx(), res.dpx(), str.part()
 }
 \author{
 Juan Carlos Aledo

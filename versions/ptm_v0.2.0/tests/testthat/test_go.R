@@ -81,15 +81,15 @@ test_that("get.go() works properly", {
 })
 
 ## ---------------------------------------------- ##
-#           Testing background.go                  #
+#                Testing bg.go                     #
 ## ---------------------------------------------- ##
-test_that("background.go() works properly", {
+test_that("bg.go() works properly", {
 
   skip_on_cran()
   skip_on_travis()
 
-  a <- background.go(ids = "./go/id_set.txt")
-  b <-  background.go(ids = c("Q13015", "Q14667", "P08575", "Q5JSZ5", "P13196", "H7C4H7"))
+  a <- bg.go(ids = "./go/id_set.txt")
+  b <-  bg.go(ids = c("Q13015", "Q14667", "P08575", "Q5JSZ5", "P13196", "H7C4H7"))
 
   expect_is(a, 'data.frame')
   expect_equal(nrow(a), 6)
@@ -112,7 +112,7 @@ test_that(" hdfisher.go() works properly", {
   skip_on_travis()
 
   a <- hdfisher.go(target = c('Q14667', 'Q5JSZ5'),
-                   background = background.go(c("Q13015", "Q14667", "P08575", "Q5JSZ5", "P13196")),
+                   background = bg.go(c("Q13015", "Q14667", "P08575", "Q5JSZ5", "P13196")),
                    query = 'extracellular')
 
   expect_is(a, 'list')

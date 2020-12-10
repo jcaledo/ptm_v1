@@ -20,13 +20,13 @@ ddG.ptm(pdb, ch, pos, ptm, dir = 'f', pH = 7)
 \item{pH}{a numeric value between 0 and 14.}
 }
 \value{
-The function computes and returns the DDG (kcal/mol) for the requested modification, defined as DDG = DGmodified - DGunmodified, where DG is the Gibbs free energy for the folding of the protein from its unfolded state. Thus, a positive value means a destabilizing effect, and vice versa. A PDB model contining the modified target is saved in the current directory.
+The function computes and returns the DDG (kcal/mol) for the requested modification, defined as DDG = DGmodified - DGunmodified, where DG is the Gibbs free energy for the folding of the protein from its unfolded state. Thus, a positive value means a destabilizing effect, and vice versa. A PDB model containing the modified target is saved in the current directory.
 }
 \description{
 Builds a PDB model of the modified protein and computes the corresponding change in stability.
 }
 \details{
-The current fucntion uses FoldX to build the model of the modified protein. Currently, FoldX does not allow to change Met by MetO, so we
+The current function uses FoldX to build the model of the modified protein. Currently, FoldX does not allow to change Met by MetO, so we use glutamine (Q) or threonine (T) to mimic MetO.
 }
 \examples{
 \dontrun{ddG.ptm('./1u8f_Repair.pdb', 'O', pos = 246, ptm = 'pThr')}

@@ -3,7 +3,7 @@
 #     search.go                           #
 #     term.go                             #
 #     get.go                              #
-#     background.go                       #
+#     bg.go                               #
 #     hdfisher.go                         #
 #     gorilla                             #
 #     net.go                              #
@@ -14,12 +14,12 @@
 #           search.go <- function(query)                             #
 ## ---------------------------------------------------------------- ##
 #' Search a Simple User Query
-#' @description Searchs a simple user query.
+#' @description Searches a simple user query.
 #' @usage search.go(query)
 #' @param query character string defining the query.
 #' @return Returns a dataframe containing the GO IDs found associated to the query, as well as other information related to these terms.
 #' @author Juan Carlos Aledo
-#' @seealso term.go(), get.go(), background.go(), hdfisher.go(), gorilla(), net.go()
+#' @seealso term.go(), get.go(), bg.go(), hdfisher.go(), gorilla(), net.go()
 #' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 #' @examples search.go('oxidative stress')
 #' @importFrom httr GET
@@ -60,10 +60,10 @@ search.go <- function(query){
 #' @usage term.go(go, children = FALSE)
 #' @param go GO id.
 #' @param children logical, when true GO children terms are returned.
-#' @details When the argument children is set to TRUE, the output of this function is a list with two elements: the first one is a dataframe with the core information, and the second one is a dataframe containing the children terms (see details).
+#' @details When the argument children is set to TRUE, the output of this function is a list with two elements: the first one is a dataframe with the core information, and the second one is a dataframe containing the children terms.
 #' @return Returns a dataframe containing core information such as term name and definition, reference, aspect, and whether or not the term is obsolete. If children is set to TRUE, the function returns a list.
 #' @author Juan Carlos Aledo
-#' @seealso search.go(), get.go(), background.go(), hdfisher.go(), gorilla(), net.go()
+#' @seealso search.go(), get.go(), bg.go(), hdfisher.go(), gorilla(), net.go()
 #' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 #' @examples term.go('GO:0034599')
 #' @importFrom httr GET
@@ -117,15 +117,15 @@ term.go <- function(go, children = FALSE){
 #' @description Gets the gene ontology annotations for a given protein.
 #' @usage get.go(id, filter = TRUE, format = 'dataframe', silent = FALSE)
 #' @param id the UniProt identifier of the protein of interest.
-#' @param filter logical, if TRUE a reduced number of terms, selected on the basis of astringent criteria (see details), is returned.
+#' @param filter logical, if TRUE a reduced number of terms, selected on the basis of astringent criteria (see details) is returned.
 #' @param format string indicating the output's format. It should be either 'dataframe' or 'string'. The 'string' format may be convenient when subsequent GO terms enrichment analysis is intended.
 #' @param silent logical, if FALSE print details of the reading process.
 #' @details Since some well-characterized proteins can have many GO annotations, it may be convenient to filter the shown GO terms. When filter is set to TRUE, the annotated terms displayed are those provided by the corresponding UniProtKB entry, which are selected based on their granularity and evidence code quality (with manual annotations preferred over automatic predictions). Annotations that have been made to isoform identifiers, or use any of the GO annotation qualifiers (NOT, contributes_to, colocalizes_with) are also removed.
-#' @return Returns a dataframe (by deafult) with GO IDs linked to the protein of interest, as well as additional information related to these GO ids. A string with the GO ids can be obtained as output if indicated by means of the argument 'format'.
+#' @return Returns a dataframe (by default) with GO IDs linked to the protein of interest, as well as additional information related to these GO ids. A string with the GO ids can be obtained as output if indicated by means of the argument 'format'.
 #' @author Juan Carlos Aledo
-#' @seealso search.go, term.go(), background.go(), hdfisher.go(), gorilla(), net.go()
+#' @seealso search.go, term.go(), bg.go(), hdfisher.go(), gorilla(), net.go()
 #' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
-#' @examples get.go('P01009')
+#' @examples \dontrun{get.go('P01009')}
 #' @importFrom httr GET
 #' @importFrom httr accept
 #' @importFrom httr content
@@ -229,21 +229,21 @@ get.go <- function(id, filter = TRUE, format = 'dataframe', silent = FALSE){
 }
 
 ## ---------------------------------------------------------------- ##
-#             background.go <- function(ids)                         #
+#                   bg.go <- function(ids)                           #
 ## ---------------------------------------------------------------- ##
 #' Search GO Terms for Background Set
-#' @description Searchs the GO terms of the protein contained in a given set.
-#' @usage background.go(ids)
+#' @description Searches the GO terms of the protein contained in a given set.
+#' @usage bg.go(ids)
 #' @param ids either a vector containing the UniProt IDs of the background set or the path to the txt file containing the list of IDs acting as background.
 #' @return Returns a dataframe with two columns (Uniprot ID, GO terms) and as many rows as different proteins there are in the input set.
 #' @author Juan Carlos Aledo
 #' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 #' @seealso search.go(), term.go(), get.go(), go.enrich(), gorilla(), net.go()
-#' @examples background.go(c('P01009', 'P01374', 'Q86UP4'))
+#' @examples \dontrun{bg.go(c('P01009', 'P01374', 'Q86UP4'))}
 #' @importFrom utils read.csv
 #' @export
 
-background.go <- function(ids){
+bg.go <- function(ids){
   ## ----- The background set
   if (is.character(ids) & length(ids) == 1){ # input as path to the txt
     if (gregexpr('txt', ids)[[1]] != -1){
@@ -274,7 +274,7 @@ background.go <- function(ids){
 #   hdfisher.go <- function(target, background, query,               #
 #                                  analysis = 'enrichment')          #
 ## ---------------------------------------------------------------- ##
-#' Hypothesis-driven Fisher Test
+#' Hypothesis-Driven Fisher Test
 #' @description Carries out an enrichment Fisher's test using a hypothesis driven approach.
 #' @usage hdfisher.go(target, background, query, analysis = 'enrichment')
 #' @param target either a vector containing the UniProt IDs of the target set or the path to the txt file containing the list of IDs.
@@ -284,8 +284,8 @@ background.go <- function(ids){
 #' @return Returns a list that contains the contingency table and the p-Value.
 #' @author Juan Carlos Aledo
 #' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
-#' @seealso search.go(), term.go(), get.go(), background.go(), go.enrich(), gorilla(), net.go()
-#' @examples hdfisher.go(c('Q14667', 'Q5JSZ5'), background.go(c("Q14667", "Q5JSZ5", "P13196")), 'extracellular')
+#' @seealso search.go(), term.go(), get.go(), bg.go(), go.enrich(), gorilla(), net.go()
+#' @examples \dontrun{hdfisher.go(c('Q14667', 'Q5JSZ5'), bg.go(c('Q14667', 'Q5JSZ5', 'P13196')), 'ion')}
 #' @importFrom utils read.csv
 #' @importFrom stats fisher.test
 #' @export
@@ -393,10 +393,10 @@ hdfisher.go <- function(target, background, query, analysis = 'enrichment'){
 #' @param data either a vector containing the UniProt IDs (vertices) or the path to the txt or rda file containing them.
 #' @param threshold threshold value of the Jaccard index above which two proteins are considered to be linked.
 #' @param silent logical, if FALSE print details of the running process.
-#' @details This function first searchs the GO for each vertex and then computes the Jaccard index for each protein pair based on their GO terms. Afterwards, an adjacency matrix is computed, where two proteins are linked if their Jaccard index is greater than the selected threshold.
+#' @details This function first searches the GO terms for each vertex and then computes the Jaccard index for each protein pair, based on their GO terms. Afterwards, an adjacency matrix is computed, where two proteins are linked if their Jaccard index is greater than the selected threshold.
 #' @return Returns a list containing (i) the dataframe corresponding to the computed Jaccard matrix, (ii) the adjacency matrix, (iii) a vector containing the vertices, and (iv) a matrix describing the edges of the network.
 #' @author Pablo Aledo & Juan Carlos Aledo
-#' @seealso search.go(), term.go(), get.go(), background.go(), gorilla()
+#' @seealso search.go(), term.go(), get.go(), bg.go(), gorilla()
 #' @references Aledo & Aledo (2020) Antioxidants 9(10), 987.
 #' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 #' @examples \dontrun{net.go(path2data = "./GOvivo.txt")}
@@ -489,7 +489,7 @@ net.go <- function(data, threshold = 0.2, silent = FALSE){
 #' @details This function is a client of GOrilla, which is a web-based application that identifies enriched GO terms.
 #' @return Returns either a dataframe with the enrichment results if a single ontology has been selected, or a list with three dataframe if the three ontologies were selected.
 #' @author Juan Carlos Aledo
-#' @seealso search.go(), term.go(), get.go(), background.go(), net.go()
+#' @seealso search.go(), term.go(), get.go(), bg.go(), net.go()
 #' @references Eden et al. (2009) BMC Bioinformatics 10:48.
 #' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 #' @examples \dontrun{gorilla(target = './go/GOvivo.txt', db = 'all')}

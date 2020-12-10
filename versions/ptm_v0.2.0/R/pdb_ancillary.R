@@ -92,7 +92,7 @@ pdb.seq <- function(pdb){
 #' @description Determines the subunit composition of a given protein.
 #' @usage pdb.quaternary(pdb, keepfiles = FALSE)
 #' @param pdb the path to the PDB of interest or a 4-letter identifier.
-#' @param keepfiles logical, if TRUE the fasta file containing the alignment of the subunits is saved in the current directory, as well as the splitted pdb files.
+#' @param keepfiles logical, if TRUE the fasta file containing the alignment of the subunits is saved in the current directory, as well as the split pdb files.
 #' @details A fasta file containing the alignment among the subunit sequences can be saved in the current directory if required.
 #' @return This function returns a list with four elements: (i) a distances matrix, (ii) the sequences, (iii) chains id, (iv) the PDB ID used.
 #' @author Juan Carlos Aledo
@@ -189,8 +189,8 @@ pdb.chain <- function(pdb, keepfiles = FALSE){
 ## ---------------------------------------------------------------- ##
 #          pdb2uniprot <- function(pdb, chain)              #
 ## ---------------------------------------------------------------- ##
-#' Returns the UniProt ID Given the PDB and Chain IDs
-#' @description Return the uniprot id of a given chain within a PDB structure.
+#' Return the UniProt ID Given the PDB and Chain IDs
+#' @description Returns the uniprot id of a given chain within a PDB structure.
 #' @usage pdb2uniprot(pdb, chain)
 #' @param pdb the 4-letter PDB identifier.
 #' @param chain letter identifying the chain.
@@ -288,7 +288,7 @@ pdb.res <- function(at, up, pdb, chain){
 #' @details The oligopeptide sequence must be given in one letter amino acid code.
 #' @return The functions returns TRUE if peptide is found in the PDB sequence (and gives the starting position), and FALSE otherwise.
 #' @author Juan Carlos Aledo
-#' @examples pdb.pep(pep = 'IVKGRASLTQEQ' , pdb = '2aw5')
+#' @examples \dontrun{pdb.pep(pep = 'IVKGRASLTQEQ' , pdb = '2aw5')}
 #' @seealso pdb.res()
 #' @importFrom bio3d read.pdb
 #' @importFrom bio3d aa321
@@ -327,7 +327,7 @@ pdb.pep <- function(pep, pdb){
 #' @param threshold coverage value that when reached the search is halted.
 #' @return A list of two elements: (i) the PDB ID and (ii) the chain. The coverage with the UniProt sequence is given as an attribute.
 #' @author Juan Carlos Aledo
-#' @examples pdb.select('P01009', threshold = 0.8)
+#' @examples \dontrun{pdb.select('P01009', threshold = 0.8)}
 #' @seealso pdb.quaternary(), pdb.chain(), pdb.res(), pdb.pep(), uniprot2pdb(), pdb2uniprot()
 #' @export
 pdb.select <- function(up_id, threshold = 0.9){

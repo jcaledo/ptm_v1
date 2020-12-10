@@ -11,7 +11,7 @@ aa.at(at, target, uniprot = TRUE)
 
 \item{target}{a character string specifying the UniProt ID of the protein of interest or, alternatively, the sequence of that protein.}
 
-\item{uniprot}{logical, if TRUE the argument 'target' shoud be an ID.}
+\item{uniprot}{logical, if TRUE the argument 'target' should be an ID.}
 }
 \value{
 Returns a single character representing the residue found at the indicated position in the indicated protein.
@@ -27,7 +27,7 @@ aa.at(28, 'P01009')
 aa.at(at = 80, target = get.seq('P00004', 'metosite'), uniprot = FALSE)
 }
 \seealso{
-is.at(), renum.pdb(), renum.meto(), renum()
+is.at(), renum.pdb(), renum.meto(), renum(), aa.comp()
 }
 \author{
 Juan Carlos Aledo

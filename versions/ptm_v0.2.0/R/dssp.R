@@ -115,11 +115,11 @@ parse.dssp <- function(file, keepfiles = FALSE){
 #      compute.dssp <- function(pdb, destfile = './')               #
 ## ---------------------------------------------------------------- ##
 #' Compute and Return a DSSP File
-#' @description Computes and retuns a DSSP file.
+#' @description Computes and returns a DSSP file.
 #' @usage compute.dssp(pdb, destfile = './')
 #' @param pdb is either a PDB id, or the path to a pdb file.
 #' @param destfile a character string with the path where the DSSP file is going to be saved.
-#' @details A drawback of this function is that it depends on DSSP's server and in ocasions it can take a long time to process the request.
+#' @details A drawback of this function is that it depends on DSSP's server and in occasions it can take a long time to process the request.
 #' @return an online computed dssp file that is saved at the indicated location.
 #' @author Juan Carlos Aledo
 #' @examples \dontrun{compute.dssp(pdb = '3cwm', destfile = './')}

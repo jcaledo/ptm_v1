@@ -16,7 +16,7 @@ This function returns a vector that is orthogonal to the plane containing the tw
 Computes the  cross product of two vectors in three-dimensional euclidean space.
 }
 \details{
-For each methionyl residue taking place in a S-aromatic motif, this function cumputes the aromatic residue involved, the distance between the delta sulfur and the aromatic ring's centroid, as well as the angle between the sulfur-aromatic vector and the normal vector of the plane containing the aromatic ring.
+For each methionyl residue taking place in a S-aromatic motif, this function computes the aromatic residue involved, the distance between the delta sulfur and the aromatic ring's centroid, as well as the angle between the sulfur-aromatic vector and the normal vector of the plane containing the aromatic ring.
 }
 \examples{
 xprod(c(1,1,1), c(1,2,1))

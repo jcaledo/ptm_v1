@@ -7,7 +7,7 @@
 imutant(protein, ch = "_", pos, newres = "", pH = 7, Te = 25, timeout = 60)
 }
 \arguments{
-\item{protein}{eihter the 4-letter identifier of a PDB structure, or the amino acid sequence (one letter amino acid code) of a protein.}
+\item{protein}{either the 4-letter identifier of a PDB structure, or the amino acid sequence (one letter amino acid code) of a protein.}
 
 \item{ch}{a letter identifying the chain of interest.}
 
@@ -26,7 +26,7 @@ The function computes and returns a dataframe containing the following variables
 \itemize{
 \item{Position:}  {Position in the primary structure of the mutated residue.}
 \item{WT:}  {Amino acid found at that position in the wild-type protein.}
-\item{NW:}  {New amino aicd found in the mutated protein.}
+\item{NW:}  {New amino acid found in the mutated protein.}
 \item{DDG:} {Change in Gibbs free energy (kcal/mol), defined as DDG = DGmt - DGwt, where DG is the change in Gibbs free energy for the folding of the protein from its unfolded state. Thus, a positive value means a stabilizing effect, and vice versa.}
 \item{pH:}  {-log[H+]}
 \item{T:}   {Temperature in Celsius degrees.}

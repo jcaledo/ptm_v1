@@ -18,7 +18,7 @@ A list of two elements: (i) the PDB ID and (ii) the chain. The coverage with the
 Select the PDB and chain with the optimal coverage to a given UniProt sequence.
 }
 \examples{
-pdb.select('P01009', threshold = 0.8)
+\dontrun{pdb.select('P01009', threshold = 0.8)}
 }
 \seealso{
 pdb.quaternary(), pdb.chain(), pdb.res(), pdb.pep(), uniprot2pdb(), pdb2uniprot()

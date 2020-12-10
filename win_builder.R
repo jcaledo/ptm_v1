@@ -22,5 +22,6 @@ devtools::check()
 rhub::validate_email()
 devtools::check_rhub(pkg = ".", email = "caledo@uma.es")
 
-
+## --------- Eventually --------- ##
 devtools::release(pkg = ".")
+## ------------------------------ ##

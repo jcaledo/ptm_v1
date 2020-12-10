@@ -10,7 +10,7 @@
 #                 meto.search <- function(...)                        #
 ## ----------------------------------------------------------------- ##
 #' Search for Specific MetO Sites
-#' @description Searchs for specific MetO sites filtering MetOSite according to the selected criteria.
+#' @description Searches for specific MetO sites filtering MetOSite according to the selected criteria.
 #' @usage meto.search(highthroughput.group = TRUE,
 #'                    bodyguard.group = TRUE,
 #'                    regulatory.group = TRUE,
@@ -20,12 +20,12 @@
 #' @param highthroughput.group logical, when FALSE the sites described in a high-throughput study (unknown effect) are filtered out.
 #' @param bodyguard.group logical, when FALSE the sites postulated to function as ROS sink (because when oxidized no apparent effect can be detected) are filtered out.
 #' @param regulatory.group logical, when FALSE the sites whose oxidation affect the properties of the protein (and therefore may be involved in regulation) are filtered out.
-#' @param gain.activity introduce 1 or 0 to indicate wether the oxidation of the selected sites implies a gain of activity or not, respectively. If we do not wish to use this property to filter, introduce 2.
-#' @param loss.activity introduce 1 or 0 to indicate wether or not the oxidation of the selected sites implies a loss of activity or not, respectively. If we do not wish to use this property to filter, introduce 2.
-#' @param gain.ppi introduce 1 or 0 to indicate wether the oxidation of the selected sites implies a gain of protein-protein interaction or not, respectively. If we do not wish to use this property to filter, introduce 2.
-#' @param loss.ppi introduce 1 or 0 to indicate wether or not the oxidation of the selected sites implies a loss of protein-protein interaction or not, respectively. If we do not wish to use this property to filter, introduce 2.
-#' @param change.stability introduce 1 or 0 to indicate wether the oxidation of the selected sites leads to a change in the protein stability or not, respectively. If we do not wish to use this property to filter, introduce 2.
-#' @param change.location introduce 1 or 0 to indicate wether or not the oxidation of the selected sites implies a change of localization or not, respectively. If we do not wish to use this property to filter, introduce 2.
+#' @param gain.activity introduce 1 or 0 to indicate whether the oxidation of the selected sites implies a gain of activity or not, respectively. If we do not wish to use this property to filter, introduce 2.
+#' @param loss.activity introduce 1 or 0 to indicate whether or not the oxidation of the selected sites implies a loss of activity or not, respectively. If we do not wish to use this property to filter, introduce 2.
+#' @param gain.ppi introduce 1 or 0 to indicate whether the oxidation of the selected sites implies a gain of protein-protein interaction or not, respectively. If we do not wish to use this property to filter, introduce 2.
+#' @param loss.ppi introduce 1 or 0 to indicate whether or not the oxidation of the selected sites implies a loss of protein-protein interaction or not, respectively. If we do not wish to use this property to filter, introduce 2.
+#' @param change.stability introduce 1 or 0 to indicate whether the oxidation of the selected sites leads to a change in the protein stability or not, respectively. If we do not wish to use this property to filter, introduce 2.
+#' @param change.location introduce 1 or 0 to indicate whether or not the oxidation of the selected sites implies a change of localization or not, respectively. If we do not wish to use this property to filter, introduce 2.
 #' @param organism a character string indicating the scientific name of the species of interest, or -1 if we do not wish to filter by species.
 #' @param oxidant a character string indicating the oxidant, or -1 if we do not wish to filter by oxidants.
 #' @details Note that all the arguments of this function are optional. We only pass an argument to the function when we want to use that parameter to filter. Thus, meto.search() will return all the MetO sites found in the database MetOSite.

@@ -12,8 +12,8 @@
 #'   \item{site_id}{primary key identifing the site}
 #'   \item{positive}{sequence environment of the MetO site}
 #'   \item{control}{sequence environment of a non oxidized Met from the same protein}
-#'   \item{IDP}{Intrinsically Desordered Proteins, 0: the protein is not found in DisProt; 1: the protein contains disordered regions; 2: the protein may contain disordered regions but the experimental evidences are ambiguous}
-#'   \item{IDR}{Intrinsically Desordered Region, TRUE: the MetO site belong to the IDR, FALSE: the MetO site doen't belong to the IDR}
+#'   \item{IDP}{Intrinsically Disordered Proteins, 0: the protein is not found in DisProt; 1: the protein contains disordered regions; 2: the protein may contain disordered regions but the experimental evidences are ambiguous}
+#'   \item{IDR}{Intrinsically Disordered Region, TRUE: the MetO site belong to the IDR, FALSE: the MetO site doesn't belong to the IDR}
 #'   \item{abundance}{protein abundance, in ppm}
 #'   \item{N}{protein length, in number of residues}
 #'   \item{met}{number of methionine residues}

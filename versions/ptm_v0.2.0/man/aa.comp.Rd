@@ -9,7 +9,7 @@ aa.comp(target, uniprot = TRUE)
 \arguments{
 \item{target}{a character string specifying the UniProt ID of the protein of interest or, alternatively, the sequence of that protein.}
 
-\item{uniprot}{logical, if TRUE the argument 'target' shoud be an ID.}
+\item{uniprot}{logical, if TRUE the argument 'target' should be an ID.}
 }
 \value{
 Returns a dataframe with the absolute frequency of each type of residue found in the target peptide.
