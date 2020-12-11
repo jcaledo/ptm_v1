@@ -62,10 +62,7 @@ pairwise.dist <- function(a, b, squared = TRUE){
 res.dist <- function(pdb, rA, chainA, rB, chainB, backbone = FALSE, hatoms = FALSE){
 
   # ------------ Data Preparation and Computation of Distances
-  oldw <- getOption("warn")
-  options(warn = -1) # avoids unnecessary warnings: 'pdb exists. Skipping download'
-  mypdb <- bio3d::read.pdb(pdb)
-  options(warn = oldw) # restores the warnings
+  mypdb <- suppressWarnings(bio3d::read.pdb(pdb)) # avoids warning: 'pdb exists. Skipping download'
 
   atoA <- mypdb$atom[which(mypdb$atom$resno == rA & mypdb$atom$chain == chainA),]
   rownames(atoA) <- paste(atoA$elety, atoA$resid, atoA$resno, atoA$chain, sep = "-")
@@ -256,10 +253,7 @@ dist2closest <- function(pdb, chain, res, aa = 'M', backbone = FALSE){
 
 ball <- function(pdb, chain, res, r, backbone = FALSE){
 
-  oldw <- getOption("warn")
-  options(warn = -1)
-  mypdb <- bio3d::read.pdb(pdb)$atom
-  options(warn = oldw)
+  mypdb <- suppressWarnings(bio3d::read.pdb(pdb)$atom) # avoids warning: 'pdb exists. Skipping download'
 
   ## --------------- Atoms to be used in the centroid computation
   residue <- mypdb$resid[which(mypdb$resno == res & mypdb$chain == chain)][1]

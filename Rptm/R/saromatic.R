@@ -28,10 +28,7 @@
 saro.dist <- function(pdb, threshold = 7, rawdata = FALSE){
 
   ## ---------- Getting pdb & Checking for M, Y, F and W ----------- ##
-  oldw <- getOption("warn")
-  options(warn = -1) # avoids unnecessary warnings: Skipping download
-  x <- bio3d::read.pdb(pdb, verbose = FALSE)
-  options(warn = oldw) # restores warnings
+  x <- suppressWarnings(bio3d::read.pdb(pdb, verbose = FALSE)) # avoids warning: Skipping download
   x <- x$atom
   is_there_M <- TRUE %in% (x$resid == "MET")
   is_there_Y <- TRUE %in% (x$resid == "TYR")
@@ -306,12 +303,7 @@ saro.geometry <- function(pdb, rA, chainA = 'A', rB, chainB = 'A'){
 
   ## -------------------- Reading the pdb file ---------------------- ##
   temp <- tempfile()
-  oldw <- getOption("warn")
-  options(warn = -1) # avoids unnecessary warnings: 'pdb exists. Skipping download'
-  x <- bio3d::read.pdb(pdb, verbose = FALSE)
-  options(warn = oldw) # restores the warnings
-
-
+  x <- suppressWarnings(bio3d::read.pdb(pdb, verbose = FALSE)) # avoids warnings: 'pdb exists. Skipping download'
   x <- x$atom
   xA <- x[which(x$resno == rA & x$chain == chainA),]
   xB <- x[which(x$resno == rB & x$chain == chainB),]

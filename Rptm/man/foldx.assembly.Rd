@@ -27,7 +27,7 @@ Computes changes in the Gibbs free energy of the assembly process of a protein.
 This function implements the FoldX's command 'AnalyseComplex', which allows to determine the interaction energy between two molecules or two groups of molecules. For instance, if in a dimeric protein, formed by chain A and B, we may set: mol1 = 'A', mol2 = 'B'. If we are dealing with a trimer, we may set: mol1 = 'A', mol2: 'AB'.
 }
 \examples{
-\dontrun{foldx.assembly(pdb = '1sev', mol1 = 'A'), mol2 = 'B'}
+\dontrun{foldx.assembly(pdb = '1sev', mol1 = 'A', mol2 = 'B')}
 }
 \references{
 Schymkowitz et al (2005) Nucl. Ac. Res. 33:W382-W388.

@@ -106,13 +106,11 @@ pdb.quaternary <- function(pdb, keepfiles = FALSE){
   chains <- suppressWarnings(pdb.chain(pdb))
 
   sequences <-  character(length(chains))
-  oldw <- getOption("warn")
-  options(warn = -1) # avoids unnecessary warnings: 'pdb exists. Skipping download'
+
   for (i in seq_len(length(chains))){
     t <- paste(pdb_id, ":", chains[i], sep = "")
     sequences[i] <-  get.seq(t, db = 'pdb')
   }
-  options(warn = oldw) # restores the warnings
 
   outfile <- paste(pdb_id, ".fa", sep = "")
 
@@ -123,8 +121,6 @@ pdb.quaternary <- function(pdb, keepfiles = FALSE){
     output[[3]] <- chains
     output[[4]] <- pdb_id
   } else {
-    oldw <- getOption("warn")
-    options(warn = -1) # avoids unnecessary warnings: 'pdb exists. Skipping download'
     myaln <- msa(sequences, ids = chains, sfile = outfile)
     if (requireNamespace('seqinr', quietly = TRUE)){
       aln <- seqinr::read.alignment(file = outfile, format = 'fasta' )
@@ -132,7 +128,6 @@ pdb.quaternary <- function(pdb, keepfiles = FALSE){
     } else {
       stop("The package seqinr must be installed to use this function")
     }
-    options(warn = oldw) # restores the warnings
     output <- list()
     output[[1]] <- as.matrix(d)
     output[[2]] <- sequences
@@ -297,13 +292,9 @@ pdb.pep <- function(pep, pdb){
   pep <- toupper(pep)
 
   ## ----- Get de pdb sequence
-  oldw <- getOption("warn")
-  options(warn = -1) # avoids unnecessary warnings: 'pdb exists. Skipping download'
-  t <- bio3d::read.pdb(pdb)$atom
-  options(warn = oldw) # restores the warnings
+  t <- suppressWarnings(bio3d::read.pdb(pdb)$atom) # avoids warning: 'pdb exists. Skipping download'
   t <- t[which(t$elety == 'CA' & t$type == 'ATOM'), ]
   seq <- paste(bio3d::aa321(t$resid), collapse = "") # sequence resolved in PDB
-
 
   ## ----- Search the peptide in the sequence
   if (gregexpr(pep, seq)[[1]][1] != -1){
@@ -340,20 +331,17 @@ pdb.select <- function(up_id, threshold = 0.9){
     if (nrow(pdbs) == 0){
       return("NO PDB FOUND")
     }
-    oldw <- getOption("warn") # To avoid some irrelevant warnings
-    options(warn = -1)
     identity <- rep(NA, nrow(pdbs))
     match <- 0 # fraction of the uniprot sequence contained in the pdb sequence
     c <- 0
     while (match < threshold & c < nrow(pdbs)){ # ---- Stop search if 90 % uniprot is found in pdb
       c <- c + 1
-      t <- renum.pdb(pdb = as.character(pdbs$PDB[c]),
+      t <- suppressWarnings(renum.pdb(pdb = as.character(pdbs$PDB[c]),
                      chain = as.character(pdbs$CHAIN[c]),
-                     uniprot = up_id)
+                     uniprot = up_id))
       match <- sum(t$uniprot == t$pdb)/nrow(t)
       identity[c] <- match
     }
-    options(warn = oldw) # Restores warnings
 
     ind <- which(identity == max(identity, na.rm = TRUE))
     pdb <-  as.character(pdbs$PDB[ind])
