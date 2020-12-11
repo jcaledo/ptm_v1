@@ -5,7 +5,7 @@
 #       dpx                                    #
 #       atom.dpx                               #
 #       res.dpx                                #
-#       stru.part                               #
+#       stru.part                              #
 #                                              #
 ## ------------------------------------------ ##
 
@@ -42,10 +42,7 @@ acc.dssp <- function(pdb, dssp = 'compute', aa = 'all'){
   del <- FALSE
   if (nchar(pdb) == 4){
     del <- TRUE
-    oldw <- getOption("warn")
-    options(warn = -1) # avoids unnecessary warnings: 'pdb exists. Skipping download'
-    bio3d::get.pdb(pdb)
-    options(warn = oldw) # restores the warnings
+    suppressWarnings(bio3d::get.pdb(pdb)) # avoids warning: 'pdb exists. Skipping download'
     file <- paste("./", pdb, ".pdb", sep = "")
     id <- pdb
   } else {
@@ -244,10 +241,7 @@ get.area <- function(pdb, keepfiles = FALSE){
   del <- FALSE
   if (nchar(pdb) == 4){
     del <- TRUE
-    oldw <- getOption("warn")
-    options(warn = -1) # avoids unnecessary warnings: 'pdb exists. Skipping download'
-    get.pdb(pdb)
-    options(warn = oldw) # restores the warnings
+    suppressWarnings(get.pdb(pdb)) # avoids warning: 'pdb exists. Skipping download'
     file <- paste("./", pdb, ".pdb", sep = "")
     id <- pdb
   } else {
@@ -255,7 +249,6 @@ get.area <- function(pdb, keepfiles = FALSE){
     t <- strsplit(file, split = "/")[[1]]
     id <- strsplit(t[length(t)], split = "\\.")[[1]][1]
   }
-
 
   output_file = gsub("\\.pdb", "_getarea.txt", file)
   url <- "http://curie.utmb.edu/cgi-bin/getarea.cgi"
@@ -350,11 +343,8 @@ get.area <- function(pdb, keepfiles = FALSE){
 dpx <- function(pdb){
 
   ## --------------- Generate a dataframe ---------------- ##
-  oldw <- getOption("warn")
-  options(warn = -1) # avoids unnecessary warnings: 'pdb exists. Skipping download'
   atom <- get.area(pdb)
-  mypdb <- read.pdb(pdb)
-  options(warn = oldw) # restores warnings
+  mypdb <- suppressWarnings(read.pdb(pdb)) # avoids warning: 'pdb exists. Skipping download'
 
   mypdb <- mypdb$atom[which(mypdb$atom$type == 'ATOM'),]
   atom$x <- mypdb$x
@@ -375,7 +365,7 @@ dpx <- function(pdb){
 
 
 ## ---------------------------------------------------------------- ##
-#                atom.dpx <- function(pdb)                      #
+#                atom.dpx <- function(pdb)                           #
 ## ---------------------------------------------------------------- ##
 #' Atom Depth Analysis
 #' @description Computes the depth from the surface for each protein's atom.
@@ -401,11 +391,7 @@ atom.dpx <- function(pdb){
   }
 
   ## ------------ For the whole structure ---------------- ##
-  oldw <- getOption("warn")
-  options(warn = -1) # avoids unnecessary warnings: 'pdb exists. Skipping download'
   atom <- dpx(pdb)
-  options(warn = oldw) # restores warnings
-
   energies <- atom$areaenergy
   dpx <- atom$dpx
   atom <- atom[,1:4]
@@ -416,14 +402,9 @@ atom.dpx <- function(pdb){
   atom$delta_dpx <- NA
 
   ## ----------- For multi-chains structure -------------- ##
-  oldw <- getOption("warn")
-  options(warn = -1) # avoids unnecessary warnings: 'pdb exists. Skipping download'
-  chains <- pdb.chain(pdb, keepfiles = TRUE)
-  options(warn = oldw) # restores warnings
-
+  chains <- suppressWarnings(pdb.chain(pdb, keepfiles = TRUE))
   counter_a <- 0
   for (i in seq_len(length(chains))){
-    # print(chains[i])
     t <- paste('./split_chain/', id, '_', chains[i], '.pdb', sep = "")
     atom_chain <- dpx(t)
     counter_b <- counter_a + nrow(atom_chain)
@@ -461,11 +442,7 @@ atom.dpx <- function(pdb){
 
 res.dpx <- function(pdb, aa = 'all'){
 
-  oldw <- getOption("warn")
-  options(warn = -1)
   atom <- atom.dpx(pdb)
-  options(warn = oldw)
-
   atom$res <- paste(atom$resid, atom$resno, atom$chain, sep ="-")
   res <- unique(atom$res)
 

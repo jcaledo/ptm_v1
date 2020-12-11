@@ -21,8 +21,7 @@ Parses a DSSP file to return a dataframe.
 If the argument 'keepfiles' is not set to TRUE, the dssp file used to get the parsed dataframe will be removed.
 }
 \examples{
-\dontrun{compute.dssp('3cwm')
-## Then: parse.dssp('3cwm.dssp')}
+\dontrun{compute.dssp('3cwm'); parse.dssp('3cwm.dssp')}
 }
 \references{
 Touw et al (2015) Nucl. Ac. Res. 43(Database issue): D364-D368 (PMID: 25352545).

@@ -18,8 +18,7 @@
 #' @details If the argument 'keepfiles' is not set to TRUE, the dssp file used to get the parsed dataframe will be removed.
 #' @return Returns a dataframe providing data for 'acc', 'ss', 'phi' and 'psi' for each residues from the structure.
 #' @author Juan Carlos Aledo
-#' @examples \dontrun{compute.dssp('3cwm')
-#' ## Then: parse.dssp('3cwm.dssp')}
+#' @examples \dontrun{compute.dssp('3cwm'); parse.dssp('3cwm.dssp')}
 #' @references Touw et al (2015) Nucl. Ac. Res. 43(Database issue): D364-D368 (PMID: 25352545).
 #' @seealso download.dssp(), compute.dssp(), mkdssp() and acc.dssp()
 #' @export
@@ -136,10 +135,7 @@ compute.dssp <- function(pdb, destfile = './'){
 
   del <- FALSE
   if (nchar(pdb) == 4){ # when input is a PDB ID
-    oldw <- getOption("warn")
-    options(warn = -1) # avoids unnecessary warnings: 'pdb exists. Skipping download'
-    mypdb <- bio3d::get.pdb(pdb)
-    options(warn = oldw) # restores warnings
+    mypdb <- suppressWarnings(bio3d::get.pdb(pdb)) # avoids warning: 'pdb exists. Skipping download'
     file <- paste("./", pdb, ".pdb", sep = "")
     del <- TRUE
   } else {
@@ -231,10 +227,7 @@ mkdssp <- function(pdb, method = 'ptm', exefile = "dssp"){
   ## --- pdb id or path to its file
   del <- FALSE
   if (nchar(pdb) == 4){ # when input is a PDB ID
-    oldw <- getOption("warn")
-    options(warn = -1) # avoids unnecessary warnings: 'pdb exists. Skipping download'
-    bio3d::get.pdb(pdb)
-    options(warn = oldw) # restores warnings
+    suppressWarnings(bio3d::get.pdb(pdb)) # avoids warning: 'pdb exists. Skipping download'
     file <- paste("./", pdb, ".pdb", sep = "")
     del <- TRUE
   } else {
@@ -257,11 +250,7 @@ mkdssp <- function(pdb, method = 'ptm', exefile = "dssp"){
     mydssp <- parse.dssp('./temp.dssp')
 
   } else if (method == 'bio3d'){
-
-    oldw <- getOption("warn")
-    options(warn = -1) # avoids unnecessary warnings: Non-protein residues detected in input PDB.
-    mydssp <- bio3d::dssp(read.pdb(file) , exefile = exefile)
-    options(warn = oldw) # restores warnings
+    mydssp <- suppressWarnings(bio3d::dssp(read.pdb(file) , exefile = exefile)) # avoids warning: Non-protein residues detected in input PDB.
   }
 
   if (del){ # if a pdb file was downloaded now is delated
