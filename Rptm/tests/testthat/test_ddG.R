@@ -54,8 +54,8 @@ test_that("foldx.mut() works properly", {
   skip_on_cran()
   skip_on_travis()
 
-  a <- foldx.mut(pdb = './pdb/1b4i_Repair.pdb', ch = 'A', pos = 8, method = 'buildmodel')
-  b <- foldx.mut(pdb = "./pdb/1b4i_Repair.pdb", ch = 'A', pos = 8, method = 'positionscan')
+  a <- foldx.mut(pdb = './pdb/1b4i_Repair.pdb', ch = 'A', pos = 8, method = 'buildmodel', keepfiles = TRUE)
+  b <- foldx.mut(pdb = "./pdb/1b4i_Repair.pdb", ch = 'A', pos = 8, method = 'positionscan', keepfiles = TRUE)
 
   expect_is(a, 'data.frame')
   expect_equal(nrow(a), 19)
@@ -70,39 +70,6 @@ test_that("foldx.mut() works properly", {
   expect_equal(b$WT[1], "S")
   expect_equal(b$Position[1], 8)
   expect_gt(b$DDG[23], 0) # S -> pS
-
-  # a <- foldx(pdb = '1pga', ch = 'A', pos = 31, method = 'buildmodel')
-  # b <- foldx(pdb = '1pga_Repair.pdb', ch = 'A', pos = 31, method = 'positionscan', wfile = "./pdb")
-  #
-  # expect_is(a, 'data.frame')
-  # expect_equal(nrow(a), 19)
-  # expect_equal(ncol(a), 8)
-  # expect_equal(a$WT[1], "K")
-  # expect_equal(a$Position[1], 31)
-  # expect_lt(a$DDG[11], 0) # K -> L
-  #
-  # expect_is(b, 'data.frame')
-  # expect_equal(nrow(b), 24)
-  # expect_equal(ncol(b), 8)
-  # expect_equal(b$WT[1], "K")
-  # expect_lt(b$DDG[3], 0) # K -> L
-
-  # a <- foldx(pdb = './pdb/1u8f_Repair.pdb', ch = 'O', pos = 46, method = "buildmodel", wfile = "./pdb")
-  # b <- foldx(pdb = './pdb/1u8f_Repair.pdb', ch = 'O', pos = 46, method = "positionscan", wfile = "./pdb")
-
-  # expect_is(a, 'data.frame')
-  # expect_equal(nrow(a), 19)
-  # expect_equal(ncol(a), 8)
-  # expect_equal(a$WT[1], "M")
-  # expect_equal(a$Position[1], 46)
-  # expect_lt(a$DDG[11], 0) # M -> L
-
-  # expect_is(b, 'data.frame')
-  # expect_equal(nrow(b), 24)
-  # expect_equal(ncol(b), 8)
-  # expect_equal(b$WT[1], "M")
-  # expect_lt(b$DDG[3], 0) # M -> L
-
 })
 
 
@@ -151,12 +118,6 @@ test_that("ddG.profile() works properly", {
   expect_is(a, 'data.frame')
   expect_equal(nrow(a), 19)
   expect_equal(ncol(a), 4)
-
-  # a <- ddG.profile(prot = "./pdb/1pga_Reapir.pdb", ch = "A")
-  #
-  # expect_is(a, 'data.frame')
-  # expect_equal(nrow(a), 19)
-  # expect_equal(ncol(a), 4)
 })
 
 
@@ -173,11 +134,6 @@ test_that("ddG.ptm() works properly", {
   c <- ddG.ptm(pdb = "./pdb/1b4i_Repair.pdb", ch = 'A', pos = 23, ptm = 'pThr', dir = 'f', pH = 7)
   d <- ddG.ptm(pdb = "./pdb/1b4i_Repair.pdb", ch = 'A', pos = 29, ptm = 'MetO-Q', dir = 'f', pH = 7)
   e <- ddG.ptm(pdb = "./pdb/1b4i_Repair.pdb", ch = 'A', pos = 29, ptm = 'MetO-T', dir = 'f', pH = 7)
-
-
-  # a <- ddG.ptm(pdb = "1fin", ch = "A", pos = 160, ptm = "pThr", dir = 'f', pH = 7)
-  # b <- ddG.ptm(pdb = "./pdb/1fin_Repair.pdb", ch = "A", pos = 160, ptm = "pThr", dir = 'f', pH = 7)
-  # c <- ddG.ptm(pdb = "./pdb/1fin_Repair.pdb", ch = "A", pos = 160, ptm = "pSer", dir = 'f', pH = 7)
 
   expect_is(a, 'character')
   expect_gt(as.numeric(a), 0)
