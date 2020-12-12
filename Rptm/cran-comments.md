@@ -5,9 +5,9 @@ This is a  resubmission. Now, in the current version:
 * I've elaborated a bit on the description field as requested.
 * Code lines in examples (in parse.dssp.Rd) have been uncommented.
 * The line in man/foldx.assembly.Rd has been fixed as requested.
-* Now we are only using suppressWarning() when necessary.
-* Now, in ddG.R and ptmplot.R we make use of on.exit().
-
+* We are only using suppressWarning() when necessary.
+* In ddG.R and ptmplot.R we make use of on.exit().
+* In the functions that offer the option of saving the results in a file, the user has to explicitly pass an argument to allow it.
 
 ## Test environments
 
