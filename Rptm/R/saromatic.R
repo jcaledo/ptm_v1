@@ -293,7 +293,7 @@ saro.dist <- function(pdb, threshold = 7, rawdata = FALSE){
 #' @return The function returns a dataframe providing the coordinates of the sulfur atom and the centroid (centroids when the aromatic residue is tryptophan), as well as the distance (ångströms) and the angle (degrees) mentioned above.
 #' @author Juan Carlos Aledo
 #' @examples saro.geometry('1CLL', rA = 141, rB = 145)
-#' saro.geometry(pdb = '1d0g', rA = 99, chainA = 'R', rB = 237, chainB = 'A')
+#' @examples \dontrun{saro.geometry(pdb = '1d0g', rA = 99, chainA = 'R', rB = 237, chainB = 'A')}
 #' @references Reid, Lindley & Thornton, FEBS Lett. 1985, 190, 209-213.
 #' @seealso saro.motif(), saro.dist()
 #' @importFrom bio3d read.pdb

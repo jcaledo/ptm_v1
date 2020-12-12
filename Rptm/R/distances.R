@@ -53,7 +53,7 @@ pairwise.dist <- function(a, b, squared = TRUE){
 #' @param hatoms logical, if TRUE we include all the hydrogen atoms in the computation as long as the PDB provides their coordinates.
 #' @return This function returns a list of three elements, where each of these elements is, in turn, a list of three elements providing information regarding minimal, maximal and averaged distances.
 #' @author Juan Carlos Aledo
-#' @examples res.dist('1q8k', 51, 'A', 55, 'A', backbone = TRUE, hatoms = TRUE)
+#' @examples \dontrun{res.dist('1q8k', 51, 'A', 55, 'A', backbone = TRUE, hatoms = TRUE)}
 #' @seealso pairwise.dist(), dist2closest(), ball()
 #' @importFrom bio3d read.pdb
 #' @importFrom stats dist

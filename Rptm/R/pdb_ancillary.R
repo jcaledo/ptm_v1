@@ -257,7 +257,7 @@ uniprot2pdb <- function(up_id){
 #' @details This function checks if a given residue in the Uniprot sequence is found in the PDB.
 #' @return The functions returns TRUE if the residue is found in the PDB sequence (and gives the position in that sequence). If the residue of interest is not found in the PDB the function returns FALSE.
 #' @author Juan Carlos Aledo
-#' @examples pdb.res(at = 361, up = 'P48163', pdb = '2aw5', chain = 'A')
+#' @examples \dontrun{pdb.res(at = 361, up = 'P48163', pdb = '2aw5', chain = 'A')}
 #' @seealso pdb.pep()
 #' @export
 pdb.res <- function(at, up, pdb, chain){
