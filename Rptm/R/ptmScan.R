@@ -344,7 +344,7 @@ ni.scan <- function(up_id, db = 'all'){
 #' @param up_id a character string corresponding to the UniProt ID.
 #' @param renumerate logical, when TRUE the  sequence numeration of MetO sites is that given by Uniprot, which may not coincide with that from MetOSite.
 #' @details The numerations of the sequences given by UniProt and MetOSite may or may not match. Sometimes one of the sequences corresponds to the precursor protein and the other to the processed mature protein.
-#' @return Returns a dataframe where each row corresponds to a residue, and the colums inform about the modifications.
+#' @return Returns a dataframe where each row corresponds to a residue, and the columns inform about the modifications.
 #' @author Juan Carlos Aledo
 #' @examples \dontrun{ptm.scan('P01009', renumerate = TRUE)}
 #' @references Hornbeck et al. Nucleic Acids Res. 2019 47:D433-D441, (PMID: 30445427).
@@ -546,7 +546,7 @@ ptm.scan <- function(up_id, renumerate = TRUE){
 #' @description Scans the indicated protein in search of regulatory PTM sites.
 #' @usage reg.scan(up_id)
 #' @param up_id a character string corresponding to the UniProt ID.
-#' @return Returns a dataframe where each row corresponds to a residue, and the colums inform about the regulatory modifications.
+#' @return Returns a dataframe where each row corresponds to a residue, and the columns inform about the regulatory modifications.
 #' @author Juan Carlos Aledo
 #' @examples reg.scan('P01009')
 #' @references Hornbeck et al. Nucleic Acids Res. 2019 47:D433-D441, (PMID: 30445427).
@@ -601,7 +601,7 @@ reg.scan <- function(up_id){
 #' @description Scans the indicated protein in search of disease-related PTM sites.
 #' @usage dis.scan(up_id)
 #' @param up_id a character string corresponding to the UniProt ID.
-#' @return Returns a dataframe where each row corresponds to a residue, and the colums inform about the disease-related modifications.
+#' @return Returns a dataframe where each row corresponds to a residue, and the columns inform about the disease-related modifications.
 #' @author Juan Carlos Aledo
 #' @examples dis.scan('P31749')
 #' @references Hornbeck et al. Nucleic Acids Res. 2019 47:D433-D441, (PMID: 30445427).

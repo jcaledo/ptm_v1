@@ -111,7 +111,7 @@ parse.dssp <- function(file, keepfiles = FALSE){
 }
 
 ## ---------------------------------------------------------------- ##
-#      compute.dssp <- function(pdb, destfile = './')               #
+#      compute.dssp <- function(pdb, destfile = './')                #
 ## ---------------------------------------------------------------- ##
 #' Compute and Return a DSSP File
 #' @description Computes and returns a DSSP file.
@@ -253,7 +253,7 @@ mkdssp <- function(pdb, method = 'ptm', exefile = "dssp"){
     mydssp <- suppressWarnings(bio3d::dssp(read.pdb(file) , exefile = exefile)) # avoids warning: Non-protein residues detected in input PDB.
   }
 
-  if (del){ # if a pdb file was downloaded now is delated
+  if (del){ # if a pdb file was downloaded now is deleted
     file.remove(file)
   }
   return(mydssp)

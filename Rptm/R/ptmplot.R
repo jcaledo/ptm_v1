@@ -6,12 +6,12 @@
 ## -------------------------------- ##
 
 ## ------------------------------------------------------------------------------- ##
-# ptm.plot <- function(up_id, pdb="", property, ptm, dssp, window, sdata=TRUE, ...) #
+#   ptm.plot <- function(up_id, pdb="", property, ptm, dssp, window, sdata=F, ...)  #
 ## ------------------------------------------------------------------------------- ##
 #' Plot Values of a Property and PTM Sites Along the Protein Sequence
 #' @description Represents the values of a property and show the PTM sites along a protein sequence.
 #' @usage ptm.plot(up_id, pdb = "", property, ptm, dssp = 'compute',
-#'                 window = 1, sdata = TRUE, ...)
+#'                 window = 1, sdata = FALSE, ...)
 #' @param up_id a character string for the UniProt ID of the protein of interest.
 #' @param pdb Optional argument to indicate the PDB and chain to be used (i.e. '1u8f.O'). If we leave this argument empty, the function will make the election for us whenever possible.
 #' @param property a character string indicating the property of interest. It should be one of 'sasa', 'acc', 'dpx', 'entropy7.aa','entropy7.codon', 'entropy100.aa', 'entropy100.codon', 'eiip', 'volume', 'polarizability', 'avg.hyd', 'pi.hel', 'a.hel', 'b.sheet', 'B.factor', or 'own'.
@@ -55,7 +55,7 @@
 
 
 ptm.plot <- function(up_id, pdb = "", property, ptm , dssp = 'compute',
-                     window = 1, sdata = TRUE, ...){
+                     window = 1, sdata = FALSE, ...){
 
   aa <- aai$aa
 

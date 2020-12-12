@@ -12,7 +12,7 @@ A data frame with 4472 rows and 15 variables:
   \item{met_pos}{the position of the MetO site in the primary structure}
   \item{met_vivo_vitro}{conditions under which the oxidation experiment was carried out}
   \item{MetOsites}{array with all the sites oxidized in that protein}
-  \item{site_id}{primary key identifing the site}
+  \item{site_id}{primary key identifying the site}
   \item{positive}{sequence environment of the MetO site}
   \item{control}{sequence environment of a non oxidized Met from the same protein}
   \item{IDP}{Intrinsically Disordered Proteins, 0: the protein is not found in DisProt; 1: the protein contains disordered regions; 2: the protein may contain disordered regions but the experimental evidences are ambiguous}

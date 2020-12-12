@@ -4,7 +4,7 @@
 \alias{parse.hssp}
 \title{Parse a HSSP File to Return Dataframes}
 \usage{
-parse.hssp(file, keepfiles = TRUE)
+parse.hssp(file, keepfiles = FALSE)
 }
 \arguments{
 \item{file}{input hssp file.}

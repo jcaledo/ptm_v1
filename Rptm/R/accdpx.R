@@ -218,7 +218,7 @@ acc.dssp <- function(pdb, dssp = 'compute', aa = 'all'){
 
 
 ## ---------------------------------------------------------------- ##
-#         get.area <- function(pdb, keepfiles = FALSE)        #
+#         get.area <- function(pdb, keepfiles = FALSE)               #
 ## ---------------------------------------------------------------- ##
 #' Atomic Solvation Energies.
 #' @description Computes online surface energies using the Getarea server.
@@ -425,7 +425,7 @@ atom.dpx <- function(pdb){
 
 
 ## ---------------------------------------------------------------- ##
-#             res.dpx <- function(pdb, aa = 'all')              #
+#             res.dpx <- function(pdb, aa = 'all')                   #
 ## ---------------------------------------------------------------- ##
 #' Residue Depth Analysis
 #' @description Computes the depth from the surface for each protein's residue.

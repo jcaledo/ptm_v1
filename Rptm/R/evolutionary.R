@@ -302,11 +302,11 @@ list.hom <- function(target, homology = 'o'){
 
 
 ## ------------------------------------------------------------------------------- ##
-#             parse.hssp <- function(file, keepfiles = TRUE)                        #
+#             parse.hssp <- function(file, keepfiles = FALSE)                       #
 ## ------------------------------------------------------------------------------- ##
 #' Parse a HSSP File to Return Dataframes
 #' @description Parses a HSSP file to return dataframes.
-#' @usage parse.hssp(file, keepfiles = TRUE)
+#' @usage parse.hssp(file, keepfiles = FALSE)
 #' @param file input hssp file.
 #' @param keepfiles logical, if TRUE the dataframes will be saved in the working directory and we will keep the hssp file.
 #' @details If the argument 'keepfiles' is not set to TRUE, the hssp file used to get the parsed dataframe will be removed. Otherwise, 4 dataframes will be saved:
@@ -323,7 +323,7 @@ list.hom <- function(target, homology = 'o'){
 #' @seealso msa(), custom.aln(), list.hom(), get.hssp(), shannon()
 #' @export
 
-parse.hssp <- function(file, keepfiles = TRUE){
+parse.hssp <- function(file, keepfiles = FALSE){
 
   ## ------- Check file argument --------- ##
   if (!file.exists(file)){

@@ -12,7 +12,7 @@ ptm.scan(up_id, renumerate = TRUE)
 \item{renumerate}{logical, when TRUE the  sequence numeration of MetO sites is that given by Uniprot, which may not coincide with that from MetOSite.}
 }
 \value{
-Returns a dataframe where each row corresponds to a residue, and the colums inform about the modifications.
+Returns a dataframe where each row corresponds to a residue, and the columns inform about the modifications.
 }
 \description{
 Scans the indicated protein in search of PTM sites.

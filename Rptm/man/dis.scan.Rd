@@ -10,7 +10,7 @@ dis.scan(up_id)
 \item{up_id}{a character string corresponding to the UniProt ID.}
 }
 \value{
-Returns a dataframe where each row corresponds to a residue, and the colums inform about the disease-related modifications.
+Returns a dataframe where each row corresponds to a residue, and the columns inform about the disease-related modifications.
 }
 \description{
 Scans the indicated protein in search of disease-related PTM sites.

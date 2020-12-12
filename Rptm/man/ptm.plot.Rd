@@ -5,7 +5,7 @@
 \title{Plot Values of a Property and PTM Sites Along the Protein Sequence}
 \usage{
 ptm.plot(up_id, pdb = "", property, ptm, dssp = 'compute',
-                window = 1, sdata = TRUE, ...)
+                window = 1, sdata = FALSE, ...)
 }
 \arguments{
 \item{up_id}{a character string for the UniProt ID of the protein of interest.}

@@ -111,7 +111,7 @@ test_that("parse.hssp() works properly", {
   skip_on_cran()
   skip_on_travis()
 
-  a <- parse.hssp(file = "./pdb/1u8f.hssp")
+  a <- parse.hssp(file = "./pdb/1u8f.hssp", keepfiles = TRUE)
 
   expect_is(a, 'data.frame')
   expect_equal(nrow(a), 333)

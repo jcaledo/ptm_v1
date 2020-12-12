@@ -232,7 +232,7 @@ dist2closest <- function(pdb, chain, res, aa = 'M', backbone = FALSE){
 
 
 ## ---------------------------------------------------------------- ##
-#          ball <- function(pdb, chain, res, r, backbone)                   #
+#          ball <- function(pdb, chain, res, r, backbone)            #
 ## ---------------------------------------------------------------- ##
 #' Search for Atoms Close to a Given Atom
 #' @description Finds the atoms within a sphere with the indicated center and radius

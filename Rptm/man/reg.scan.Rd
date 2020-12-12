@@ -10,7 +10,7 @@ reg.scan(up_id)
 \item{up_id}{a character string corresponding to the UniProt ID.}
 }
 \value{
-Returns a dataframe where each row corresponds to a residue, and the colums inform about the regulatory modifications.
+Returns a dataframe where each row corresponds to a residue, and the columns inform about the regulatory modifications.
 }
 \description{
 Scans the indicated protein in search of regulatory PTM sites.

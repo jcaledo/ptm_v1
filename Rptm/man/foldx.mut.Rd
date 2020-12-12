@@ -4,7 +4,7 @@
 \alias{foldx.mut}
 \title{Compute Changes in Stability (DDG)}
 \usage{
-foldx.mut(pdb, ch, pos, newres = "", pH =7, method = "buildmodel", keepfiles = TRUE)
+foldx.mut(pdb, ch, pos, newres = "", pH =7, method = "buildmodel", keepfiles = FALSE)
 }
 \arguments{
 \item{pdb}{the 4-letter identifier of a PDB structure or the path to a PDB file.}

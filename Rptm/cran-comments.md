@@ -1,6 +1,13 @@
-## First submission
+## Resubmission
 
-The current submission is a first submission of the package ptm.
+This is a  resubmission. Now, in the current version:
+
+* I've elaborated a bit on the description field as requested.
+* Code lines in examples (in parse.dssp.Rd) have been uncommented.
+* The line in man/foldx.assembly.Rd has been fixed as requested.
+* Now we are only using suppressWarning() when necessary.
+* Now, in ddG.R and ptmplot.R we make use of on.exit().
+
 
 ## Test environments
 
