@@ -427,8 +427,8 @@ ptm.plot <- function(up_id, pdb = "", property, ptm , dssp = 'compute',
   ## ---------------------------------------------------------------- ##
   ## ------------------------ Ploting data -------------------------- ##
   ## ---------------------------------------------------------------- ##
-  olmfrow <- par('mfrow')
-  olmar <- par('mar')
+  oldpar <- par(no.readonly = TRUE)
+  on.exit(oldpar)
   par(mar = c(2, 4.1, 2, 2.1))
   ## -------- When two plots are shown (chain vs complex) ----------- ##
   if (sum(s_property_seq_com != s_property_seq_mon) != 0){ # Two plots
@@ -498,10 +498,6 @@ ptm.plot <- function(up_id, pdb = "", property, ptm , dssp = 'compute',
     points(strands$respdb, rep(dymin -0.07*(dymax - dymin), nrow(strands)),
            pch = 15, col = 'magenta', cex = 0.5)
   }
-
-
-  par(mar = olmar) # restore par to its default value
-  par(mfrow = olmfrow)
 
   output <- "Work done."
   attr(output, "uniprot") <- up_id
