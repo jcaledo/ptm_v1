@@ -23,11 +23,8 @@ Searches for amino acids either overrepresented or avoided at given positions wi
 Please, note that in addition to the 20 proteinogenetic amino acid we are using the symbol X when the target (central) residue is closer to the N-terminal or C-terminal of the protein than the radius used.
 }
 \examples{
-\dontrun{## Get the matrices
-pos = env.matrices(hmeto$positive)[[2]][,-11]
-ctr = env.matrices(hmeto$control)[[2]][,-11]
-## Run the test
-env.Ztest(pos, ctr, alpha = 0.0001)}
+pos = env.matrices(hmeto$positive)[[2]][,-11]; ctr = env.matrices(hmeto$control)[[2]][,-11]
+env.Ztest(pos, ctr, alpha = 0.0001)
 }
 \references{
 Aledo et al. Sci Rep. 2015; 5: 16955. (PMID: 26597773)

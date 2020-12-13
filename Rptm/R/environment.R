@@ -23,7 +23,7 @@
 #' @details The random control returns an environment center at a random position containing the same type or amino acid than the positive environment. The closest control searches for the closest position where such a type of amino acid is found and returns its environment.
 #' @return Returns a  list of two strings (environments).
 #' @author Juan Carlos Aledo
-#' @examples env.extract('P01009', db = 'uniprot', 271, 10, ctr = 'random')
+#' @examples \dontrun{env.extract('P01009', db = 'uniprot', 271, 10, ctr = 'random')}
 #' @references Aledo et al. Sci Rep. 2015; 5: 16955. (PMID: 26597773)
 #' @seealso env.matrices(), env.Ztest() and env.plot()
 #' @export
@@ -170,11 +170,8 @@ env.matrices <- function(env){
 #' @details Please, note that in addition to the 20 proteinogenetic amino acid we are using the symbol X when the target (central) residue is closer to the N-terminal or C-terminal of the protein than the radius used.
 #' @return Returns a list with three elements: (1) a matrix with the values of the Z statistical. (2) A dataframe with information regarding amino acid overrepresented in the positive environments, and (3) a dataframe similar to the previous one, but for amino acids avoided from the positive environments.
 #' @author Juan Carlos Aledo
-#' @examples \dontrun{## Get the matrices
-#' pos = env.matrices(hmeto$positive)[[2]][,-11]
-#' ctr = env.matrices(hmeto$control)[[2]][,-11]
-#' ## Run the test
-#' env.Ztest(pos, ctr, alpha = 0.0001)}
+#' @examples pos = env.matrices(hmeto$positive)[[2]][,-11]; ctr = env.matrices(hmeto$control)[[2]][,-11]
+#' @examples env.Ztest(pos, ctr, alpha = 0.0001)
 #' @references Aledo et al. Sci Rep. 2015; 5: 16955. (PMID: 26597773)
 #' @seealso env.extract(), env.matrices() and env.plot()
 #' @importFrom stats qnorm

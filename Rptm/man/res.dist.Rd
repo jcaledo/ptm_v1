@@ -28,7 +28,7 @@ This function returns a list of three elements, where each of these elements is,
 Computes the euclidean distance between two given residues
 }
 \examples{
-res.dist('1q8k', 51, 'A', 55, 'A', backbone = TRUE, hatoms = TRUE)
+\dontrun{res.dist('1q8k', 51, 'A', 55, 'A', backbone = TRUE, hatoms = TRUE)}
 }
 \seealso{
 pairwise.dist(), dist2closest(), ball()

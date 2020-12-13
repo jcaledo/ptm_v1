@@ -292,7 +292,7 @@ saro.dist <- function(pdb, threshold = 7, rawdata = FALSE){
 #' @details The distance between the delta sulfur atom and the centroid of the aromatic ring is computed, as well as the angle between this vector and the one perpendicular to the plane containing the aromatic ring. Based on the distance (d) and the angle (theta) the user decide whether the two residues are considered to be S-bonded or not (usually when d < 7 and theta < 60º).
 #' @return The function returns a dataframe providing the coordinates of the sulfur atom and the centroid (centroids when the aromatic residue is tryptophan), as well as the distance (ångströms) and the angle (degrees) mentioned above.
 #' @author Juan Carlos Aledo
-#' @examples saro.geometry('1CLL', rA = 141, rB = 145)
+#' @examples \dontrun{saro.geometry('1CLL', rA = 141, rB = 145)}
 #' @examples \dontrun{saro.geometry(pdb = '1d0g', rA = 99, chainA = 'R', rB = 237, chainB = 'A')}
 #' @references Reid, Lindley & Thornton, FEBS Lett. 1985, 190, 209-213.
 #' @seealso saro.motif(), saro.dist()
@@ -433,7 +433,7 @@ saro.geometry <- function(pdb, rA, chainA = 'A', rB, chainB = 'A'){
 #' @details For each methionyl residue taking place in a S-aromatic motif, this function computes the aromatic residues involved, the distance between the delta sulfur and the aromatic ring's centroid, as well as the angle between the sulfur-aromatic vector and the normal vector of the plane containing the aromatic ring.
 #' @return The function returns a dataframe reporting the S-aromatic motifs found for the protein of interest.
 #' @author Juan Carlos Aledo
-#' @examples saro.motif('1CLL')
+#' @examples \dontrun{saro.motif('1CLL')}
 #' @references Reid, Lindley & Thornton, FEBS Lett. 1985, 190, 209-213.
 #' @seealso saro.dist(), saro.geometry()
 #' @importFrom bio3d read.pdb

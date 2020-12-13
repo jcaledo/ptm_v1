@@ -16,6 +16,8 @@ devtools::run_examples(pkg = ".",
                        run_dontrun = FALSE,
                        run_donttest = FALSE,
                        document = TRUE)
+rhub::platforms()
+rhub::check_on_windows(path = ".")
 
 devtools::spell_check(pkg = ".")
 devtools::check()

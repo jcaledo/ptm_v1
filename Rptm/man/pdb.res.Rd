@@ -25,7 +25,7 @@ Checks whether or not a given residue is resolved in the PDB structure.
 This function checks if a given residue in the Uniprot sequence is found in the PDB.
 }
 \examples{
-pdb.res(at = 361, up = 'P48163', pdb = '2aw5', chain = 'A')
+\dontrun{pdb.res(at = 361, up = 'P48163', pdb = '2aw5', chain = 'A')}
 }
 \seealso{
 pdb.pep()
