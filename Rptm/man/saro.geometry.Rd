@@ -27,7 +27,7 @@ Computes distances and angles of S-aromatic motifs.
 The distance between the delta sulfur atom and the centroid of the aromatic ring is computed, as well as the angle between this vector and the one perpendicular to the plane containing the aromatic ring. Based on the distance (d) and the angle (theta) the user decide whether the two residues are considered to be S-bonded or not (usually when d < 7 and theta < 60º).
 }
 \examples{
-saro.geometry('1CLL', rA = 141, rB = 145)
+\dontrun{saro.geometry('1CLL', rA = 141, rB = 145)}
 \dontrun{saro.geometry(pdb = '1d0g', rA = 99, chainA = 'R', rB = 237, chainB = 'A')}
 }
 \references{
