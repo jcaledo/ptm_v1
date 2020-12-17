@@ -40,6 +40,7 @@ Currently, the *ptm* package offers three functions that may be useful for the s
 * [saro.dist](./saro.dist)                                 
 * [saro.geometry](./saro.geometry)                         
 * [saro.motif](./saro.motif)
+* [ddG.ptm](./ddG.ptm)
 
 To illustrate the use of these functions we are going to use calmodulin (CaM) as a model protein. Calmodulin is a multifunctional calcium-binding protein expressed in all eukaryotic cells. The binding of the secondary messenger Ca2+ to CaM changes the CaM conformation and its affinity for its various targets. Methionine residues of CaM play an essential role in the sequence-independent specific binding to its many protein targets. In a Ca2+ free medium, CaM exhibits a spatial conformation corresponding to the so-called apoCaM (PDB ID: 1CFD). On the other hand, when CaM binds two Ca2+ ions, the protein adopt a different spatial conformation correspoonding to the holoCaM (PDB ID: 1CLL).
 
@@ -76,9 +77,9 @@ img {
 
 <img src="apoholoCaM.png" alt="S-aromatic network" style="width:60%;">
 
-The information provided by this dynamic network can be complemented using the function *ddG.ptm()*[./ddG.ptm], which will inform us about the changes in thermodynamic stability caused by modification of the corresponding methionine residues. 
+The information provided by this dynamic network can be complemented using the function [*ddG.ptm()*](./ddG.ptm), which will inform us about the changes in thermodynamic stability caused by modification of the corresponding methionine residues. 
 
-To this end, we need the UniProt ID of human calmodulin-1, which is P0DP23. Nevertheless, if all we know is that we are interested in human calmodulin-1, and we don't want to leave the R IDE to search the desired identifier, we can make use of the function *meto.list()*[./meto.list], typing:
+To this end, we need the UniProt ID of human calmodulin-1, which is P0DP23. Nevertheless, if all we know is that we are interested in human calmodulin-1, and we don't want to leave the R IDE to search the desired identifier, we can make use of the function [*meto.list()]*(./meto.list), typing:
 
 ```{r}
 id <- meto.list('Calmodulin-1')$prot_id[which(meto.list('Calmodulin-1')$prot_sp == 'Homo sapiens')]
@@ -89,10 +90,10 @@ Now we get the amino acid sequence of this protein:
 ```{r}
 seq <- get.seq(id) # CaM sequence
 seq <- substring(seq, 2, nchar(seq)) # Removing the initiation methionine
-met_positions <- gregexpr("M", seq)[[1]] # Positions at which methionines are found
+met <- gregexpr("M", seq)[[1]] # Positions at which methionines are found
 ```
 
-Once we know at which positions the protein exhibits a methionine residue, we are in conditions to compute the change in free energy after modifying those residues. To this end, the arguments taken by the *ddG.ptm()* functions are the PDB ID of interest, the position to be modified, and the type of post-translation modification to be introduced. In our case, we set ptm = 'MetO-Q' that, as explained somewhere[./ddG.ptm] else, mimics the sulfoxidation of methionine.
+Once we know at which positions the protein exhibits a methionine residue, we are in conditions to compute the change in free energy after modifying those residues. To this end, the arguments taken by the *ddG.ptm()* functions are the PDB ID of interest, the position to be modified, and the type of post-translation modification to be introduced. In our case, we set ptm = 'MetO-Q' that, as explained [somewhere else](./ddG.ptm), mimics the sulfoxidation of methionine.
 
 ```{r}
 meto_apo <- lapply(met, function(x) ddG.ptm('1cfd', pos = x, 'A', ptm = 'MetO-Q'))
@@ -101,24 +102,28 @@ meto_holo <- lapply(met, function(x) ddG.ptm('1cll', pos = x, 'A', ptm = 'MetO-Q
 meto_holo <- round(as.numeric(unlist(meto_holo)), 3)
 ```
 
-The objects meto_apo and meto_halo contain the Gibbs free energy change values in kcal/mol. So, let's plot them:
+The objects meto_apo and meto_halo contain the Gibbs free energy change values in kcal/mol. Now, let's plot them:
 
 ```{r}
-
+oldpar <- par()
+par(mfrow=c(1,2))
+on.exit(oldpar)
 barplot(meto_apo, 
         horiz = TRUE, names.arg = met, cex.names = 0.6,
         xlab = expression(paste(Delta, Delta, "G (kcal/mol)", sep = "")),
         ylab = "Modified Met",
-        col = "red")
+        col = "red",
+        main = "ApoCaM")
 
 barplot(meto_holo, 
         horiz = TRUE, names.arg = met, cex.names = 0.6,
         xlab = expression(paste(Delta, Delta, "G (kcal/mol)", sep = "")),
         ylab = "Modified Met",
-        col = "blue")
+        col = "blue",
+        main = "HoloCaM")
 ```
 
-If we want to obtain a greater wealth of raw data related to the inter-residual distances, we can choose the function *saro.dist()*
+If we want to obtain a greater wealth of raw data related to the inter-residual distances between the sulfur atom and the aromatic ring, we can choose the function *saro.dist()*
 
 ```{r}
 raw_data <- saro.dist('1cfd', rawdata = TRUE)
