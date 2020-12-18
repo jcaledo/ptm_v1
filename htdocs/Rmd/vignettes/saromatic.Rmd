@@ -40,7 +40,6 @@ Currently, the *ptm* package offers three functions that may be useful for the s
 * [saro.dist](./saro.dist)                                 
 * [saro.geometry](./saro.geometry)                         
 * [saro.motif](./saro.motif)
-* [ddG.ptm](./ddG.ptm)
 
 To illustrate the use of these functions we are going to use calmodulin (CaM) as a model protein. Calmodulin is a multifunctional calcium-binding protein expressed in all eukaryotic cells. The binding of the secondary messenger Ca2+ to CaM changes the CaM conformation and its affinity for its various targets. Methionine residues of CaM play an essential role in the sequence-independent specific binding to its many protein targets. In a Ca2+ free medium, CaM exhibits a spatial conformation corresponding to the so-called apoCaM (PDB ID: 1CFD). On the other hand, when CaM binds two Ca2+ ions, the protein adopt a different spatial conformation correspoonding to the holoCaM (PDB ID: 1CLL).
 
