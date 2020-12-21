@@ -14,18 +14,36 @@ library(knitr)
 
 Whenever you embark yourself on a computational project, you should not forget the maxim that affirms "junk in means junk out". So, the very first step must be to build a clean and solid dataset. To this respect, _ptm_ can be your friend!
 
-For the sake of concretion, let's suppose we are interested in investigating whether the environment of serines that are susceptible to being phosphorylated (phosphosites) can be statistically discriminated against those other enviroments belonging to serines that are not phosphorilatable. To address this research, the raw dataset we need may consist in a dataframe with two columns: one for the UniProt ID of the phosphoprotein, and another containing an array with the position where pSer can be found within each phosphoprotein. 
+For the sake of concretion, let's suppose we are interested in investigating whether, in human proteins, the environment of serines that are susceptible to being phosphorylated (phosphosites) can be statistically discriminated against those other enviroments belonging to serines that are not phosphorilatable. Alternativaly, we may be interested in addressing whether or not the sequence environments of those phospho-serines that have been described as playing a regulatory function, can be statistically distinguished from those environments belonging to phospho-serines detected in high-throughput analyses, but for which we have no information about their biological relevance.
 
-First, we are going to obtain an array with the IDs for all the human (let's focus just on human proteins) that are found in the [PhosphoSitePlus](https://www.phosphosite.org) database:
+
+
+To address this researches, the raw dataset we are going to build consist in a dataframe where each row will correspond to a serine residue from the human phosphoproteome, and the columns will be:
+
+* UniProt ID of the phosphoprotein.
+* Position of the serine residue in the primary structure of the protein.
+* Whether or not the serine is phosphorylatable.
+* Whether or not the serine has been described as regulatory.
+* Sequence environment (flanking amino acids at positions from –10 to +10 relative to the central Ser).
+
+
+As starting point, we are going to download a raw dataframe containing phosphosites reported by the following popular databases:
+
+* [PhosphoSitePlus](https://www.phosphosite.org)
+* [dbPTM](http://dbptm.mbc.nctu.edu.tw)
+* [Phospho.ELM](http://phospho.elm.eu.org/)
+* [dbPAF](http://dbpaf.biocuckoo.org)
+* [PhosPhAt](http://phosphat.uni-hohenheim.de/)
+
 
 ```{r}
-# Get all the phosphosites:
 url <- "https://github.com/jcaledo/ptm_db/raw/master/p_db.Rda"
 destfile <- tempfile(pattern = 'all',
                      tmpdir = tempdir(),
                      fileext = '.Rda')
 download.file(url, destfile, quiet = TRUE)
 load(destfile)
+head(p_db)
 ```
 
 These lines of code will load an object (dataframe) called `p_db` in the global environment of R. This dataframe contains data regarding phosphosites found in different databases and for different species. So, we need to filter out non-human phosphoproteins, as well as those human sites corresponding to tyrosine or threonine.
@@ -34,13 +52,14 @@ These lines of code will load an object (dataframe) called `p_db` in the global 
 hpSer <- p_db[which(p_db$organism == 'Homo sapiens' &
                       p_db$database == 'PSP' &
                       grepl('S', p_db$modification)), c(1,3) ]
+head(hpSer)
 ```
 
-Then, we're going to build a dataframe (df) where each row contain the pSer sites of a unique human protein:
+Then, we're going to build a dataframe (df) where each row corresponds to a single human phosphoprotein:
 
 ```{r}
 id <- unique(hpSer$up_id)
-df <- data.frame(id = id, pos = rep(NA, length(id)))
+df <- data.frame(id = id, seq = rep(NA, length(id)), pSer = rep(NA, length(id)))
 
 sites <- function(x){
   t <- hpSer$modification[which(hpSer$up_id == x)]
@@ -48,14 +67,237 @@ sites <- function(x){
   return(as.numeric(unlist(output)))
 }
 
-df$pos <- lapply(id, sites)
+df$pSer <- lapply(id, sites) 
+df$seq <- lapply(id, get.seq) # Please, note that the execution of this command can take a while!
 ```
 
-Let's see a few of them:
+Next, after removing from our dataframe those entries that are currently considered as obsolete in UniProt, we will add the positions where serine residues are present, regardless of their phospho-status:
 
 ```{r}
-kable(head(df))
+obsolete <- df$id[which(nchar(df$seq) < 10)]
+df <- df[which(!df$id %in% obsolete), ]
+df$allSer <- NA
+for (i in 1:nrow(df)){
+  print(i)
+  df$allSer[i] <- list(gregexpr("S", df$seq[i])[[1]])
+}
+df$non_pSer <- NA
+for (i in 1:nrow(df)){
+  print(i)
+  df$non_pSer[i] <- list(setdiff(df$allSer[[i]], df$pSer[[i]]))
+}
 ```
 
-Now that we have the dataset, we are ready to study the differential sequence environment of these phosphoserine sites. To get an idea of how we can proceed further, read the vignette [Exploring MetO Sequence Environments](/exploring-meto-sequence-environments).
+Before continuing with our process, let's carry out some data-quality tests:
+
+* Test1: Check that the intersection between df$allSer and df$pSer is equal to df$pSer 
+* Test2: Check that the union df$pSer and df$non_pSer is equal to df$allSer
+
+
+```{r}
+df$test2 <- df$test1 <- NA
+for (i in 1:nrow(df)){
+  print(i)
+  df$test1[i] <- length(df$pSer[[i]]) == sum(intersect(df$allSer[[i]], df$pSer[[i]]) == df$pSer[[i]])
+  df$test2[i] <- length(df$allSer[[i]]) == sum(sort(c(df$pSer[[i]], df$non_pSer[[i]])) == df$allSer[[i]])
+}
+df <- df[which(df$test1 & df$test2), ]
+```
+
+
+Next, we build a dataframe with as many rows as serine sites we are analyzing:
+
+```{r}
+ser.sites <- function(prot_id){
+  p <- df$pSer[[which(df$id == prot_id)]]
+  np <- df$non_pSer[[which(df$id == prot_id)]]
+  all <- c(p, np)
+  output <- data.frame(id = rep(prot_id, length(all)),
+                       pos = all,
+                       pSer = rep(FALSE, length(all)))
+  output$pSer[which(output$pos %in% p)] <- TRUE
+  return(output)
+}
+
+serine_sites <- ser.sites(df$id[1]) # seed
+for (i in 2:nrow(df)){ # This step can take a few minutes!
+  print(i)
+  serine_sites <- rbind(serine_sites, ser.sites(df$id[i]))
+}
+serine_sites <- serine_sites[complete.cases(serine_sites), ] # When a protein hasn't non-phosphorylatable Ser
+```
+
+## Searching for regulatory phospho-serines
+
+We have collected tens of thousands of phospho-serine sites in our data set. However, as pointed out by [Gustav E. Lienhard](https://pubmed.ncbi.nlm.nih.gov/18603430), there are reasons for believing that some portion of these reported phosphorylations might have little or no functional importance. Thus, we are going to use an astringent criterion to label a phosphosite as regulatory: it should have been empirically proved that the phosphorylation of that site has an effect on the phosphoprotein. To search for those phosphosites fulfilling such criterion, we will make use of the function **reg.scan()**:
+
+```{r}
+serine_sites$regulatory <- NA
+prot <- unique(serine_sites$id)
+for (i in 11:length(prot)){
+  print(i)
+  t <- reg.scan(prot[i])
+  if (is.data.frame(t)){
+    w <- t$modification
+    w <- unlist(lapply(w, function(x) strsplit(x, "-")))
+    w <- w[grepl("S", w)]
+    reg <- as.numeric(substr(w, 2, nchar(w)))
+    serine_sites$regulatory[which(serine_sites$id == prot[i] & serine_sites$pos %in% reg)] <- TRUE
+  }
+  closeAllConnections()
+}
+serine_sites$regulatory[is.na(serine_sites$regulatory)] <- FALSE
+```
+
+
+## Extracting the sequence environments
+
+We can start analyzing the sequence environment of these phospho-acceptors. To this end, we'll start extracting the sequence environment using the function **env.extract()**:
+
+```{r}
+
+serine_sites$env <- NA
+for (i in 1:nrow(serine_sites)){
+  print(i)
+  serine_sites$env[i] <- env.extract(prot = df$seq[which(df$id == serine_sites$id[i])][[1]],
+                                     c = serine_sites$pos[i],
+                                     r = 10)$Positive
+}
+```
+
+
+Only serine residues with ten or more neighbors in both directions will be considered in this analysis:
+
+```{r}
+serine_sites <- serine_sites[!grepl('X', serine_sites$env), ]
+head(serine_sites)
+```
+
+This is the dataframe we need to start addressing our hypothesis: [Regulatory phosphoserines have a differential sequence environment with respect to non-regulatory phosphoserines](/regvsnonreg). 
+
+
+## Amino acid frequencies within environments
+
+Once we have extracted the environment for each serine residue, we can move to the next task: compute the amino acid frequencies at each position within the environment. For each serine site, the frequency of flanking amino acids at each position from –10 to +10 relative to the central Ser is recorded making use of **env.matrices()**. The only argument that this function takes is a vector containing the environments as character string.
+
+### Non phosphorylatable serine sites
+
+```{r}
+non_pSer <- env.matrices(serine_sites$env[which(serine_sites$pSer == FALSE)])
+```
+
+The environments matrix:
+
+```{r}
+environments_non_pSer <- non_pSer[[1]]
+head(environments_non_pSer)
+```
+and its frequencies matrix:
+
+```{r}
+freq_non_pSer <- non_pSer[[2]]
+head(freq_non_pSer)
+```
+
+### Non regulatory pSer sites
+
+```{r}
+non_reg_pSer <- env.matrices(serine_sites$env[which(serine_sites$pSer == TRUE & serine_sites$regulatory == FALSE)])
+```
+
+The environments matrix:
+
+```{r}
+environments_non_reg_pSer <- non_reg_pSer[[1]]
+head(environments_non_reg_pSer)
+```
+and its frequencies matrix:
+
+```{r}
+freq_non_reg_pSer <- non_reg_pSer[[2]]
+head(freq_non_reg_pSer)
+```
+### Regulatory pSer sites
+
+```{r}
+reg_pSer <- env.matrices(serine_sites$env[which(serine_sites$pSer == TRUE & serine_sites$regulatory == TRUE)])
+```
+
+The environments matrix:
+
+```{r}
+environments_reg_pSer <- reg_pSer[[1]]
+head(environments_reg_pSer)
+```
+and its frequencies matrix:
+
+```{r}
+freq_reg_pSer <- reg_pSer[[2]]
+head(freq_reg_pSer)
+```
+
+## Comparing regulatory and non-regulatory sequence environments: Z-tests
+
+Since we are interested in detecting differences between the sequence environments of regulatory and non-regulatory pSer sites, we formulate the following null hypothesis: the difference between the relative frequency matrices (regulatory – non-regulatory) yields the zero matrix.
+
+To contrast this hypothesis, a new matrix, {Z_{ij}}, accounting for the standardized difference in frequencies, needs to be computed and that’s work for **env.Ztest()**. But, first of all let’s get rid of the central columns that don’t provide information (the central amino acid is always Ser).
+
+```{r}
+freq_reg_pSer <- freq_reg_pSer[, -11]
+freq_non_reg_pSer <- freq_non_reg_pSer[, -11]
+```
+
+Then, we can call the **env.Ztest()** as shown next:
+
+```{r}
+Z <- env.Ztest(pos = freq_reg_pSer,
+               ctr = freq_non_reg_pSer,
+               alpha = 0.001)
+```
+
+This function returns a list with three elements. The first one (Z[[1]]) is the Z matrix. Each element from this matrix should follow a standarized normal distribution, under the null hypothesis conditions. 
+
+```{r}
+head(Z[[1]])
+```
+
+The second element, Z[[2]] is a dataframe containing those amino acid that make a significant contribution (according to the confidence level, alpha, chosen for the user) to the differential environment by being overrepresented in the positive environment.
+
+```{r}
+head(Z[[2]])
+```
+
+The third element is also a dataframe containing those other residues that make a significant contribution to the differential environment, but in this occasion being underrepresented in the positive environment.
+
+```{r}
+head(Z[[3]])
+```
+As you can see, we must reject the null hypothesis and declare that the sequence environments of regulatory and non-regulatory phospho-serine sites are statistically distinguishable.
+
+## Ploting the differences between sequence environment
+
+The conclusion to which we have just arrived: the regulatory pSer sites exhibit a differential sequence environment, can be visually illustrated making use of the **env.plot()** function. For instance, let’s focus on proline and arginine, amino acids that are clearly overrepresented in the environment of regulatory pSer sites. On the other hand, glycine and serine are clearly underrepresented in the environment of regulatory pSer sites.
+
+```{r}
+oldpar <- par()
+par(mfrow=c(2,2))
+on.exit(oldpar)
+
+env.plot(Z = Z[[1]], aa = "P", pValue = 0.001, ylim = 'automatic')
+env.plot(Z = Z[[1]], aa = "R", pValue = 0.001, ylim = 'automatic')
+env.plot(Z = Z[[1]], aa = "G", pValue = 0.001, ylim = 'automatic')
+env.plot(Z = Z[[1]], aa = "S", pValue = 0.001, ylim = 'automatic')
+```
+
+We can conclude that regulatory pSer environments exhibit a preference for proline at position +1 and for arginine at positions -2 and -3. On the other hand, serine is avoided at position -3 and +1, while glycine is underrepresented at -2 and +1, arginine at the position +1 seems to be also excluded from the regulatory environments.
+
+
+
+
+
+```{r}
+
+```
+
+
 

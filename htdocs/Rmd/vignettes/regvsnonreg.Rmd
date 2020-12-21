@@ -1,0 +1,32 @@
+---
+title: "Regulatory versus Non-Regulatory Phosphoserines"
+author: "Juan Carlos Aledo"
+date: "12/20/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ptm)
+library(knitr)
+```
+
+
+In a previous vignette ([Building Up a Dataset for the Study of Phosphoserines](/pSerSet)) we showed how to proceed to build a dataset containing information regarding the serine residues from the human phosphoproteome. Herein, we will download that dataset, which will be use as a starting point. The reader interested in the details about how this data were collected can visit the above referred vignette. 
+
+```{r}
+url <- "https://github.com/jcaledo/ptm_db/raw/master/SerSites.Rda"
+
+destfile <- tempfile(pattern = 'all',
+                     tmpdir = tempdir(),
+                     fileext = '.Rda')
+download.file(url, destfile, quiet = TRUE)
+load(destfile)
+```
+
+
+
+We have collected tens of thousands of phospho-serine sites in our data set. However, as pointed out by [Gustav E. Lienhard](https://pubmed.ncbi.nlm.nih.gov/18603430), there are reasons for believing that some portion of these reported phosphorylations might have little or no functional importance. Thus, we are going to use an astringent criterion to label a phosphosite as regulatory: it should have been empirically proved that the phosphorylation of that site has an effect on the phosphoprotein. To search for those phosphosites fulfilling such criterion, we will make use of the function **reg.scan()**:
+
+we may be interested in addressing whether or not the sequence environments of those phospho-serines that have been described as playing a regulatory function, can be statistically distinguished from those environments belonging to phospho-serines detected in high-throughput analyses, but for which we have no information about their biological relevance.
+
