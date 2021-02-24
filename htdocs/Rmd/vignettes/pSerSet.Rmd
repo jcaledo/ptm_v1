@@ -144,7 +144,6 @@ We have collected tens of thousands of phospho-serine sites in our data set. How
 #   closeAllConnections()
 # }
 # serine_sites$regulatory[is.na(serine_sites$regulatory)] <- FALSE
-load("./SerSites.Rda")
 ```
 
 
@@ -166,10 +165,11 @@ We can start analyzing the sequence environment of these phospho-acceptors. To t
 Only serine residues with ten or more neighbors in both directions will be considered in this analysis:
 
 ```{r}
-serine_sites <- serine_sites[!grepl('X', serine_sites$env), ]
-head(serine_sites)
+# serine_sites <- serine_sites[!grepl('X', serine_sites$env), ]
+# head(serine_sites)
+load("./SerSites.Rda")
 ```
 
-This is the dataframe we need to start addressing our hypothesis: Regulatory phosphoserines have a differential sequence environment with respect to non-regulatory phosphoserines. A detailed description of how to carry out such analysis can be found in the vignette [Differential Sequence Environment of Regulatory and Non-regulatory Phosphoserines](/pSerRegulatory). 
+This is the dataframe we need to start addressing our hypothesis: Regulatory phosphoserines have a differential sequence environment with respect to non-regulatory phosphoserines. A detailed description of how to carry out such analysis can be found in the vignette [ Regulatory versus Non-Regulatory Phosphoserines](/pSerRegulatory). 
 
 

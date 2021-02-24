@@ -1,0 +1,21 @@
+---
+title: "January 2021 MetOSite Release"
+# author: "Juan Carlos Aledo"
+# date: "1/21/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+We are pleased to announce that a new release of MetOSite is now available. Among the new MetO sites incorporated to the database, we would like to highlight methionine 308 from the Ca2+/calmodulin-dependent protein kinase II (CaMKII). CaMKII is a serine/threonine kinase that plays very relevant roles in the cardiomuscular physiology, and which has been related to a number of human diseases. During the past 2020, the laboratory of Mark E. Anderson at the Johns Hopkins University, in collaboration with other laboratories (Rodney L. Levine at the NIH in Bethesda, Alex L. Holodkin at the Johns Hopkins University and Vadim N. Gladyshev at the Harvard Medical School) published in the Journal of Clinical Investigation (130:4663-4678) a paper that constitutes a real breakthrough in the area of redox signaling. In this paper, summarized in a short video (https://www.jci.org/posts/622) by Mark Anderson, the authors show that:
+
+•	MICAL 1, a methionine monooxygenase thought to exclusively target actin, can stereospecifically oxidize CaMKII Met308 to methionine sulfoxide (Met308-O-R). Met308 is a highly conserved residue in the CaM-binding domain of CaMKII. 
+•	This oxidation decreased CaM binding and CaMKII activity, while the absence of MICAL 1 in mice caused cardiac arrhythmias and premature death due to CaMKII hyperactivation. 
+•	MSRB, a methionine reductase, can reduce Met308-O-R back to methionine.
+
+Therefore, the coordinate action of MICAL 1 and MSRB seems to control the stereospecific redox status of Met308, which is revealed as a key regulator of fight-or-flight response. 
+
+
+
