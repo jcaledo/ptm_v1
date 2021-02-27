@@ -1,5 +1,5 @@
 ---
-title: "Differential Sequence Environment of Regulatory and Non-regulatory Phosphoserines"
+title: "Regulatory versus Non-Regulatory Phosphoserines"
 author: "Juan Carlos Aledo"
 date: "12/18/2020"
 output: html_document
@@ -13,7 +13,7 @@ library(knitr)
 
 In a previous vignette ([Building Up a Dataset for the Study of Phosphoserines](/pSerSet)) we showed how to proceed in order to build a dataset containing information regarding the serine residues from the human phosphoproteome. Herein, we will download that dataset, which will be use as a starting point to test the following working hypothesis:
 
-Regulatory phosphoserines have a differential sequence environment with respect to non-regulatory phosphoserines.
+**Regulatory phosphoserines have a differential sequence environment with respect to non-regulatory phosphoserines.**
 
 The reader interested in the details about how the data that will allow us to test this hypothesis were collected, can visit the above referred vignette. 
 
