@@ -74,3 +74,4 @@ test_that("mkdssp() works properly", {
   expect_gte(length(d$sse), 1332)
   expect_gt(sum(d$acc), 40000)
 })
+

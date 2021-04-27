@@ -571,7 +571,7 @@ parse.hssp <- function(file, keepfiles = FALSE){
 #' }
 #' @return Returns a dataframe corresponding to the profile.Rda described above.
 #' @author Juan Carlos Aledo
-#' @examples \dontrun{get.hssp(file = './1u8f.hssp')}
+#' @examples \dontrun{get.hssp(file = '1u8f')}
 #' @references Touw et al (2015) Nucl. Ac. Res. 43:D364-368.
 #' @seealso msa(), custom.aln(), list.hom(), parse.hssp(), shannon()
 #' @export
