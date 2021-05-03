@@ -59,6 +59,10 @@ pdb.seq <- function(pdb){
     }
   }
   ## ----------- Parsing the response ------------- #
+  if (grepl("^LOST CONNECTION", text) || grepl("No fasta", text) ||
+       grepl("^ERROR", text) || grepl("Nothing has been found",text)){
+    return("Sorry, no result could be retrieved")
+  }
   t <- strsplit(text, split = ">")[[1]][-1]
   seq <- data.frame(entry = rep(NA, length(t)),
                     entity = rep(NA, length(t)),
@@ -217,6 +221,7 @@ pdb2uniprot <- function(pdb, chain){
   attr(output, 'PDB_END') <- t$PDB_END
   return(output)
 }
+
 ## ---------------------------------------------------------------- ##
 #                  uniprot2pdb <- function(up_id)                    #
 ## ---------------------------------------------------------------- ##

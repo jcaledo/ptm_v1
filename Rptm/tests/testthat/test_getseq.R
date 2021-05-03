@@ -11,12 +11,15 @@ test_that("get.seq() works properly with UniProt",{
 
   a <- get.seq('P01009')
   t <- get.seq('P01009', as.string = FALSE)
+  b <- get.seq('P010091')
 
   expect_is(a, 'character')
   expect_equal(nchar(a), 418)
   expect_is(t, 'list')
   expect_equal(length(t[[1]]), 418)
   expect_equal(t[[1]][28], 'Q')
+  expect_is(b, 'character')
+  expect_true(grepl('LOST', b))
 })
 
 test_that("get.seq() works properly with MetOSite",{

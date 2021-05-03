@@ -22,9 +22,7 @@
 #' @details MetOSite uses the same type of protein ID than UniProt. However, if the chosen database is PDB, the identifier should be the 4-character unique identifier characteristic of PDB, followed by colon and the chain of interest. For instance, '2OCC:B' means we are interested in the sequence of chain B from the structure 2OCC. KEGG used its own IDs (see examples).
 #' @return Returns a protein (or nucleotide) sequence either as a character vector or a as a character string.
 #' @author Juan Carlos Aledo
-#' @examples get.seq('P01009')
-#' @examples \dontrun{get.seq("hsa:5265", db = "kegg-aa")}
-#' @examples \dontrun{get.seq("1u8f:P", db = "pdb")}
+#' @example get.seq('P01009')
 #' @importFrom httr GET
 #' @importFrom httr content
 #' @export
@@ -45,18 +43,22 @@ get.seq <- function(id, db = 'uniprot', as.string = TRUE){
     text <- 'no text'
     id <- strsplit(id, split=':')[[1]]
     df <- pdb.seq(id[1])
-    call <- NULL
-    if (!is.na(id[2])){ # a given chain
-      chains <- strsplit(gsub(",", "", paste(df$chain, collapse = "")), split = "")[[1]]
-      if (id[2] %in% chains){
-        seq <- df$sequence[grepl(id[2], df$chain)]
-      } else if (grepl(id[2], chains)){
-        seq <- df$sequence[grepl(id[2], df$chain)]
-      } else {
-        stop("The chosen chain is not found in the PDB")
+    if (is.data.frame(df)){ # pdb.seq successed
+      call <- NULL
+      if (!is.na(id[2])){ # a given chain
+        chains <- strsplit(gsub(",", "", paste(df$chain, collapse = "")), split = "")[[1]]
+        if (id[2] %in% chains){
+          seq <- df$sequence[grepl(id[2], df$chain)]
+        } else if (grepl(id[2], chains)){
+          seq <- df$sequence[grepl(id[2], df$chain)]
+        } else {
+          stop("The chosen chain is not found in the PDB")
+        }
+      } else { # no chain specified
+        seq <- paste(df$sequence, collapse = "")
       }
-    } else { # no chain specified
-      seq <- paste(df$sequence, collapse = "")
+    } else { # pdb.seq lost connection
+      seq <- df # should be a lost connection message
     }
 
   } else if (db == 'kegg-aa' | db == 'kegg-nt'){
@@ -131,7 +133,7 @@ get.seq <- function(id, db = 'uniprot', as.string = TRUE){
       }
     }
   } else {
-    output <- text
+    output <- paste("Sorry, ", text, sep = "")
   }
 
   attr(output, "ID") <- id
@@ -172,13 +174,20 @@ prot2codon <- function(prot, chain = "", laxity = TRUE){
   } else if (nchar(prot) == 4){ # input is PDB ID
     id <- paste(prot, chain, sep = ":")
     seq <- ptm::get.seq(id, db = 'pdb', as.string = FALSE)[[1]]
-
+    if (grepl('LOST', seq[1])){ # if get.seq doesn't success
+      return("Sorry, no result could be retrieved")
+    }
     t <- prot
     source <- 'pdb'
 
   } else { # input should be a uniprot ID
     seq <- ptm::get.seq(prot, as.string = FALSE)[[1]]
-    if (length(seq) == 0) {return("Sorry, no Uniprot seq could be found!")}
+    if (grepl('LOST', seq[1])){ # if get.seq doesn't success
+      return("Sorry, no result could be retrieved")
+    }
+    else if (length(seq) == 0) {
+      return("Sorry, no Uniprot seq could be found!")
+    }
     t <- prot
     source <- 'uniprot'
   }
@@ -198,8 +207,15 @@ prot2codon <- function(prot, chain = "", laxity = TRUE){
   ## ----------------- Finding the codons ------------------ ##
   organism <- species.mapping(t, db = source)
 
+  if (grepl("Sorry", organism)){ # if species.mapping doesn't success
+    return(organism)
+  }
+
   if (source == 'pdb'){
     t <- pdb2uniprot(t, chain = chain)
+    if (grepl("Sorry", t)){ # if pdb2uniprot doesn't success
+      return(t)
+    }
   }
 
   kegg_id <- id.mapping(t, from = 'uniprot', to = 'kegg')[1]
@@ -208,6 +224,9 @@ prot2codon <- function(prot, chain = "", laxity = TRUE){
     return(output)
   }
   dna <- ptm::get.seq(kegg_id, 'kegg-nt')
+  if (grepl("Sorry", dna)){ # if get.seq doesn't success
+    return(dna)
+  }
   codon <- gsub("(.{3})", "\\1 ", dna)
   codon <- strsplit(codon, split = " ")[[1]]
   if (requireNamespace('seqinr', quietly = TRUE)){
@@ -299,7 +318,11 @@ id.mapping <- function(id, from, to){
     } else {
       stop("The package KEGGREST must be installed to get this mapping")
     }
-    output <- substr(output, 4, nchar(output))
+    if (length(output) == 0){
+      output <- "Sorry, no result could be retrieved"
+    } else {
+      output <- substr(output, 4, nchar(output))
+    }
     return(output)
   }
   ## ----- From UniProt to KEGG ------------- ##
@@ -307,7 +330,12 @@ id.mapping <- function(id, from, to){
     if (requireNamespace("KEGGREST", quietly = TRUE)){
       sp <- species.mapping(id)
       organisms <- NULL
-      load(url("https://github.com/jcaledo/kegg_species/blob/master/organisms.Rda?raw=true"))
+      orgfile <- try(load(url("https://github.com/jcaledo/kegg_species/blob/master/organisms.Rda?raw=true")))
+      closeAllConnections()
+      if (inherits(orgfile, "try-error")) {
+        output <- "Sorry, LOST CONNECTION"
+        retunr(output)
+      }
       org <- organisms$organism[which(regexpr(sp, organisms$species) != -1)[1]]
       if (is.na(org)){ # if there is not a full match, try a partial match
         sp_ <- strsplit(sp, " ")[[1]]
@@ -333,7 +361,7 @@ id.mapping <- function(id, from, to){
     request <- try(httr::GET(uniprot_url, query = params, my_headers),
                    silent = TRUE)
     if (inherits(request, "try-error")) {
-      ans <- "LOST CONNECTION"
+      ans <- "Sorry, LOST CONNECTION"
     } else {
       ans <- httr::content(request, 'text', encoding = "ISO-8859-1")
     }
@@ -346,7 +374,7 @@ id.mapping <- function(id, from, to){
       request <- try(httr::GET(uniprot_url, query = params, my_headers),
                      silent = TRUE)
       if (inherits(request, "try-error")) {
-        ans <- "LOST CONNECTION"
+        ans <- "Sorry, LOST CONNECTION"
       }
       else {
         ans <- httr::content(request, 'text', encoding = "ISO-8859-1")
@@ -371,7 +399,7 @@ id.mapping <- function(id, from, to){
     request <- try(httr::GET(uniprot_url, query = params, my_headers),
                    silent = TRUE)
     if (inherits(request, "try-error")) {
-      ans <- "LOST CONNECTION"
+      ans <- "Sorry, LOST CONNECTION"
     } else {
       ans <- httr::content(request, 'text', encoding = "ISO-8859-1")
     }
@@ -384,7 +412,7 @@ id.mapping <- function(id, from, to){
       request <- try(httr::GET(uniprot_url, query = params, my_headers),
                      silent = TRUE)
       if (inherits(request, "try-error")) {
-        ans <- "LOST CONNECTION"
+        ans <- "Sorry, LOST CONNECTION"
       }
       else {
         ans <- httr::content(request, 'text', encoding = "ISO-8859-1")
@@ -554,10 +582,17 @@ species.mapping <- function(id, db = 'uniprot'){
     }
   }
 
-  start <- gregexpr("OS=", text)[[1]]
-  stop <- gregexpr("OX=", text)[[1]]
-  species <- substr(text, start+3, stop-2)
+  if (text == "LOST CONNECTION"){
+    species <- paste("Sorry, ", text, sep = "")
+  } else {
+    start <- gregexpr("OS=", text)[[1]]
+    stop <- gregexpr("OX=", text)[[1]]
+    species <- substr(text, start+3, stop-2)
+  }
 
+  if (nchar(species) == 0){
+    species <- "Sorry, no result could be retrieved"
+  }
   return(species)
 }
 
@@ -583,7 +618,12 @@ species.mapping <- function(id, db = 'uniprot'){
 species.kegg <- function(organism, from = 'scientific'){
 
   organisms <- NULL
-  load(url("https://github.com/jcaledo/kegg_species/blob/master/organisms.Rda?raw=true"))
+  orgfile <- try(load(url("https://github.com/jcaledo/kegg_species/blob/master/organisms.Rda?raw=true")))
+  closeAllConnections()
+  if (inherits(orgfile, "try-error")) {
+    output <- "Sorry, LOST CONNECTION"
+    retunr(output)
+  }
   organisms$organism <- as.character(organisms$organism)
   organisms$species <- as.character(organisms$species)
 

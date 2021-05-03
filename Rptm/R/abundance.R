@@ -24,7 +24,12 @@
 abundance <- function(id, ...){
 
   tissue <- list(...)
+
   sp <- species.mapping(id)
+  if (is.null(sp)){
+    message("Sorry, data abundance for the requested protein could not be found")
+    return(NULL)
+  }
 
   if (sp == 'Arabidopsis thaliana'){
     paxdb <- pax.ath
@@ -61,9 +66,9 @@ abundance <- function(id, ...){
   } else if (sp == 'Sus scrofa'){
     paxdb <- pax.ssc
   } else {
-    warning <- paste('Abundance data for proteins of the species ',
-                     sp, " couldn't be found", sep = "")
-    return(warning)
+    message(paste('Abundance data for proteins of the species ',
+                     sp, " couldn't be found", sep = ""))
+    return(NULL)
   }
 
   paxdb$abundance <- as.numeric(as.character(paxdb$abundance))
