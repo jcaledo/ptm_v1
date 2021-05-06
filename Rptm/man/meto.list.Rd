@@ -17,7 +17,6 @@ Lists proteins found in MetOSite with names matching the keyword.
 }
 \examples{
 meto.list('inhibitor')
-meto.list('calcium')
 }
 \references{
 Valverde et al. 2019. Bioinformatics 35:4849-4850 (PMID: 31197322)

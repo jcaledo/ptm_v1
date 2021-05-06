@@ -6,45 +6,42 @@ context("Residue-Focused Functions Tests")
 ## ----------------------------------------------- ##
 test_that("aa.at() using named arguments with order", {
 
-  t <- aa.at(at=28 , target='P01009' , uniprot=TRUE)
-  w <- aa.at(at=500, target='P01009' , uniprot=TRUE)
-  x <- aa.at(at=-5, target='P01009' , uniprot=TRUE)
+  skip_on_cran()
+  skip_on_travis()
 
-  expect_equal(t, "Q")
-  expect_equal(length(t), 1)
-  expect_equal(nchar(t), 1)
-  expect_equal(length(w), 1)
-  expect_gt(nchar(w), 1)
-  expect_gt(nchar(x), 1)
+  a <- aa.at(at=28 , target='P01009' , uniprot=TRUE)
+  b <- aa.at(at=500, target='P01009' , uniprot=TRUE)
+
+  if (!is.null(a)){
+    expect_is(a, 'character')
+    expect_equal(a, "Q")
+  }
+  expect_is(b, 'NULL')
 })
 
 test_that("aa.at() using named arguments without order", {
 
-  t <- aa.at(target='P01009' , uniprot=TRUE, at=28)
-  w <- aa.at(at=500, uniprot=TRUE, target='P01009')
-  x <- aa.at(uniprot=TRUE, at=-5, target='P01009')
+  skip_on_cran()
+  skip_on_travis()
 
-  expect_equal(t, "Q")
-  expect_equal(length(t), 1)
-  expect_equal(nchar(t), 1)
-  expect_equal(length(w), 1)
-  expect_gt(nchar(w), 1)
-  expect_gt(nchar(x), 1)
-})
+  a <- aa.at(target='P01009' , uniprot=TRUE, at=28)
+  b <- aa.at(at=500, uniprot=TRUE, target='P01009')
 
-test_that("aa.at() using uniprot = TRUE",{
-  expect_equal(aa.at(28, 'P01009'), "Q")
-  expect_equal(length(aa.at(80, 'P00109')), 1)
-  expect_equal(nchar(aa.at(100, 'P01009')), 1)
-  expect_equal(length(aa.at(500, 'P01009')), 1)
-  expect_gt(nchar(aa.at(500, 'P01009')), 1)
-  expect_gt(nchar(aa.at(-5, 'P01009')), 1)
+  if (!is.null(a)){
+    expect_is(a, 'character')
+    expect_equal(a, "Q")
+    expect_equal(length(a), 1)
+    expect_equal(nchar(a), 1)
+  }
+  expect_is(b, 'NULL')
+
 })
 
 test_that("aa.at using uniprot = FALSE",{
+
   expect_equal(aa.at(6, "MARSSRAM", FALSE), 'R')
-  expect_gt(nchar(aa.at(10, "MARSSRAM", FALSE)), 1)
-  expect_gt(nchar(aa.at(-6, "MARSSRAM", FALSE)), 1)
+  expect_is(aa.at(10, "MARSSRAM", FALSE), 'NULL')
+
 })
 
 
@@ -52,9 +49,60 @@ test_that("aa.at using uniprot = FALSE",{
 #            Testing the function is.at            #
 ## ---------------------------------------------- ##
 test_that("is.at() works properly", {
-  expect_true(is.at(at = 5, target = 'MARTMTRAM', uniprot = FALSE))
-  expect_true(is.at(28, 'P01009', 'Q'))
-  expect_false(is.at(80, 'P00004', 'R'))
+
+  skip_on_cran()
+  skip_on_travis()
+
+  a <- is.at(at = 5, target = 'MARTMTRAM', uniprot = FALSE)
+  b <- is.at(28, 'P01009', aa = 'Q')
+  c <- is.at(at =5, target = 'MARTMTRAM', aa = "P", uniprot = FALSE)
+  d <- is.at(28, 'P01009', aa = 'P')
+  e <- is.at(28, 'P010091')
+
+  expect_is(a, 'logical')
+  expect_true(a)
+
+  if (!is.null(b)){
+    expect_is(b, 'logical')
+    expect_true(b)
+  }
+
+  if (!is.null(c)){
+    expect_is(c, 'logical')
+    expect_false(c)
+  }
+
+  if (!is.null(d)){
+    expect_is(d, 'logical')
+    expect_false(d)
+  }
+
+  expect_is(e, 'NULL')
+
+})
+
+## ---------------------------------------------- ##
+#        Testing the function aa.comp              #
+## ---------------------------------------------- ##
+test_that("the function aa.comp() works properly", {
+
+  skip_on_cran()
+  skip_on_travis()
+
+  a <- aa.comp("ACEEAGRKDNW", uniprot = FALSE)
+  b <- aa.comp("P01009")
+  c <- aa.comp('P010091')
+
+  expect_is(a, 'data.frame')
+  expect_equal(dim(a), c(20, 2))
+
+  if (!is.null(b)){
+    expect_is(b, 'data.frame')
+    expect_equal(dim(a), c(20, 2))
+    expect_equal(sum(b$frequency), 418)
+  }
+
+  expect_is(c, 'NULL')
 })
 
 
@@ -68,17 +116,24 @@ test_that("the function renum.pdb() works properly", {
 
   a <- renum.pdb(pdb = '121P', chain = 'A', uniprot = 'P01112')
   b <- renum.pdb(pdb = "./pdb/1u8f.pdb", chain = 'O', 'P04406')
+  c <- renum.pdb(pdb = 'xxxx', chain = 'X', uniprot = 'P010091')
 
-  expect_is(a, 'data.frame')
-  expect_equal(nrow(a), 189)
-  expect_equal(ncol(a), 6)
-  expect_equal(a$uni_pos[10], a$pdb_pos[10])
-  expect_false(a$uniprot[180] == a$pdb[180])
+  if (!is.null(a)){
+    expect_is(a, 'data.frame')
+    expect_equal(nrow(a), 189)
+    expect_equal(ncol(a), 6)
+    expect_equal(a$uni_pos[10], a$pdb_pos[10])
+    expect_false(a$uniprot[180] == a$pdb[180])
+  }
 
-  expect_is(b, 'data.frame')
-  expect_equal(nrow(b), 335)
-  expect_equal(ncol(b), 6)
-  expect_equal(b$uni_pos[10], b$pdb_renum[10])
+  if (!is.null(b)){
+    expect_is(b, 'data.frame')
+    expect_equal(nrow(b), 335)
+    expect_equal(ncol(b), 6)
+    expect_equal(b$uni_pos[10], b$pdb_renum[10])
+  }
+
+  expect_is(c, 'NULL')
 })
 
 
@@ -91,13 +146,16 @@ test_that("the function renum.meto() works properly", {
   skip_on_travis()
 
   a <- renum.meto(uniprot = 'P01009')
+  b <- renum.meto(uniprot = 'P010091')
 
-  expect_is(a, 'data.frame')
-  expect_equal(nrow(a), 418)
-  expect_equal(ncol(a), 6)
-  expect_equal(a$uni_pos[180], a$meto_pos[180] + 24)
-  expect_false(a$uniprot[10] == a$meto[10])
-
+  if (!is.null(a)){
+    expect_is(a, 'data.frame')
+    expect_equal(nrow(a), 418)
+    expect_equal(ncol(a), 6)
+    expect_equal(a$uni_pos[180], a$meto_pos[180] + 24)
+    expect_false(a$uniprot[10] == a$meto[10])
+  }
+  expect_is(b, 'NULL')
 })
 
 
@@ -119,6 +177,8 @@ test_that('renum() works properly', {
   d <- renum(up_id = 'P01009', pos = 16,
              from = 'pdb' , to = 'uniprot',
              pdb = '1ATU', chain = 'A')
+  e <- renum(up_id = 'P010091', pos = 60,
+             from = 'uniprot', to = 'metosite')
 
   expect_is(a, 'numeric')
   expect_equal(a, 36)
@@ -128,5 +188,6 @@ test_that('renum() works properly', {
   expect_equal(c, 16)
   expect_is(d, 'numeric')
   expect_equal(d, 60)
+  expect_is(e, 'NULL')
 })
 

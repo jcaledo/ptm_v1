@@ -5,7 +5,6 @@
 #     get.go                              #
 #     bg.go                               #
 #     hdfisher.go                         #
-#     gorilla                             #
 #     net.go                              #
 #                                         #
 ## ------------------------------------- ##
@@ -21,13 +20,8 @@
 #' @author Juan Carlos Aledo
 #' @seealso term.go(), get.go(), bg.go(), hdfisher.go(), gorilla(), net.go()
 #' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
-#' @examples search.go('oxidative stress')
-#' @importFrom httr GET
-#' @importFrom httr accept
-#' @importFrom httr content
-#' @importFrom httr stop_for_status
+#' @examples \dontrun{search.go('oxidative stress')}
 #' @importFrom jsonlite fromJSON
-#' @importFrom jsonlite toJSON
 #' @export
 
 search.go <- function(query){
@@ -37,20 +31,22 @@ search.go <- function(query){
   baseURL <- "https://www.ebi.ac.uk/QuickGO/services/ontology/go/search?query="
   requestURL <- paste(baseURL, query_, "&limit=600", sep = "")
 
-  r <- httr::GET(requestURL, httr::accept("application/json"))
-  httr::stop_for_status(r)
-  json <- jsonlite::toJSON(httr::content(r))
-  myjson <- jsonlite::fromJSON(json)
-  if (myjson$numberOfHits == 0){
-    output <- "Sorry, no hits were found for the current query"
-  } else {
-    output <- as.data.frame(jsonlite::fromJSON(json))[, 2:6]
-    names(output) <- c("GO_id", "obsolete", "term_name", "definition_text", "aspect")
-  }
+  r <- gracefully_fail(requestURL)
 
-  attr(output, "query") <- query
-  return(output)
+  if (is.null(r)){
+    message("Sorry, no result could be retrieved")
+    return(NULL)
+  } else if (jsonlite::fromJSON(r)$numberOfHits == 0) {
+    message("Sorry, no hits found")
+    return(NULL)
+  } else {
+    output <- as.data.frame(jsonlite::fromJSON(r))[, 2:6]
+    names(output) <- c("GO_id", "obsolete", "term_name", "definition_text", "aspect")
+    attr(output, "query") <- query
+    return(output)
+  }
 }
+
 
 ## ---------------------------------------------------------------- ##
 #           term.go <- function(go, children = FALSE)                #
@@ -65,13 +61,8 @@ search.go <- function(query){
 #' @author Juan Carlos Aledo
 #' @seealso search.go(), get.go(), bg.go(), hdfisher.go(), gorilla(), net.go()
 #' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
-#' @examples term.go('GO:0034599')
-#' @importFrom httr GET
-#' @importFrom httr accept
-#' @importFrom httr content
-#' @importFrom httr stop_for_status
+#' @examples \dontrun{term.go('GO:0034599')}
 #' @importFrom jsonlite fromJSON
-#' @importFrom jsonlite toJSON
 #' @export
 
 term.go <- function(go, children = FALSE){
@@ -80,12 +71,13 @@ term.go <- function(go, children = FALSE){
   id <- strsplit(go, split = ":")[[1]][2]
   requestURL <- paste(baseURL, id, sep = "")
 
-  r <- httr::GET(requestURL, accept("application/json"))
+  r <- gracefully_fail(requestURL)
+  if (is.null(r)){
+    message("Sorry, no result could be retrieved")
+    return(NULL)
+  }
 
-  httr::stop_for_status(r)
-
-  json <- jsonlite::toJSON(httr::content(r))
-  t <- as.list(jsonlite::fromJSON(json)[[2]])
+  t <- as.list(jsonlite::fromJSON(r)[[2]])
   core <- as.data.frame(matrix(rep(NA, 7), ncol = 7))
   names(core) <- c("term_name","GO_id","aspect","definition_text","reference", "synonyms","obsolete")
   if (!is.null(t$name)) core$term_name[1] = t$name[[1]]
@@ -100,6 +92,11 @@ term.go <- function(go, children = FALSE){
   } else {
     children_terms <- "Sorry, no children couldn't be found"
   }
+
+  # r <- httr::GET(requestURL, httr::accept("application/json"))
+  # httr::stop_for_status(r)
+  # json <- jsonlite::toJSON(httr::content(r))
+  # t <- as.list(jsonlite::fromJSON(json)[[2]])
 
   if (children){
     output <- list(core, children_terms)
@@ -129,7 +126,6 @@ term.go <- function(go, children = FALSE){
 #' @importFrom httr GET
 #' @importFrom httr accept
 #' @importFrom httr content
-#' @importFrom httr stop_for_status
 #' @importFrom jsonlite fromJSON
 #' @export
 
@@ -144,9 +140,24 @@ get.go <- function(id, filter = TRUE, format = 'dataframe', silent = FALSE){
     requestURL <- paste("https://www.ebi.ac.uk/QuickGO/services/annotation/",
                         "downloadSearch?includeFields=goName&selectedFields=symbol&geneProductId=",
                         id, sep = "")
-    r <- httr::GET(requestURL, httr::accept("text/gpad"))
-    httr::stop_for_status(r)
-    content <- httr::content(r,as = "text")
+
+    r <- tryCatch(
+      {
+        httr::GET(requestURL, httr::accept("text/gpad"))
+      },
+      error = function(cond){
+        return(NULL)
+      }
+    )
+    if (is.null(r)){
+      message("Sorry, no result could be retrieved")
+      return(NULL)
+    } else if (r$status_code > 300){
+      message("Sorry, no result could be retrieved")
+      return(NULL)
+    }
+    content <- httr::content(r, as = "text")
+
     a <- strsplit(content, split = "\n")[[1]]
     lines <- a[10:length(a)]
     output <- as.data.frame(matrix(rep(NA, length(lines)*8), ncol = 8))
@@ -171,8 +182,15 @@ get.go <- function(id, filter = TRUE, format = 'dataframe', silent = FALSE){
   filtered.list <- function(id){
     baseURL <- 'https://www.uniprot.org/uniprot/?query='
     requestURL <- paste(baseURL, id, '&format=tab&columns=id%2Cgo', sep = "")
-    resp <- .get.url(requestURL)
-    cont <- httr::content(resp, 'text')
+    cont <- gracefully_fail(requestURL)
+    if (is.null(cont)){
+      message("Sorry, no result could be retrieved")
+      return(NULL)
+    } else if (cont == ""){
+      message("Sorry, no result could be retrieved")
+      return(NULL)
+    }
+
     a <- strsplit(cont, split = '\n')[[1]] # all the lines
     b <- a[which(grepl(id, a))]
     c <- strsplit(b, split = "\t")[[1]][2] # only term names and GO ids
@@ -189,7 +207,8 @@ get.go <- function(id, filter = TRUE, format = 'dataframe', silent = FALSE){
     output <- output[which(substr(output$GO_id, 1, 2) == "GO"), ]
 
     if (sum(is.na(output$GO_id)) == nrow(output)){
-      return(paste("Sorry, no GO terms found for the ", id, " entry", sep = ""))
+      message(paste("Sorry, no GO terms found for the ", id, " entry", sep = ""))
+      return(NULL)
     } else {
       output$obsolete <- output$definition_text <- output$aspect <- NA
       for (i in 1:nrow(output)){
@@ -264,7 +283,15 @@ bg.go <- function(ids){
   bg <- data.frame(up_id = bg, GO_id = rep(NA, length(bg)))
 
   for (i in 1:nrow(bg)){
-    bg$GO_id[i] <- get.go(trimws(bg$up_id[i]), format = 'string')
+    bg$GO_id[i] <- tryCatch(
+      {
+        get.go(trimws(bg$up_id[i]), format = 'string')
+      },
+      error = function(cond){
+        return(NA)
+      }
+    )
+
   }
   return(bg)
 }
@@ -321,10 +348,17 @@ hdfisher.go <- function(target, background, query, analysis = 'enrichment'){
   }
   target_c <- setdiff(bg, sample) # target complement
 
-  rquery <- search.go(query)
-  if (!is.data.frame(rquery)){
-    output <- "Sorry, no hits were found for the current query"
-    return(output)
+  rquery <- tryCatch(
+    {
+      search.go(query)
+    },
+    error = function(cond){
+      return(NULL)
+    }
+  )
+  if (is.null(rquery)){
+    message("Sorry, no hits were found for the current query")
+    return(NULL)
   } else {
     rquery <- unlist(rquery$GO_id)
 
@@ -378,6 +412,7 @@ hdfisher.go <- function(target, background, query, analysis = 'enrichment'){
     ft <- stats::fisher.test(ct, alternative = alternative)
     output <- list(contingency_table = ct, pv = ft$p.value)
   }
+
   attr(output, 'query') <- query
   attr(output, 'analysis') <- analysis
   return(output)
@@ -408,7 +443,7 @@ net.go <- function(data, threshold = 0.2, silent = FALSE){
 
   ## ------- Assessing whether data are in txt or rda format -------- ##
   format <- format_ <- ""
-  if (is.vector(data) & length(data) > 1){ # --- Vertices are directely provided as a vector
+  if (is.vector(data) & length(data) > 1){ # --- Vertices are directly provided as a vector
     vertices <- data
     # id <- vertices[,1]
   } else if (is.character(data)){
@@ -436,7 +471,9 @@ net.go <- function(data, threshold = 0.2, silent = FALSE){
   id <- vertices
   ## ----------------- Computing f(id) = GO_subset ------------------ ##
   fid <- lapply(id, function(x) get.go(id = x, filter = FALSE, format = "string"))
-
+  valid_id <- which(fid != "NULL") # removing proteing without GO annotations
+  fid <- fid[valid_id]
+  id <- id[valid_id]
   ## ---------- Computing Jaccard index in the id x id set ---------- ##
   jaccard <- matrix(rep(NA, length(id)^2), ncol =length(id))
   colnames(jaccard) <- rownames(jaccard) <- id
@@ -472,209 +509,4 @@ net.go <- function(data, threshold = 0.2, silent = FALSE){
   return(output)
 }
 
-
-## ---------------------------------------------------------------- ##
-#   gorilla <- function(target, background = NULL, mode = 'mhg',     #
-#                       db = 'proc', pv = 0.001, spe = NULL)         #
-## ---------------------------------------------------------------- ##
-#' GO Enrichment Analysis
-#' @description Performs GO terms enrichment analyses.
-#' @usage gorilla(target, background = NULL, mode = 'mhg', db = 'proc', pv = 0.001, spe = NULL)
-#' @param target path to the txt file containing (one per line) the UniProt id of the proteins belonging to the target set.
-#' @param background path to the txt file containing (one per line) the UniProt id of the proteins belonging to the background set.
-#' @param mode a character string specifying the desired analysis mode; it must be one of 'mhg' (identifies enriched GO terms in ranked lists), 'hg' (identifies enriched GO terms in the target set compared to the background set)
-#' @param db a character string specifying the chosen ontology; it must be one of 'proc' (biological process), 'func' (molecular function), 'comp' (cellular component), 'all' (all the three previous ontologies).
-#' @param pv a numeric value for the p-value threshold. Only GO terms with a p-value better than this threshold are reported.
-#' @param spe a character string specifying the organism of interest. The species supported by GOrilla are: (Arabidopsis thaliana, Saccharomyces cerevisiae, Caenorhabditis elegans, Drosophila melanogaster, Danio rerio, Homo sapiens, Mus musculus, Rattus norvegicus)
-#' @details This function is a client of GOrilla, which is a web-based application that identifies enriched GO terms.
-#' @return Returns either a dataframe with the enrichment results if a single ontology has been selected, or a list with three dataframe if the three ontologies were selected.
-#' @author Juan Carlos Aledo
-#' @seealso search.go(), term.go(), get.go(), bg.go(), net.go()
-#' @references Eden et al. (2009) BMC Bioinformatics 10:48.
-#' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
-#' @examples \dontrun{gorilla(target = './go/GOvivo.txt', db = 'all')}
-#' @importFrom httr GET
-#' @importFrom httr content
-#' @importFrom jsonlite fromJSON
-#' @importFrom utils read.delim
-#' @export
-
-gorilla <- function(target, background = NULL, mode = 'mhg', db = 'proc', pv = 0.001, spe = NULL){
-
-  ## ------------------------------- Check arguments --------------------------------- ##
-  warn <- FALSE
-  warn_message <- c()
-  if (! file.exists(target)){
-    stop("Please, provide a proper target file")
-  } else {
-    target <- httr::upload_file(target)
-  }
-
-  if (mode == 'mhg'){
-    background = NULL
-  } else if (mode == 'hg'){
-    if (! file.exists(background)){
-      stop("Please, provide a proper background file")
-    } else {
-      background <- httr::upload_file(background)
-    }
-  } else {
-    mode <- 'mhg'
-    warn <- TRUE
-    warn_message <- c(warn_message, "Run mode has been set to 'mgh'")
-  }
-
-  if (! db %in% c('proc', 'func', 'comp', 'all')){
-    db <- 'all'
-    warn <- TRUE
-    warn_message <- c(warn_message, "db has been set to 'all")
-  }
-
-  organism <- c('Arabidopsis thaliana', 'Caenorhabditis elegans', 'Danio rerio',
-                'Drosophila melanogaster', 'Homo sapiens', 'Mus musculus',
-                'Rattus norvegicus', 'Saccharomyces cerevisiae')
-  if (is.null(spe)){
-    sp <- "HOMO_SAPIENS"
-    warn <- TRUE
-    warn_message <- c(warn_message, "species has been set to 'HOMO_SAPIENS")
-  } else if (spe %in% organism){
-    sp <- gsub(' ', '_', toupper(spe))
-  } else {
-    sp <- "HOMO_SAPIENS"
-    warn <- TRUE
-    warn_message <- c(warn_message, "species has been set to 'HOMO_SAPIENS")
-  }
-
-  if (is.numeric(pv)){
-    closest <- c()
-    for (n in (3:11)){
-      closest <- c(closest, abs(pv - (1/10^n)))
-    }
-    closest <- which(closest == min(closest)) + 2
-    p <- 1/10^closest
-    p <- as.character(p)
-  } else {
-    stop("A proper numeric p-Value should be provided")
-  }
-
-  ## --------------------------------- Form ----------------------------------- ##
-  query_parameters <- list(
-                            application = "gorilla",
-                            run_mode = mode,
-                            target_file_name = target,
-                            background_file_name = background,
-                            db = db,
-                            pvalue_thresh = p,
-                            fast_mode = NA,
-                            output_excel = NA,
-                            output_revigo = NA,
-                            output_unresolved = NA,
-                            species = sp
-                          )
-
-
-
-  resp_gorilla <- httr::POST(url = "http://cbl-gorilla.cs.technion.ac.il/servlet/GOrilla",
-                             body = query_parameters)
-
-
-  if (httr::status_code(resp_gorilla) > 300){
-    stop(paste("The server responded: ", httr::status_code(resp_gorilla)))
-  }
-
-  ## -------------------------------------- Results ---------------------------------------- ##
-  response <- httr::GET(resp_gorilla$url)
-  httr::status_code(response)
-
-  if (httr::status_code(response) >= 200 & httr::status_code(response) < 300){
-    work_id <- strsplit(resp_gorilla$url, split = "id=")[[1]][2]
-    base_res_url <- "http://cbl-gorilla.cs.technion.ac.il/GOrilla/"
-    # Sys.sleep(10)
-    if (db == 'proc'){
-      process_url <- paste(base_res_url, work_id, "/GO.xls", sep = "")
-
-      response_results <- httr::GET(process_url)
-      wait <- TRUE
-      times <- 0
-      while (wait & times < 7){
-        if (httr::status_code(response_results) == 200){
-          wait <- FALSE
-        }
-        times <- times + 1
-        Sys.sleep(10)
-      }
-
-      process_df <- utils::read.delim(process_url)
-      output <-  process_df
-    } else if (db == 'func'){
-      function_url <- paste(base_res_url, work_id, "/GO.xls", sep = "")
-
-      response_results <- httr::GET(function_url)
-      wait <- TRUE
-      times <- 0
-      while (wait & times < 7){
-        if (httr::status_code(response_results) == 200){
-          wait <- FALSE
-        }
-        times <- times + 1
-        Sys.sleep(10)
-      }
-
-      function_df <- utils::read.delim(function_url)
-      output <-  function_df
-    } else if (db == 'comp'){
-      component_url <- paste(base_res_url, work_id, "/GO.xls", sep = "")
-
-      response_results <- httr::GET(component_url)
-      wait <- TRUE
-      times <- 0
-      while (wait & times < 7){
-        if (httr::status_code(response_results) == 200){
-          wait <- FALSE
-        }
-        times <- times + 1
-        Sys.sleep(10)
-      }
-
-      component_df <- utils::read.delim(component_url)
-      output <-  component_df
-    } else {
-      process_url <- paste(base_res_url, work_id, "/GOPROCESS.xls", sep = "")
-      function_url <- paste(base_res_url, work_id, "/GOFUNCTION.xls", sep = "")
-      component_url <- paste(base_res_url, work_id, "/GOCOMPONENT.xls", sep = "")
-
-      response_results <- httr::GET(process_url)
-      wait <- TRUE
-      times <- 0
-      while (wait & times < 7){
-        if (httr::status_code(response_results) == 200){
-          wait <- FALSE
-        }
-        times <- times + 1
-        Sys.sleep(10)
-      }
-
-      process_df <- utils::read.delim(process_url)
-      function_df <- utils::read.delim(function_url)
-      component_df <- utils::read.delim(component_url)
-
-      # Sys.sleep(60)
-      output <- list(process_df, function_df, component_df)
-    }
-
-    attr(output, 'target') <- target
-    attr(output, 'background') <- background
-    attr(output, 'run mode') <- mode
-    attr(output, 'db') <- db
-    attr(output, 'pValue') <- p
-
-    if (warn){
-      warning(warn_message)
-    }
-
-  } else {
-    output <- httr::status_code(response)
-  }
-  return(output)
-}
 

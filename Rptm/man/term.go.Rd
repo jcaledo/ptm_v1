@@ -21,7 +21,7 @@ Gets core information about the GO term of interest.
 When the argument children is set to TRUE, the output of this function is a list with two elements: the first one is a dataframe with the core information, and the second one is a dataframe containing the children terms.
 }
 \examples{
-term.go('GO:0034599')
+\dontrun{term.go('GO:0034599')}
 }
 \references{
 Rhee et al. (2008) Nature Reviews Genetics 9:509–515.

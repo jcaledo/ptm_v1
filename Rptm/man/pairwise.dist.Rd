@@ -21,6 +21,3 @@ Computes the pairwise distance matrix between two sets of points
 \examples{
 pairwise.dist(matrix(1:9, ncol = 3), matrix(9:1, ncol = 3))
 }
-\seealso{
-res.dist(), dist2closest(), ball()
-}

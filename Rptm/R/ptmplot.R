@@ -1,4 +1,4 @@
-## ---------- plot_ptm.R ---------- ##
+## ---------- ptmplot.R ---------- ##
 #                                    #
 #     ptm.plot                       #
 #     find.aaindex                   #
@@ -14,7 +14,7 @@
 #'                 window = 1, sdata = FALSE, ...)
 #' @param up_id a character string for the UniProt ID of the protein of interest.
 #' @param pdb Optional argument to indicate the PDB and chain to be used (i.e. '1u8f.O'). If we leave this argument empty, the function will make the election for us whenever possible.
-#' @param property a character string indicating the property of interest. It should be one of 'sasa', 'acc', 'dpx', 'entropy7.aa','entropy7.codon', 'entropy100.aa', 'entropy100.codon', 'eiip', 'volume', 'polarizability', 'avg.hyd', 'pi.hel', 'a.hel', 'b.sheet', 'B.factor', or 'own'.
+#' @param property a character string indicating the property of interest. It should be one of 'sasa', 'acc', 'dpx', 'eiip', 'volume', 'polarizability', 'avg.hyd', 'pi.hel', 'a.hel', 'b.sheet', 'B.factor', or 'own'.
 #' @param ptm a character vector indicating the PTMs of interest. It should be among: 'ac' (acetylation), 'me' (methylation), 'meto' (sulfoxidation), 'p' (phosphorylation), 'ni' (nitration), 'su' (sumoylation) or 'ub' (ubiquitination), 'gl' (glycosylation), 'sni' (S-nitrosylation),'reg' (regulatory), 'dis' (disease).
 #' @param dssp character string indicating the method to compute DSSP. It should be either 'compute' or 'mkdssp'.
 #' @param window positive integer indicating the window size for smoothing with a sliding window average (default: 1, i.e. no smoothing).
@@ -37,10 +37,6 @@
 #' \item{argos:} {Hydrophobicity index, Argos et al 1982, (1D)}
 #' \item{eiip:} {Electron-ion interaction potential, Veljkovic et al 1985, (1D)}
 #' \item{polarizability:} {Polarizability parameter, Charton-Charton 1982, (1D)}
-#' \item{entropy7.aa:} {Shannon entropy based on 7 species and protein sequences (EVO)}
-#' \item{entropy100.aa:} {Shannon entropy based on 100 species and protein sequences (EVO)}
-#' \item{entropy7.condon:} {Shannon entropy based on 7 species and codon sequences (EVO)}
-#' \item{entropy100.codon:} {Shannon entropy based on 100 species and codon sequences (EVO)}
 #' }
 #' For 3D properties such as sasa, acc or dpx, for which different values can be obtained depending on the quaternary structure, we first compute the property values for each residue in the whole protein and plotted them against the residue position. Then, the value for this property is computed in the isolated chain (a single polypeptide chain) and in a second plot, the differences between the values in the whole protein and the chain are plotted against the residue position.
 #' @return This function returns either one or two plots related to the chosen property along the primary structure, as well as the computed data if sdata has been set to TRUE.
@@ -76,7 +72,7 @@ ptm.plot <- function(up_id, pdb = "", property, ptm , dssp = 'compute',
     exists.pdb <- TRUE
   } else if (pdb == ""){ # ---- the PDB is selected by the script
     pdb <- pdb.select(up_id)
-    if (pdb[[1]][1] == 'NO PDB FOUND'){
+    if (is.null(pdb)){
       exists.pdb <- FALSE
     } else {
       exists.pdb <- TRUE
@@ -85,7 +81,8 @@ ptm.plot <- function(up_id, pdb = "", property, ptm , dssp = 'compute',
       pdb_coverage <- attributes(pdb)$coverage
     }
   } else {
-    stop("Wrong pdb input!")
+    message("Wrong pdb input!")
+    return(NULL)
   }
 
 
@@ -117,35 +114,40 @@ ptm.plot <- function(up_id, pdb = "", property, ptm , dssp = 'compute',
                        'FODM020101', 'KYTJ820101', 'CIDH920105', 'MEEJ800101',
                        'ARGP820101', 'VELV850101', 'CHAM820101')
 
-  evo_property <- c('entropy7.aa', 'entropy100.aa','entropy7.condon', 'entropy100.codon')
+  # evo_property <- c('entropy7.aa', 'entropy100.aa','entropy7.condon', 'entropy100.codon')
+  # all_property <- c(pdb_property, aa_property, evo_property, 'own')
 
-  all_property <- c(pdb_property, aa_property, evo_property, 'own')
+  all_property <- c(pdb_property, aa_property,  'own')
 
   if (! property %in% all_property){
-    stop("A proper property must be indicated")
+    message("A proper property must be indicated")
+    return(NULL)
   }
 
   if (!exists.pdb & property %in% pdb_property){
-    stop('This property cannot be computed because no PDB file could be found')
+    message('This property cannot be computed because no PDB file could be found')
+    return(NULL)
   }
 
   if (!is.numeric(window) || window < 1){
-    stop("'window' must be numeric and positive")
+    message("'window' must be numeric and positive")
+    return(NULL)
   }
 
     if (property == 'own'){
-    z <- list(...)
-    if (length(z[[1]]) == 0){
-      stop("No aa index has been provided")
-    } else {
-      index <- z[[1]]
-    }
+      z <- list(...)
+      if (length(z[[1]]) == 0){
+        message("No aa index has been provided")
+        return(NULL)
+      } else {
+        index <- z[[1]]
+      }
 
-    if (sum(aa == names(index)) != 20){
-      stop("The provided aa index must be a named numeric vector")
+      if (sum(aa == names(index)) != 20){
+        message("The provided aa index must be a named numeric vector")
+        return(NULL)
+      }
     }
-
-  }
 
   ## ------------------------------------------------------------------- ##
   ## ---------- Checking that a suitable ptm has been selected --------- ##
@@ -159,8 +161,9 @@ ptm.plot <- function(up_id, pdb = "", property, ptm , dssp = 'compute',
   should_be_empty <- setdiff(ptm, supported_ptm)
 
   if (length(should_be_empty) != 0){
-    stop("The supported PTMs are 'ac', 'me', 'meto', 'p', 'su', 'ub', 'gl', 'sni',
+    message("The supported PTMs are 'ac', 'me', 'meto', 'p', 'su', 'ub', 'gl', 'sni',
                      'ni', 'reg', 'dis'")
+    return(NULL)
   }
 
   if (ptm[1] == 'all'){
@@ -173,12 +176,15 @@ ptm.plot <- function(up_id, pdb = "", property, ptm , dssp = 'compute',
   ## ------------------------------------------------------------------- ##
   if (! 'scan' %in% ls()){
     scan <- suppressWarnings(ptm.scan(up_id))
+    if (is.null(scan)){
+      message("Sorry, ptm.scan failed")
+    }
     if (sdata){
       dir.create("plotptm_cache", showWarnings = FALSE)
       save(scan, file = paste("./plotptm_cache/scan_", up_id, ".Rda", sep = ""))
     }
   }
-  if (! grepl("Sorry", scan)[1]){
+  if (! is.null(scan)){
     ptmScan <- scan[, c(2,3, which(colnames(scan) %in% ptm))]
     modifications <- !is.na(ptmScan[,3:dim(ptmScan)[2]])
     ptmScan$multi <- apply(as.matrix(modifications), 1, sum)
@@ -215,6 +221,10 @@ ptm.plot <- function(up_id, pdb = "", property, ptm , dssp = 'compute',
   if (exists.pdb){
     if (! 'sse' %in% ls()){
       sse <- acc.dssp(pdb_id, dssp = dssp)
+      if (is.null(sse)){
+        message("Sorry, acc.dssp failed")
+        return(NULL)
+      }
       if (sdata){
         dir.create("plotptm_cache", showWarnings = FALSE)
         save(sse, file = paste("./plotptm_cache/sse_", pdb_id, ".Rda", sep = ""))
@@ -240,26 +250,27 @@ ptm.plot <- function(up_id, pdb = "", property, ptm , dssp = 'compute',
     coils <- sse[which(sse$sse == 0),]
 
     if (window >= nrow(sse)) {
-      stop("'window' must be smaller than the sequence length")
+      message("'window' must be smaller than the sequence length")
+      return(NULL)
     }
 
     if (property == 'dpx'){
       dpx <- res.dpx(pdb_id)
-    } else if (property == 'hetatom'){
-      # -------- TO BE COMPLETED
-    } else if (property == 'ncontacts'){
-      # -------- TO BE COMPLETED
+      if (is.null(dpx)){
+        message("Sorry, res.dpx failed")
+        return(NULL)
+      }
     }
+
+
   } else { # When there is no pdb to be used
-    if (property %in% c('entropy7.aa', 'entropy7.codon', 'entropy100.aa', 'entropy100.codon')){
-      seq <- get.seq(id.mapping(up_id, 'uniprot', 'kegg'),
-                     db = 'kegg-aa', as.string = FALSE)[[1]] # aa sequence from KEGG
-    } else {
-      seq <- get.seq(up_id, as.string = FALSE)[[1]] # aa sequence from Uniprot
-    }
+
+    seq <- get.seq(up_id, as.string = FALSE)[[1]] # aa sequence from Uniprot
     names(seq) <- 1:length(seq) # aa position
+
     if (window >= length(aa)){
-      stop("'window' must be smaller than the sequence length")
+      message("'window' must be smaller than the sequence length")
+      return(NULL)
     }
   }
 
@@ -281,24 +292,7 @@ ptm.plot <- function(up_id, pdb = "", property, ptm , dssp = 'compute',
     dpx <- res.dpx(pdb_id)[which(dpx$chain == pdb_chain), ]
     property_seq_mon <- dpx$min_dpx_chain
     property_seq_com <- dpx$min_dpx_complex
-  } else if (property == "hetatom"){
-    ## ----------------------------------------- TO BE COMPLETED ----------------- ##
-  } else if (property == "ncontacts"){
-    ## ----------------------------------------- TO BE COMPLETED ----------------- ##
-  } else if (property == "entropy7.aa"){
-    t <- shannon(id.mapping(up_id, 'uniprot', 'kegg'), 'vertebrates', base = 21)
-    property_seq_mon <- property_seq_com <- t$Haa
-  } else if (property == "entropy7.codon"){
-    t <- shannon(id.mapping(up_id, 'uniprot', 'kegg'), 'vertebrates', base = 21)
-    property_seq_mon <- property_seq_com <- t$Hcodon
-  } else if (property == "entropy100.aa"){
-    t <- shannon(id.mapping(up_id, 'uniprot', 'kegg'), 'one-hundred', base = 21)
-    property_seq_mon <- property_seq_com <- t$Haa
-  } else if (property == "entropy100.codon"){
-    t <- shannon(id.mapping(up_id, 'uniprot', 'kegg'), 'one-hundred', base = 21)
-    property_seq_mon <- property_seq_com <- t$Hcodon
   }
-
 
   ## ------------------------------------------------------------------- ##
   ## ------- Smoothing the computed property values sequence ----------- ##
@@ -365,30 +359,6 @@ ptm.plot <- function(up_id, pdb = "", property, ptm , dssp = 'compute',
     ylab <- expression(paste('Depth (', ring(A), ')', sep = ""))
     dy <- s_property_seq_com - s_property_seq_mon
     dylab <- expression(paste(Delta,'Depth (', ring(A), ')', sep = ""))
-  } else if (property == 'hetatm'){
-    ## ------- TO BE COMPLETED
-    ylab <- expression(paste('Minimal Distance to AS (', ring(A), ')', sep = ""))
-  } else if (property == 'ncontacts'){
-    ## ------- TO BE COMPLETED
-    ylab <-'Total number of contacts'
-  } else if (property == 'ncontacts.intra'){
-    ## ------- TO BE COMPLETED
-    ylab <-'Number of intramolecular contacts'
-  } else if (property == 'ncontacts.inter'){
-    ## ------- TO BE COMPLETED
-    ylab <-'Number of intermolecular contacts'
-  } else if (property == 'entropy7.aa'){
-    y <- s_property_seq_com
-    ylab <- "Shannon's entropy.aa7"
-  } else if (property == 'entropy7.codon'){
-    y <- s_property_seq_com
-    ylab <- "Shannon's entropy.codon7"
-  } else if (property == 'entropy100.aa'){
-    y <- s_property_seq_com
-    ylab <- "Shannon's entropy.aa100"
-  } else if (property == 'entropy100.codon'){
-    y <- s_property_seq_com
-    ylab <- "Shannon's entropy.codon100"
   } else if (property == 'eiip'){
     y <- s_property_seq_com
     ylab <- "EIIP"

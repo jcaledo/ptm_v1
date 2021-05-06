@@ -32,11 +32,9 @@
 #' @return This function returns a dataframe with a line per MetO site.
 #' @author Juan Carlos Aledo
 #' @examples meto.search(organism = 'Homo sapiens', oxidant = 'HClO')
-#' \dontrun{meto.search(highthroughput.group = FALSE, bodyguard.group = FALSE, gain.activity = 1)}
 #' @references Valverde et al. 2019. Bioinformatics 35:4849-4850 (PMID: 31197322)
 #' @seealso meto.scan(), meto.list()
-#' @importFrom httr GET
-#' @importFrom httr content
+#' @importFrom jsonlite fromJSON
 #' @export
 
 meto.search <-  function(highthroughput.group = TRUE,
@@ -62,8 +60,15 @@ meto.search <-  function(highthroughput.group = TRUE,
                                change.stability, change.location, sep ="")
   call <- paste('https://metosite.uma.es/api/sites/mapping/',
                 groups, '/', affected.properties, sep = "")
-  response <- httr::GET(call)
-  FCs <- httr::content(response, 'text') # Functional Categories
+
+  FCs <- gracefully_fail(call) # Functional Categories
+
+  if (is.null(FCs)){
+    message("Call to MetOSite failed")
+    return(NULL)
+  }
+  # response <- httr::GET(call)
+  # FCs <-  httr::content(response, 'text') # Functional Categories
 
   ## ----------------- Formatting FCs for query ---------------------- ##
   formatted.fc <- gsub("\\[|\\]", "", FCs)
@@ -82,20 +87,15 @@ meto.search <-  function(highthroughput.group = TRUE,
   ## -------------------- Quering MetOSite --------------------------- ##
   call <- paste('https://metosite.uma.es/api/sites/search/',
                 formatted.fc, '/', organism, '/', oxidant, sep = "")
-  res_entries <-  httr::GET(call)
 
-  if (res_entries$status_code == 200){
-    entries <- httr::content(res_entries, 'text')
+  entries <- gracefully_fail(call)
+
+  if (is.null(entries)){
+    message("Query to MetOSite failed")
+    return(NULL)
   } else {
-    return(res_entries$status_code)
-  }
-
-  if (requireNamespace("jsonlite", quietly = TRUE)){
     df.entries <- jsonlite::fromJSON(entries, flatten = TRUE)
     return(df.entries)
-  } else {
-    warning("If you install the package 'jsonlite' this output would be nicely shown as a dataframe")
-    return(entries)
   }
 }
 
@@ -103,7 +103,7 @@ meto.search <-  function(highthroughput.group = TRUE,
 #       meto.scan <- function(up_id, report)                          #
 ## ----------------------------------------------------------------- ##
 #' Scans a Protein in Search of  MetO Sites
-#' @description Scan a given protein in search of MetO sites.
+#' @description Scans a given protein in search of MetO sites.
 #' @usage meto.scan(up_id, report = 1)
 #' @param up_id a character string corresponding to the UniProt ID.
 #' @param report it should be a natural number between 1 and 3.
@@ -113,20 +113,18 @@ meto.search <-  function(highthroughput.group = TRUE,
 #' @examples meto.scan('P01009')
 #' @references Valverde et al. 2019. Bioinformatics 35:4849-4850 (PMID: 31197322)
 #' @seealso meto.search(), meto.list()
-#' @importFrom httr GET
-#' @importFrom httr content
+#' @importFrom jsonlite fromJSON
 #' @export
 
 meto.scan <- function(up_id, report = 1){
 
   call <- paste('https://metosite.uma.es/api/proteins/scan/', up_id,  sep = "")
-  response <- httr::GET(call)
-
-  if (response$status_code == 200){
-    output <- httr::content(response, 'text')
-    output <- jsonlite::fromJSON(output, flatten = TRUE)
+  output <- gracefully_fail(call)
+  if (is.null(output)){
+    message("MetOSite couldn't return an answer")
+    return(NULL)
   } else {
-    return(response$status_code)
+    output <- jsonlite::fromJSON(output, flatten = TRUE)
   }
 
   if (report == 1){
@@ -214,6 +212,7 @@ meto.scan <- function(up_id, report = 1){
   }
 }
 
+
 ## ----------------------------------------------------------------- ##
 #           meto.list <- function(keyword)                            #
 ## ----------------------------------------------------------------- ##
@@ -224,11 +223,9 @@ meto.scan <- function(up_id, report = 1){
 #' @return This function returns a dataframe with the uniprot id, the protein name and the species, for those proteins present into MetOSite whose name contains the keyword.
 #' @author Juan Carlos Aledo
 #' @examples meto.list('inhibitor')
-#' meto.list('calcium')
 #' @references Valverde et al. 2019. Bioinformatics 35:4849-4850 (PMID: 31197322)
 #' @seealso meto.search(), meto.scan()
-#' @importFrom httr GET
-#' @importFrom httr content
+#' @importFrom jsonlite fromJSON
 #' @export
 
 meto.list <- function(keyword){
@@ -238,16 +235,14 @@ meto.list <- function(keyword){
   call <- paste('https://metosite.uma.es/api/proteins/pname/',
                 keyword, sep = "")
 
-  res_entries <-  httr::GET(call)
+  entries <- gracefully_fail(call)
 
-  entries <- httr::content(res_entries, 'text')
-
-  if (requireNamespace("jsonlite", quietly = TRUE)){
+  if (is.null(entries)){
+    message("MetOSite's API failed")
+    return(NULL)
+  } else {
     df.entries <- jsonlite::fromJSON(entries, flatten = TRUE)
     return(df.entries)
-  } else {
-    warning("If you install the package 'jsonlite' this output would be nicely shown as a dataframe")
-    return(entries)
   }
 }
 

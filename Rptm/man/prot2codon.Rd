@@ -20,8 +20,7 @@ Returns a dataframe with as many rows as residues has the protein.
 Finds the codons corresponding to a given protein.
 }
 \examples{
-prot2codon('P01009')
-\dontrun{prot2codon(prot = '1ATU', chain = 'A')}
+\dontrun{prot2codon('P01009')}
 }
 \author{
 Juan Carlos Aledo

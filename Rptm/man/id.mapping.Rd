@@ -20,7 +20,7 @@ Returns a character string corresponding to the requested identifier.
 Mapping between protein identifiers.
 }
 \examples{
-id.mapping('P01009', from = 'uniprot', to = 'pdb')
+\dontrun{id.mapping('P01009', from = 'uniprot', to = 'pdb')}
 }
 \seealso{
 pdb2uniprot(), uniprot2pdb()

@@ -24,8 +24,6 @@ MetOSite uses the same type of protein ID than UniProt. However, if the chosen d
 }
 \examples{
 get.seq('P01009')
-\dontrun{get.seq("hsa:5265", db = "kegg-aa")}
-\dontrun{get.seq("1u8f:P", db = "pdb")}
 }
 \author{
 Juan Carlos Aledo

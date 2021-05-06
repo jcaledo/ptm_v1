@@ -29,7 +29,7 @@ Extracts the sequence environment around a given position.
 The random control returns an environment center at a random position containing the same type or amino acid than the positive environment. The closest control searches for the closest position where such a type of amino acid is found and returns its environment.
 }
 \examples{
-\dontrun{env.extract('P01009', db = 'uniprot', 271, 10, ctr = 'random')}
+env.extract('P01009', db = 'uniprot', 271, 10, ctr = 'random')
 }
 \references{
 Aledo et al. Sci Rep. 2015; 5: 16955. (PMID: 26597773)

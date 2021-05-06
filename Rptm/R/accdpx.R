@@ -1,5 +1,8 @@
 ## --------------- accdpx.R ----------------- ##
 #                                              #
+#       parse.dssp                             #
+#       compute.dssp                           #
+#       mkdssp                                 #
 #       acc.dssp                               #
 #       get.area                               #
 #       dpx                                    #
@@ -8,6 +11,346 @@
 #       stru.part                              #
 #                                              #
 ## ------------------------------------------ ##
+
+## ---------------------------------------------------------------- ##
+#      parse.dssp <- function(file, keepfiles = FALSE)               #
+## ---------------------------------------------------------------- ##
+#' Parse a DSSP File to Return a Dataframe
+#' @description Parses a DSSP file to return a dataframe.
+#' @usage parse.dssp(file, keepfiles = FALSE)
+#' @param file input dssp file.
+#' @param keepfiles logical, if TRUE the dataframe will be saved in the working directory and we will keep the dssp file.
+#' @details If the argument 'keepfiles' is not set to TRUE, the dssp file used to get the parsed dataframe will be removed.
+#' @return Returns a dataframe providing data for 'acc', 'ss', 'phi' and 'psi' for each residues from the structure.
+#' @author Juan Carlos Aledo
+#' @examples \dontrun{compute.dssp('3cwm'); parse.dssp('3cwm.dssp')}
+#' @references Touw et al (2015) Nucl. Ac. Res. 43(Database issue): D364-D368 (PMID: 25352545).
+#' @seealso download.dssp(), compute.dssp(), mkdssp() and acc.dssp()
+#' @export
+
+parse.dssp <- function(file, keepfiles = FALSE){
+  ## --------------- Reading the dssp file ------------------ ##
+  con <- tryCatch(
+    {
+      file(file, 'r')
+    },
+    error = function(cond){
+      return(NULL)
+    },
+    warning = function(w) conditionMessage(w)
+  )
+  if (is.null(con) | grepl("no fue posible", con) | grepl("No such file", con)){
+    message("Sorry, no connection could be established")
+    return(NULL)
+  }
+
+  counter <- 0
+  resnum <- c()
+  respdb <- c()
+  chain <- c()
+  aa <- c()
+  ss <- c()
+  sasa <- c()
+  phi <- c()
+  psi <- c()
+
+  while(TRUE){
+    line <- readLines(con, n = 1)
+    counter <- counter + 1
+
+    if (counter == 1){
+      l <- strsplit(line, split = "")[[1]]
+      l <- paste(l, collapse = "")
+      if ("have bz2" %in% l){
+        first_valid_line <- 29 # dssp file coming from the API
+      } else {
+        first_valid_line <- 28 # dssp file coming from the sync
+      }
+    }
+
+    if (counter > first_valid_line & length(line) != 0){
+      a <- strsplit(line, split = "")[[1]]
+      resnum <- c(resnum, paste(a[1:5], collapse = ""))
+      respdb <- c(respdb, paste(a[6:10], collapse = ""))
+      chain <- c(chain, paste(a[11:12], collapse = ""))
+      aa <- c(aa, paste(a[13:14], collapse = ""))
+      ss <- c(ss, paste(a[15:17], collapse = ""))
+      sasa <- c(sasa, paste(a[36:38], collapse = ""))
+      phi <- c(phi, paste(a[104:109], collapse = ""))
+      psi <- c(psi, paste(a[110:115], collapse = ""))
+    }
+    if (length(line) == 0){
+      break
+    }
+  }
+  close(con)
+
+  ## ------ Setting the variable types ------------- ##
+  resnum <- as.numeric(resnum)
+  respdb <- as.numeric(respdb)
+  chain <- gsub(" ", "", chain)
+  aa <- gsub(" ", "", aa)
+  ss <- gsub("   ", "C", ss)
+  ss <- gsub(" ", "", ss)
+
+  ## -------- Building the dataframe ---------------- ##
+  df <- as.data.frame(matrix(c(resnum, respdb, chain, aa,
+                               ss, sasa, phi, psi), ncol = 8),
+                      stringsAsFactors = FALSE)
+
+  colnames(df) <- c('resnum', 'respdb', 'chain', 'aa', 'ss',
+                    'sasa', 'phi', 'psi')
+
+  df$resnum <- as.numeric(df$resnum)
+  df$respdb <- as.numeric(df$respdb)
+  df$sasa <- as.numeric(df$sasa)
+  df$phi <- as.numeric(df$phi)
+  df$psi <- as.numeric(df$psi)
+
+  if (keepfiles == TRUE){
+    save(df, file = paste(file, ".Rda", sep = ""))
+  } else {
+    file.remove(file)
+  }
+
+  ## --------------- Remove empty lines between chains ------------- ##
+  badlines <- c()
+  for (i in 1:nrow(df)){
+    if (df$aa[i] == '!' | df$aa[i] == 'X'){
+      badlines <- c(badlines, i)
+    }
+  }
+  if (length(badlines) != 0){
+    df <- df[-badlines,]
+    df$resnum <- 1:nrow(df)
+  }
+  return(df)
+}
+
+## ---------------------------------------------------------------- ##
+#      compute.dssp <- function(pdb, destfile = './')                #
+## ---------------------------------------------------------------- ##
+#' Compute and Return a DSSP File
+#' @description Computes and returns a DSSP file.
+#' @usage compute.dssp(pdb, destfile = './')
+#' @param pdb is either a PDB id, or the path to a pdb file.
+#' @param destfile a character string with the path where the DSSP file is going to be saved.
+#' @details A drawback of this function is that it depends on DSSP's server and in occasions it can take a long time to process the request.
+#' @return An online computed dssp file that is saved at the indicated location.
+#' @author Juan Carlos Aledo
+#' @examples \dontrun{compute.dssp(pdb = '3cwm', destfile = './')}
+#' @references Touw et al (2015) Nucl. Ac. Res. 43(Database issue): D364-D368 (PMID: 25352545).
+#' @seealso download.dssp(), parse.dssp(), mkdssp() and acc.dssp()
+#' @importFrom httr content
+#' @importFrom httr GET
+#' @importFrom httr POST
+#' @importFrom httr upload_file
+#' @importFrom bio3d get.pdb
+#' @export
+
+compute.dssp <- function(pdb, destfile = './'){
+
+  del <- FALSE
+  if (nchar(pdb) == 4){ # when input is a PDB ID
+    mypdb <- suppressWarnings(bio3d::get.pdb(pdb)) # avoids warning: 'pdb exists. Skipping download'
+    file <- paste("./", pdb, ".pdb", sep = "")
+    del <- TRUE
+  } else {
+    file <- pdb
+  }
+
+  url_create <- 'https://www3.cmbi.umcn.nl/xssp/api/create/pdb_file/dssp/'
+  # url_create <- 'http://www.cmbi.umcn.nl/xssp/api/create/pdb_file/dssp/'
+  body <- tryCatch(
+    {
+      list(file_ = httr::upload_file(file))
+    },
+    error = function(cond){
+      return(NULL)
+    }
+  )
+  if (is.null(body)){
+    message("Sorry, no file was found to be uploaded")
+    return(NULL)
+  }
+
+  response_create <- tryCatch(
+    {
+      httr::POST(url_create, body = body)
+    },
+    error = function(cond){
+      message(cond)
+      return(NULL)
+    }
+  )
+  if (is.null(response_create)){
+    message("Sorry, pdb file could be posted")
+    return(NULL)
+  }
+
+  if (response_create$status_code %in% c(200, 202)){
+    job_id <- httr::content(response_create)
+  }
+
+  url <- 'http://www.cmbi.umcn.nl/xssp/api/status/pdb_file/dssp/'
+  url_status <- paste(url, job_id, sep="")
+
+  response_status <- tryCatch(
+    {
+      httr::GET(url_status)
+    },
+    error = function(cond){
+      message(cond)
+      return(NULL)
+    }
+  )
+
+  if (is.null(response_status)){
+    message("Sorry, no response from the DSSP server")
+    return(NULL)
+  }
+
+  if (response_status$status_code == 200){
+    job_status <- httr::content(response_status)
+    ready <- FALSE
+    attempts <- 0
+    while(!ready & attempts < 3){
+      print(attempts)
+      attempts <- attempts + 1
+      if (job_status == 'SUCCESS'){
+        ready = TRUE
+      } else if (job_status %in% c('FAILURE', 'REVOKED')){
+        stop(print(job_status))
+      } else {
+        Sys.sleep(5)
+      }
+    }
+
+    if (del){ # if a pdb file was downloaded now is deleted
+      file.remove(file)
+    }
+    if (job_status != 'SUCCESS'){
+      message("After three attempts the server didn't responde")
+      return(NULL)
+    }
+
+    t <- strsplit(file, split = "\\/")[[1]] # name and location of the saved file
+    # pdb_id <- substring(t[length(t)], 1,4)
+    pdb_id <- strsplit(t[length(t)], split = "\\.")[[1]][1]
+    destfile = paste(destfile, pdb_id, ".dssp", sep = "")
+
+    url <- 'http://www.cmbi.umcn.nl/xssp/api/result/pdb_file/dssp/'
+    url_results <- paste(url, job_id, sep="")
+
+    response_results <- tryCatch(
+      {
+        httr::GET(url_results)
+      },
+      error = function(cond){
+        message(cond)
+        return(NULL)
+      }
+    )
+    if (is.null(response_results)){
+      return(NULL)
+    }
+
+    if (response_results$status_code == 200){
+      a <- httr::content(response_results)
+      cat(a$result, file = destfile)
+      return(paste("Work done!. See file at: ", destfile, sep = ""))
+    } else {
+      message(paste("Sorry, ", response_results$status_code))
+      return(NULL)
+    }
+
+  } else {
+    message("Response_status fails")
+    return(NULL)
+  }
+}
+
+
+## ---------------------------------------------------------------- ##
+#         mkdssp <- function(pdb, method, exefile = "dssp")          #
+## ---------------------------------------------------------------- ##
+#' Compute DSSP File Using an In-House Version of the DSSP Software
+#' @description Computes the DSSP file using an in-house version of the DSSP software.
+#' @usage mkdssp(pdb, method = 'ptm', exefile = "dssp")
+#' @param pdb is either a 4-character identifier of the PDB structure, or the path to a pdb file.
+#' @param method a character string specifying the desired method to get the dssp dataframe; it should be one of 'ptm' or 'bio3d'.
+#' @param exefile  file path to the DSSP executable on your system (i.e. how is DSSP invoked).
+#' @details The structure of the output data depends on the method chosen, but it will always contain the DSSP-related data.
+#' @return Returns either a dataframe containing the information extracted from the dssp file (method ptm), or a list with that information (method bio3d).
+#' @author Juan Carlos Aledo
+#' @examples \dontrun{mkdssp('3cwm', method = 'ptm')}
+#' @references Touw et al (2015) Nucl. Ac. Res. 43(Database issue): D364-D368 (PMID: 25352545).
+#' @seealso download.dssp(), parse.dssp(), compute.dssp() and acc.dssp()
+#' @importFrom bio3d dssp
+#' @importFrom bio3d read.pdb
+#' @importFrom bio3d get.pdb
+#' @export
+
+mkdssp <- function(pdb, method = 'ptm', exefile = "dssp"){
+
+  ## --- pdb id or path to its file
+  del <- FALSE
+  if (nchar(pdb) == 4){ # when input is a PDB ID
+    suppressWarnings(bio3d::get.pdb(pdb)) # avoids warning: 'pdb exists. Skipping download'
+    file <- paste("./", pdb, ".pdb", sep = "")
+    del <- TRUE
+  } else {
+    file <- pdb
+  }
+
+  ## ---- Path to DSSP executable
+  exefile <- .get.exepath(exefile)
+  success <- .test.exefile(exefile)
+
+  if (!success){
+    message(paste("Launching external program 'dssp' (or 'mkdssp') failed\n",
+               "  make sure '", exefile, "' is in your search path", sep = ""))
+    return(NULL)
+  }
+
+  ## ------ Method to compute DSSP
+  if(method == 'ptm'){
+    mydssp <- tryCatch(
+      {
+        system(paste(exefile, " -i ", file, " -o ./temp.dssp", sep = ""))
+      },
+      error = function(cond){
+        message(cond)
+        return(NULL)
+      }
+    )
+    if (is.null(mydssp) | mydssp == 1){
+      return(NULL)
+    }
+
+    mydssp <- parse.dssp('./temp.dssp')
+
+  } else if (method == 'bio3d'){
+
+    mydssp <- tryCatch(
+      {
+        suppressWarnings(bio3d::dssp(read.pdb(file) , exefile = exefile))
+      },
+      error = function(cond){
+        return(NULL)
+      }
+    )
+    if (is.null(mydssp)){
+      return(NULL)
+    }
+  }
+
+  if (del){ # if a pdb file was downloaded now is deleted
+    file.remove(file)
+  }
+  return(mydssp)
+}
+
 
 ## ---------------------------------------------------------------- ##
 #     acc.dssp <- function(pdb, dssp = 'compute', aa = 'all')        #
@@ -51,18 +394,48 @@ acc.dssp <- function(pdb, dssp = 'compute', aa = 'all'){
     id <- strsplit(t[length(t)], split = "\\.")[[1]][1]
   }
   chains <- pdb.chain(file, keepfiles = TRUE)
+  if (is.null(chains)){
+    return(NULL)
+  }
 
   ## ------------ Get the whole protein dssp file ------------ ##
   if (dssp == 'compute'){
-    compute.dssp(pdb)
+    tryCatch(
+      {
+        compute.dssp(pdb)
+      },
+      error = function(cond){
+        return(NULL)
+      }
+    )
+
     dssp_file <- paste('./', id, '.dssp', sep = "")
-    df <- parse.dssp(dssp_file, keepfiles = FALSE)
+
+    df <- tryCatch(
+      {
+        parse.dssp(dssp_file, keepfiles = FALSE)
+      },
+      error = function(cond){
+        message(cond)
+        return(NULL)
+      }
+    )
+    if (is.null(df)){
+      return(NULL)
+    }
 
   } else if (dssp == 'mkdssp'){
+
     df <- mkdssp(id, method = 'ptm')
+    if (is.null(df)){
+      message()
+      return(NULL)
+    }
+
     # system(paste("mkdssp -i ", file, " -o ", dssp_file, sep =""))
   } else {
-    stop("A proper dssp method should be provided!")
+    message("A proper dssp method should be provided!")
+    return(NULL)
   }
 
   ## -------- Starting the dataframe construction ------------ ##
@@ -212,7 +585,8 @@ acc.dssp <- function(pdb, dssp = 'compute', aa = 'all'){
   } else if (aa == 'all'){
     return(df)
   } else {
-    stop("A proper amino acid must be selected!")
+    message("A proper amino acid must be selected!")
+    return(NULL)
   }
 }
 
@@ -253,16 +627,26 @@ get.area <- function(pdb, keepfiles = FALSE){
   output_file = gsub("\\.pdb", "_getarea.txt", file)
   url <- "http://curie.utmb.edu/cgi-bin/getarea.cgi"
 
-  result <-  postForm(url,
-                     "water" = "1.4",
-                     "gradient" = "n",
-                     "name" = "test",
-                     "email" = 'metosite2018@gmail.com',
-                     "Method" = "4",
-                     "PDBfile" = fileUpload(file))
+  result <- tryCatch(
+    {
+      RCurl::postForm(url,
+                      "water" = "1.4",
+                      "gradient" = "n",
+                      "name" = "test",
+                      "email" = 'metosite2018@gmail.com',
+                      "Method" = "4",
+                      "PDBfile" = RCurl::fileUpload(file))
+    },
+    error = function(cond){
+      return(NULL)
+    }
+  )
+  if (is.null(result)){
+    message("Sorry, getare failed")
+    return(NULL)
+  }
 
   writeLines(gsub("[</pre></td>|<td><pre>]","", result), con = output_file)
-
   con <- file(output_file, 'r')
   counter <- 0
   eleno <- c()
@@ -325,6 +709,7 @@ get.area <- function(pdb, keepfiles = FALSE){
   return(df)
 }
 
+
 ## ---------------------------------------------------------------- ##
 #                   dpx <- function(pdb)                             #
 ## ---------------------------------------------------------------- ##
@@ -335,6 +720,7 @@ get.area <- function(pdb, keepfiles = FALSE){
 #' @details This function computes the depth, defined as the distance in angstroms between the target atom and the closest atom on the protein surface.
 #' @return A dataframe with the computed depths.
 #' @author Juan Carlos Aledo
+#' @examples \dontrun{dpx('3cwm')}
 #' @references Pintar et al. 2003. Bioinformatics 19:313-314 (PMID: 12538266)
 #' @seealso compute.dssp(), atom.dpx(), res.dpx(), acc.dssp(), str.part()
 #' @importFrom bio3d read.pdb
@@ -343,8 +729,31 @@ get.area <- function(pdb, keepfiles = FALSE){
 dpx <- function(pdb){
 
   ## --------------- Generate a dataframe ---------------- ##
-  atom <- get.area(pdb)
-  mypdb <- suppressWarnings(read.pdb(pdb)) # avoids warning: 'pdb exists. Skipping download'
+  atom <- tryCatch(
+    {
+      get.area(pdb)
+    },
+    error = function(cond){
+      return(NULL)
+    }
+  )
+  if (is.null(atom)){
+    message("Sorry, get.area failed")
+    return(NULL)
+  }
+
+  mypdb <- tryCatch(
+   {
+     suppressWarnings(read.pdb(pdb))
+   },
+   error = function(cond){
+     return(NULL)
+   }
+  )
+
+  if (is.null(mypdb)){
+   return(NULL)
+  }
 
   mypdb <- mypdb$atom[which(mypdb$atom$type == 'ATOM'),]
   atom$x <- mypdb$x
@@ -392,6 +801,10 @@ atom.dpx <- function(pdb){
 
   ## ------------ For the whole structure ---------------- ##
   atom <- dpx(pdb)
+  if (is.null(atom)){
+    message("Sorry, dpx failed")
+    return(NULL)
+  }
   energies <- atom$areaenergy
   dpx <- atom$dpx
   atom <- atom[,1:4]
@@ -403,6 +816,10 @@ atom.dpx <- function(pdb){
 
   ## ----------- For multi-chains structure -------------- ##
   chains <- suppressWarnings(pdb.chain(pdb, keepfiles = TRUE))
+  if (is.null(chains)){
+    message("Sorry, pdb.chain failed")
+    return(NULL)
+  }
   counter_a <- 0
   for (i in seq_len(length(chains))){
     t <- paste('./split_chain/', id, '_', chains[i], '.pdb', sep = "")
@@ -443,6 +860,10 @@ atom.dpx <- function(pdb){
 res.dpx <- function(pdb, aa = 'all'){
 
   atom <- atom.dpx(pdb)
+  if (is.null(atom)){
+    message("Sorry, atom.dpx failed")
+    return(NULL)
+  }
   atom$res <- paste(atom$resid, atom$resno, atom$chain, sep ="-")
   res <- unique(atom$res)
 
@@ -483,7 +904,8 @@ res.dpx <- function(pdb, aa = 'all'){
   } else if (aa == 'all'){
     return(df)
   } else {
-    stop("A proper amino acid must be provided!")
+    message("A proper amino acid must be provided!")
+    return(NULL)
   }
 }
 
@@ -517,6 +939,10 @@ stru.part <- function(pdb, cutoff = 0.25){
 
   ## --- Getting Accessibilities
   t <- acc.dssp(pdb, dssp = 'compute', aa = 'all')
+  if (is.null(t)){
+    message("Sorry, acc.dssp failed")
+    return(NULL)
+  }
   output <- t[, c(1:5, 9:11)]
   names(output) <- c(names(t)[1:5], "ACCc", "ACCm", "DACC")
   output$str <- NA

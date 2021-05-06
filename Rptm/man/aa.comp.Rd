@@ -19,7 +19,6 @@ Returns a table with the amino acid composition of the target protein.
 }
 \examples{
 aa.comp('MPSSVSWGILLLAGLCCLVPVSLAEDPQGDAAQK', uniprot = FALSE)
-aa.comp('P01009')
 }
 \seealso{
 is.at(), renum.pdb(), renum.meto(), renum(), aa.at()

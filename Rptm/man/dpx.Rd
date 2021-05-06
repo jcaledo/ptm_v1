@@ -18,6 +18,9 @@ Computes the depth from the surface for each protein's atom.
 \details{
 This function computes the depth, defined as the distance in angstroms between the target atom and the closest atom on the protein surface.
 }
+\examples{
+\dontrun{dpx('3cwm')}
+}
 \references{
 Pintar et al. 2003. Bioinformatics 19:313-314 (PMID: 12538266)
 }

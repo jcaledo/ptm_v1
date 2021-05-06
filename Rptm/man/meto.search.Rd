@@ -45,7 +45,6 @@ Note that all the arguments of this function are optional. We only pass an argum
 }
 \examples{
 meto.search(organism = 'Homo sapiens', oxidant = 'HClO')
-\dontrun{meto.search(highthroughput.group = FALSE, bodyguard.group = FALSE, gain.activity = 1)}
 }
 \references{
 Valverde et al. 2019. Bioinformatics 35:4849-4850 (PMID: 31197322)

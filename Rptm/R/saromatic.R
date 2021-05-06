@@ -28,7 +28,20 @@
 saro.dist <- function(pdb, threshold = 7, rawdata = FALSE){
 
   ## ---------- Getting pdb & Checking for M, Y, F and W ----------- ##
-  x <- suppressWarnings(bio3d::read.pdb(pdb, verbose = FALSE)) # avoids warning: Skipping download
+  x <- tryCatch(
+    {
+      suppressWarnings(bio3d::read.pdb(pdb, verbose = FALSE))
+    },
+    error = function(cond){
+      return(-999)
+    }
+  )
+
+  if (is.numeric(x)){
+    message("Sorry, read.pdb failed")
+    return(NULL)
+  }
+
   x <- x$atom
   is_there_M <- TRUE %in% (x$resid == "MET")
   is_there_Y <- TRUE %in% (x$resid == "TYR")
@@ -292,8 +305,7 @@ saro.dist <- function(pdb, threshold = 7, rawdata = FALSE){
 #' @details The distance between the delta sulfur atom and the centroid of the aromatic ring is computed, as well as the angle between this vector and the one perpendicular to the plane containing the aromatic ring. Based on the distance (d) and the angle (theta) the user decide whether the two residues are considered to be S-bonded or not (usually when d < 7 and theta < 60º).
 #' @return The function returns a dataframe providing the coordinates of the sulfur atom and the centroid (centroids when the aromatic residue is tryptophan), as well as the distance (ångströms) and the angle (degrees) mentioned above.
 #' @author Juan Carlos Aledo
-#' @examples \dontrun{saro.geometry('1CLL', rA = 141, rB = 145)}
-#' @examples \dontrun{saro.geometry(pdb = '1d0g', rA = 99, chainA = 'R', rB = 237, chainB = 'A')}
+#' @examples saro.geometry('1CLL', rA = 141, rB = 145)
 #' @references Reid, Lindley & Thornton, FEBS Lett. 1985, 190, 209-213.
 #' @seealso saro.motif(), saro.dist()
 #' @importFrom bio3d read.pdb
@@ -303,7 +315,21 @@ saro.geometry <- function(pdb, rA, chainA = 'A', rB, chainB = 'A'){
 
   ## -------------------- Reading the pdb file ---------------------- ##
   temp <- tempfile()
-  x <- suppressWarnings(bio3d::read.pdb(pdb, verbose = FALSE)) # avoids warnings: 'pdb exists. Skipping download'
+
+  x <- tryCatch(
+    {
+      suppressWarnings(bio3d::read.pdb(pdb, verbose = FALSE))
+    },
+    error = function(cond){
+      return(-999)
+    }
+  )
+
+  if (is.numeric(x)){
+    message("Sorry, read.pdb failed")
+    return(NULL)
+  }
+
   x <- x$atom
   xA <- x[which(x$resno == rA & x$chain == chainA),]
   xB <- x[which(x$resno == rB & x$chain == chainB),]
@@ -445,7 +471,17 @@ saro.motif <- function(pdb, threshold = 7, onlySaro = TRUE){
   # Test with a pdb for a protein lacking either Met or aromatic residues
 
   ## -------------- Getting raw distance matrix ------------- ##
-  d <- saro.dist(pdb, threshold, rawdata = TRUE)[[2]]
+  d <- saro.dist(pdb, threshold, rawdata = TRUE)
+
+  if (!is.list(d)){
+    if (is.null(d)){
+      message("Sorry, saro.dist failed")
+      return(NULL)
+    }
+  } else {
+    d <- d[[2]]
+  }
+
   d[,1] <- as.character(d[,1])
 
   ## -------------- Output dataframe ------------------------ ##

@@ -44,10 +44,19 @@ p.scan <- function(up_id, db = 'all'){
   baseUrl <- "https://github.com/jcaledo/p_db/blob/master/"
   call <- paste(baseUrl, "p_db_", up_id, ".Rda?raw=true", sep = "")
 
-  resp <- try(load(url(call)), silent = TRUE)
-  if (inherits(resp, "try-error")) {
-    text <- "Sorry, no modification sites were found for this protein"
-    return(text)
+  tryCatch(
+    {
+      load(url(call))
+    },
+    error = function(cond){
+      message("Sorry, no result could be retrieved")
+      return(NULL)
+    },
+    warning = function(w) conditionMessage(w)
+  )
+  if (is.null(p_db)){
+    message("Sorry, no result could be retrieved")
+    return(NULL)
   }
 
   if (db != 'all'){
@@ -85,10 +94,19 @@ ac.scan <- function(up_id, db = 'all'){
   baseUrl <- "https://github.com/jcaledo/ac_db/blob/master/"
   call <- paste(baseUrl, "ac_db_", up_id, ".Rda?raw=true", sep = "")
 
-  resp <- try(load(url(call)), silent = TRUE)
-  if (inherits(resp, "try-error")) {
-    text <- "Sorry, no modification sites were found for this protein"
-    return(text)
+  tryCatch(
+    {
+      load(url(call))
+    },
+    error = function(cond){
+      message("Sorry, no result could be retrieved")
+      return(NULL)
+    },
+    warning = function(w) conditionMessage(w)
+  )
+  if (is.null(ac_db)){
+    message("Sorry, no result could be retrieved")
+    return(NULL)
   }
 
   if (db != 'all'){
@@ -125,10 +143,19 @@ me.scan <- function(up_id, db = 'all'){
   baseUrl <- "https://github.com/jcaledo/me_db/blob/master/"
   call <- paste(baseUrl, "me_db_", up_id, ".Rda?raw=true", sep = "")
 
-  resp <- try(load(url(call)), silent = TRUE)
-  if (inherits(resp, "try-error")) {
-    text <- "Sorry, no modification sites were found for this protein"
-    return(text)
+  tryCatch(
+    {
+      load(url(call))
+    },
+    error = function(cond){
+      message("Sorry, no result could be retrieved")
+      return(NULL)
+    },
+    warning = function(w) conditionMessage(w)
+  )
+  if (is.null(me_db)){
+    message("Sorry, no result could be retrieved")
+    return(NULL)
   }
 
   if (db != 'all'){
@@ -165,10 +192,19 @@ ub.scan <- function(up_id, db = 'all'){
   baseUrl <- "https://github.com/jcaledo/ub_db/blob/master/"
   call <- paste(baseUrl, "ub_db_", up_id, ".Rda?raw=true", sep = "")
 
-  resp <- try(load(url(call)), silent = TRUE)
-  if (inherits(resp, "try-error")) {
-    text <- "Sorry, no modification sites were found for this protein"
-    return(text)
+  tryCatch(
+    {
+      load(url(call))
+    },
+    error = function(cond){
+      message("Sorry, no result could be retrieved")
+      return(NULL)
+    },
+    warning = function(w) conditionMessage(w)
+  )
+  if (is.null(ub_db)){
+    message("Sorry, no result could be retrieved")
+    return(NULL)
   }
 
   if (db != 'all'){
@@ -205,10 +241,19 @@ su.scan <- function(up_id, db = 'all'){
   baseUrl <- "https://github.com/jcaledo/su_db/blob/master/"
   call <- paste(baseUrl, "su_db_", up_id, ".Rda?raw=true", sep = "")
 
-  resp <- try(load(url(call)), silent = TRUE)
-  if (inherits(resp, "try-error")) {
-    text <- "Sorry, no modification sites were found for this protein"
-    return(text)
+  tryCatch(
+    {
+      load(url(call))
+    },
+    error = function(cond){
+      message("Sorry, no result could be retrieved")
+      return(NULL)
+    },
+    warning = function(w) conditionMessage(w)
+  )
+  if (is.null(su_db)){
+    message("Sorry, no result could be retrieved")
+    return(NULL)
   }
 
   if (db != 'all'){
@@ -245,10 +290,19 @@ gl.scan <- function(up_id, db = 'all'){
   baseUrl <- "https://github.com/jcaledo/gl_db/blob/master/"
   call <- paste(baseUrl, "gl_db_", up_id, ".Rda?raw=true", sep = "")
 
-  resp <- try(load(url(call)), silent = TRUE)
-  if (inherits(resp, "try-error")) {
-    text <- "Sorry, no modification sites were found for this protein"
-    return(text)
+  tryCatch(
+    {
+      load(url(call))
+    },
+    error = function(cond){
+      message("Sorry, no result could be retrieved")
+      return(NULL)
+    },
+    warning = function(w) conditionMessage(w)
+  )
+  if (is.null(gl_db)){
+    message("Sorry, no result could be retrieved")
+    return(NULL)
   }
 
   if (db != 'all'){
@@ -283,10 +337,19 @@ sni.scan <- function(up_id, db = 'all'){
   baseUrl <- "https://github.com/jcaledo/sni_db/blob/master/"
   call <- paste(baseUrl, "sni_db_", up_id, ".Rda?raw=true", sep = "")
 
-  resp <- try(load(url(call)), silent = TRUE)
-  if (inherits(resp, "try-error")) {
-    text <- "Sorry, no modification sites were found for this protein"
-    return(text)
+  tryCatch(
+    {
+      load(url(call))
+    },
+    error = function(cond){
+      message("Sorry, no result could be retrieved")
+      return(NULL)
+    },
+    warning = function(w) conditionMessage(w)
+  )
+  if (is.null(sni_db)){
+    message("Sorry, no result could be retrieved")
+    return(NULL)
   }
 
   if (db != 'all'){
@@ -321,10 +384,19 @@ ni.scan <- function(up_id, db = 'all'){
   baseUrl <- "https://github.com/jcaledo/ni_db/blob/master/"
   call <- paste(baseUrl, "ni_db_", up_id, ".Rda?raw=true", sep = "")
 
-  resp <- try(load(url(call)), silent = TRUE)
-  if (inherits(resp, "try-error")) {
-    text <- "Sorry, no modification sites were found for this protein"
-    return(text)
+  tryCatch(
+    {
+      load(url(call))
+    },
+    error = function(cond){
+      message("Sorry, no result could be retrieved")
+      return(NULL)
+    },
+    warning = function(w) conditionMessage(w)
+  )
+  if (is.null(ni_db)){
+    message("Sorry, no result could be retrieved")
+    return(NULL)
   }
 
   if (db != 'all'){
@@ -356,7 +428,22 @@ ni.scan <- function(up_id, db = 'all'){
 #' @export
 
 ptm.scan <- function(up_id, renumerate = TRUE){
-  seq <- get.seq(up_id, as.string = FALSE)[[1]]
+  seq <- tryCatch(
+    {
+      get.seq(up_id, as.string = FALSE)
+    },
+    error = function(cond){
+      return(NULL)
+    },
+    warning = function(w) conditionMessage(w)
+  )
+  if (is.null(seq)){
+    message("Sorry, get.seq failed")
+    return(NULL)
+  } else {
+    seq <- seq[[1]]
+  }
+
   output <- as.data.frame(matrix(rep(NA, length(seq)*14), ncol = 14))
   names(output) <- c('id','n', 'aa', 'meto', 'p', 'ac', 'me', 'ub', 'su', 'gl', 'sni', 'ni', 'reg', 'dis')
   output$id <- up_id
@@ -364,12 +451,35 @@ ptm.scan <- function(up_id, renumerate = TRUE){
   output$aa <- seq
 
   ## ----- Sulfoxidation -------- ##
-  meto <- meto.scan(up_id)[[1]]
-  if (!is.null(nrow(meto))){ # if there is any meto site
+  meto <- tryCatch(
+    {
+      meto.scan(up_id)
+    },
+    error = function(cond){
+      return(NULL)
+    },
+    warning = function(w) conditionMessage(w)
+  )
+  if (is.null(meto)){
+    message("Sorry, meto.scan failed")
+    return(NULL)
+  } else {
+    meto <- meto[[1]]
+  }
+
+  if (!is.null(nrow(meto))){ # if there some meto site
     for (i in 1:nrow(meto)){
       t <- as.numeric(meto$met_pos[i])
       if (renumerate){
-        t <- renum(up_id, t, from = 'metosite', to = 'uniprot')
+        t <- tryCatch(
+          {
+            renum(up_id, t, from = 'metosite', to = 'uniprot')
+          },
+          error = function(cond){
+            return(NA)
+          },
+          warning = function(w) conditionMessage(w)
+        )
       }
       output$meto[t] <- TRUE
     }
@@ -378,22 +488,22 @@ ptm.scan <- function(up_id, renumerate = TRUE){
 
   ## ----- Phosphorylation -------- ##
   p <- p.scan(up_id)
-  if (!grepl("Sorry", p[1])){
-    if (nrow(p) != 0){ # if there is any site
-      u <- unique(p$modification)
-      for (i in 1:length(u)){
-        t <- strsplit(u[i], split = "-")[[1]][-2]
-        t <- as.numeric(substring(t, 2))
-        output$p[t] <- TRUE
-      }
-    }
+  if (!is.null(p)){
+    if (nrow(p) != 0){ # if there some site
+          u <- unique(p$modification)
+          for (i in 1:length(u)){
+            t <- strsplit(u[i], split = "-")[[1]][-2]
+            t <- as.numeric(substring(t, 2))
+            output$p[t] <- TRUE
+          }
+        }
   }
-
 
   ## ----- Acetylation -------- ##
   ac <- ac.scan(up_id)
-  if (!grepl("Sorry", ac[1])){
-    if (nrow(ac) != 0){ # if there is any site
+
+  if (!is.null(ac)){
+    if (nrow(ac) != 0){ # if there some site
       u <- unique(ac$modification)
       for (i in 1:length(u)){
         t <- strsplit(u[i], split = "-")[[1]][-2]
@@ -406,8 +516,8 @@ ptm.scan <- function(up_id, renumerate = TRUE){
 
   ## ----- Methylation -------- ##
   me <- me.scan(up_id)
-  if (!grepl("Sorry", me[1])){
-    if (nrow(me) != 0){ # if there is any site
+  if (!is.null(me)){
+    if (nrow(me) != 0){ # if there is some site
       u <- unique(me$modification)
       for (i in 1:length(u)){
         t <- strsplit(u[i], split = "-")[[1]][-2]
@@ -420,8 +530,8 @@ ptm.scan <- function(up_id, renumerate = TRUE){
 
   ## ----- Ubiquitination -------- ##
   ub <- ub.scan(up_id)
-  if (!grepl("Sorry", ub[1])){
-    if (nrow(ub) != 0){ # if there is any site
+  if (!is.null(ub)){
+    if (nrow(ub) != 0){ # if there is some site
       u <- unique(ub$modification)
       for (i in 1:length(u)){
         t <- strsplit(u[i], split = "-")[[1]][-2]
@@ -434,8 +544,8 @@ ptm.scan <- function(up_id, renumerate = TRUE){
 
   ## ----- Sumoylation -------- ##
   su <- su.scan(up_id)
-  if (!grepl("Sorry", su[1])){
-    if (nrow(su) != 0){ # if there is any site
+  if (!is.null(su)){
+    if (nrow(su) != 0){ # if there is some site
       u <- unique(su$modification)
       for (i in 1:length(u)){
         t <- strsplit(u[i], split = "-")[[1]][-2]
@@ -448,8 +558,8 @@ ptm.scan <- function(up_id, renumerate = TRUE){
 
   ## ----- OGlcNAc -------- ##
   gl <- gl.scan(up_id)
-  if (!grepl("Sorry", gl[1])){
-    if (nrow(gl) != 0){ # if there is any site
+  if (!is.null(gl)){
+    if (nrow(gl) != 0){ # if there is some site
       u <- unique(gl$modification)
       for (i in 1:length(u)){
         t <- strsplit(u[i], split = "-")[[1]][-2]
@@ -462,8 +572,8 @@ ptm.scan <- function(up_id, renumerate = TRUE){
 
   ## ----- S-nitrosylation -------- ##
   sni <- sni.scan(up_id)
-  if (!grepl("Sorry", sni[1])){
-    if (nrow(sni) != 0){ # if there is any site
+  if (!is.null(sni)){
+    if (nrow(sni) != 0){ # if there is some site
       u <- unique(sni$modification)
       for (i in 1:length(u)){
         t <- strsplit(u[i], split = "-")[[1]][-2]
@@ -476,8 +586,8 @@ ptm.scan <- function(up_id, renumerate = TRUE){
 
   ## ----- Nitration -------- ##
   ni <- ni.scan(up_id)
-  if (!grepl("Sorry", ni[1])){
-    if (nrow(ni) != 0){ # if there is any site
+  if (!is.null(ni)){
+    if (nrow(ni) != 0){ # if there is some site
       u <- unique(ni$modification)
       for (i in 1:length(u)){
         t <- strsplit(u[i], split = "-")[[1]][-2]
@@ -490,8 +600,8 @@ ptm.scan <- function(up_id, renumerate = TRUE){
 
   ## ----- Regulation -------- ##
   reg <- reg.scan(up_id)
-  if (!grepl("Sorry", reg[1])){
-    if (nrow(reg) != 0){ # if there is any site
+  if (!is.null(reg)){
+    if (nrow(reg) != 0){ # if there is some site
       u <- unique(reg$modification)
       for (i in 1:length(u)){
         t <- strsplit(u[i], split = "-")[[1]][-2]
@@ -508,7 +618,7 @@ ptm.scan <- function(up_id, renumerate = TRUE){
 
   ## ----- Disease -------- ##
   dis <- dis.scan(up_id)
-  if (!grepl("Sorry", dis[1])){
+  if (!is.null(dis)){
     if (nrow(dis) != 0){ # if there is any site
       u <- unique(dis$modification)
       for (i in 1:length(u)){
@@ -522,7 +632,8 @@ ptm.scan <- function(up_id, renumerate = TRUE){
   output <- output[rowSums(is.na(output[, 4:14])) != 11,]
 
   if (nrow(output) == 0){
-    output <- "Sorry, no modification sites were found for this protein"
+    message("Sorry, no modification sites were found for this protein")
+    output <- NULL
   } else {
     o <- as.matrix(output)
     output$multi <- NA
@@ -532,8 +643,10 @@ ptm.scan <- function(up_id, renumerate = TRUE){
     }
   }
 
-  attr(output, 'prot_id') <- up_id
-  attr(output, 'prot_length') <- length(seq)
+  if (!is.null(output)){
+    attr(output, 'prot_id') <- up_id
+    attr(output, 'prot_length') <- length(seq)
+  }
 
   return(output)
 }
@@ -558,14 +671,27 @@ reg.scan <- function(up_id){
   reg_db <- NULL
   baseUrl <- "https://github.com/jcaledo/reg_db/blob/master/"
   call <- paste(baseUrl, "reg_db_", up_id, ".Rda?raw=true", sep = "")
-  resp <- try(load(url(call)), silent = TRUE)
-  if (inherits(resp, "try-error")) {
-    t <- data.frame()
+
+  tryCatch(
+    {
+      load(url(call))
+    },
+    error = function(cond){
+      return(NULL)
+    },
+    warning = function(w) conditionMessage(w)
+  )
+  closeAllConnections()
+
+  if (is.null(reg_db)){
+    message("Sorry, no regulatory sites found for this protein")
+    return(NULL)
   } else {
     t <-  reg_db[which(reg_db$up_id == up_id),]
   }
 
   m <- meto.scan(up_id, report = 2)
+
   if (length(m$Metosites) != 0){
     tt <- m$Metosites[which(m$Metosites$reg_id > 2), ]
 
@@ -589,8 +715,8 @@ reg.scan <- function(up_id){
   if (nrow(t) > 0){
     return(t)
   } else {
-    text <- "Sorry, no modification sites were found for this protein"
-    return(text)
+    message("Sorry, no modification sites were found for this protein")
+    return(NULL)
   }
 }
 
@@ -603,7 +729,7 @@ reg.scan <- function(up_id){
 #' @param up_id a character string corresponding to the UniProt ID.
 #' @return Returns a dataframe where each row corresponds to a residue, and the columns inform about the disease-related modifications.
 #' @author Juan Carlos Aledo
-#' @examples dis.scan('P31749')
+#' @examples \dontrun{dis.scan('P31749')}
 #' @references Hornbeck et al. Nucleic Acids Res. 2019 47:D433-D441, (PMID: 30445427).
 #' @seealso  meto.scan(), ac.scan(), me.scan(), ub.scan(), su.scan(), gl.scan(), sni.scan(), ni.scan(), ptm.scan(), reg.scan(), p.scan()
 #' @export
@@ -613,12 +739,23 @@ dis.scan <- function(up_id){
   dis_db <- NULL
   baseUrl <- "https://github.com/jcaledo/dis_db/blob/master/"
   call <- paste(baseUrl, "dis_db_", up_id, ".Rda?raw=true", sep = "")
-  resp <- try(load(url(call)), silent = TRUE)
-  if (inherits(resp, "try-error")) {
-    text <- "Sorry, no modification sites were found for this protein"
-    return(text)
-  }
 
-  t <-  dis_db[which(dis_db$up_id == up_id),]
-  return(t)
+  tryCatch(
+    {
+      load(url(call))
+    },
+    error = function(cond){
+      return(NULL)
+    },
+    warning = function(w) conditionMessage(w)
+  )
+  closeAllConnections()
+
+  if (is.null(dis_db)){
+    message("Sorry, no modification sites were found for this protein")
+    return(NULL)
+  } else {
+    t <-  dis_db[which(dis_db$up_id == up_id),]
+    return(t)
+  }
 }

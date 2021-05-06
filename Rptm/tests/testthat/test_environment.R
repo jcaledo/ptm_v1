@@ -13,27 +13,41 @@ test_that("env.extract() works properly",{
   b <- env.extract('P01009', db = 'uniprot', c = 351+24, r = 10, ctr = 'closest')
   c <- env.extract('P01009', db = 'uniprot', c = 7, r = 14)
   d <- env.extract('P01009', db = 'uniprot', c = 415, r = 20)
+  e <- env.extract('P010091', db = 'uniprot', c = 15, r = 20)
 
-  expect_is(a, 'list')
-  expect_equal(length(a), 2)
-  expect_equal(nchar(a$Positive), 21)
-  expect_equal(nchar(a$Positive), nchar(a$Control))
+  if (!is.null(a)){
+    expect_is(a, 'list')
+    expect_equal(length(a), 2)
+    expect_equal(nchar(a$Positive), 21)
+    expect_equal(nchar(a$Positive), nchar(a$Control))
+  }
 
-  expect_is(b, 'list')
-  expect_equal(length(b), 2)
-  expect_equal(nchar(b$Positive), 21)
-  expect_false(b$Positive == b$Control)
-  expect_true(a$Positive == b$Positive)
+  if (!is.null(b)){
+    expect_is(b, 'list')
+    expect_equal(length(b), 2)
+    expect_equal(nchar(b$Positive), 21)
+    expect_false(b$Positive == b$Control)
+  }
 
-  expect_is(c, 'list')
-  expect_equal(length(c), 2)
-  expect_true('X' %in% strsplit(c$Positive, split = "")[[1]])
-  expect_equal(nchar(c$Control), 0)
+  if (!is.null(a) & !is.null(b)){
+    expect_true(a$Positive == b$Positive)
+  }
 
-  expect_is(d, 'list')
-  expect_equal(length(d), 2)
-  expect_true('X' %in% strsplit(d$Positive, split = "")[[1]])
-  expect_equal(nchar(d$Control), 0)
+  if (!is.null(c)){
+    expect_is(c, 'list')
+    expect_equal(length(c), 2)
+    expect_true('X' %in% strsplit(c$Positive, split = "")[[1]])
+    expect_equal(nchar(c$Control), 0)
+  }
+
+  if (!is.null(d)){
+    expect_is(d, 'list')
+    expect_equal(length(d), 2)
+    expect_true('X' %in% strsplit(d$Positive, split = "")[[1]])
+    expect_equal(nchar(d$Control), 0)
+  }
+
+  expect_is(e, 'NULL')
 })
 
 
@@ -76,10 +90,13 @@ test_that("env.extract() works properly",{
 
   a <- env.extract('P01009', db = 'metosite', c = 351+24, r = 10, ctr = 'random')
 
-  expect_is(a, 'list')
-  expect_equal(length(a), 2)
-  expect_equal(nchar(a$Positive), 21)
-  expect_equal(nchar(a$Positive), nchar(a$Control))
+  if (!is.null(a)){
+    expect_is(a, 'list')
+    expect_equal(length(a), 2)
+    expect_equal(nchar(a$Positive), 21)
+    expect_equal(nchar(a$Positive), nchar(a$Control))
+  }
+
 })
 
 

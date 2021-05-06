@@ -12,7 +12,7 @@ ptm.plot(up_id, pdb = "", property, ptm, dssp = 'compute',
 
 \item{pdb}{Optional argument to indicate the PDB and chain to be used (i.e. '1u8f.O'). If we leave this argument empty, the function will make the election for us whenever possible.}
 
-\item{property}{a character string indicating the property of interest. It should be one of 'sasa', 'acc', 'dpx', 'entropy7.aa','entropy7.codon', 'entropy100.aa', 'entropy100.codon', 'eiip', 'volume', 'polarizability', 'avg.hyd', 'pi.hel', 'a.hel', 'b.sheet', 'B.factor', or 'own'.}
+\item{property}{a character string indicating the property of interest. It should be one of 'sasa', 'acc', 'dpx', 'eiip', 'volume', 'polarizability', 'avg.hyd', 'pi.hel', 'a.hel', 'b.sheet', 'B.factor', or 'own'.}
 
 \item{ptm}{a character vector indicating the PTMs of interest. It should be among: 'ac' (acetylation), 'me' (methylation), 'meto' (sulfoxidation), 'p' (phosphorylation), 'ni' (nitration), 'su' (sumoylation) or 'ub' (ubiquitination), 'gl' (glycosylation), 'sni' (S-nitrosylation),'reg' (regulatory), 'dis' (disease).}
 
@@ -48,10 +48,6 @@ Currently the supported properties are:
 \item{argos:} {Hydrophobicity index, Argos et al 1982, (1D)}
 \item{eiip:} {Electron-ion interaction potential, Veljkovic et al 1985, (1D)}
 \item{polarizability:} {Polarizability parameter, Charton-Charton 1982, (1D)}
-\item{entropy7.aa:} {Shannon entropy based on 7 species and protein sequences (EVO)}
-\item{entropy100.aa:} {Shannon entropy based on 100 species and protein sequences (EVO)}
-\item{entropy7.condon:} {Shannon entropy based on 7 species and codon sequences (EVO)}
-\item{entropy100.codon:} {Shannon entropy based on 100 species and codon sequences (EVO)}
 }
 For 3D properties such as sasa, acc or dpx, for which different values can be obtained depending on the quaternary structure, we first compute the property values for each residue in the whole protein and plotted them against the residue position. Then, the value for this property is computed in the isolated chain (a single polypeptide chain) and in a second plot, the differences between the values in the whole protein and the chain are plotted against the residue position.
 }

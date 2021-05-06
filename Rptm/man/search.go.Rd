@@ -16,7 +16,7 @@ Returns a dataframe containing the GO IDs found associated to the query, as well
 Searches a simple user query.
 }
 \examples{
-search.go('oxidative stress')
+\dontrun{search.go('oxidative stress')}
 }
 \references{
 Rhee et al. (2008) Nature Reviews Genetics 9:509–515.

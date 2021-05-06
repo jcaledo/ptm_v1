@@ -22,14 +22,28 @@
 #' @return Returns a single character representing the residue found at the indicated position in the indicated protein.
 #' @author Juan Carlos Aledo
 #' @examples aa.at(28, 'P01009')
-#' aa.at(at = 80, target = get.seq('P00004', 'metosite'), uniprot = FALSE)
 #' @seealso is.at(), renum.pdb(), renum.meto(), renum(), aa.comp()
 #' @importFrom bio3d read.fasta
 #' @export
 
 aa.at <- function(at, target, uniprot = TRUE){
   if (uniprot == TRUE){
-    target <- get.seq(target, as.string = FALSE)[[1]]
+    target <- tryCatch(
+      {
+        get.seq(target, as.string = FALSE)
+      },
+      error = function(cond){
+        return(NULL)
+      }
+    )
+
+    if (is.null(target)){
+      message("Sorry, get.seq failed")
+      return(NULL)
+    } else {
+      target <- target[[1]]
+    }
+
   } else {
     if (length(target) == 1){
       target <- strsplit(target, split="")[[1]]
@@ -38,7 +52,8 @@ aa.at <- function(at, target, uniprot = TRUE){
   if (at %in% 1:length(target)){
     return(target[at])
   } else {
-    return(paste(at , " isn't a valid position for this protein", sep=""))
+    message(paste(at , " isn't a valid position for this protein", sep=""))
+    return(NULL)
   }
 }
 
@@ -63,7 +78,23 @@ aa.at <- function(at, target, uniprot = TRUE){
 
 is.at <- function(at, target, aa = 'M', uniprot = TRUE){
   if (uniprot == TRUE){
-    target <- get.seq(target)[[1]]
+
+    target <- tryCatch(
+      {
+        get.seq(target)
+      },
+      error = function(cond){
+        return(NULL)
+      }
+    )
+
+    if (is.null(target)){
+      message("Sorry, get.seq failed")
+      return(NULL)
+    } else {
+      target <- target[[1]]
+    }
+
   }
   return(at %in% gregexpr(aa, target)[[1]])
 }
@@ -80,14 +111,24 @@ is.at <- function(at, target, aa = 'M', uniprot = TRUE){
 #' @return Returns a dataframe with the absolute frequency of each type of residue found in the target peptide.
 #' @author Juan Carlos Aledo
 #' @examples aa.comp('MPSSVSWGILLLAGLCCLVPVSLAEDPQGDAAQK', uniprot = FALSE)
-#' aa.comp('P01009')
 #' @seealso is.at(), renum.pdb(), renum.meto(), renum(), aa.at()
 #' @export
 
 aa.comp <- function(target, uniprot = TRUE){
 
-  if (uniprot){
-    seq <- get.seq(id = target) # Protein sequence
+  if (uniprot == TRUE){
+    seq <- tryCatch(
+      {
+        get.seq(id = target)
+      },
+      error = function(cond){
+        return(NULL)
+      }
+    )
+    if (is.null(seq)){
+      message("Sorry, get.seq failed")
+      return(NULL)
+    }
     id <- target
   } else {
     seq <- target
@@ -104,6 +145,7 @@ aa.comp <- function(target, uniprot = TRUE){
       output$frequency[which(output$aa == aa)] <- length(t)
     }
   }
+
   attr(output, 'seq') <- target
   return(output)
 }
@@ -129,20 +171,53 @@ aa.comp <- function(target, uniprot = TRUE){
 renum.pdb <- function(pdb, chain, uniprot){
 
   ## ---------------------- Protein from PDB --------------- ##
-  prot_pdb <- suppressWarnings(bio3d::read.pdb(pdb)$atom)
+  prot_pdb <- tryCatch(
+    {
+      suppressWarnings(bio3d::read.pdb(pdb)$atom)
+    },
+    error = function(cond){
+      return(NULL)
+    }
+  )
+  if (is.null(prot_pdb)){
+    message("Sorry, read.pdb failed")
+    return(NULL)
+  }
+
   prot_pdb <- prot_pdb[which(prot_pdb$elety == 'CA'),]
   seq_pdb <- bio3d::aa321(prot_pdb$resid[which(prot_pdb$elety == 'CA' &
                                    prot_pdb$chain == chain)])
 
   ## ----------------- Protein from UniProt --------------- ##
-  seq_uni <- get.seq(uniprot, as.string = FALSE)[[1]]
-
+  seq_uni <- tryCatch(
+    {
+      get.seq(uniprot, as.string = FALSE)[[1]]
+    },
+    error = function(cond){
+      return(NULL)
+    }
+  )
+  if (is.null(seq_uni)){
+    message("Sorry, get.seq failed")
+    return(NULL)
+  }
 
   ## ----------------- Proteins Alignement --------------- ##
   sequences <- c(paste(seq_uni, collapse = ""),
                  paste(seq_pdb, collapse = ""))
   ids <- c('seq_uni', 'seq_pdb')
-  aln <- msa(sequences, ids)
+  aln <- tryCatch(
+    {
+      msa(sequences, ids)
+    },
+    error = function(cond){
+      return(NULL)
+    }
+  )
+  if (is.null(aln)){
+    message("Sorry, msa failed")
+    return(NULL)
+  }
 
   ## ------------------- Renumerating ------------------- ##
   valn <- as.data.frame(matrix(rep(NA, dim(aln$ali)[2]*6), ncol = 6)) # vertical alignment
@@ -186,11 +261,46 @@ renum.pdb <- function(pdb, chain, uniprot){
 renum.meto <- function(uniprot){
 
   ## ----------------- Proteins Alignement --------------- ##
-  seq_uni <- get.seq(id = uniprot)
-  seq_meto <- get.seq(id = uniprot, db = 'metosite')
+  seq_uni <- tryCatch(
+    {
+      get.seq(id = uniprot)
+    },
+    error = function(cond){
+      return(NULL)
+    }
+  )
+  if (is.null(seq_uni)){
+    message("Sorry, get.seq failed")
+    return(NULL)
+  }
+
+  seq_meto <- tryCatch(
+    {
+      get.seq(id = uniprot, db = 'metosite')
+    },
+    error = function(cond){
+      return(NULL)
+    }
+  )
+  if (is.null(seq_meto)){
+    message("Sorry, get.seq failed")
+    return(NULL)
+  }
+
   sequences <- c(seq_uni, seq_meto)
   names(sequences) <- c("uniprot", "metosite")
-  aln <- msa(sequences)
+  aln <- tryCatch(
+    {
+      msa(sequences)
+    },
+    error = function(cond){
+      return(NULL)
+    }
+  )
+  if (is.null(aln)){
+    message("Sorry, msa failed")
+    return(NULL)
+  }
 
   ## ------------------- Renumerating ------------------- ##
   valn <- as.data.frame(matrix(rep(NA, dim(aln$ali)[2]*6), ncol = 6)) # vertical alignment
@@ -249,15 +359,31 @@ renum <- function(up_id, pos, from, to, ...){
 
   if (from == 'uniprot' & to == 'pdb'){
      t <- renum.pdb(pdb = pdb, chain = chain, uniprot = up_id)
+     if (is.null(t)){
+       message("Sorry, renum.pdb failed")
+       return(NULL)
+     }
      rpos <- t$pdb_pos[which(t$uni_pos == pos)]
   } else if (from == 'pdb' & to == 'uniprot'){
      t <- renum.pdb(pdb = pdb, chain = chain, uniprot = up_id)
+     if (is.null(t)){
+       message("Sorry, renum.pdb failed")
+       return(NULL)
+     }
      rpos <- t$uni_pos[which(t$pdb_pos == pos)]
   } else if (from == 'uniprot' & to == 'metosite'){
      t <- renum.meto(up_id)
+     if (is.null(t)){
+       message("Sorry, renum.pdb failed")
+       return(NULL)
+     }
      rpos <- t$meto_pos[which(t$uni_pos == pos)]
   } else if(from == 'metosite' & to == 'uniprot'){
      t <- renum.meto(up_id)
+     if (is.null(t)){
+       message("Sorry, renum.pdb failed")
+       return(NULL)
+     }
      rpos <- t$uni_pos[which(t$meto_pos == pos)]
   } else {
     stop("Provide proper values for the parameters!")

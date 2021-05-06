@@ -11,7 +11,7 @@ msa(sequences, ids = names(sequences), sfile = FALSE, inhouse = FALSE)
 
 \item{ids}{vector containing the sequences' ids.}
 
-\item{sfile}{path to the file where the fasta alignment should be saved, if any.}
+\item{sfile}{if different to FALSE, then it should be a string indicating the path to save  a fasta alignment file.}
 
 \item{inhouse}{logical, if TRUE the in-house MUSCLE software is used. It must be installed on your system and in the search path for executables.}
 }

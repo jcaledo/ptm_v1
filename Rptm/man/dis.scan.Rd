@@ -16,7 +16,7 @@ Returns a dataframe where each row corresponds to a residue, and the columns inf
 Scans the indicated protein in search of disease-related PTM sites.
 }
 \examples{
-dis.scan('P31749')
+\dontrun{dis.scan('P31749')}
 }
 \references{
 Hornbeck et al. Nucleic Acids Res. 2019 47:D433-D441, (PMID: 30445427).

@@ -10,11 +10,15 @@ test_that("abundance() works properly", {
   b <- abundance(id = 'A0AVT1', 'jurkat')
   c <- abundance(id = 'A0AVT1', 'hela')
   d <- abundance(id = 'P30034') # from Sus scrofa
+  e <- abundance(id = 'P010091')
+  f <- abundance(id = 'G1T1T4') # from Oryctolagus (not present in DB)
 
   expect_is(a, 'numeric')
   expect_is(b, 'numeric')
   expect_is(c, 'numeric')
   expect_is(d, 'numeric')
+  expect_is(e, 'NULL')
+  expect_is(f, 'NULL')
 
   expect_equal(attributes(a)$units, "ppm")
   expect_equal(attributes(b)$units, "ppm")

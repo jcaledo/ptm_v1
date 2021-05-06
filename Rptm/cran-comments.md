@@ -2,16 +2,13 @@
 
 This is a  resubmission. Now, in the current version:
 
-* I've elaborated a bit on the description field as requested.
-* Code lines in examples (in parse.dssp.Rd) have been uncommented.
-* The line in man/foldx.assembly.Rd has been fixed as requested.
-* We are only using suppressWarning() when necessary.
-* In ddG.R and ptmplot.R we make use of on.exit().
-* In the functions that offer the option of saving the results in a file, the user has to explicitly pass an argument to allow it.
+* Those functions that use Internet resources have been modified to fail gracefully with an informative message if the resource is not available, instead of giving a check warning or error.
 
 ## Test environments
 
 * local OS X install, R 4.0.2
+
+* local Linux install, R 4.0.4
 
 * win-builder (devel and release)
 

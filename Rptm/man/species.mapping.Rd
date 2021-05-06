@@ -18,7 +18,7 @@ Returns a character string identifying the organism to which the given protein b
 Maps a protein ID to its corresponding organism.
 }
 \examples{
-species.mapping('P01009')
+\dontrun{species.mapping('P01009')}
 }
 \seealso{
 id.features()

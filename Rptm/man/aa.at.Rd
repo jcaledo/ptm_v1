@@ -24,7 +24,6 @@ Please, note that when uniprot is set to FALSE, target can be the string returne
 }
 \examples{
 aa.at(28, 'P01009')
-aa.at(at = 80, target = get.seq('P00004', 'metosite'), uniprot = FALSE)
 }
 \seealso{
 is.at(), renum.pdb(), renum.meto(), renum(), aa.comp()

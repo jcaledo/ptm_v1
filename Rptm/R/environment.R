@@ -23,7 +23,7 @@
 #' @details The random control returns an environment center at a random position containing the same type or amino acid than the positive environment. The closest control searches for the closest position where such a type of amino acid is found and returns its environment.
 #' @return Returns a  list of two strings (environments).
 #' @author Juan Carlos Aledo
-#' @examples \dontrun{env.extract('P01009', db = 'uniprot', 271, 10, ctr = 'random')}
+#' @examples env.extract('P01009', db = 'uniprot', 271, 10, ctr = 'random')
 #' @references Aledo et al. Sci Rep. 2015; 5: 16955. (PMID: 26597773)
 #' @seealso env.matrices(), env.Ztest() and env.plot()
 #' @export
@@ -32,9 +32,32 @@ env.extract <- function(prot, db = 'none', c, r, ctr = 'none', exclude = c()){
 
   ## ------------ Preparing the sequence ------------ ##
   if (db == 'uniprot'){
-    seq <- get.seq(prot)
+    seq <- tryCatch(
+      {
+        get.seq(prot)
+      },
+      error = function(cond){
+        return(NULL)
+      }
+    )
+    if (is.null(seq)){
+      message("Sorry, get.seq failed")
+      return(NULL)
+    }
+
   } else if (db == 'metosite'){
-    seq <- get.seq(prot, db = 'metosite')
+    seq <- tryCatch(
+      {
+        get.seq(prot, db = 'metosite')
+      },
+      error = function(cond){
+        return(NULL)
+      }
+    )
+    if (is.null(seq)){
+        message("Sorry, get.seq failed")
+        return(NULL)
+    }
   } else {
     seq <- prot
   }
@@ -180,6 +203,7 @@ env.matrices <- function(env){
 #' @export
 
 env.Ztest <- function(pos, ctr, alpha = 0.05){
+
   ## --- Absolute to relative frequencies --- ##
   if (!is.null(attributes(pos)$number_sequences_analyzed)){
     n_pos <- attributes(pos)$number_sequences_analyzed
