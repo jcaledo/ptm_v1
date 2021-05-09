@@ -21,7 +21,7 @@ Scans the indicated protein in search of glycosylation sites.
 If db = 'all' has been selected, it may happen that the same residue appears in several rows if it is present in different databases.
 }
 \examples{
-gl.scan('P08670', db = 'PSP')
+\dontrun{gl.scan('P08670', db = 'PSP')}
 }
 \references{
 Hornbeck et al. Nucleic Acids Res. 2019 47:D433-D441, (PMID: 30445427).

@@ -16,8 +16,8 @@
 #' @return A numeric value for the abundance, expressed a parts per million (ppm), of the requested protein.
 #' @author Juan Carlos Aledo
 #' @examples abundance(id = 'A0AVT1')
-#' abundance(id = 'A0AVT1', 'jurkat')
-#' abundance(id = 'A0AVT1', 'hela')
+#' @examples \dontrun{abundance(id = 'A0AVT1', 'jurkat')}
+#' @examples \dontrun{abundance(id = 'A0AVT1', 'hela')}
 #' @references Wang et al. Proteomics 2015, 10.1002/pmic.201400441. (PMID: 25656970)
 #' @export
 

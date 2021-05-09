@@ -28,8 +28,7 @@ For the given PDB the function obtains its corresponding DSSP file using the cho
 'mkdssp' (if you have installed DSSP on your system and in the search path for executables).
 }
 \examples{
-\dontrun{acc.dssp('3cwm')
-acc.dssp(pdb = '3cwm', aa = 'M')}
+\dontrun{acc.dssp('3cwm')}
 }
 \references{
 Miller et al (1987) J. Mol. Biol. 196: 641-656 (PMID: 3681970).

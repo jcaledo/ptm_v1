@@ -18,7 +18,7 @@ Returns a dataframe where each row corresponds to a modifiable residue.
 Scans the indicated protein in search of S-nitrosylation sites.
 }
 \examples{
-sni.scan('P01009')
+\dontrun{sni.scan('P01009')}
 }
 \references{
 Huang et al. Nucleic Acids Res. 2019 47:D298-D308, (PMID: 30418626).

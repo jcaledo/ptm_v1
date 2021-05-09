@@ -23,7 +23,7 @@ Returns the residue found at the requested position.
 Please, note that when uniprot is set to FALSE, target can be the string returned by a suitable function, such as get.seq or other.
 }
 \examples{
-aa.at(28, 'P01009')
+\dontrun{aa.at(28, 'P01009')}
 }
 \seealso{
 is.at(), renum.pdb(), renum.meto(), renum(), aa.comp()

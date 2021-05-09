@@ -16,7 +16,7 @@ Returns a dataframe with as many rows as different chains are present in the PDB
 Gets the sequences of the chain find in a given PDB.
 }
 \examples{
-pdb.seq('1bpl')
+\dontrun{pdb.seq('1bpl')}
 }
 \author{
 Juan Carlos Aledo

@@ -16,7 +16,7 @@ devtools::run_examples(pkg = ".",
                        run_dontrun = FALSE,
                        run_donttest = FALSE,
                        document = TRUE)
-
+rhub::validate_email()
 devtools::check_rhub()
 
 rhub::platforms()
@@ -36,3 +36,6 @@ devtools::release(pkg = ".")
 devtools::submit_cran(pkg = ".")
 ## ------------------------------ ##
 # Run devtools::submit_cran() to re-submit the package without working through all the release() questions a second time.
+
+
+

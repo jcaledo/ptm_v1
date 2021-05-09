@@ -369,8 +369,7 @@ mkdssp <- function(pdb, method = 'ptm', exefile = "dssp"){
 #' (ii) the solvent accessible surface area (sasa) of each residue in square angstrom (Å²), and
 #' (iii) the accessibility (acc) computed as the percent of the sasa that the residue X would have in the tripeptide GXG with the polypeptide skeleton in an extended conformation and the side chain in the conformation most frequently observed in proteins.
 #' @author Juan Carlos Aledo
-#' @examples \dontrun{acc.dssp('3cwm')
-#' acc.dssp(pdb = '3cwm', aa = 'M')}
+#' @examples \dontrun{acc.dssp('3cwm')}
 #' @references Miller et al (1987) J. Mol. Biol. 196: 641-656 (PMID: 3681970).
 #' @references Touw et al (2015) Nucl. Ac. Res. 43(Database issue): D364-D368 (PMID: 25352545).
 #' @seealso compute.dssp(), atom.dpx(), res.dpx(), str.part()

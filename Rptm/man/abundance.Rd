@@ -22,8 +22,8 @@ For human proteins, in addition to the abundance in the whole organism (by defau
 }
 \examples{
 abundance(id = 'A0AVT1')
-abundance(id = 'A0AVT1', 'jurkat')
-abundance(id = 'A0AVT1', 'hela')
+\dontrun{abundance(id = 'A0AVT1', 'jurkat')}
+\dontrun{abundance(id = 'A0AVT1', 'hela')}
 }
 \references{
 Wang et al. Proteomics 2015, 10.1002/pmic.201400441. (PMID: 25656970)

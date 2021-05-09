@@ -180,7 +180,7 @@ imutant <- function(protein, ch = "_", pos, newres = "",
 #' @details Two computational approaches for prediction of the effect of amino acid changes on protein stability are implemented. FoldX (buildmodel and positionscan methods) uses a force field approach and although it has been proved to be satisfactorily accurate, it is also a time-consuming method. An alternative much faster is I-Mutant, a method base on machine-learning
 #' @return The function computes and returns the DDG (kcal/mol) for the requested residue change, defined as DDG = DGmt - DGwt, where DG is the Gibbs free energy for the folding of the protein from its unfolded state. Thus, a positive value means a destabilizing effect, and vice versa.
 #' @author Juan Carlos Aledo
-#' @examples \dontrun{foldx('1aaq', 'A', 45, 'R')}
+#' @examples \dontrun{foldx.mut('1aaq', 'A', 45, 'R')}
 #' @seealso imutant(), ddG.profile()
 #' @references Schymkowitz et al (2005) Nucl. Ac. Res. 33:W382-W388.
 #' @importFrom bio3d get.pdb

@@ -21,7 +21,7 @@
 #' @details Please, note that when uniprot is set to FALSE, target can be the string returned by a suitable function, such as get.seq or other.
 #' @return Returns a single character representing the residue found at the indicated position in the indicated protein.
 #' @author Juan Carlos Aledo
-#' @examples aa.at(28, 'P01009')
+#' @examples \dontrun{aa.at(28, 'P01009')}
 #' @seealso is.at(), renum.pdb(), renum.meto(), renum(), aa.comp()
 #' @importFrom bio3d read.fasta
 #' @export
@@ -71,8 +71,7 @@ aa.at <- function(at, target, uniprot = TRUE){
 #' @details Please, note that when uniprot is set to FALSE, target can be the string returned by a suitable function, such as get.seq or other.
 #' @return Returns a boolean. Either the residue is present at that position or not.
 #' @author Juan Carlos Aledo
-#' @examples is.at(28, 'P01009', 'Q')
-#' is.at(at = 80, target = get.seq('P00004', 'metosite'), uniprot = FALSE)
+#' @examples \dontrun{is.at(28, 'P01009', 'Q')}
 #' @seealso aa.at(), renum.pdb(), renum.meto(), renum(), aa.comp()
 #' @export
 
@@ -162,7 +161,7 @@ aa.comp <- function(target, uniprot = TRUE){
 #' @param uniprot the UniProt ID.
 #' @return Returns a dataframe containing the re-numerated sequence.
 #' @author Juan Carlos Aledo
-#' @examples renum.pdb(pdb = '121P', chain = 'A', uniprot = 'P01112')
+#' @examples \dontrun{renum.pdb(pdb = '121P', chain = 'A', uniprot = 'P01112')}
 #' @seealso is.at(), aa.at(), renum.meto(), renum(), aa.compo()
 #' @importFrom bio3d read.pdb
 #' @importFrom bio3d aa321
@@ -254,7 +253,7 @@ renum.pdb <- function(pdb, chain, uniprot){
 #' @param uniprot the UniProt ID.
 #' @return Returns a dataframe containing the re-numerated sequence.
 #' @author Juan Carlos Aledo
-#' @examples renum.meto('P01009')
+#' @examples \dontrun{renum.meto('P01009')}
 #' @seealso is.at(), aa.at(), renum.pdb(), renum(), aa.comp()
 #' @export
 
@@ -343,7 +342,6 @@ renum.meto <- function(uniprot){
 #' @details Either the origin sequence or the target sequence should be uniprot. Nevertheless, the conversion pdb -> metosite, for instance, can be achieved through the path: pdb -> uniprot -> metosite. If 'pdb' is selected, then the PDB ID and the involved chain must be provided, in that order.
 #' @return Returns the final position.
 #' @author Juan Carlos Aledo
-#' @examples renum(up_id = 'P01009', pos = 351, from = 'metosite', to = 'uniprot')
 #' @examples \dontrun{renum(up_id = 'P01009', pos = 60, from = 'uniprot',
 #'                          to = 'pdb', pdb = '1ATU', chain = 'A')}
 #' @seealso is.at(), aa.at(), renum.pdb(), renum.meto(), aa.comp()

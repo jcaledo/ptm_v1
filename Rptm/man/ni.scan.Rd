@@ -18,7 +18,7 @@ Returns a dataframe where each row corresponds to a modified residue.
 Scans the indicated protein in search of nitration sites.
 }
 \examples{
-ni.scan('P05202')
+\dontrun{ni.scan('P05202')}
 }
 \references{
 Huang et al. Nucleic Acids Res. 2019 47:D298-D308, (PMID: 30418626).

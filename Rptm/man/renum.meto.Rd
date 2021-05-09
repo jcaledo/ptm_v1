@@ -16,7 +16,7 @@ Returns a dataframe containing the re-numerated sequence.
 Renumerates residue position of a MetOSite sequence to match the corresponding UniProt sequence
 }
 \examples{
-renum.meto('P01009')
+\dontrun{renum.meto('P01009')}
 }
 \seealso{
 is.at(), aa.at(), renum.pdb(), renum(), aa.comp()

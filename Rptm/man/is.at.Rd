@@ -25,8 +25,7 @@ Checks if a given amino acid is at a given position.
 Please, note that when uniprot is set to FALSE, target can be the string returned by a suitable function, such as get.seq or other.
 }
 \examples{
-is.at(28, 'P01009', 'Q')
-is.at(at = 80, target = get.seq('P00004', 'metosite'), uniprot = FALSE)
+\dontrun{is.at(28, 'P01009', 'Q')}
 }
 \seealso{
 aa.at(), renum.pdb(), renum.meto(), renum(), aa.comp()

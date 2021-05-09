@@ -129,7 +129,7 @@ ac.scan <- function(up_id, db = 'all'){
 #' @author Juan Carlos Aledo
 #' @references Hornbeck et al. Nucleic Acids Res. 2019 47:D433-D441, (PMID: 30445427).
 #' @references Huang et al. Nucleic Acids Res. 2019 47:D298-D308, (PMID: 30418626).
-#' @examples me.scan('Q16695', db = 'PSP')
+#' @examples \dontrun{me.scan('Q16695', db = 'PSP')}
 #' @seealso meto.scan(), ac.scan(), p.scan(), ub.scan(), su.scan(), gl.scan(), sni.scan(), ni.scan(), ptm.scan(), reg.scan(), dis.scan()
 #' @export
 
@@ -176,7 +176,7 @@ me.scan <- function(up_id, db = 'all'){
 #' @details If db = 'all' has been selected, it may happen that the same residue appears in several rows if it is present in different databases.
 #' @return Returns a dataframe where each row corresponds to a modifiable residue.
 #' @author Juan Carlos Aledo
-#' @examples ub.scan('Q16695', db = 'PSP')
+#' @examples \dontrun{ub.scan('Q16695', db = 'PSP')}
 #' @references Hornbeck et al. Nucleic Acids Res. 2019 47:D433-D441, (PMID: 30445427).
 #' @references Huang et al. Nucleic Acids Res. 2019 47:D298-D308, (PMID: 30418626).
 #' @seealso meto.scan(), ac.scan(), me.scan(), p.scan(), su.scan(), gl.scan(), sni.scan(), ni.scan(), ptm.scan(), reg.scan(), dis.scan()
@@ -225,7 +225,7 @@ ub.scan <- function(up_id, db = 'all'){
 #' @details If db = 'all' has been selected, it may happen that the same residue appears in several rows if it is present in different databases.
 #' @return Returns a dataframe where each row corresponds to a modifiable residue.
 #' @author Juan Carlos Aledo
-#' @examples su.scan('Q16695', db = 'PSP')
+#' @examples \dontrun{su.scan('Q16695', db = 'PSP')}
 #' @references Hornbeck et al. Nucleic Acids Res. 2019 47:D433-D441, (PMID: 30445427).
 #' @references Huang et al. Nucleic Acids Res. 2019 47:D298-D308, (PMID: 30418626).
 #' @seealso meto.scan(), ac.scan(), me.scan(), ub.scan(), p.scan(), gl.scan(), sni.scan(), ni.scan(), ptm.scan(), reg.scan(), dis.scan()
@@ -274,7 +274,7 @@ su.scan <- function(up_id, db = 'all'){
 #' @details If db = 'all' has been selected, it may happen that the same residue appears in several rows if it is present in different databases.
 #' @return Returns a dataframe where each row corresponds to a modifiable residue.
 #' @author Juan Carlos Aledo
-#' @examples gl.scan('P08670', db = 'PSP')
+#' @examples \dontrun{gl.scan('P08670', db = 'PSP')}
 #' @references Hornbeck et al. Nucleic Acids Res. 2019 47:D433-D441, (PMID: 30445427).
 #' @references Huang et al. Nucleic Acids Res. 2019 47:D298-D308, (PMID: 30418626).
 #' @seealso meto.scan(), ac.scan(), me.scan(), ub.scan(), su.scan(), p.scan(), sni.scan(), ni.scan(), ptm.scan(), reg.scan(), dis.scan()
@@ -322,7 +322,7 @@ gl.scan <- function(up_id, db = 'all'){
 #' @param db the database where to search. It should be one among 'PSP', 'dbPTM', 'all'.
 #' @return Returns a dataframe where each row corresponds to a modifiable residue.
 #' @author Juan Carlos Aledo
-#' @examples sni.scan('P01009')
+#' @examples \dontrun{sni.scan('P01009')}
 #' @references Huang et al. Nucleic Acids Res. 2019 47:D298-D308, (PMID: 30418626).
 #' @seealso meto.scan(), ac.scan(), me.scan(), ub.scan(), su.scan(), gl.scan(), p.scan(), ni.scan(), ptm.scan(), reg.scan(), dis.scan()
 #' @export
@@ -369,7 +369,7 @@ sni.scan <- function(up_id, db = 'all'){
 #' @param db the database where to search. It should be one among 'PSP', 'dbPTM', 'all'.
 #' @return Returns a dataframe where each row corresponds to a modified residue.
 #' @author Juan Carlos Aledo
-#' @examples ni.scan('P05202')
+#' @examples \dontrun{ni.scan('P05202')}
 #' @references Huang et al. Nucleic Acids Res. 2019 47:D298-D308, (PMID: 30418626).
 #' @seealso meto.scan(), ac.scan(), me.scan(), ub.scan(), su.scan(), gl.scan(), sni.scan(), p.scan(), ptm.scan(), reg.scan(), dis.scan()
 #' @export
@@ -661,7 +661,7 @@ ptm.scan <- function(up_id, renumerate = TRUE){
 #' @param up_id a character string corresponding to the UniProt ID.
 #' @return Returns a dataframe where each row corresponds to a residue, and the columns inform about the regulatory modifications.
 #' @author Juan Carlos Aledo
-#' @examples reg.scan('P01009')
+#' @examples \dontrun{reg.scan('P01009')}
 #' @references Hornbeck et al. Nucleic Acids Res. 2019 47:D433-D441, (PMID: 30445427).
 #' @seealso  meto.scan(), ac.scan(), me.scan(), ub.scan(), su.scan(), gl.scan(), sni.scan(), ni.scan(), ptm.scan(), p.scan(), dis.scan()
 #' @export

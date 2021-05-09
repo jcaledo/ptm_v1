@@ -147,7 +147,7 @@ get.seq <- function(id, db = 'uniprot', as.string = TRUE){
 #' @param pdb the 4-letter PDB identifier.
 #' @return  Returns a dataframe with as many rows as different chains are present in the PDB. For each row six variables are returned: (i) the entry id, (ii) the entity id, (iii) the chain, (iv) the protein name, (v) the species and (vi) the sequence.
 #' @author Juan Carlos Aledo
-#' @examples pdb.seq('1bpl')
+#' @examples \dontrun{pdb.seq('1bpl')}
 #' @export
 
 pdb.seq <- function(pdb){
@@ -179,8 +179,14 @@ pdb.seq <- function(pdb){
     z <- strsplit(tt[1], "\\|")[[1]]
     seq$entry[i] <- strsplit(z[1], split = "_")[[1]][1]
     seq$entity[i] <- strsplit(z[1], split = "_")[[1]][2]
-    chains <- strsplit(z[2], split = " ")[[1]][2]
+    x <- gsub("Chain", "", z[2])
+    x <- gsub("[a-z]", "", x)
+    x <- gsub("],", ",", x)
+    x <- gsub("\\[", ",", x)
+    x <- gsub("]", "", x)
+    chains <- trimws(x)
 
+    # chains <- strsplit(z[2], split = " ")[[1]][2]
     # chains <- trimws(gsub('[Chains|Chain]', "", z[2]))
 
     seq$chain[i] <- trimws(chains)
@@ -467,8 +473,8 @@ prot2codon <- function(prot, chain = "", laxity = TRUE){
   output$aa <- seq
 
   ## ----------------- Finding the codons ------------------ ##
+  organism <- NULL
   organism <- species.mapping(t, db = source)
-
   if (is.null(organism)){
     message("Sorry, species.mapping failed")
     return(NULL)
@@ -941,7 +947,9 @@ uniprot.kegg <- function(id){
       }
     )
 
-    if (!is.null(sp)){
+    if (is.null(sp)){
+      return(NULL)
+    } else {
       organisms <- NULL
       tryCatch(
         {
@@ -950,10 +958,15 @@ uniprot.kegg <- function(id){
         },
         error = function(cond){
           return(NULL)
-        }
+        },
+        warning = function(w) conditionMessage(w)
       )
+      if (is.null(organisms)){
+        return(NULL)
+      } else {
+        org <- organisms$organism[which(regexpr(sp, organisms$species) != -1)[1]]
+      }
 
-      org <- organisms$organism[which(regexpr(sp, organisms$species) != -1)[1]]
       if (is.na(org)){ # if there is not a full match, try a partial match
         sp_ <- strsplit(sp, " ")[[1]]
         sp_ <- paste(sp_[1], sp_[2])

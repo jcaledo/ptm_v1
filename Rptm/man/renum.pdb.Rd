@@ -20,7 +20,7 @@ Returns a dataframe containing the re-numerated sequence.
 Renumerates residue position of a PDB sequence to match the corresponding UniProt sequence.
 }
 \examples{
-renum.pdb(pdb = '121P', chain = 'A', uniprot = 'P01112')
+\dontrun{renum.pdb(pdb = '121P', chain = 'A', uniprot = 'P01112')}
 }
 \seealso{
 is.at(), aa.at(), renum.meto(), renum(), aa.compo()

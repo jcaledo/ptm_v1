@@ -13,7 +13,7 @@
 #' @param call url of the resource.
 #' @param timeout set maximum request time in seconds.
 #' @param ... further named parameters, such as query, headers, etc.
-#' @details Bla bla bla.
+#' @details To be used as an ancillary function.
 #' @return The response object or NULL when the server does not respond properly.
 #' @author thefactmachine
 #' @examples gracefully_fail("http://httpbin.org/delay/2")

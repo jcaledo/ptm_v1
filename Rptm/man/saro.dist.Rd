@@ -23,7 +23,7 @@ Computes distances to the closest aromatic residues.
 For each methionyl residue this function computes the distances to the closest aromatic ring from Y, F and W. When that distance is equal or lower to the threshold, it will be computed as a S-aromatic motif.
 }
 \examples{
-saro.dist('1CLL')
+\dontrun{saro.dist('1CLL')}
 }
 \references{
 Reid, Lindley & Thornton, FEBS Lett. 1985, 190:209-213.

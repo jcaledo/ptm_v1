@@ -27,7 +27,6 @@ Renumerates residue position.
 Either the origin sequence or the target sequence should be uniprot. Nevertheless, the conversion pdb -> metosite, for instance, can be achieved through the path: pdb -> uniprot -> metosite. If 'pdb' is selected, then the PDB ID and the involved chain must be provided, in that order.
 }
 \examples{
-renum(up_id = 'P01009', pos = 351, from = 'metosite', to = 'uniprot')
 \dontrun{renum(up_id = 'P01009', pos = 60, from = 'uniprot',
                          to = 'pdb', pdb = '1ATU', chain = 'A')}
 }

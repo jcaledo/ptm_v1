@@ -16,7 +16,7 @@ Returns a dataframe where each row corresponds to a residue, and the columns inf
 Scans the indicated protein in search of regulatory PTM sites.
 }
 \examples{
-reg.scan('P01009')
+\dontrun{reg.scan('P01009')}
 }
 \references{
 Hornbeck et al. Nucleic Acids Res. 2019 47:D433-D441, (PMID: 30445427).

@@ -20,7 +20,7 @@ The response object or NULL when the server does not respond properly.
 Checks that internet resource works properly and fail gracefully when not.
 }
 \details{
-Bla bla bla.
+To be used as an ancillary function.
 }
 \examples{
 gracefully_fail("http://httpbin.org/delay/2")

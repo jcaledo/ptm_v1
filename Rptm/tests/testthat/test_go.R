@@ -123,9 +123,11 @@ test_that("bg.go() works properly", {
   a <- bg.go(ids = "./go/id_set.txt")
   b <-  bg.go(ids = c("Q13015", "Q14667", "P08575", "Q5JSZ5", "P13196", "H7C4H7"))
 
-  expect_is(a, 'data.frame')
-  expect_equal(nrow(a), 6)
-  expect_equal(ncol(a), 2)
+  if (!is.null(a)){
+    expect_is(a, 'data.frame')
+    expect_equal(nrow(a), 6)
+    expect_equal(ncol(a), 2)
+  }
 
   if (!is.null(b)){
     expect_is(b, 'data.frame')
@@ -133,9 +135,6 @@ test_that("bg.go() works properly", {
     expect_equal(ncol(b), 2)
     expect_equal(a, b)
   }
-
-
-
 
 })
 
