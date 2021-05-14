@@ -487,7 +487,7 @@ ptm.scan <- function(up_id, renumerate = TRUE){
 
 
   ## ----- Phosphorylation -------- ##
-  p <- p.scan(up_id)
+  p <- suppressMessages(p.scan(up_id))
   if (!is.null(p)){
     if (nrow(p) != 0){ # if there some site
           u <- unique(p$modification)
@@ -500,7 +500,7 @@ ptm.scan <- function(up_id, renumerate = TRUE){
   }
 
   ## ----- Acetylation -------- ##
-  ac <- ac.scan(up_id)
+  ac <- suppressMessages(ac.scan(up_id))
 
   if (!is.null(ac)){
     if (nrow(ac) != 0){ # if there some site
@@ -515,7 +515,7 @@ ptm.scan <- function(up_id, renumerate = TRUE){
 
 
   ## ----- Methylation -------- ##
-  me <- me.scan(up_id)
+  me <- suppressMessages(me.scan(up_id))
   if (!is.null(me)){
     if (nrow(me) != 0){ # if there is some site
       u <- unique(me$modification)
@@ -529,7 +529,7 @@ ptm.scan <- function(up_id, renumerate = TRUE){
 
 
   ## ----- Ubiquitination -------- ##
-  ub <- ub.scan(up_id)
+  ub <- suppressMessages(ub.scan(up_id))
   if (!is.null(ub)){
     if (nrow(ub) != 0){ # if there is some site
       u <- unique(ub$modification)
@@ -543,7 +543,7 @@ ptm.scan <- function(up_id, renumerate = TRUE){
 
 
   ## ----- Sumoylation -------- ##
-  su <- su.scan(up_id)
+  su <- suppressMessages(su.scan(up_id))
   if (!is.null(su)){
     if (nrow(su) != 0){ # if there is some site
       u <- unique(su$modification)
@@ -557,7 +557,7 @@ ptm.scan <- function(up_id, renumerate = TRUE){
 
 
   ## ----- OGlcNAc -------- ##
-  gl <- gl.scan(up_id)
+  gl <- suppressMessages(gl.scan(up_id))
   if (!is.null(gl)){
     if (nrow(gl) != 0){ # if there is some site
       u <- unique(gl$modification)
@@ -571,7 +571,7 @@ ptm.scan <- function(up_id, renumerate = TRUE){
 
 
   ## ----- S-nitrosylation -------- ##
-  sni <- sni.scan(up_id)
+  sni <- suppressMessages(sni.scan(up_id))
   if (!is.null(sni)){
     if (nrow(sni) != 0){ # if there is some site
       u <- unique(sni$modification)
@@ -585,7 +585,7 @@ ptm.scan <- function(up_id, renumerate = TRUE){
 
 
   ## ----- Nitration -------- ##
-  ni <- ni.scan(up_id)
+  ni <- suppressMessages(ni.scan(up_id))
   if (!is.null(ni)){
     if (nrow(ni) != 0){ # if there is some site
       u <- unique(ni$modification)
@@ -599,7 +599,7 @@ ptm.scan <- function(up_id, renumerate = TRUE){
 
 
   ## ----- Regulation -------- ##
-  reg <- reg.scan(up_id)
+  reg <- suppressMessages(reg.scan(up_id))
   if (!is.null(reg)){
     if (nrow(reg) != 0){ # if there is some site
       u <- unique(reg$modification)
@@ -617,7 +617,7 @@ ptm.scan <- function(up_id, renumerate = TRUE){
 
 
   ## ----- Disease -------- ##
-  dis <- dis.scan(up_id)
+  dis <- suppressMessages(dis.scan(up_id))
   if (!is.null(dis)){
     if (nrow(dis) != 0){ # if there is any site
       u <- unique(dis$modification)
