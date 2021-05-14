@@ -79,6 +79,8 @@ test_that("get.go() works properly", {
   e <- get.go(id = 'P00367') # requires removing spurious rows
   f <- get.go(id = 'Q14687') # no GO terms found
   g <- get.go(id = "P010091") # dummy protein ID
+  h <- get.go("AAA58698", filter = FALSE) # currently P06748
+  i <- get.go("AAA58698")
 
   if (!is.null(a)){
     expect_is(a, 'data.frame')
@@ -110,6 +112,9 @@ test_that("get.go() works properly", {
 
   expect_is(f, 'NULL')
   expect_is(g, 'NULL')
+  expect_is(h, 'NULL')
+  expect_is(i, 'NULL')
+
 })
 
 ## ---------------------------------------------- ##

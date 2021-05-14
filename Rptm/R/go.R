@@ -193,6 +193,9 @@ get.go <- function(id, filter = TRUE, format = 'dataframe', silent = FALSE){
 
     a <- strsplit(cont, split = '\n')[[1]] # all the lines
     b <- a[which(grepl(id, a))]
+    if (length(b) == 0){
+      return(NULL)
+    }
     c <- strsplit(b, split = "\t")[[1]][2] # only term names and GO ids
     d <-  strsplit(c, split = ";")[[1]] # a single line by term
 
