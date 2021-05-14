@@ -406,7 +406,7 @@ foldx.mut <- function(pdb, ch, pos, newres = "", pH = 7,
     if (!is.null(war)){
       warning(war)
     }
-    closeAllConnections()
+
     return(df)
 
   } else if (method == 'positionscan'){ ## -------------------- Method FoldX-PositionScan
@@ -534,7 +534,7 @@ foldx.mut <- function(pdb, ch, pos, newres = "", pH = 7,
     if (!is.null(war)){
       warning(war)
     }
-    closeAllConnections()
+
     return(df)
   }
 }
@@ -656,7 +656,7 @@ foldx.stab <- function(pdb, pH = 7, I = 0.05) {
   ## --------- Output ----------- ##
   attr(DG, "pdb") <- pdb
   attr(DG, "units") <- "kcal/mol"
-  closeAllConnections()
+
   return(DG)
 }
 
@@ -814,7 +814,7 @@ foldx.assembly <- function(pdb, mol1, mol2, pH = 7, I = 0.05) {
   attr(IR, "Gibbs") <- DG
   attr(IR, "units") <- "kcal/mol"
   attr(IR, "pdb") <- pdb
-  closeAllConnections()
+
   return(IR)
 }
 
@@ -1155,8 +1155,6 @@ ddG.ptm <- function(pdb, ch, pos, ptm, dir = 'f', pH = 7){
   attr(output, "PTM") <- ptm
   attr(output, "units") <- "kcal/mol"
 
-  closeAllConnections()
   return(output)
-
 }
 

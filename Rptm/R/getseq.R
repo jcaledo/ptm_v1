@@ -350,7 +350,6 @@ pdb2uniprot <- function(pdb, chain){
     },
     warning = function(w) conditionMessage(w)
   )
-  closeAllConnections()
 
   if (is.null(d)){
     message("Sorry, pdb_chain_uniprot couldn't be accessed")
@@ -396,7 +395,7 @@ uniprot2pdb <- function(up_id){
     },
     warning = function(w) conditionMessage(w)
   )
-  closeAllConnections()
+
   if (is.null(d)){
     message("Sorry, no result could be retrieve")
     return(NULL)
@@ -838,7 +837,6 @@ species.kegg <- function(organism, from = 'scientific'){
     },
     warning = function(w) conditionMessage(w)
   )
-  closeAllConnections()
 
   if (is.null(organisms)){
     message("Sorry, no result could be retrieved")
@@ -954,7 +952,6 @@ uniprot.kegg <- function(id){
       tryCatch(
         {
           load(url("https://github.com/jcaledo/kegg_species/blob/master/organisms.Rda?raw=true"))
-          closeAllConnections()
         },
         error = function(cond){
           return(NULL)

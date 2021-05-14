@@ -681,7 +681,6 @@ reg.scan <- function(up_id){
     },
     warning = function(w) conditionMessage(w)
   )
-  closeAllConnections()
 
   if (is.null(reg_db)){
     message("Sorry, no regulatory sites found for this protein")
@@ -749,7 +748,6 @@ dis.scan <- function(up_id){
     },
     warning = function(w) conditionMessage(w)
   )
-  closeAllConnections()
 
   if (is.null(dis_db)){
     message("Sorry, no modification sites were found for this protein")
