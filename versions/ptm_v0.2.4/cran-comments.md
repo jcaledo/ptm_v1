@@ -1,8 +1,7 @@
 ## Resubmission
 
-This is a  resubmission. Now, in the current version:
+This is a resubmission. Now a proper reference describing the method in the package has been included in the DESCRIPTION. In addition, now we have been careful to reset the user par() after running the vignettes code. 
 
-* Those functions that use Internet resources have been modified to fail gracefully with an informative message if the resource is not available, instead of giving a check warning or error.
 
 ## Test environments
 
