@@ -18,7 +18,7 @@ License: GPL (>= 2)
 URL: https://bitbucket.org/jcaledo/ptm, https://metositeptm.com
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 Depends: R (>= 4.0.0)
 Imports: 
   bio3d (>= 2.3-4),
@@ -39,4 +39,3 @@ Suggests:
   knitr,
   markdown,
   testthat
-    
