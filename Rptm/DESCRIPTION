@@ -2,7 +2,7 @@ Package: ptm
 Type: Package
 Title: Analyses of Protein Post-Translational Modifications
 Version: 0.2.5
-Author: Juan Carlos Aledo [au, cre]
+Author: Juan Carlos Aledo [aut, cre]
 Maintainer: Juan Carlos Aledo <caledo@uma.es>
 Description: Contains utilities for the analysis of post-translational modifications (PTMs) in proteins, 
     with particular emphasis on the sulfoxidation of methionine residues. Features include the ability to download, 
