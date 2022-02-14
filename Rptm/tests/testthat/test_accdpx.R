@@ -4,46 +4,44 @@ context("ACC and SASA Computations")
 ## ---------------------------------------------- ##
 #             Testing parse.dssp                   #
 ## ---------------------------------------------- ##
-test_that("parse.dssp() works properly", {
-
-  skip_on_cran()
-  skip_on_travis()
-
-  compute.dssp('3cwm')
-  a <- parse.dssp('3cwm.dssp')
-
-  expect_equal(nrow(a), 369)
-  expect_equal(ncol(a), 8)
-  expect_equal(sum(c('B', 'C', 'E', 'G', 'H', 'S', 'T') %in% a$ss), 7)
-})
+# test_that("parse.dssp() works properly", {
+#
+#   skip_on_cran()
+#   skip_on_travis()
+#
+#   compute.dssp('3cwm')
+#   a <- parse.dssp('3cwm.dssp')
+#
+#   expect_equal(nrow(a), 369)
+#   expect_equal(ncol(a), 8)
+#   expect_equal(sum(c('B', 'C', 'E', 'G', 'H', 'S', 'T') %in% a$ss), 7)
+# })
 
 
 
 ## ---------------------------------------------- ##
 #            Testing compute.dssp                  #
 ## ---------------------------------------------- ##
-
-test_that("compute.dssp() works properly", {
-
-  skip_on_cran()
-  skip_on_travis()
-
-  compute.dssp(pdb = "./pdb/1u8f.pdb", destfile = "./pdb/")
-  if (file.exists('./pdb/1u8f.dssp')){
-    b <- parse.dssp("./pdb/1u8f.dssp")
-    if (!is.null(b)){
-      expect_is(b, 'data.frame')
-      expect_equal(nrow(b), 1332)
-      expect_equal(ncol(b), 8)
-    }
-  }
-})
+# test_that("compute.dssp() works properly", {
+#
+#   skip_on_cran()
+#   skip_on_travis()
+#
+#   compute.dssp(pdb = "./pdb/1u8f.pdb", destfile = "./pdb/")
+#   if (file.exists('./pdb/1u8f.dssp')){
+#     b <- parse.dssp("./pdb/1u8f.dssp")
+#     if (!is.null(b)){
+#       expect_is(b, 'data.frame')
+#       expect_equal(nrow(b), 1332)
+#       expect_equal(ncol(b), 8)
+#     }
+#   }
+# })
 
 
 ## ---------------------------------------------- ##
 #               Testing mkdssp                     #
 ## ---------------------------------------------- ##
-
 test_that("mkdssp() works properly", {
 
   skip_on_cran()
@@ -101,9 +99,9 @@ test_that("acc.dssp() works properly",{
 
   a <- acc.dssp('./pdb/1u8f.pdb')
   b <- acc.dssp('./pdb/1u8f.pdb', aa = 'M')
-  c <- acc.dssp('./pdb/1u8f.pdb', dssp = 'mkdssp')
-  d <- acc.dssp('./pdb/1u8f.pdb', dssp = 'mkdssp', aa = 'S')
-  e <- acc.dssp('./pdb/1u8f.pdb', dssp = 'mkdssp', aa = 'O')
+
+  d <- acc.dssp('./pdb/1u8f.pdb', aa = 'S')
+  e <- acc.dssp('./pdb/1u8f.pdb', aa = 'O')
 
   if (!is.null(a)){
     expect_is(a, 'data.frame')
@@ -119,13 +117,6 @@ test_that("acc.dssp() works properly",{
     expect_true('Q' %in% unique(b$chain))
   }
 
-  if (!is.null(c)){
-    expect_is(c, 'data.frame')
-    expect_equal(nrow(c), 1332)
-    expect_equal(ncol(c), 11)
-    expect_true('P' %in% unique(c$chain))
-  }
-
   if (!is.null(d)){
     expect_is(d, 'data.frame')
     expect_equal(nrow(d), 84)
@@ -136,10 +127,10 @@ test_that("acc.dssp() works properly",{
 
   a <- acc.dssp('6lu7')
   b <- acc.dssp('6lu7', aa = 'M')
-  c <- acc.dssp('6lu7', dssp = 'mkdssp')
-  d <- acc.dssp('6lu7', dssp = 'mkdssp', aa = 'K')
-  e <- acc.dssp('xxxx', dssp = 'mkdssp')
-  f <- acc.dssp('xxxx', dssp = 'compute')
+
+  d <- acc.dssp('6lu7', aa = 'K')
+  e <- acc.dssp('xxxx')
+
 
   if (!is.null(a)){
     expect_is(a, 'data.frame')
@@ -155,12 +146,6 @@ test_that("acc.dssp() works properly",{
     expect_true('A' %in% unique(b$chain))
   }
 
-  if (!is.null(c)){
-    expect_is(c, 'data.frame')
-    expect_equal(nrow(c), 309)
-    expect_equal(ncol(c), 11)
-    expect_true('A' %in% unique(c$chain))
-  }
 
   if (!is.null(d)){
     expect_is(d, 'data.frame')
@@ -170,7 +155,7 @@ test_that("acc.dssp() works properly",{
   }
 
   expect_is(e, 'NULL')
-  expect_is(f, 'NULL')
+
 
   a <- acc.dssp('1h9d') # pdb contain non-protein chains
 

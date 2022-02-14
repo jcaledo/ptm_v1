@@ -4,12 +4,10 @@
 \alias{acc.dssp}
 \title{Compute Residue Accessibility and SASA}
 \usage{
-acc.dssp(pdb, dssp = 'compute', aa = 'all')
+acc.dssp(pdb, aa = 'all')
 }
 \arguments{
 \item{pdb}{is either a PDB id, or the path to a pdb file.}
-
-\item{dssp}{string indicating the preferred method to obtain the dssp file. It must be either 'compute' or 'mkdssp'.}
 
 \item{aa}{one letter code for the amino acid of interest, or 'all' for all the protein residues.}
 }
@@ -23,9 +21,7 @@ A dataframe where each row is an individual residue of the selected protein. The
 Computes the accessibility as well as the SASA for each reside from the indicated protein.
 }
 \details{
-For the given PDB the function obtains its corresponding DSSP file using the chosen method. The argument dssp allows two alternative methods:
-'compute' (it calls to the function compute.dssp(), which in turn uses an API to run DSSP at the CMBI);
-'mkdssp' (if you have installed DSSP on your system and in the search path for executables).
+You must have installed DSSP on your system and in the search path for executables.
 }
 \examples{
 \dontrun{acc.dssp('3cwm')}
@@ -36,7 +32,7 @@ Miller et al (1987) J. Mol. Biol. 196: 641-656 (PMID: 3681970).
 Touw et al (2015) Nucl. Ac. Res. 43(Database issue): D364-D368 (PMID: 25352545).
 }
 \seealso{
-compute.dssp(), atom.dpx(), res.dpx(), str.part()
+atom.dpx(), res.dpx(), str.part()
 }
 \author{
 Juan Carlos Aledo

@@ -113,6 +113,9 @@ is.at <- function(at, target, aa = 'M', uniprot = TRUE){
 #' @author Juan Carlos Aledo
 #' @examples aa.comp('MPSSVSWGILLLAGLCCLVPVSLAEDPQGDAAQK', uniprot = FALSE)
 #' @seealso is.at(), renum.pdb(), renum.meto(), renum(), aa.at()
+#' @importFrom graphics text
+#' @importFrom stats fisher.test
+#' @importFrom stats chisq.test
 #' @export
 
 aa.comp <- function(target, uniprot = TRUE, reference = 'human', init = 'FALSE'){

@@ -89,17 +89,19 @@ test_that("the function aa.comp() works properly", {
   skip_on_cran()
   skip_on_travis()
 
-  a <- aa.comp("ACEEAGRKDNW", uniprot = FALSE)
+  a <- suppressWarnings(aa.comp("ACEEAGRKDNW", uniprot = FALSE))
   b <- aa.comp("P01009")
   c <- aa.comp('P010091')
 
-  expect_is(a, 'data.frame')
-  expect_equal(dim(a), c(20, 2))
+  expect_is(a, 'list')
+  expect_equal(dim(a[[1]]), c(20, 6))
 
   if (!is.null(b)){
-    expect_is(b, 'data.frame')
-    expect_equal(dim(a), c(20, 2))
-    expect_equal(sum(b$frequency), 418)
+    expect_is(b, 'list')
+    expect_equal(dim(b[[1]]), c(20, 6))
+    expect_equal(sum(b[[1]]$observed), 418)
+    expect_equal(length(b[[2]]), 9)
+    expect_lt(b[[2]]$p.value, 0.5)
   }
 
   expect_is(c, 'NULL')

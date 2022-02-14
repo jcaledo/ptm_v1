@@ -84,7 +84,7 @@ test_that("get.go() works properly", {
 
   if (!is.null(a)){
     expect_is(a, 'data.frame')
-    expect_gte(nrow(a), 20)
+    expect_gte(nrow(a), 18)
     expect_equal(ncol(a), 5)
   }
 

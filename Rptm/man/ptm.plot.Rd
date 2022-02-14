@@ -4,8 +4,7 @@
 \alias{ptm.plot}
 \title{Plot Values of a Property and PTM Sites Along the Protein Sequence}
 \usage{
-ptm.plot(up_id, pdb = "", property, ptm, dssp = 'compute',
-                window = 1, sdata = FALSE, ...)
+ptm.plot(up_id, pdb = "", property, ptm, window = 1, sdata = FALSE, ...)
 }
 \arguments{
 \item{up_id}{a character string for the UniProt ID of the protein of interest.}
@@ -15,8 +14,6 @@ ptm.plot(up_id, pdb = "", property, ptm, dssp = 'compute',
 \item{property}{a character string indicating the property of interest. It should be one of 'sasa', 'acc', 'dpx', 'eiip', 'volume', 'polarizability', 'avg.hyd', 'pi.hel', 'a.hel', 'b.sheet', 'B.factor', or 'own'.}
 
 \item{ptm}{a character vector indicating the PTMs of interest. It should be among: 'ac' (acetylation), 'me' (methylation), 'meto' (sulfoxidation), 'p' (phosphorylation), 'ni' (nitration), 'su' (sumoylation) or 'ub' (ubiquitination), 'gl' (glycosylation), 'sni' (S-nitrosylation),'reg' (regulatory), 'dis' (disease).}
-
-\item{dssp}{character string indicating the method to compute DSSP. It should be either 'compute' or 'mkdssp'.}
 
 \item{window}{positive integer indicating the window size for smoothing with a sliding window average (default: 1, i.e. no smoothing).}
 

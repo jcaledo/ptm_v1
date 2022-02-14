@@ -149,7 +149,7 @@ parse.dssp <- function(file, keepfiles = FALSE){
 #' @export
 
 compute.dssp <- function(pdb, destfile = './'){
-
+  .Deprecated(new = "mkdssp", old = "compute.dssp")
   del <- FALSE
   if (nchar(pdb) == 4){ # when input is a PDB ID
     mypdb <- suppressWarnings(bio3d::get.pdb(pdb)) # avoids warning: 'pdb exists. Skipping download'
@@ -353,17 +353,14 @@ mkdssp <- function(pdb, method = 'ptm', exefile = "dssp"){
 
 
 ## ---------------------------------------------------------------- ##
-#     acc.dssp <- function(pdb, dssp = 'compute', aa = 'all')        #
+#     acc.dssp <- function(pdb, aa = 'all')        #
 ## ---------------------------------------------------------------- ##
 #' Compute Residue Accessibility and SASA
 #' @description Computes the accessibility as well as the SASA for each reside from the indicated protein.
-#' @usage acc.dssp(pdb, dssp = 'compute', aa = 'all')
+#' @usage acc.dssp(pdb, aa = 'all')
 #' @param pdb is either a PDB id, or the path to a pdb file.
-#' @param dssp string indicating the preferred method to obtain the dssp file. It must be either 'compute' or 'mkdssp'.
 #' @param aa one letter code for the amino acid of interest, or 'all' for all the protein residues.
-#' @details For the given PDB the function obtains its corresponding DSSP file using the chosen method. The argument dssp allows two alternative methods:
-#' 'compute' (it calls to the function compute.dssp(), which in turn uses an API to run DSSP at the CMBI);
-#' 'mkdssp' (if you have installed DSSP on your system and in the search path for executables).
+#' @details You must have installed DSSP on your system and in the search path for executables.
 #' @return A dataframe where each row is an individual residue of the selected protein. The variables computed, among others, are:
 #' (i) the secondary structure (ss) element to which the residue belongs,
 #' (ii) the solvent accessible surface area (sasa) of each residue in square angstrom (Å²), and
@@ -372,13 +369,13 @@ mkdssp <- function(pdb, method = 'ptm', exefile = "dssp"){
 #' @examples \dontrun{acc.dssp('3cwm')}
 #' @references Miller et al (1987) J. Mol. Biol. 196: 641-656 (PMID: 3681970).
 #' @references Touw et al (2015) Nucl. Ac. Res. 43(Database issue): D364-D368 (PMID: 25352545).
-#' @seealso compute.dssp(), atom.dpx(), res.dpx(), str.part()
+#' @seealso atom.dpx(), res.dpx(), str.part()
 #' @importFrom bio3d get.pdb
 #' @importFrom bio3d pdbsplit
 #' @importFrom bio3d read.pdb
 #' @export
 
-acc.dssp <- function(pdb, dssp = 'compute', aa = 'all'){
+acc.dssp <- function(pdb, aa = 'all'){
 
   ## --------------- Download and split the PDB -------------- ##
   del <- FALSE
@@ -397,45 +394,11 @@ acc.dssp <- function(pdb, dssp = 'compute', aa = 'all'){
     return(NULL)
   }
 
-  ## ------------ Get the whole protein dssp file ------------ ##
-  if (dssp == 'compute'){
-    tryCatch(
-      {
-        compute.dssp(pdb)
-      },
-      error = function(cond){
-        return(NULL)
-      }
-    )
-
-    dssp_file <- paste('./', id, '.dssp', sep = "")
-
-    df <- tryCatch(
-      {
-        parse.dssp(dssp_file, keepfiles = FALSE)
-      },
-      error = function(cond){
-        message(cond)
-        return(NULL)
-      }
-    )
-    if (is.null(df)){
-      return(NULL)
-    }
-
-  } else if (dssp == 'mkdssp'){
-
-    df <- mkdssp(id, method = 'ptm')
-    if (is.null(df)){
-      message()
-      return(NULL)
-    }
-
-    # system(paste("mkdssp -i ", file, " -o ", dssp_file, sep =""))
-  } else {
-    message("A proper dssp method should be provided!")
-    return(NULL)
-  }
+  df <- mkdssp(id, method = 'ptm')
+     if (is.null(df)){
+       message()
+       return(NULL)
+     }
 
   ## -------- Starting the dataframe construction ------------ ##
   df <- df[,1:6] # keep only relevant variables
@@ -450,14 +413,9 @@ acc.dssp <- function(pdb, dssp = 'compute', aa = 'all'){
   chains <- unique(df$chain) # Sometimes we have to remove non-protein chains
   chain_files <- paste('./split_chain/', id, '_', chains,  '.pdb', sep = "")
   dssp_files <- paste('./split_chain/', id, '_', chains, '.dssp', sep = "")
-  if (dssp == 'compute'){
-    chain_files <- chain_files[file.exists(chain_files)]
-    lapply(chain_files, function(x) compute.dssp(x, destfile = './split_chain/'))
-    dssp_files <- dssp_files[file.exists(dssp_files)]
-    df$sasa_chain <- unlist(lapply(dssp_files, function(x) parse.dssp(x, keepfiles = FALSE)$sasa))
-  } else if (dssp == 'mkdssp'){
-    df$sasa_chain <- unlist(lapply(chain_files, function(x) mkdssp(x, method = "ptm")$sasa))
-  }
+
+  df$sasa_chain <- unlist(lapply(chain_files, function(x) mkdssp(x, method = "ptm")$sasa))
+
   df$delta_sasa <- df$sasa_chain - df$sasa_complex
 
   ## ---------------- Compute accessibility ------------------ ##
@@ -937,7 +895,7 @@ res.dpx <- function(pdb, aa = 'all'){
 stru.part <- function(pdb, cutoff = 0.25){
 
   ## --- Getting Accessibilities
-  t <- acc.dssp(pdb, dssp = 'compute', aa = 'all')
+  t <- acc.dssp(pdb, aa = 'all')
   if (is.null(t)){
     message("Sorry, acc.dssp failed")
     return(NULL)

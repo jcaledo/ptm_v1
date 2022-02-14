@@ -6,17 +6,15 @@
 ## -------------------------------- ##
 
 ## ------------------------------------------------------------------------------- ##
-#   ptm.plot <- function(up_id, pdb="", property, ptm, dssp, window, sdata=F, ...)  #
+#   ptm.plot <- function(up_id, pdb="", property, ptm, window, sdata=F, ...)  #
 ## ------------------------------------------------------------------------------- ##
 #' Plot Values of a Property and PTM Sites Along the Protein Sequence
 #' @description Represents the values of a property and show the PTM sites along a protein sequence.
-#' @usage ptm.plot(up_id, pdb = "", property, ptm, dssp = 'compute',
-#'                 window = 1, sdata = FALSE, ...)
+#' @usage ptm.plot(up_id, pdb = "", property, ptm, window = 1, sdata = FALSE, ...)
 #' @param up_id a character string for the UniProt ID of the protein of interest.
 #' @param pdb Optional argument to indicate the PDB and chain to be used (i.e. '1u8f.O'). If we leave this argument empty, the function will make the election for us whenever possible.
 #' @param property a character string indicating the property of interest. It should be one of 'sasa', 'acc', 'dpx', 'eiip', 'volume', 'polarizability', 'avg.hyd', 'pi.hel', 'a.hel', 'b.sheet', 'B.factor', or 'own'.
 #' @param ptm a character vector indicating the PTMs of interest. It should be among: 'ac' (acetylation), 'me' (methylation), 'meto' (sulfoxidation), 'p' (phosphorylation), 'ni' (nitration), 'su' (sumoylation) or 'ub' (ubiquitination), 'gl' (glycosylation), 'sni' (S-nitrosylation),'reg' (regulatory), 'dis' (disease).
-#' @param dssp character string indicating the method to compute DSSP. It should be either 'compute' or 'mkdssp'.
 #' @param window positive integer indicating the window size for smoothing with a sliding window average (default: 1, i.e. no smoothing).
 #' @param sdata logical, if TRUE save a Rda file with the relevant data in the current directory.
 #' @param ... when the user want to use his/her own amino acid index, it can be passed as a named vector.
@@ -50,8 +48,7 @@
 #' @export
 
 
-ptm.plot <- function(up_id, pdb = "", property, ptm , dssp = 'compute',
-                     window = 1, sdata = FALSE, ...){
+ptm.plot <- function(up_id, pdb = "", property, ptm , window = 1, sdata = FALSE, ...){
 
   aa <- aai$aa
 
@@ -220,7 +217,7 @@ ptm.plot <- function(up_id, pdb = "", property, ptm , dssp = 'compute',
   ## ------------------------------------------------------------------- ##
   if (exists.pdb){
     if (! 'sse' %in% ls()){
-      sse <- acc.dssp(pdb_id, dssp = dssp)
+      sse <- acc.dssp(pdb_id)
       if (is.null(sse)){
         message("Sorry, acc.dssp failed")
         return(NULL)
