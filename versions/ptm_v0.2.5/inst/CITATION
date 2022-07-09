@@ -1,0 +1,17 @@
+citHeader("To cite ptm in publications use:")
+
+citEntry(entry = "Article",
+	title	   = "{ptm}: an R package for the study of methionine sulfoxidation and other posttranslational modifications",
+	author	   = person("Juan Carlos", "Aledo"),
+	journal	   = "Bioinformatics",
+	year	   = "2021",
+	volume	   = "37",
+	number	   = "21",
+	pages	   = "3979--3980",
+	url		   = "https://academic.oup.com/bioinformatics/article-abstract/37/21/3979/6272576",
+
+	textVersion =
+	paste("Aledo (2021).",
+	"ptm: an R package for the study of methionine sulfoxidation and other posttranslational modifications.",
+	" Bioinformatics 37:3979-3980.")
+)
