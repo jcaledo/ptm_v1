@@ -185,10 +185,50 @@ test_that('reg.scan() works properly', {
   }
 
   if (!is.null(b)){
-    expect_equal(nrow(b), 3)
     expect_equal(ncol(b), 4)
-    expect_equal(b$modification[3], "M358-ox")
+    if (nrow(b) == 1){
+      message("MetOSite couldn't return an answer")
+    } else {
+      expect_equal(nrow(b), 3)
+      expect_equal(b$modification[3], "M358-ox")
+    }
   }
+
+  expect_is(c, 'NULL')
+
+  if (!is.null(d)){
+    expect_is(d, 'data.frame')
+    expect_equal(nrow(d), 12)
+    expect_equal(ncol(d), 4)
+    expect_true(d$database[1] == 'PSP')
+  }
+})
+
+## ---------------------------------------------- ##
+#                 Testing reg.scan (strong)        #
+## ---------------------------------------------- ##
+test_that('reg.scan() works properly', {
+
+  skip_on_cran()
+
+  a <- reg.scan('O14757')
+  b <- reg.scan('P01009')
+  c <- suppressWarnings(reg.scan('G3SB67'))  # without described ptm
+  d <- reg.scan('Q15796') # without meto
+
+  if (!is.null(a)){
+    expect_is(a, 'data.frame')
+    expect_equal(nrow(a), 6)
+    expect_equal(ncol(a), 4)
+    expect_equal(a$modification[6], "S296-p")
+    expect_is(a, 'data.frame')
+  }
+
+  if (!is.null(b)){
+      expect_equal(ncol(b), 4)
+      expect_equal(nrow(b), 3)
+      expect_equal(b$modification[3], "M358-ox")
+    }
 
   expect_is(c, 'NULL')
 

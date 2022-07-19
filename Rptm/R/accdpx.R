@@ -353,7 +353,7 @@ mkdssp <- function(pdb, method = 'ptm', exefile = "dssp"){
 
 
 ## ---------------------------------------------------------------- ##
-#     acc.dssp <- function(pdb, aa = 'all')        #
+#         acc.dssp <- function(pdb, aa = 'all')                      #
 ## ---------------------------------------------------------------- ##
 #' Compute Residue Accessibility and SASA
 #' @description Computes the accessibility as well as the SASA for each reside from the indicated protein.
@@ -394,11 +394,13 @@ acc.dssp <- function(pdb, aa = 'all'){
     return(NULL)
   }
 
-  df <- mkdssp(id, method = 'ptm')
-     if (is.null(df)){
-       message()
-       return(NULL)
-     }
+  # df <- mkdssp(id, method = 'ptm')     #---------------- sustituido
+  df <- mkdssp(file, method = 'ptm')
+
+  if (is.null(df)){
+    message()
+    return(NULL)
+  }
 
   ## -------- Starting the dataframe construction ------------ ##
   df <- df[,1:6] # keep only relevant variables
@@ -529,15 +531,15 @@ acc.dssp <- function(pdb, aa = 'all'){
 
   ## ---------------- Cleaning and Tidying ------------------- ##
   unlink("./temp_split", recursive = TRUE)
-  aai <- as.character(aai$aa)
-
+  # aai <- as.character(aai$aa) # ------------------------------------------ Sustituido:
+  aai <- c('A', 'R', 'N', 'D', 'C', 'Q', 'E', 'G', 'H', 'I', 'L', 'K', 'M', 'F', 'P', 'S', 'T', 'W', 'Y', 'V')
   if (del & file.exists(file)){
     file.remove(file)
   }
 
   ## ------------------ Returning Results -------------------- ##
   if (aa != 'all' & aa %in% aai){
-    df <- df[which(df$aa == aa),]
+      df <- df[which(df$aa == aa),]
     return(df)
   } else if (aa == 'all'){
     return(df)
@@ -546,7 +548,6 @@ acc.dssp <- function(pdb, aa = 'all'){
     return(NULL)
   }
 }
-
 
 ## ---------------------------------------------------------------- ##
 #         get.area <- function(pdb, keepfiles = FALSE)               #
