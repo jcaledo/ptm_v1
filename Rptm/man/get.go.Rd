@@ -4,12 +4,10 @@
 \alias{get.go}
 \title{Get Gene Ontology Annotation}
 \usage{
-get.go(id, filter = TRUE, format = 'dataframe', silent = FALSE)
+get.go(id, format = 'dataframe', silent = FALSE)
 }
 \arguments{
 \item{id}{the UniProt identifier of the protein of interest.}
-
-\item{filter}{logical, if TRUE a reduced number of terms, selected on the basis of astringent criteria (see details) is returned.}
 
 \item{format}{string indicating the output's format. It should be either 'dataframe' or 'string'. The 'string' format may be convenient when subsequent GO terms enrichment analysis is intended.}
 
@@ -20,9 +18,6 @@ Returns a dataframe (by default) with GO IDs linked to the protein of interest, 
 }
 \description{
 Gets the gene ontology annotations for a given protein.
-}
-\details{
-Since some well-characterized proteins can have many GO annotations, it may be convenient to filter the shown GO terms. When filter is set to TRUE, the annotated terms displayed are those provided by the corresponding UniProtKB entry, which are selected based on their granularity and evidence code quality (with manual annotations preferred over automatic predictions). Annotations that have been made to isoform identifiers, or use any of the GO annotation qualifiers (NOT, contributes_to, colocalizes_with) are also removed.
 }
 \examples{
 \dontrun{get.go('P01009')}

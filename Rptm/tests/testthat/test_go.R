@@ -73,30 +73,24 @@ test_that("get.go() works properly", {
   skip_on_travis()
 
   a <- get.go(id = "P01009")
-  b <- get.go(id = 'P01009', filter = FALSE)
-  c <- get.go(id = 'P04406', format = 'string')
-  d <- get.go(id = 'P04406', filter = FALSE, format = 'string')
-  e <- get.go(id = 'P00367') # requires removing spurious rows
-  f <- get.go(id = 'Q14687') # no GO terms found
-  g <- get.go(id = "P010091") # dummy protein ID
-  h <- get.go("AAA58698", filter = FALSE) # currently P06748
-  i <- get.go("AAA58698")
+  b <- get.go(id = 'P01009', format = 'string')
+  c <- get.go(id = "P010091") # dummy protein ID
+  d <- get.go("AAA58698") # currently P06748
+
 
   if (!is.null(a)){
     expect_is(a, 'data.frame')
     expect_gte(nrow(a), 18)
-    expect_equal(ncol(a), 5)
+    expect_equal(ncol(a), 8)
   }
 
   if (!is.null(b)){
-    expect_is(b, 'data.frame')
-    expect_gte(nrow(b), 70)
-    expect_equal(ncol(b), 8)
+    expect_is(b, 'character')
+    expect_gte(nchar(b), 700)
   }
 
   if (!is.null(c)){
-    expect_is(c, 'character')
-    expect_gte(nchar(c), 400)
+    # it should be NULL
   }
 
   if (!is.null(d)){
@@ -104,16 +98,8 @@ test_that("get.go() works properly", {
     expect_gte(nchar(d), 1100)
   }
 
-  if (!is.null(e)){
-    expect_is(e, 'data.frame')
-    expect_gte(nrow(e), 15)
-    expect_equal(ncol(e), 5)
-  }
-
-  expect_is(f, 'NULL')
-  expect_is(g, 'NULL')
-  expect_is(h, 'NULL')
-  expect_is(i, 'NULL')
+  expect_is(c, 'NULL')
+  expect_is(d, 'NULL')
 
 })
 

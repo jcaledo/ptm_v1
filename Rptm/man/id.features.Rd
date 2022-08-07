@@ -18,10 +18,10 @@ Returns a named list with the requested features.
 Obtains features related to the provided id.
 }
 \details{
-By default the the function provides info regarding the following features: id, reviewed, entry name and organism. If wished, this list of features can be expanded using the argument 'features'. There is a larga list of features that can be retrieved. You can look up your relevant feature's name in the full list of UniProtKB found at https://www.uniprot.org/help/uniprotkb_column_names.
+By default the the function provides info regarding the following features: id, reviewed, entry name and organism. If wished, this list of features can be expanded using the argument 'features'. There is a large list of features that can be retrieved. You can look up your relevant feature's name in the full list of UniProtKB found at https://www.uniprot.org/help/return_fields.
 }
 \examples{
-\dontrun{id.features('P04406', features = 'ec,keywords,database(PDB)')}
+\dontrun{id.features('P04406', features = 'ec,keyword,xref_pdb')}
 }
 \seealso{
 species.mapping()

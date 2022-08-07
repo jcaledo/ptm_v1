@@ -107,17 +107,14 @@ term.go <- function(go, children = FALSE){
 }
 
 ## ---------------------------------------------------------------- ##
-#   get.go <- function(id, filter = TRUE,  format = 'dataframe',     #
-#                                                silent = FALSE)     #
+#   get.go <- function(id, format = 'dataframe', silent = FALSE)     #
 ## ---------------------------------------------------------------- ##
 #' Get Gene Ontology Annotation
 #' @description Gets the gene ontology annotations for a given protein.
-#' @usage get.go(id, filter = TRUE, format = 'dataframe', silent = FALSE)
+#' @usage get.go(id, format = 'dataframe', silent = FALSE)
 #' @param id the UniProt identifier of the protein of interest.
-#' @param filter logical, if TRUE a reduced number of terms, selected on the basis of astringent criteria (see details) is returned.
 #' @param format string indicating the output's format. It should be either 'dataframe' or 'string'. The 'string' format may be convenient when subsequent GO terms enrichment analysis is intended.
 #' @param silent logical, if FALSE print details of the reading process.
-#' @details Since some well-characterized proteins can have many GO annotations, it may be convenient to filter the shown GO terms. When filter is set to TRUE, the annotated terms displayed are those provided by the corresponding UniProtKB entry, which are selected based on their granularity and evidence code quality (with manual annotations preferred over automatic predictions). Annotations that have been made to isoform identifiers, or use any of the GO annotation qualifiers (NOT, contributes_to, colocalizes_with) are also removed.
 #' @return Returns a dataframe (by default) with GO IDs linked to the protein of interest, as well as additional information related to these GO ids. A string with the GO ids can be obtained as output if indicated by means of the argument 'format'.
 #' @author Juan Carlos Aledo
 #' @seealso search.go, term.go(), bg.go(), hdfisher.go(), gorilla(), net.go()
@@ -129,7 +126,7 @@ term.go <- function(go, children = FALSE){
 #' @importFrom jsonlite fromJSON
 #' @export
 
-get.go <- function(id, filter = TRUE, format = 'dataframe', silent = FALSE){
+get.go <- function(id, format = 'dataframe', silent = FALSE){
 
   if (!silent){
     print(paste("Getting GO terms for ", id, sep = ""))
@@ -178,71 +175,72 @@ get.go <- function(id, filter = TRUE, format = 'dataframe', silent = FALSE){
   }
 
 
-  ## ------------------------- Subfunction for filtered list --------------------- ##
-  filtered.list <- function(id){
-    baseURL <- 'https://www.uniprot.org/uniprot/?query='
-    requestURL <- paste(baseURL, id, '&format=tab&columns=id%2Cgo', sep = "")
-    cont <- gracefully_fail(requestURL)
-    if (is.null(cont)){
-      message("Sorry, no result could be retrieved")
-      return(NULL)
-    } else if (cont == ""){
-      message("Sorry, no result could be retrieved")
-      return(NULL)
-    }
-
-    a <- strsplit(cont, split = '\n')[[1]] # all the lines
-    b <- a[which(grepl(id, a))]
-    if (length(b) == 0){
-      return(NULL)
-    }
-    c <- strsplit(b, split = "\t")[[1]][2] # only term names and GO ids
-    d <-  strsplit(c, split = ";")[[1]] # a single line by term
-
-    output <- as.data.frame(matrix(rep(NA,length(d)*2), ncol = 2))
-    names(output) <- c('term_name', 'GO_id')
-
-    for (i in 1:length(d)){
-      output$term_name[i] <- trimws( strsplit(d[i], split = '\\[')[[1]][1] )
-      output$GO_id[i] <- gsub('\\]', '', strsplit(d[i], split = '\\[')[[1]][2])
-    }
-    ## ---- Removing spurious rows if necessary
-    output <- output[which(substr(output$GO_id, 1, 2) == "GO"), ]
-
-    if (sum(is.na(output$GO_id)) == nrow(output)){
-      message(paste("Sorry, no GO terms found for the ", id, " entry", sep = ""))
-      return(NULL)
-    } else {
-      output$obsolete <- output$definition_text <- output$aspect <- NA
-      for (i in 1:nrow(output)){
-        t <- strsplit(output$GO_id[i], split = ":")[[1]][2]
-        url <- 'https://www.ebi.ac.uk/QuickGO/services/ontology/go/search?query=GO%3A'
-        call <- paste(url, t, '&limit=1&page=1', sep = "")
-        resp <- .get.url(call)
-        cont <- httr::content(resp, 'text')
-        cont <- jsonlite::fromJSON(cont, flatten = TRUE)$results
-
-        if ("isObsolete" %in% names(cont)){
-          output$obsolete[i] <- cont$isObsolete
-        }
-        if ("definition.text" %in% names(cont)){
-          output$definition_text[i] <- cont$definition.text
-        }
-        if ("aspect" %in% names(cont)){
-          output$aspect[i] <- cont$aspect
-        }
-      }
-    }
-    return(output)
-  }
+  # ## ------------------------- Subfunction for filtered list --------------------- ##
+  # filtered.list <- function(id){
+  #   baseURL <- 'https://www.uniprot.org/uniprot/?query='
+  #   requestURL <- paste(baseURL, id, '&format=tab&columns=id%2Cgo', sep = "")
+  #   cont <- gracefully_fail(requestURL)
+  #   if (is.null(cont)){
+  #     message("Sorry, no result could be retrieved")
+  #     return(NULL)
+  #   } else if (cont == ""){
+  #     message("Sorry, no result could be retrieved")
+  #     return(NULL)
+  #   }
+  #
+  #   a <- strsplit(cont, split = '\n')[[1]] # all the lines
+  #   b <- a[which(grepl(id, a))]
+  #   if (length(b) == 0){
+  #     return(NULL)
+  #   }
+  #   c <- strsplit(b, split = "\t")[[1]][2] # only term names and GO ids
+  #   d <-  strsplit(c, split = ";")[[1]] # a single line by term
+  #
+  #   output <- as.data.frame(matrix(rep(NA,length(d)*2), ncol = 2))
+  #   names(output) <- c('term_name', 'GO_id')
+  #
+  #   for (i in 1:length(d)){
+  #     output$term_name[i] <- trimws( strsplit(d[i], split = '\\[')[[1]][1] )
+  #     output$GO_id[i] <- gsub('\\]', '', strsplit(d[i], split = '\\[')[[1]][2])
+  #   }
+  #   ## ---- Removing spurious rows if necessary
+  #   output <- output[which(substr(output$GO_id, 1, 2) == "GO"), ]
+  #
+  #   if (sum(is.na(output$GO_id)) == nrow(output)){
+  #     message(paste("Sorry, no GO terms found for the ", id, " entry", sep = ""))
+  #     return(NULL)
+  #   } else {
+  #     output$obsolete <- output$definition_text <- output$aspect <- NA
+  #     for (i in 1:nrow(output)){
+  #       t <- strsplit(output$GO_id[i], split = ":")[[1]][2]
+  #       url <- 'https://www.ebi.ac.uk/QuickGO/services/ontology/go/search?query=GO%3A'
+  #       call <- paste(url, t, '&limit=1&page=1', sep = "")
+  #       resp <- .get.url(call)
+  #       cont <- httr::content(resp, 'text')
+  #       cont <- jsonlite::fromJSON(cont, flatten = TRUE)$results
+  #
+  #       if ("isObsolete" %in% names(cont)){
+  #         output$obsolete[i] <- cont$isObsolete
+  #       }
+  #       if ("definition.text" %in% names(cont)){
+  #         output$definition_text[i] <- cont$definition.text
+  #       }
+  #       if ("aspect" %in% names(cont)){
+  #         output$aspect[i] <- cont$aspect
+  #       }
+  #     }
+  #   }
+  #   return(output)
+  # }
 
   ## ------- Building the output dataframe ----------------- ##
-  if (filter){
-    output <- filtered.list(id)
-  } else {
-    output <- complet.list(id)
-  }
+  # if (filter){
+  #   output <- filtered.list(id)
+  # } else {
+  #   output <- complet.list(id)
+  # }
 
+  output <- complet.list(id)
   if (format == 'string' & !is.atomic(output)){
     output <- paste(output$GO_id, collapse = ", ")
   }
@@ -473,7 +471,7 @@ net.go <- function(data, threshold = 0.2, silent = FALSE){
   }
   id <- vertices
   ## ----------------- Computing f(id) = GO_subset ------------------ ##
-  fid <- lapply(id, function(x) get.go(id = x, filter = FALSE, format = "string"))
+  fid <- lapply(id, function(x) get.go(id = x, format = "string"))
   valid_id <- which(fid != "NULL") # removing proteing without GO annotations
   fid <- fid[valid_id]
   id <- id[valid_id]

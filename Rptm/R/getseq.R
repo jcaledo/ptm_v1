@@ -707,54 +707,92 @@ id.mapping <- function(id, from, to){
 #' @usage id.features(id, features = "")
 #' @param id the UniProt identifier of the protein of interest.
 #' @param features a string identifying the features (comma separated) to be recovered.
-#' @details By default the the function provides info regarding the following features: id, reviewed, entry name and organism. If wished, this list of features can be expanded using the argument 'features'. There is a larga list of features that can be retrieved. You can look up your relevant feature's name in the full list of UniProtKB found at https://www.uniprot.org/help/uniprotkb_column_names.
+#' @details By default the the function provides info regarding the following features: id, reviewed, entry name and organism. If wished, this list of features can be expanded using the argument 'features'. There is a large list of features that can be retrieved. You can look up your relevant feature's name in the full list of UniProtKB found at https://www.uniprot.org/help/return_fields.
 #' @return Returns a named list with the requested features.
 #' @author Juan Carlos Aledo
-#' @examples \dontrun{id.features('P04406', features = 'ec,keywords,database(PDB)')}
+#' @examples \dontrun{id.features('P04406', features = 'ec,keyword,xref_pdb')}
 #' @seealso species.mapping()
 #' @importFrom httr GET
+#' @importFrom httr POST
+#' @importFrom httr accept_json
 #' @importFrom httr content
 #' @importFrom httr add_headers
+#' @importFrom utils read.table
 #' @export
 
 id.features <- function(id, features = "" ){
 
+  # https://www.uniprot.org/help/id_mapping
+  # https://www.uniprot.org/help/return_fields
+
   ## -------- Building the query ---------- ##
-  col <- 'id,reviewed,entry name,organism'
+  col <- '?fields=accession%2Creviewed%2Cprotein_name%2Corganism_name'
   if (features != ""){
     features <- gsub(', ', ',', features)
-    col <- paste(col, features, sep = ',')
+    features <- gsub(',', "%2C", features)
+    col <- paste(col, "%2C", features, sep = '')
   }
-  base_url <- "http://www.uniprot.org/uploadlists/"
-  my_headers <- httr::add_headers('User-Agent' = paste('R', 'metosite@uma.es'))
-  params <- list(from = 'ACC+ID',
-                 to = 'ACC',
-                 format = 'tab',
-                 columns = col,
-                 query = id)
 
-  ## --------- Sending the query ----------- ##
-  request <- tryCatch(
-    {
-      httr::GET(base_url, query = params, my_headers)
-    },
-    error = function(cond){
-      return(NULL)
+  isJobReady <- function(jobId) {
+    pollingInterval = 5
+    nTries = 20
+    for (i in 1:nTries) {
+      url <- paste("https://rest.uniprot.org/idmapping/status/", jobId, sep = "")
+      r <- GET(url = url, accept_json())
+      status <- content(r, as = "parsed")
+      if (!is.null(status[["results"]]) || !is.null(status[["failedIds"]])) {
+        return(TRUE)
+      }
+      if (!is.null(status[["messages"]])) {
+        print(status[["messages"]])
+        return (FALSE)
+      }
+      Sys.sleep(pollingInterval)
     }
-  )
-  if (is.null(request)){
-    message("Sorry, the query failed")
-    return(NULL)
-  } else {
-    cont <- httr::content(request, "text", encoding = "ISO-8859-1")
+    return(FALSE)
   }
 
-  ## ------- Parsing the response ---------- ##
-  l <- strsplit(cont, split = "\n")[[1]]
-  headers <- strsplit(l, split = "\t")[[1]]
-  headers <- gsub(" ", "_", headers)
-  output <- as.list(strsplit(l[2], split = "\t")[[1]])
-  names(output) <- gsub(" ", "_", headers)
+  getResultsURL <- function(redirectURL) {
+    if (grepl("/idmapping/results/", redirectURL, fixed = TRUE)) {
+      url <- gsub("/idmapping/results/", "/idmapping/stream/", redirectURL)
+    } else {
+      url <- gsub("/results/", "/results/stream/", redirectURL)
+    }
+  }
+
+  files = list(
+    ids = id,
+    from = "UniProtKB_AC-ID",
+    to = "UniProtKB"
+  )
+
+  my_headers <- httr::add_headers('User-Agent' = paste('R', 'metosite@uma.es'))
+  r <- POST(url = "https://rest.uniprot.org/idmapping/run", body = files, my_headers, encode = "multipart", accept_json())
+  submission <- content(r, as = "parsed")
+
+  if (isJobReady(submission[["jobId"]])) {
+    url <- paste("https://rest.uniprot.org/idmapping/details/", submission[["jobId"]], sep = "")
+    r <- GET(url = url, accept_json())
+    details <- content(r, as = "parsed")
+    url <- getResultsURL(details[["redirectURL"]])
+    # Using TSV format see: https://www.uniprot.org/help/api_queries#what-formats-are-available
+
+    url <- paste(url, col, "&format=tsv&size=500", sep = "")
+    r <- GET(url = url, accept_json())
+    output <- read.table(text = content(r), sep = "\t", header=TRUE)
+  }
+
+  if (!is.null(output)){
+    return(output)
+
+  } else {
+    message("Uniprot server could not respond")
+    output <- NULL
+  }
+
+  if (length(output) == 0){
+    output <- NULL
+  }
   return(output)
 }
 
@@ -998,42 +1036,75 @@ uniprot.kegg <- function(id){
 #' @examples \dontrun{uniprot.pdb('P01009')}
 #' @seealso id.mapping()
 #' @importFrom httr GET
+#' @importFrom httr POST
 #' @importFrom httr content
 #' @importFrom httr add_headers
+#' @importFrom httr accept_json
+#' @importFrom utils read.table
 #' @export
 
 uniprot.pdb <- function(id){
 
-  uniprot_url <- "http://www.uniprot.org/uploadlists/"
-  my_headers <- httr::add_headers('User-Agent' = paste('R', 'metosite@uma.es'))
-  params <- list(from = 'ACC',
-                 to = 'PDB_ID',
-                 format = 'tab',
-                 query = id)
-
-  request <- tryCatch(
-    {
-      httr::GET(uniprot_url, query = params, my_headers)
-    },
-    error = function(cond){
-      return(NULL)
+  # https://www.uniprot.org/help/id_mapping
+  isJobReady <- function(jobId) {
+    pollingInterval = 5
+    nTries = 20
+    for (i in 1:nTries) {
+      url <- paste("https://rest.uniprot.org/idmapping/status/", jobId, sep = "")
+      r <- GET(url = url, accept_json())
+      status <- content(r, as = "parsed")
+      if (!is.null(status[["results"]]) || !is.null(status[["failedIds"]])) {
+        return(TRUE)
+      }
+      if (!is.null(status[["messages"]])) {
+        print(status[["messages"]])
+        return (FALSE)
+      }
+      Sys.sleep(pollingInterval)
     }
+    return(FALSE)
+  }
+
+  getResultsURL <- function(redirectURL) {
+    if (grepl("/idmapping/results/", redirectURL, fixed = TRUE)) {
+      url <- gsub("/idmapping/results/", "/idmapping/stream/", redirectURL)
+    } else {
+      url <- gsub("/results/", "/results/stream/", redirectURL)
+    }
+  }
+
+
+  files = list(
+    ids = id,
+    from = "UniProtKB_AC-ID",
+    to = "PDB"
   )
 
-  if (!is.null(request)){
-    ans <- httr::content(request, 'text', encoding = "ISO-8859-1")
-    pos <- gregexpr(id, ans)[[1]]
-    output <- character(length(pos))
-    for (i in seq_len(length(pos))){
-      n_id <- (substr(ans, pos[i]+nchar(id)+1, pos[i]+nchar(id)+4))
-      output[i] <- n_id
-    }
+  my_headers <- httr::add_headers('User-Agent' = paste('R', 'metosite@uma.es'))
+  r <- POST(url = "https://rest.uniprot.org/idmapping/run", body = files, my_headers, encode = "multipart", accept_json())
+  submission <- content(r, as = "parsed")
+
+  if (isJobReady(submission[["jobId"]])) {
+    url <- paste("https://rest.uniprot.org/idmapping/details/", submission[["jobId"]], sep = "")
+    r <- GET(url = url, accept_json())
+    details <- content(r, as = "parsed")
+    url <- getResultsURL(details[["redirectURL"]])
+    # Using TSV format see: https://www.uniprot.org/help/api_queries#what-formats-are-available
+    url <- paste(url, "?format=tsv", sep = "")
+    r <- GET(url = url, accept_json())
+    resultsTable = read.table(text = content(r), sep = "\t", header=TRUE)
+    output <- resultsTable$To
+  }
+
+  if (!is.null(output)){
+    return(output)
+
   } else {
     message("Uniprot server could not respond")
     output <- NULL
   }
 
-  if (sum(grepl("\n", output)) > 0){
+  if (length(output) == 0){
     output <- NULL
   }
   return(output)
@@ -1051,36 +1122,67 @@ uniprot.pdb <- function(id){
 #' @examples \dontrun{pdb.uniprot('3cwm')}
 #' @seealso id.mapping()
 #' @importFrom httr GET
+#' @importFrom httr POST
 #' @importFrom httr content
 #' @importFrom httr add_headers
+#' @importFrom httr accept_json
+#' @importFrom utils read.table
 #' @export
 
 pdb.uniprot <- function(id){
 
-  uniprot_url <- "http://www.uniprot.org/uploadlists/"
-  my_headers <- httr::add_headers('User-Agent' = paste('R', 'metosite@uma.es'))
-  params <- list(from = 'PDB_ID',
-                 to = 'ACC',
-                 format = 'tab',
-                 query = id)
-
-  request <- tryCatch(
-    {
-      httr::GET(uniprot_url, query = params, my_headers)
-    },
-    error = function(cond){
-      return(NULL)
+  isJobReady <- function(jobId) {
+    pollingInterval = 5
+    nTries = 20
+    for (i in 1:nTries) {
+      url <- paste("https://rest.uniprot.org/idmapping/status/", jobId, sep = "")
+      r <- GET(url = url, accept_json())
+      status <- content(r, as = "parsed")
+      if (!is.null(status[["results"]]) || !is.null(status[["failedIds"]])) {
+        return(TRUE)
+      }
+      if (!is.null(status[["messages"]])) {
+        print(status[["messages"]])
+        return (FALSE)
+      }
+      Sys.sleep(pollingInterval)
     }
+    return(FALSE)
+  }
+
+  getResultsURL <- function(redirectURL) {
+    if (grepl("/idmapping/results/", redirectURL, fixed = TRUE)) {
+      url <- gsub("/idmapping/results/", "/idmapping/stream/", redirectURL)
+    } else {
+      url <- gsub("/results/", "/results/stream/", redirectURL)
+    }
+  }
+
+  files <- list(
+    ids = id,
+    from = "PDB",
+    to = "UniProtKB"
   )
 
-  if (!is.null(request)){
-    ans <- httr::content(request, 'text', encoding = "ISO-8859-1")
-    temp <- strsplit(ans, split = "\n")[[1]][-1]
-    output <- character(length(temp))
-    for (i in seq_len(length(temp))){
-      t <- strsplit(temp[i], split = "\t")[[1]][2]
-      output[i] <- t
-    }
+  my_headers <- httr::add_headers('User-Agent' = paste('R', 'metosite@uma.es'))
+  r <- POST(url = "https://rest.uniprot.org/idmapping/run", body = files, my_headers, encode = "multipart", accept_json())
+  submission <- content(r, as = "parsed")
+
+  if (isJobReady(submission[["jobId"]])) {
+    url <- paste("https://rest.uniprot.org/idmapping/details/", submission[["jobId"]], sep = "")
+    r <- GET(url = url, accept_json())
+    details <- content(r, as = "parsed")
+    url <- getResultsURL(details[["redirectURL"]])
+    # Using TSV format see: https://www.uniprot.org/help/api_queries#what-formats-are-available
+    url <- paste(url, "?format=tsv", sep = "")
+    r <- GET(url = url, accept_json())
+    resultsTable = read.table(text = content(r), sep = "\t", header=TRUE)
+    output <- resultsTable$Entry
+  }
+
+  if (!is.null(output)){
+    return(output)
+
   } else {
     message("Uniprot server could not respond")
     output <- NULL
@@ -1091,4 +1193,3 @@ pdb.uniprot <- function(id){
   }
   return(output)
 }
-

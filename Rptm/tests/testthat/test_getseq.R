@@ -468,16 +468,16 @@ test_that("id.features() works properly",{
   skip_on_travis()
 
   a <- id.features('P01009')
-  b <- id.features('P01009', features = 'ec,keywords,database(PDB)')
+  b <- id.features('P01009', features = 'ec,keyword,xref_pdb')
 
   if (!is.null(a)){
-    expect_is(a, 'list')
+    expect_is(a, 'data.frame')
     expect_equal(length(a), 5)
-    expect_equal(a$Status, "reviewed")
+    expect_equal(a$Reviewed, "reviewed")
   }
 
   if (!is.null(b)){
-    expect_is(b, 'list')
+    expect_is(b, 'data.frame')
     expect_equal(length(b), 8)
   }
 
