@@ -1,7 +1,7 @@
 Package: ptm
 Type: Package
 Title: Analyses of Protein Post-Translational Modifications
-Version: 0.2.6
+Version: 0.2.7
 Authors@R: person("Juan Carlos", "Aledo", email = "caledo@uma.es", role = c("aut", "cre"))
 Maintainer: Juan Carlos Aledo <caledo@uma.es>
 Description: Contains utilities for the analysis of post-translational modifications (PTMs) in proteins, 
@@ -18,24 +18,24 @@ License: GPL (>= 2)
 URL: https://bitbucket.org/jcaledo/ptm, https://metositeptm.com
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.1
+RoxygenNote: 7.3.1
 Depends: R (>= 4.0.0)
 Imports: 
   bio3d (>= 2.3-4),
-  Biostrings,
   curl, 
   graphics,
   httr (>= 1.3.1),
   igraph,
   jsonlite,
-  muscle,
   RCurl, 
   seqinr,
   stats,
   utils,
   xml2
 Suggests: 
+  Biostrings,
   KEGGREST,
   knitr,
   markdown,
+  muscle,
   testthat

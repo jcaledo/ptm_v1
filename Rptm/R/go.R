@@ -437,7 +437,7 @@ hdfisher.go <- function(target, background, query, analysis = 'enrichment'){
 #' @references Rhee et al. (2008) Nature Reviews Genetics 9:509–515.
 #' @examples \dontrun{net.go(path2data = "./GOvivo.txt")}
 #' @importFrom igraph graph_from_adjacency_matrix
-#' @importFrom igraph get.edgelist
+#' @importFrom igraph as_edgelist
 #' @export
 
 net.go <- function(data, threshold = 0.2, silent = FALSE){
@@ -502,7 +502,7 @@ net.go <- function(data, threshold = 0.2, silent = FALSE){
 
   ## ------------------------- Network ------------------------------- ##
   g <- igraph::graph_from_adjacency_matrix(A, mode = "undirected")
-  edges.df <- igraph::get.edgelist(g, names=TRUE)
+  edges.df <- igraph::as_edgelist(g, names=TRUE)
 
   ## -------------------------- Output ------------------------------- ##
   output <- list(jaccard, A, vertices, trimws(edges.df))

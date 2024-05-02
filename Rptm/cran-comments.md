@@ -1,6 +1,6 @@
 ## Resubmission
 
-This is a resubmission. Now, the code of some functions that use Internet resources have been modified to fail gracefully with an informative message if the resource is not available, instead of giving a check warning or error. In addition, the code of some functions have been reformulated to accommodate changes in the UniProt and EBI APIs.
+This is a resubmission. Now, packages in Suggests (muscle, Biostrings, and KEGGREST) have been used conditionally. 
 
 
 ## Test environments

@@ -1,0 +1,12 @@
+Dear maintainer,
+
+Please see the problems shown on
+<https://cran.r-project.org/web/checks/check_results_ptm.html>.
+
+Please correct before 2024-05-04 to safely retain your package on CRAN.
+
+Packages in Suggests should be used conditionally: see 'Writing R Extensions'.
+This needs to be corrected even if the missing package(s) become available.
+It can be tested by checking with _R_CHECK_DEPENDS_ONLY_=true.
+
+The CRAN Team

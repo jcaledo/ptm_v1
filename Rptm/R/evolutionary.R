@@ -13,16 +13,14 @@
 #' @usage msa(sequences, ids = names(sequences), sfile = FALSE, inhouse = FALSE)
 #' @param sequences vector containing the sequences.
 #' @param ids vector containing the sequences' ids.
-#' @param sfile if different to FALSE, then it should be a string indicating the path to save  a fasta alignment file.
-#' @param inhouse logical, if TRUE the in-house MUSCLE software is used. It must be installed on your system and in the search path for executables.
+#' @param sfile if different to FALSE, then it should be a string indicating the path where to save a fasta alignment file.
+#' @param inhouse logical, if TRUE the in-house MUSCLE software is used. It must be installed on your system and in the search path for executable.
 #' @return Returns a list of four elements. The first one ($seq) provides the sequences analyzed, the second element ($ids) returns the identifiers, the third element ($aln) provides the alignment in fasta format and the fourth element ($ali) gives the alignment in matrix format.
 #' @examples \dontrun{msa(sequences = sapply(c("P19446", "P40925", "P40926"), ptm::get.seq),
 #'  ids = c("wmelon", "cyt", "mit"))}
 #' @references Edgar RC. Nucl. Ac. Res. 2004 32:1792-1797.
 #' @references Edgar RC. BMC Bioinformatics 5(1):113.
 #' @seealso custom.aln(), list.hom(), parse.hssp(), get.hssp(), shannon()
-#' @importFrom Biostrings AAStringSet
-#' @importFrom muscle muscle
 #' @importFrom bio3d seqbind
 #' @importFrom bio3d seqaln
 #' @importFrom bio3d write.fasta
@@ -60,21 +58,21 @@ msa <- function(sequences, ids = names(sequences), sfile = FALSE, inhouse = FALS
 
   } else {
     ## --- Using the Biostring and muscle R packages
-    seq <- Biostrings::AAStringSet(sequences)
+    # seq <- Biostrings::AAStringSet(sequences)
 
-    # if (requireNamespace('Biostrings', quietly = TRUE)){
-    #   seq <- Biostrings::AAStringSet(sequences)
-    # } else {
-    #   stop("You must install the package Biostrings in order to use this function")
-    # }
+    if (requireNamespace('Biostrings', quietly = TRUE)){
+      seq <- Biostrings::AAStringSet(sequences)
+    } else {
+      stop("You must install the package Biostrings in order to use this function")
+    }
 
-    aln1 <- muscle::muscle(seq)
+    # aln1 <- muscle::muscle(seq)
 
-    # if (requireNamespace('muscle', quietly = TRUE)){
-    #   aln1 <- muscle::muscle(seq)
-    # } else {
-    #   stop("You must install the package muscle in order to use this function")
-    # }
+    if (requireNamespace('muscle', quietly = TRUE)){
+      aln1 <- muscle::muscle(seq)
+    } else {
+      stop("You must install the package muscle in order to use this function")
+    }
 
     aln <- list()
     aln$seq <- sequences

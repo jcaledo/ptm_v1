@@ -11,9 +11,9 @@ msa(sequences, ids = names(sequences), sfile = FALSE, inhouse = FALSE)
 
 \item{ids}{vector containing the sequences' ids.}
 
-\item{sfile}{if different to FALSE, then it should be a string indicating the path to save  a fasta alignment file.}
+\item{sfile}{if different to FALSE, then it should be a string indicating the path where to save a fasta alignment file.}
 
-\item{inhouse}{logical, if TRUE the in-house MUSCLE software is used. It must be installed on your system and in the search path for executables.}
+\item{inhouse}{logical, if TRUE the in-house MUSCLE software is used. It must be installed on your system and in the search path for executable.}
 }
 \value{
 Returns a list of four elements. The first one ($seq) provides the sequences analyzed, the second element ($ids) returns the identifiers, the third element ($aln) provides the alignment in fasta format and the fourth element ($ali) gives the alignment in matrix format.

@@ -440,7 +440,7 @@ get.area <- function(pdb, keepfiles = FALSE){
   }
 
   output_file = gsub("\\.pdb", "_getarea.txt", file)
-  url <- "http://curie.utmb.edu/cgi-bin/getarea.cgi"
+  url <- "https://curie.utmb.edu/cgi-bin/getarea.cgi"
 
   result <- tryCatch(
     {
