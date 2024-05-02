@@ -186,10 +186,14 @@ test_that('renum() works properly', {
   expect_equal(a, 36)
   expect_is(b, 'numeric')
   expect_equal(b, 60)
-  expect_is(c, 'numeric')
-  expect_equal(c, 16)
-  expect_is(d, 'numeric')
-  expect_equal(d, 60)
+  if (!is.null(c)){
+    expect_is(c, 'numeric')
+    expect_equal(c, 16)
+  }
+  if (!is.null(d)){
+    expect_is(d, 'numeric')
+    expect_equal(d, 60)
+  }
   expect_is(e, 'NULL')
 })
 

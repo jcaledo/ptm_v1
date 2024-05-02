@@ -31,20 +31,20 @@ Represents the values of a property and show the PTM sites along a protein seque
 If the property 'own' is selected, a named vector with the own index for the 20 amino acids should be passed as argument.
 Currently the supported properties are:
 \itemize{
-\item{sasa:}  {Solvent-accessible surface area (3D)}
-\item{acc:} {Accessibility (3D)}
-\item{dpx:} {Depth (3D)}
-\item{volume:} {Normalized van der Waals volume (1D)}
-\item{mutability:} {Relative mutability, Jones 1992, (1D)}
-\item{helix:} {Average relative probability of helix, Kanehisa-Tsong 1980,(1D)}
-\item{beta-sheet:} {Average relative probability of beta-sheet, Kanehisa-Tsong 1980, (1D)}
-\item{pi-helix:} {Propensity of amino acids within pi-helices, Fodje-Al-Karadaghi 2002, (1D)}
-\item{hydropathy:} {Hydropathy index, Kyte-Doolittle 1982, (1D)}
-\item{avg.hyd:} {Normalized average hydrophobicity scales, Cid et al 1992, (1D)}
-\item{hplc:} {Retention coefficient in HPLC at pH7.4, Meek 1980, (1D)}
-\item{argos:} {Hydrophobicity index, Argos et al 1982, (1D)}
-\item{eiip:} {Electron-ion interaction potential, Veljkovic et al 1985, (1D)}
-\item{polarizability:} {Polarizability parameter, Charton-Charton 1982, (1D)}
+\item sasa:  Solvent-accessible surface area (3D)
+\item acc: Accessibility (3D)
+\item dpx: Depth (3D)
+\item volume: Normalized van der Waals volume (1D)
+\item mutability: Relative mutability, Jones 1992, (1D)
+\item helix: Average relative probability of helix, Kanehisa-Tsong 1980,(1D)
+\item beta-sheet: Average relative probability of beta-sheet, Kanehisa-Tsong 1980, (1D)
+\item pi-helix: Propensity of amino acids within pi-helices, Fodje-Al-Karadaghi 2002, (1D)
+\item hydropathy: Hydropathy index, Kyte-Doolittle 1982, (1D)
+\item avg.hyd: Normalized average hydrophobicity scales, Cid et al 1992, (1D)
+\item hplc: Retention coefficient in HPLC at pH7.4, Meek 1980, (1D)
+\item argos: Hydrophobicity index, Argos et al 1982, (1D)
+\item eiip: Electron-ion interaction potential, Veljkovic et al 1985, (1D)
+\item polarizability: Polarizability parameter, Charton-Charton 1982, (1D)
 }
 For 3D properties such as sasa, acc or dpx, for which different values can be obtained depending on the quaternary structure, we first compute the property values for each residue in the whole protein and plotted them against the residue position. Then, the value for this property is computed in the isolated chain (a single polypeptide chain) and in a second plot, the differences between the values in the whole protein and the chain are plotted against the residue position.
 }

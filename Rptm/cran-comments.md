@@ -2,10 +2,9 @@
 
 This is a resubmission. Now, packages in Suggests (muscle, Biostrings, and KEGGREST) have been used conditionally. 
 
-
 ## Test environments
 
-* local OS X install, R 4.2.0
+* local OS X install, R 4.3.2
 
 * win-builder (devel and release)
 
