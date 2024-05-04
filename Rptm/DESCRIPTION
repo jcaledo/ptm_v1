@@ -3,7 +3,6 @@ Type: Package
 Title: Analyses of Protein Post-Translational Modifications
 Version: 0.2.7
 Authors@R: person("Juan Carlos", "Aledo", email = "caledo@uma.es", role = c("aut", "cre"))
-Maintainer: Juan Carlos Aledo <caledo@uma.es>
 Description: Contains utilities for the analysis of post-translational modifications (PTMs) in proteins, 
     with particular emphasis on the sulfoxidation of methionine residues. Features include the ability to download, 
     filter and analyze data from the sulfoxidation database 'MetOSite', and integrate data from other main PTMs 
