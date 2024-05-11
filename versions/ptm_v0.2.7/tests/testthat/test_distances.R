@@ -1,4 +1,5 @@
 library(ptm)
+context("Distances")
 
 ## ---------------------------------------------- ##
 #            Testing pairwise.dist                 #

@@ -1,5 +1,4 @@
 library(ptm)
-context("Residue-Focused Functions Tests")
 
 ## ----------------------------------------------- ##
 #         Testing the function aa.at                #
@@ -105,95 +104,5 @@ test_that("the function aa.comp() works properly", {
   }
 
   expect_is(c, 'NULL')
-})
-
-
-## ---------------------------------------------- ##
-#        Testing the function renum.pdb            #
-## ---------------------------------------------- ##
-test_that("the function renum.pdb() works properly", {
-
-  skip_on_cran()
-  skip_on_travis()
-
-  a <- renum.pdb(pdb = '121P', chain = 'A', uniprot = 'P01112')
-  b <- renum.pdb(pdb = "./pdb/1u8f.pdb", chain = 'O', 'P04406')
-  c <- renum.pdb(pdb = 'xxxx', chain = 'X', uniprot = 'P010091')
-
-  if (!is.null(a)){
-    expect_is(a, 'data.frame')
-    expect_equal(nrow(a), 189)
-    expect_equal(ncol(a), 6)
-    expect_equal(a$uni_pos[10], a$pdb_pos[10])
-    expect_false(a$uniprot[180] == a$pdb[180])
-  }
-
-  if (!is.null(b)){
-    expect_is(b, 'data.frame')
-    expect_equal(nrow(b), 335)
-    expect_equal(ncol(b), 6)
-    expect_equal(b$uni_pos[10], b$pdb_renum[10])
-  }
-
-  expect_is(c, 'NULL')
-})
-
-
-## ---------------------------------------------- ##
-#        Testing the function renum.meto           #
-## ---------------------------------------------- ##
-test_that("the function renum.meto() works properly", {
-
-  skip_on_cran()
-  skip_on_travis()
-
-  a <- renum.meto(uniprot = 'P01009')
-  b <- renum.meto(uniprot = 'P010091')
-
-  if (!is.null(a)){
-    expect_is(a, 'data.frame')
-    expect_equal(nrow(a), 418)
-    expect_equal(ncol(a), 6)
-    expect_equal(a$uni_pos[180], a$meto_pos[180] + 24)
-    expect_false(a$uniprot[10] == a$meto[10])
-  }
-  expect_is(b, 'NULL')
-})
-
-
-## ---------------------------------------------- ##
-#            Testing the function renum            #
-## ---------------------------------------------- ##
-test_that('renum() works properly', {
-
-  skip_on_cran()
-  skip_on_travis()
-
-  a <- renum(up_id = 'P01009', pos = 60,
-             from = 'uniprot', to = 'metosite')
-  b <- renum(up_id = 'P01009', pos = 36,
-             from = 'metosite', to = 'uniprot')
-  c <- renum(up_id = 'P01009', pos = 60,
-             from = 'uniprot' , to = 'pdb',
-             pdb = '1ATU', chain = 'A')
-  d <- renum(up_id = 'P01009', pos = 16,
-             from = 'pdb' , to = 'uniprot',
-             pdb = '1ATU', chain = 'A')
-  e <- renum(up_id = 'P010091', pos = 60,
-             from = 'uniprot', to = 'metosite')
-
-  expect_is(a, 'numeric')
-  expect_equal(a, 36)
-  expect_is(b, 'numeric')
-  expect_equal(b, 60)
-  if (!is.null(c)){
-    expect_is(c, 'numeric')
-    expect_equal(c, 16)
-  }
-  if (!is.null(d)){
-    expect_is(d, 'numeric')
-    expect_equal(d, 60)
-  }
-  expect_is(e, 'NULL')
 })
 

@@ -6,8 +6,6 @@ context("S-Aromatic Motifs")
 ## ----------------------------------------------- ##
 test_that('saro.dist() works properly', {
 
-  skip_on_cran()
-
   a <- saro.dist('1cll', rawdata = TRUE)
   b <- saro.dist('3ug0')
   c <- saro.dist('2lo1')
@@ -34,8 +32,6 @@ test_that('saro.dist() works properly', {
 #            Testing the saro.geometry              #
 ## ----------------------------------------------- ##
 test_that('saro.geometry() works properly', {
-
-  skip_on_cran()
 
   a <- saro.geometry('1cll', rA = 145, rB = 141)
   b <- saro.geometry('3ug0', rA = 74, rB = 78)
@@ -74,8 +70,6 @@ test_that('saro.geometry() works properly', {
 #            Testing the saro.motif                 #
 ## ----------------------------------------------- ##
 test_that('saro.motif() works properly', {
-
-  skip_on_cran()
 
   a <- saro.motif('1cll', onlySaro = FALSE)
   b <- saro.motif(pdb = '1d0g', threshold = 5)

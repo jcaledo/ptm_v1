@@ -28,7 +28,7 @@ Please, note that when uniprot is set to FALSE, target can be the string returne
 \dontrun{is.at(28, 'P01009', 'Q')}
 }
 \seealso{
-aa.at(), renum.pdb(), renum.meto(), renum(), aa.comp()
+aa.at(), aa.comp()
 }
 \author{
 Juan Carlos Aledo

@@ -1,4 +1,5 @@
 library(ptm)
+context("Errors and Warnings Handling")
 
 ## ---------------------------------------------- ##
 #             Testing gracefully_fail              #
