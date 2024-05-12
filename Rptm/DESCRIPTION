@@ -21,12 +21,11 @@ RoxygenNote: 7.3.1
 Depends: R (>= 4.0.0)
 Imports: 
   bio3d (>= 2.3-4),
+  curl,
   graphics,
   httr,
   jsonlite,
-  stats,
-  utils,
-  xml2
+  stats
 Suggests: 
   knitr,
   markdown,

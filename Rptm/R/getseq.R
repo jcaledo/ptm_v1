@@ -1,21 +1,6 @@
 ## ---------- getseq.R ------------ ##
 #                                    #
 #     get.seq                        #
-#     pdb.seq                        #
-#     pdb.quaternary                 #
-#     pdb.chain                      #
-#     pdb2uniprot                    #
-#     uniprot2pdb                    #
-#     prot2codon                     #
-#     pdb.select                     #
-#     id.mapping                     #
-#     id.features                    #
-#     species.mapping                #
-#     species.kegg                   #
-#     kegg.uniprot                   #
-#     uniprot.kegg                   #
-#     uniprot.pdb                    #
-#     pdb.uniprot                    #
 #                                    #
 ## -------------------------------- ##
 

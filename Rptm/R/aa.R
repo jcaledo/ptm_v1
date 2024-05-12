@@ -111,6 +111,8 @@ is.at <- function(at, target, aa = 'M', uniprot = TRUE){
 #' @examples aa.comp('MPSSVSWGILLLAGLCCLVPVSLAEDPQGDAAQK', uniprot = FALSE)
 #' @seealso is.at(), renum.pdb(), renum.meto(), renum(), aa.at()
 #' @importFrom graphics text
+#' @importFrom graphics abline
+#' @importFrom graphics points
 #' @importFrom stats fisher.test
 #' @importFrom stats chisq.test
 #' @export
